@@ -8,7 +8,6 @@ namespace Domain
     {
         string Email { get; set; }
         string Password { get; set; }
-
         List<BookingStage> Entries { get; set; }
     }
 }

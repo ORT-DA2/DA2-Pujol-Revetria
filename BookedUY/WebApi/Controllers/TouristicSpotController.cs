@@ -10,7 +10,7 @@ namespace WebApi.Controllers
 {
     [Route("api/touristicspot")]
     [ApiController]
-    public class TouristicSpotController : ControllerBase
+    public class TouristicSpotController : BookedUYController
     {
         // GET: api/<TouristicSpotController>
         [HttpGet]

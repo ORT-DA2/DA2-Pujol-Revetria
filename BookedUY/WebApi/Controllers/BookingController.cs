@@ -11,7 +11,7 @@ namespace WebApi.Controllers
 {
     [Route("api/booking")]
     [ApiController]
-    public class BookingController : ControllerBase
+    public class BookingController : BookedUYController
     {
         private readonly IBookingLogic bookingLogic;
         public BookingController(IBookingLogic bookingLogic)
@@ -20,9 +20,11 @@ namespace WebApi.Controllers
         }
         // GET: api/<BookingController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<string> GetBookings()
         {
-            return new string[] { "value1", "value2" };
+
+            var bookings = this.bookingLogic.GetBookings();
+            return bookings;
         }
 
         // GET api/<BookingController>/5

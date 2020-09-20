@@ -10,7 +10,7 @@ namespace WebApi.Controllers
 {
     [Route("api/administrator")]
     [ApiController]
-    public class AdministratorController : ControllerBase
+    public class AdministratorController : BookedUYController
     {
         // GET: api/<AdministratorController>
         [HttpGet]
