@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
 namespace Domain
 {
@@ -14,6 +13,6 @@ namespace Domain
         string Information { get; set; }
         float PricePerNight { get; set; }
         bool Full { get; set; }
-
+        List<Booking> Bookings { get; set; }
     }
 }

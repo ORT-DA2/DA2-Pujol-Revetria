@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
 namespace Domain
 {
@@ -11,7 +10,5 @@ namespace Domain
         Region Region { get; set; }
         string Description { get; set; }
         List<Category> Categories { get; set; }
-
-
     }
 }

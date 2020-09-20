@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
 namespace Domain
 {
@@ -9,5 +8,7 @@ namespace Domain
     {
         string Email { get; set; }
         string Password { get; set; }
+
+        List<BookingStage> Entries { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLogicInterface;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -12,6 +13,11 @@ namespace WebApi.Controllers
     [ApiController]
     public class BookingController : ControllerBase
     {
+        private readonly IBookingLogic bookingLogic;
+        public BookingController(IBookingLogic bookingLogic)
+        {
+            this.bookingLogic = bookingLogic;
+        }
         // GET: api/<BookingController>
         [HttpGet]
         public IEnumerable<string> Get()

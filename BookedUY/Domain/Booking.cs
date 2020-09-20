@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Domain
 {
@@ -16,7 +14,6 @@ namespace Domain
         string HostName { get; set; }
         string HostLastName { get; set; }
         string HostEmail { get; set; }
-        List<BookingStage> BookingStage { get; set; }
-        
+        List<BookingStage> BookingHistory { get; set; }
     }
 }
