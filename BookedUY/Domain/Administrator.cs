@@ -6,8 +6,8 @@ namespace Domain
 {
     public class Administrator
     {
-        string Email { get; set; }
-        string Password { get; set; }
-        List<BookingStage> Entries { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public List<BookingStage> Entries { get; set; }
     }
 }

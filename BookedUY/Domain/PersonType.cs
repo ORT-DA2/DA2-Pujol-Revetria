@@ -4,8 +4,10 @@ using System.Text;
 
 namespace Domain
 {
-    public enum Status
+    public enum PersonType
     {
-        Created, PaymentPending, Accepted, Rejected, Expired
+        Adult = 1,
+        Child = 2,
+        Baby = 4,
     }
 }

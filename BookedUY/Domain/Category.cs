@@ -6,7 +6,7 @@ namespace Domain
 {
     public class Category
     {
-        string Name { get; set; }
-        List<TouristicSpot> Spots { get; set; }
+        public string Name { get; set; }
+        public List<TouristicSpot> Spots { get; set; }
     }
 }

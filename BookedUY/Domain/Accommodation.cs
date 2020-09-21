@@ -6,13 +6,13 @@ namespace Domain
 {
     public class Accommodation
     {
-        TouristicSpot Spot { get; set; }
-        string Name { get; set; }
-        string Addres { get; set; }
-        string ContactNumber { get; set; }
-        string Information { get; set; }
-        float PricePerNight { get; set; }
-        bool Full { get; set; }
-        List<Booking> Bookings { get; set; }
+        public TouristicSpot Spot { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string ContactNumber { get; set; }
+        public string Information { get; set; }
+        public float PricePerNight { get; set; }
+        public bool Full { get; set; }
+        public List<Booking> Bookings { get; set; }
     }
 }

@@ -6,9 +6,11 @@ namespace Domain
 {
     public class BookingStage
     {
-        Administrator Administrator { get; set; }
-        Status Status { get; set; }
-        string Description { get; set; }
-        DateTime EntryDate { get; set; }
+        public int Id { get; set; }
+        public Administrator Administrator { get; set; }
+        public Status Status { get; set; }
+        public string Description { get; set; }
+        public DateTime EntryDate { get; set; }
+        public Booking AsociatedBooking { get; set; }
     }
 }

@@ -20,18 +20,16 @@ namespace WebApi.Controllers
         }
         // GET: api/<BookingController>
         [HttpGet]
-        public IEnumerable<string> GetBookings()
+        public void GetBookings()
         {
 
-            var bookings = this.bookingLogic.GetBookings();
-            return bookings;
         }
 
         // GET api/<BookingController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public void Get(int id)
         {
-            return "value";
+            
         }
 
         // POST api/<BookingController>
