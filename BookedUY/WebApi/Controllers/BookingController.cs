@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebApi.Controllers
 {
     [Route("api/booking")]
-    [ApiController]
     public class BookingController : BookedUYController
     {
         private readonly IBookingLogic bookingLogic;

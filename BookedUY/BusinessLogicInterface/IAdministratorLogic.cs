@@ -4,8 +4,8 @@ using System.Text;
 
 namespace BusinessLogicInterface
 {
-    public interface IAccommodationLogic
+    public interface IAdministratorLogic
     {
-
+        
     }
 }

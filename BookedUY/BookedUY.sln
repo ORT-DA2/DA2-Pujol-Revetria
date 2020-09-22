@@ -8,27 +8,29 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csp
 		{E02779A2-3001-4026-AD30-4AF57E5FD206} = {E02779A2-3001-4026-AD30-4AF57E5FD206}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogicInterface", "BusinessLogicInterface\BusinessLogicInterface.csproj", "{E02779A2-3001-4026-AD30-4AF57E5FD206}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogicInterface", "BusinessLogicInterface\BusinessLogicInterface.csproj", "{E02779A2-3001-4026-AD30-4AF57E5FD206}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{63D3C756-C85F-492E-A574-9D997352CD52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{63D3C756-C85F-492E-A574-9D997352CD52}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E02779A2-3001-4026-AD30-4AF57E5FD206} = {E02779A2-3001-4026-AD30-4AF57E5FD206}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factory", "Factory\Factory.csproj", "{65162D0F-7419-42FF-91DC-9C27E6D46804}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Factory", "Factory\Factory.csproj", "{65162D0F-7419-42FF-91DC-9C27E6D46804}"
 	ProjectSection(ProjectDependencies) = postProject
 		{11CE241C-BC36-4F02-9E05-D1D448B757E7} = {11CE241C-BC36-4F02-9E05-D1D448B757E7}
 		{2716A8A5-FAAD-495F-9707-C72F48FB8A62} = {2716A8A5-FAAD-495F-9707-C72F48FB8A62}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessInterface", "DataAccessInterface\DataAccessInterface.csproj", "{2716A8A5-FAAD-495F-9707-C72F48FB8A62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessInterface", "DataAccessInterface\DataAccessInterface.csproj", "{2716A8A5-FAAD-495F-9707-C72F48FB8A62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{11CE241C-BC36-4F02-9E05-D1D448B757E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{11CE241C-BC36-4F02-9E05-D1D448B757E7}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2716A8A5-FAAD-495F-9707-C72F48FB8A62} = {2716A8A5-FAAD-495F-9707-C72F48FB8A62}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{5D3827D4-0E6C-4259-B1BA-41681FC9CCCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{5D3827D4-0E6C-4259-B1BA-41681FC9CCCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{E0440FB6-560C-4B0F-A84E-3A37DABD819A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,6 +66,10 @@ Global
 		{5D3827D4-0E6C-4259-B1BA-41681FC9CCCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D3827D4-0E6C-4259-B1BA-41681FC9CCCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D3827D4-0E6C-4259-B1BA-41681FC9CCCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0440FB6-560C-4B0F-A84E-3A37DABD819A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0440FB6-560C-4B0F-A84E-3A37DABD819A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0440FB6-560C-4B0F-A84E-3A37DABD819A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0440FB6-560C-4B0F-A84E-3A37DABD819A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

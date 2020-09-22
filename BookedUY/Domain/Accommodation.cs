@@ -6,6 +6,7 @@ namespace Domain
 {
     public class Accommodation
     {
+        public int Id { get; set; }
         public TouristicSpot Spot { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }

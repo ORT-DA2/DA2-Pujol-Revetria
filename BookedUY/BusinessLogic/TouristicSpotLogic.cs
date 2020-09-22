@@ -1,4 +1,5 @@
 ﻿using BusinessLogicInterface;
+using DataAccessInterface;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,11 +8,11 @@ namespace BusinessLogic
 {
     public class TouristicSpotLogic : ITouristicSpotLogic
     {
-        private readonly ITouristicSpotLogic spotLogic;
+        private readonly ITouristicSpotRepository touristicSpotRepository;
 
-        public TouristicSpotLogic(ITouristicSpotLogic spotLogic)
+        public TouristicSpotLogic(ITouristicSpotRepository touristicSpotRepository)
         {
-            this.spotLogic = spotLogic;
+            this.touristicSpotRepository = touristicSpotRepository;
         }
     }
 }

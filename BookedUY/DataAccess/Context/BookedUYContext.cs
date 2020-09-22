@@ -21,11 +21,9 @@ namespace DataAccess.Context
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Write Fluent API configurations here
-            //Property Configurations
             modelBuilder.Entity<Booking>().HasKey(b => b.Id);
-            modelBuilder.Entity<Booking>().Property(b => b.CheckIn).IsRequired().HasColumnType("Date");
-            modelBuilder.Entity<Booking>().Property(b => b.CheckOut).IsRequired().HasColumnType("Date");
+            modelBuilder.Entity<Booking>().Property(b => b.CheckIn).IsRequired();
+            modelBuilder.Entity<Booking>().Property(b => b.CheckOut).IsRequired();
             modelBuilder.Entity<Booking>().Property(b => b.BabyGuests).IsRequired();
             modelBuilder.Entity<Booking>().Property(b => b.ChildGuests).IsRequired();
             modelBuilder.Entity<Booking>().Property(b => b.AdultGuests).IsRequired();
@@ -33,7 +31,7 @@ namespace DataAccess.Context
             modelBuilder.Entity<Booking>().HasOne<Accommodation>(b => b.Accommodation).WithMany(a => a.Bookings).HasForeignKey(b=>b.Accommodation);
             modelBuilder.Entity<Booking>().HasOne<Tourist>(b => b.Guest).WithMany(t => t.Bookings).HasForeignKey(b => b.Guest);
             modelBuilder.Entity<BookingStage>().HasKey(s => s.Id);
-            modelBuilder.Entity<BookingStage>().Property(b => b.EntryDate).IsRequired().HasColumnType("Date").ValueGeneratedOnAdd();
+            modelBuilder.Entity<BookingStage>().Property(b => b.EntryDate).IsRequired().HasDefaultValueSql("newdate()");
             modelBuilder.Entity<BookingStage>().Property(b => b.Description).IsRequired();
             modelBuilder.Entity<BookingStage>().Property(b => b.Status).IsRequired();
             modelBuilder.Entity<BookingStage>().HasOne<Booking>(s => s.AsociatedBooking).WithMany(b => b.BookingHistory).HasForeignKey(s => s.AsociatedBooking);
@@ -43,7 +41,6 @@ namespace DataAccess.Context
             modelBuilder.Entity<TouristicSpot>().HasKey(t => t.Name);
             modelBuilder.Entity<TouristicSpot>().Property(t => t.Region); 
             modelBuilder.Entity<TouristicSpot>().HasOne<Region>(b => b.Region).WithMany(t => t.Spots).HasForeignKey(b => b.Region);
-            //modelBuilder.Entity<TouristicSpot>().HasMany<Category>(t => t.Categories).With
             modelBuilder.Entity<Accommodation>().HasKey(a => a.Name);
             modelBuilder.Entity<Accommodation>().Property(a => a.Full);
             modelBuilder.Entity<Accommodation>().Property(a => a.Address);
@@ -56,6 +53,10 @@ namespace DataAccess.Context
             modelBuilder.Entity<Tourist>().Property(t => t.LastName);
             modelBuilder.Entity<Region>().HasKey(r => r.Name);
             modelBuilder.Entity<Category>().HasKey(c => c.Name);
+
+            modelBuilder.Entity<CategoryTouristicSpot>().HasOne<Category>(ct => ct.Category).WithMany(c => c.Spots).HasForeignKey(ct => ct.CategoryId);
+
+            modelBuilder.Entity<CategoryTouristicSpot>().HasOne<TouristicSpot>(ct => ct.TouristicSpot).WithMany(t => t.Categories).HasForeignKey(ct => ct.TouristicSpotId);
         }
         public BookedUYContext(DbContextOptions options) : base(options) { }
     }

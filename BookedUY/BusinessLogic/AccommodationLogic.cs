@@ -1,4 +1,5 @@
 ﻿using BusinessLogicInterface;
+using DataAccessInterface;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,11 +8,11 @@ namespace BusinessLogic
 {
     public class AccommodationLogic : IAccommodationLogic
     {
-        private readonly IAccommodationLogic accommodationLogic;
+        private readonly IAccommodationRepository accommodationRepository;
 
-        public AccommodationLogic(IAccommodationLogic accommodationLogic)
+        public AccommodationLogic(IAccommodationRepository accommodationRepository)
         {
-            this.accommodationLogic = accommodationLogic;
+            this.accommodationRepository = accommodationRepository;
         }
     }
 }

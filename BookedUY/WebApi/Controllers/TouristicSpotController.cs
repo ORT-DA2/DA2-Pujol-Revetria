@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLogicInterface;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -9,9 +10,16 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebApi.Controllers
 {
     [Route("api/touristicspot")]
-    [ApiController]
     public class TouristicSpotController : BookedUYController
     {
+        private readonly ITouristicSpotLogic touristicSpotLogic;
+
+        public TouristicSpotController(ITouristicSpotLogic touristicSpotLogic)
+        {
+            this.touristicSpotLogic = touristicSpotLogic;
+        }
+
+
         // GET: api/<TouristicSpotController>
         [HttpGet]
         public IEnumerable<string> Get()

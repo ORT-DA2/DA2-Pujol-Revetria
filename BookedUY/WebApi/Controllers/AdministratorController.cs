@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLogicInterface;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -9,9 +10,16 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebApi.Controllers
 {
     [Route("api/administrator")]
-    [ApiController]
     public class AdministratorController : BookedUYController
     {
+        private readonly IAdministratorLogic administratorLogic;
+
+        public AdministratorController(IAdministratorLogic administratorLogic)
+        {
+            this.administratorLogic = administratorLogic;
+        }
+
+
         // GET: api/<AdministratorController>
         [HttpGet]
         public IEnumerable<string> Get()
