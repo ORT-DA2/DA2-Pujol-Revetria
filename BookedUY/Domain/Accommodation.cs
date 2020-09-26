@@ -8,6 +8,7 @@ namespace Domain
     {
         public int Id { get; set; }
         public TouristicSpot Spot { get; set; }
+        public int SpotId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string ContactNumber { get; set; }

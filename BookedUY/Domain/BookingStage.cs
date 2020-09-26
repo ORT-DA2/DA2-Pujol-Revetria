@@ -8,9 +8,12 @@ namespace Domain
     {
         public int Id { get; set; }
         public Administrator Administrator { get; set; }
+        public int AdministratorId { get; set; }
+
         public Status Status { get; set; }
         public string Description { get; set; }
         public DateTime EntryDate { get; set; }
         public Booking AsociatedBooking { get; set; }
+        public int AsociatedBookingId { get; set; }
     }
 }
