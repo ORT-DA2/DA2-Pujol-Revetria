@@ -7,13 +7,13 @@ namespace Domain
     {
         public int Id { get; set; }
         public Accommodation Accommodation { get; set; }
+        public int AccommodationId { get; set; }
         public DateTime CheckIn { get; set; }
         public DateTime CheckOut { get; set; }
         public float TotalPrice { get; set; }
-        public int BabyGuests { get; set; }
-        public int ChildGuests { get; set; }
-        public int AdultGuests { get; set; }
-        public Tourist Guest { get; set; }
+        public List<Guest> Guests {get; set;}
+        public Tourist HeadGuest { get; set; }
+        public int GuestId { get; set; }
         public List<BookingStage> BookingHistory { get; set; }
     }
 }
