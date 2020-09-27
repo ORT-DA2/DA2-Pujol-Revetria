@@ -1,19 +1,31 @@
 ﻿using DataAccessInterface;
 using Domain;
 using Microsoft.EntityFrameworkCore;
+using DataAccess;
 using System;
+using System.Collections.Generic;
+using DataAccess.Context;
 
 namespace DataAccess.Repositories
 {
     public class BookingRepository : IBookingRepository
     {
-        private readonly DbSet<Booking> bookings;
-        private readonly DbContext bookedUYContext;
+        private DbSet<Booking> bookings;
+        private BookedUYContext bookedUYContext;
 
-        public BookingRepository(DbContext context)
+        public BookingRepository(BookedUYContext context)
         {
-            this.bookedUYContext = context ?? throw new ArgumentNullException(nameof(bookedUYContext));
+            this.bookedUYContext = context;
             this.bookings = context.Set<Booking>();
+            
         }
+
+        //public List<Booking> GetBookings()
+        //{
+        //    using (var context = new BookedUYContext())
+        //    {
+        //        context.Boo
+        //    }
+        //}
     }
 }
