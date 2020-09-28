@@ -16,10 +16,10 @@ namespace WebApi.Tests
                 new Booking()
                 {
                     Id=1,
-                    Accommodation = new Accommodation(),
+                    Accommodation = new Accommodation(0),
                     CheckIn = DateTime.Now,
                     CheckOut = DateTime.Now,
-                    
+                    AccommodationId = 0;
                 }
             };
         }

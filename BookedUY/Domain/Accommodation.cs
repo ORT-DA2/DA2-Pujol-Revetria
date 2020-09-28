@@ -16,5 +16,19 @@ namespace Domain
         public float PricePerNight { get; set; }
         public bool Full { get; set; }
         public List<Booking> Bookings { get; set; }
+
+        public Accommodation(int id, TouristicSpot spot, string name, string address, string contactNumber, string information, float pricePerNight)
+        {
+            Id = id;
+            Spot = spot;
+            Name = name;
+            Address = address;
+            ContactNumber = contactNumber;
+            Information = information;
+            PricePerNight = pricePerNight;
+            Full = false;
+            Bookings = new List<Booking>();
+            SpotId = spot.Id;
+        }
     }
 }
