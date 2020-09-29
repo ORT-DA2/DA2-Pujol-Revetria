@@ -80,8 +80,8 @@ namespace Domain
                 }
             }
         }
-        private float _pricePerNight;
-        public float PricePerNight
+        private double _pricePerNight;
+        public double PricePerNight
         {
             get
             {
