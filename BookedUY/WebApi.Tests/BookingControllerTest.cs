@@ -13,14 +13,7 @@ namespace WebApi.Tests
         {
             List<Booking> BookingsToReturn = new List<Booking>()
             {
-                new Booking()
-                {
-                    Id=1,
-                    Accommodation = new Accommodation(0),
-                    CheckIn = DateTime.Now,
-                    CheckOut = DateTime.Now,
-                    AccommodationId = 0;
-                }
+                
             };
         }
     }

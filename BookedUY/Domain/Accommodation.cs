@@ -7,28 +7,100 @@ namespace Domain
     public class Accommodation
     {
         public int Id { get; set; }
-        public TouristicSpot Spot { get; set; }
+        public TouristicSpot Spot{ get; set; }
         public int SpotId { get; set; }
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public string ContactNumber { get; set; }
-        public string Information { get; set; }
-        public float PricePerNight { get; set; }
-        public bool Full { get; set; }
-        public List<Booking> Bookings { get; set; }
 
-        public Accommodation(int id, TouristicSpot spot, string name, string address, string contactNumber, string information, float pricePerNight)
+        private string _name;
+        public string Name
         {
-            Id = id;
-            Spot = spot;
-            Name = name;
-            Address = address;
-            ContactNumber = contactNumber;
-            Information = information;
-            PricePerNight = pricePerNight;
-            Full = false;
-            Bookings = new List<Booking>();
-            SpotId = spot.Id;
+            get { return _name; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new Exception("Name cannot be empty");
+                }
+                else
+                {
+                    _name = value.Trim();
+                }
+            }
         }
+        private string _address;
+        public string Address
+        {
+            get { return _address; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new Exception("Address cannot be empty");
+                }
+                else
+                {
+                    _address = value.Trim();
+                }
+            }
+        }
+        private string _contactNumber;
+        public string ContactNumber
+        {
+            get 
+            { 
+                return _contactNumber; 
+            }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new Exception("Name cannot be empty");
+                }
+                else
+                {
+                    _contactNumber = value.Trim();
+                }
+            }
+        }
+        private string _information;
+        public string Information
+        {
+            get 
+            { 
+                return _information; 
+            }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new Exception("Name cannot be empty");
+                }
+                else
+                {
+                    _information = value.Trim();
+                }
+            }
+        }
+        private float _pricePerNight;
+        public float PricePerNight
+        {
+            get
+            {
+                return _pricePerNight;
+            }
+            set
+            {
+                if (value < 0)
+                {
+                    throw new Exception("Price must be positive");
+                }
+                else
+                {
+                    _pricePerNight = value;
+                }
+            }
+        }
+        public bool Full { get; set; }
+        public List<Booking> Bookings{ get; set;}
+
     }
 }
