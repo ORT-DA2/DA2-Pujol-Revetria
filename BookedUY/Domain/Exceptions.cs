@@ -69,4 +69,15 @@ namespace Domain
             }
         }
     }
+
+    public class NegativeAmountException : Exception
+    {
+        public override string Message
+        {
+            get
+            {
+                return "The amount entered is negative";
+            }
+        }
+    }
 }
