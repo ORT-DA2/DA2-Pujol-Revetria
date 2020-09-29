@@ -18,7 +18,7 @@ namespace Domain
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new Exception("Name cannot be empty");
+                    throw new NullInputException();
                 }
                 else
                 {
@@ -34,7 +34,7 @@ namespace Domain
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new Exception("Address cannot be empty");
+                    throw new NullInputException();
                 }
                 else
                 {
@@ -53,7 +53,7 @@ namespace Domain
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new Exception("Name cannot be empty");
+                    throw new NullInputException();
                 }
                 else
                 {
@@ -72,7 +72,7 @@ namespace Domain
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new Exception("Name cannot be empty");
+                    throw new NullInputException();
                 }
                 else
                 {
@@ -91,7 +91,7 @@ namespace Domain
             {
                 if (value < 0)
                 {
-                    throw new Exception("Price must be positive");
+                    throw new NegativePriceException();
                 }
                 else
                 {
@@ -102,5 +102,14 @@ namespace Domain
         public bool Full { get; set; }
         public List<Booking> Bookings{ get; set;}
 
+        public override bool Equals(object obj)
+        {
+            var result = false;
+            if (obj is Accommodation accommodation)
+            {
+                result = this.Id == accommodation.Id && this.Name == accommodation.Name;
+            }
+            return result;
+        }
     }
 }

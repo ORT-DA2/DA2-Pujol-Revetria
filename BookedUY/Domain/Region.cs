@@ -7,21 +7,35 @@ namespace Domain
     public class Region
     {
         public int Id { get; set; }
+        private string _name;
         public string Name
         {
-            get { return this.Name; }
+            get 
+            { 
+                return _name; 
+            }
             set
             {
-                if (!string.IsNullOrWhiteSpace(value))
+                if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new Exception("Name cannot be empty");
+                    throw new NullInputException();
                 }
                 else
                 {
-                    this.Name = value;
+                    _name = value;
                 }
             }
         }
         public List<TouristicSpot> Spots { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            var result = false;
+            if (obj is Region region)
+            {
+                result = this.Id == region.Id && this.Name == region.Name;
+            }
+            return result;
+        }
     }
 }

@@ -4,27 +4,24 @@ using System.Text;
 
 namespace Domain
 {
-    public class Exceptions
+    public class NullInputException : Exception
     {
-        public class NullInputException : Exception
+        public override string Message
         {
-            public override string Message
+            get
             {
-                get
-                {
-                    return "The input received was empty";
-                }
+                return "The input received was empty";
             }
         }
+    }
 
-        public class AlreadyExistsException : Exception
+    public class AlreadyExistsException : Exception
+    {
+        public override string Message
         {
-            public override string Message
+            get
             {
-                get
-                {
-                    return "The object trying to be created already exists";
-                }
+                return "The object trying to be created already exists";
             }
         }
     }
@@ -61,5 +58,15 @@ namespace Domain
             }
         }
     }
-}
 
+    public class EmailException : Exception
+    {
+        public override string Message
+        {
+            get
+            {
+                return "The input is not an Email";
+            }
+        }
+    }
+}
