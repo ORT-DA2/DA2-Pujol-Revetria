@@ -56,9 +56,10 @@ namespace DataAccess.Tests
         [TestMethod]
         public void TestAddBookingStage()
         {
+            int id = 3;
             BookingStage bookingStage = new BookingStage()
             {
-                Id = 3,
+                Id = id,
                 Description = "Tayment",
                 Administrator = null,
                 AdministratorId = 0,
@@ -72,7 +73,7 @@ namespace DataAccess.Tests
             var context = new BookedUYContext(options);
             var repository = new BookingStageRepository(context);
             repository.Add(bookingStage);
-            Assert.AreEqual(context.Find<BookingStage>(3), bookingStage);
+            Assert.AreEqual(context.Find<BookingStage>(id), bookingStage);
 
         }
     }
