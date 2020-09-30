@@ -14,7 +14,7 @@ namespace DataAccess.Tests
     public class BookingStageRepositoryTest
     {
         [TestMethod]
-        public void TestGetAllRegionsOk()
+        public void TestGetAllBookingStagesOk()
         {
             List<BookingStage> bookingStagesToReturn = new List<BookingStage>()
             {
@@ -51,6 +51,29 @@ namespace DataAccess.Tests
             var result = repository.GetAll();
 
             Assert.IsTrue(bookingStagesToReturn.SequenceEqual(result));
+        }
+
+        [TestMethod]
+        public void TestAddBookingStage()
+        {
+            BookingStage bookingStage = new BookingStage()
+            {
+                Id = 3,
+                Description = "Tayment",
+                Administrator = null,
+                AdministratorId = 0,
+                AsociatedBooking = null,
+                AsociatedBookingId = 0,
+                EntryDate = DateTime.Now,
+                Status = new Status(),
+            };
+            var options = new DbContextOptionsBuilder<BookedUYContext>()
+                .UseInMemoryDatabase(databaseName: "BookedUYDB").Options;
+            var context = new BookedUYContext(options);
+            var repository = new BookingStageRepository(context);
+            repository.Add(bookingStage);
+            Assert.AreEqual(context.Find<BookingStage>(3), bookingStage);
+
         }
     }
 }

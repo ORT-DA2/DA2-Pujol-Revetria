@@ -22,5 +22,11 @@ namespace DataAccess.Repositories
         {
             return this.bookingStages;
         }
+
+        public void Add(BookingStage bookingStage)
+        {
+            this.bookingStages.Add(bookingStage);
+            bookUYContext.SaveChanges();
+        }
     }
 }
