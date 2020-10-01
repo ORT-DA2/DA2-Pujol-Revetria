@@ -8,9 +8,26 @@ using System.Linq;
 
 namespace DataAccess.Tests
 {
+
     [TestClass]
     public class CategoryRepositoryTest
     {
+        private DbContextOptions<BookedUYContext> _options = new DbContextOptionsBuilder<BookedUYContext>()
+                .UseInMemoryDatabase(databaseName: "BookedUYDB").Options;
+        private BookedUYContext _context;
+
+        [TestInitialize]
+        public void TestInit()
+        {
+            _context = new BookedUYContext(_options);
+        }
+
+        [TestCleanup]
+        public void CleanUp()
+        {
+            _context.Database.EnsureDeleted();
+        }
+
         [TestMethod]
         public void TestGetAllCategoriesOk()
         {
@@ -29,12 +46,10 @@ namespace DataAccess.Tests
                     Spots = null
                 },
             };
-            var options = new DbContextOptionsBuilder<BookedUYContext>()
-                .UseInMemoryDatabase(databaseName: "BookedUYDB").Options;
-            var context = new BookedUYContext(options);
-            categoriesToReturn.ForEach(r => context.Add(r));
-            context.SaveChanges();
-            var repository = new CategoryRepository(context);
+
+            categoriesToReturn.ForEach(r => _context.Add(r));
+            _context.SaveChanges();
+            var repository = new CategoryRepository(_context);
 
             var result = repository.GetAll();
 

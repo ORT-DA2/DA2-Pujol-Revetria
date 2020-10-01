@@ -13,6 +13,22 @@ namespace DataAccess.Tests
     [TestClass]
     public class BookingStageRepositoryTest
     {
+        private DbContextOptions<BookedUYContext> _options = new DbContextOptionsBuilder<BookedUYContext>()
+                .UseInMemoryDatabase(databaseName: "BookedUYDB").Options;
+        private BookedUYContext _context;
+
+        [TestInitialize]
+        public void TestInit()
+        {
+            _context = new BookedUYContext(_options);
+        }
+
+        [TestCleanup]
+        public void CleanUp()
+        {
+            _context.Database.EnsureDeleted();
+        }
+
         [TestMethod]
         public void TestGetAllBookingStagesOk()
         {
@@ -41,12 +57,10 @@ namespace DataAccess.Tests
                     Status = new Status(),
                 },
             };
-            var options = new DbContextOptionsBuilder<BookedUYContext>()
-                .UseInMemoryDatabase(databaseName: "BookedUYDB").Options;
-            var context = new BookedUYContext(options);
-            bookingStagesToReturn.ForEach(r => context.Add(r));
-            context.SaveChanges();
-            var repository = new BookingStageRepository(context);
+
+            bookingStagesToReturn.ForEach(r => _context.Add(r));
+            _context.SaveChanges();
+            var repository = new BookingStageRepository(_context);
 
             var result = repository.GetAll();
 
@@ -68,12 +82,10 @@ namespace DataAccess.Tests
                 EntryDate = DateTime.Now,
                 Status = new Status(),
             };
-            var options = new DbContextOptionsBuilder<BookedUYContext>()
-                .UseInMemoryDatabase(databaseName: "BookedUYDB").Options;
-            var context = new BookedUYContext(options);
-            var repository = new BookingStageRepository(context);
+
+            var repository = new BookingStageRepository(_context);
             repository.Add(bookingStage);
-            Assert.AreEqual(context.Find<BookingStage>(id), bookingStage);
+            Assert.AreEqual(_context.Find<BookingStage>(id), bookingStage);
 
         }
     }

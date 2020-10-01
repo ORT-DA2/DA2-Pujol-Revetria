@@ -11,6 +11,22 @@ namespace DataAccess.Tests
     [TestClass]
     public class RegionRepositoryTest
     {
+        private DbContextOptions<BookedUYContext> _options = new DbContextOptionsBuilder<BookedUYContext>()
+                .UseInMemoryDatabase(databaseName: "BookedUYDB").Options;
+        private BookedUYContext _context;
+
+        [TestInitialize]
+        public void TestInit()
+        {
+            _context = new BookedUYContext(_options);
+        }
+
+        [TestCleanup]
+        public void CleanUp()
+        {
+            _context.Database.EnsureDeleted();
+        }
+
         [TestMethod]
         public void TestGetAllRegionsOk()
         {
@@ -29,12 +45,10 @@ namespace DataAccess.Tests
                     Spots = null
                 },
             };
-            var options = new DbContextOptionsBuilder<BookedUYContext>()
-                .UseInMemoryDatabase(databaseName: "BookedUYDB").Options;
-            var context = new BookedUYContext(options);
-            regionsToReturn.ForEach(r => context.Add(r));
-            context.SaveChanges();
-            var repository = new RegionRepository(context);
+
+            regionsToReturn.ForEach(r => _context.Add(r));
+            _context.SaveChanges();
+            var repository = new RegionRepository(_context);
 
             var result = repository.GetAll();
 

@@ -13,6 +13,22 @@ namespace DataAccess.Tests
     [TestClass]
     public class TouristicSpotRepositoryTest
     {
+        private DbContextOptions<BookedUYContext> _options = new DbContextOptionsBuilder<BookedUYContext>()
+                .UseInMemoryDatabase(databaseName: "BookedUYDB").Options;
+        private BookedUYContext _context;
+
+        [TestInitialize]
+        public void TestInit()
+        {
+            _context = new BookedUYContext(_options);
+        }
+
+        [TestCleanup]
+        public void CleanUp()
+        {
+            _context.Database.EnsureDeleted();
+        }
+
         [TestMethod]
         public void TestGetAllSpotsOk()
         {
@@ -43,14 +59,34 @@ namespace DataAccess.Tests
                     Categories=null,
                 },
             };
-            var options = new DbContextOptionsBuilder<BookedUYContext>()
-                .UseInMemoryDatabase(databaseName: "BookedUYDB").Options;
-            var context = new BookedUYContext(options);
-            spotsToReturn.ForEach(s => context.Add(s));
-            context.SaveChanges();
-            var repository = new TouristicSpotRepository(context);
+
+            spotsToReturn.ForEach(s => _context.Add(s));
+            _context.SaveChanges();
+            var repository = new TouristicSpotRepository(_context);
             var result = repository.GetAll();
             Assert.IsTrue(spotsToReturn.SequenceEqual(result));
+        }
+
+        [TestMethod]
+        public void TestAddSpot()
+        {
+            int id = 1;
+            TouristicSpot spot = new TouristicSpot()
+            {
+                Id = id,
+                Name = "Colonia del Sacramento",
+                Accommodations = null,
+                Description = "Es conocida por su Barrio Histórico con calles de" +
+                    " adoquines rodeadas de edificios que datan de la" +
+                    " época en que era un asentamiento portugués.",
+                Region = null,
+                RegionId = 1,
+                Categories = null,
+            };
+            var repository = new TouristicSpotRepository(_context);
+            repository.Add(spot);
+
+            Assert.AreEqual(_context.Find<TouristicSpot>(id), spot);
         }
     }
 }

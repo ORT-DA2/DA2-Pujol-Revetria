@@ -7,5 +7,6 @@ namespace DataAccessInterface
 {
     public interface IRegionRepository
     {
+        IEnumerable<Region> GetAll();
     }
 }

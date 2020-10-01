@@ -13,8 +13,24 @@ namespace DataAccess.Tests
     [TestClass]
     public class TouristRepositoryTest
     {
+        private DbContextOptions<BookedUYContext> _options = new DbContextOptionsBuilder<BookedUYContext>()
+                .UseInMemoryDatabase(databaseName: "BookedUYDB").Options;
+        private BookedUYContext _context;
+
+        [TestInitialize]
+        public void TestInit()
+        {
+            _context = new BookedUYContext(_options);
+        }
+
+        [TestCleanup]
+        public void CleanUp()
+        {
+            _context.Database.EnsureDeleted();
+        }
+
         [TestMethod]
-        public void TestGetAllSpotsOk()
+        public void TestGetAllTouristsOk()
         {
             List<Tourist> touristsToReturn = new List<Tourist>()
             {
@@ -35,12 +51,10 @@ namespace DataAccess.Tests
                     Bookings=null,
                 },
             };
-            var options = new DbContextOptionsBuilder<BookedUYContext>()
-                .UseInMemoryDatabase(databaseName: "BookedUYDB").Options;
-            var context = new BookedUYContext(options);
-            touristsToReturn.ForEach(s => context.Add(s));
-            context.SaveChanges();
-            var repository = new TouristRepository(context);
+
+            touristsToReturn.ForEach(s => _context.Add(s));
+            _context.SaveChanges();
+            var repository = new TouristRepository(_context);
             var result = repository.GetAll();
             Assert.IsTrue(touristsToReturn.SequenceEqual(result));
         }

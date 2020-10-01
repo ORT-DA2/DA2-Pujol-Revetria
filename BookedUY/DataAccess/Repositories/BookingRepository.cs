@@ -20,12 +20,15 @@ namespace DataAccess.Repositories
             
         }
 
-        //public List<Booking> GetBookings()
-        //{
-        //    using (var context = new BookedUYContext())
-        //    {
-        //        context.Boo
-        //    }
-        //}
+        public IEnumerable<Booking> GetAll()
+        {
+            return this.bookings;
+        }
+
+        public void Add(Booking booking)
+        {
+            this.bookings.Add(booking);
+            this.bookedUYContext.SaveChanges();
+        }
     }
 }

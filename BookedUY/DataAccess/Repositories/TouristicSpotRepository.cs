@@ -22,5 +22,11 @@ namespace DataAccess.Repositories
         {
             return this.spots;
         }
+
+        public void Add(TouristicSpot spot)
+        {
+            this.spots.Add(spot);
+            this.bookUYContext.SaveChanges();
+        }
     }
 }
