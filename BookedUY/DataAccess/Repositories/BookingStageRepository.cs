@@ -3,6 +3,7 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DataAccess.Repositories
@@ -27,6 +28,11 @@ namespace DataAccess.Repositories
         {
             this.bookingStages.Add(bookingStage);
             bookUYContext.SaveChanges();
+        }
+
+        public IEnumerable<BookingStage> GetByBooking(int id)
+        {
+            return this.bookingStages.Where(b => b.AsociatedBookingId == id);
         }
     }
 }

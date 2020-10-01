@@ -9,5 +9,6 @@ namespace DataAccessInterface
     {
         IEnumerable<BookingStage> GetAll();
         void Add(BookingStage bookingStage);
+        IEnumerable<BookingStage> GetByBooking(int id);
     }
 }
