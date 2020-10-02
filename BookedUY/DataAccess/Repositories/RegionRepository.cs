@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DataAccess.Repositories
 {
-    public class RegionRepository : IRegionRepository
+    public class RegionRepository : IRepository<Region>
     {
         private readonly DbSet<Region> regions;
         private readonly DbContext bookUYContext;

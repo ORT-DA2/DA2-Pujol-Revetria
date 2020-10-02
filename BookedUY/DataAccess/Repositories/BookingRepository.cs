@@ -8,7 +8,7 @@ using DataAccess.Context;
 
 namespace DataAccess.Repositories
 {
-    public class BookingRepository : IBookingRepository
+    public class BookingRepository : IRepository<Booking>
     {
         private DbSet<Booking> bookings;
         private BookedUYContext bookedUYContext;

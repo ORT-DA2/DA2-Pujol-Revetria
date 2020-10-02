@@ -3,6 +3,7 @@ using BusinessLogicInterface;
 using DataAccess.Context;
 using DataAccess.Repositories;
 using DataAccessInterface;
+using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -15,13 +16,13 @@ namespace Factory
         public static void AddMyServices(IServiceCollection services)
         {
             services.AddScoped<IBookingLogic, BookingLogic>();
-            services.AddScoped<IBookingRepository, BookingRepository>();
-            services.AddScoped<IAccommodationRepository, AccommodationRepository>();
-            services.AddScoped<IBookingStageRepository, BookingStageRepository>();
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<IRegionRepository, RegionRepository>();
-            services.AddScoped<ITouristicSpotRepository, TouristicSpotRepository>();
-            services.AddScoped<IAdministratorRepository, AdministratorRepository>();
+            services.AddScoped<IRepository<Booking>, BookingRepository>();
+            services.AddScoped<IRepository<Accommodation>, AccommodationRepository>();
+            services.AddScoped<IRepository<BookingStage>, BookingStageRepository>();
+            services.AddScoped<IRepository<Category>, CategoryRepository>();
+            services.AddScoped<IRepository<Region>, RegionRepository>();
+            services.AddScoped<IRepository<TouristicSpot>, TouristicSpotRepository>();
+            services.AddScoped<IRepository<Administrator>, AdministratorRepository>();
         }
 
         public static void AddDbContextServices(IServiceCollection services, string connectionString)
