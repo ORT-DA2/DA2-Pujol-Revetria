@@ -8,7 +8,7 @@ using System.Text;
 
 namespace DataAccess.Repositories
 {
-    public class AccommodationRepository : IAccommodationRepository
+    public class AccommodationRepository : IRepository<Accommodation>
     {
         private DbSet<Accommodation> accommodations;
         private BookedUYContext bookedUYContext;

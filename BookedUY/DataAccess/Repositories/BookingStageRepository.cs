@@ -8,7 +8,7 @@ using System.Text;
 
 namespace DataAccess.Repositories
 {
-    public class BookingStageRepository : IBookingStageRepository
+    public class BookingStageRepository : IRepository<BookingStage>
     {
         private readonly DbSet<BookingStage> bookingStages;
         private readonly DbContext bookUYContext;

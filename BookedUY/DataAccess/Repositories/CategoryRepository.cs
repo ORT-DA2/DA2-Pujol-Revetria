@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DataAccess.Repositories
 {
-    public class CategoryRepository : ICategoryRepository
+    public class CategoryRepository : IRepository<Category>
     {
         private readonly DbSet<Category> categories;
         private readonly DbContext bookUYContext;
