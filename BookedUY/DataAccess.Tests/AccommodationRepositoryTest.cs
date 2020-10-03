@@ -95,7 +95,7 @@ namespace DataAccess.Tests
         }
 
         [TestMethod]
-        public void GetDeleteAccommodationsTest()
+        public void DeleteAccommodationsTest()
         {
             int id = 1;
             Accommodation accommodation = new Accommodation()
@@ -118,6 +118,50 @@ namespace DataAccess.Tests
             repository.Delete(accommodation);
 
             Assert.IsNull(_context.Find<Accommodation>(id));
+        }
+
+        [TestMethod]
+        public void TestGetByIdAccomodation()
+        {
+            int testId = 1;
+            Accommodation testAccommodation = new Accommodation()
+            {
+                Id = testId,
+                Address = "Test1",
+                Bookings = null,
+                ContactNumber = "0993456611",
+                Full = false,
+                Name = "Hilton",
+                Information = "Epic",
+                PricePerNight = 120.76,
+                Spot = null,
+                SpotId = 2
+            };
+            List<Accommodation> accommodationList = new List<Accommodation>()
+            {
+
+                new Accommodation()
+                {
+                    Id = 2,
+                    Address = "Test",
+                    Bookings = null,
+                    ContactNumber = "09934566",
+                    Full = false,
+                    Name = "Radisson",
+                    Information = "nice",
+                    PricePerNight = 1.76,
+                    Spot = null,
+                    SpotId = 1
+                },
+            };
+            accommodationList.Add(testAccommodation);
+            accommodationList.ForEach(r => _context.Add(r));
+            _context.SaveChanges();
+            var repository = new BookingRepository(_context);
+
+            var result = repository.GetById(testId);
+
+            Assert.AreEqual(testAccommodation, result);
         }
     }
 }

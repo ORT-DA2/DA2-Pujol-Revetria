@@ -30,5 +30,15 @@ namespace DataAccess.Repositories
             this.bookings.Add(booking);
             this.bookedUYContext.SaveChanges();
         }
+
+        public Booking GetById(int id)
+        {
+            return this.bookings.Find(id);
+        }
+
+        public void Delete(Booking booking)
+        {
+            this.bookings.Remove(booking);
+        }
     }
 }

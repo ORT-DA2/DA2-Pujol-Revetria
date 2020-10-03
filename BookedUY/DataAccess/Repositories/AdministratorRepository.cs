@@ -23,5 +23,22 @@ namespace DataAccess.Repositories
         {
             return this.administrators;
         }
+
+        public void Delete(Administrator administrator)
+        {
+            this.administrators.Remove(administrator);
+            bookedUYContext.SaveChanges();
+        }
+
+        public void Add(Administrator obj)
+        {
+            this.administrators.Add(obj);
+            bookedUYContext.SaveChanges();
+        }
+
+        public Administrator GetById(int id)
+        {
+            return administrators.Find(id);
+        }
     }
 }

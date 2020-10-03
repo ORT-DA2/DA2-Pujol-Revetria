@@ -8,5 +8,10 @@ namespace DataAccessInterface
     {
         IEnumerable<T> GetAll();
 
+        void Add(T obj);
+
+        void Delete(T obj);
+
+        T GetById(int id);
     }
 }

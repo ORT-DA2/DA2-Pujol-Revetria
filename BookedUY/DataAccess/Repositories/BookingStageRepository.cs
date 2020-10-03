@@ -34,5 +34,16 @@ namespace DataAccess.Repositories
         {
             return this.bookingStages.Where(b => b.AsociatedBookingId == id);
         }
+
+        public void Delete(BookingStage obj)
+        {
+            this.bookingStages.Remove(obj);
+            this.bookUYContext.SaveChanges();
+        }
+
+        public BookingStage GetById(int id)
+        {
+            return this.bookingStages.Find(id);
+        }
     }
 }

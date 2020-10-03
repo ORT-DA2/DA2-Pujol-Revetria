@@ -18,6 +18,7 @@ namespace DataAccess.Context
         public DbSet<BookingStage> BookingStages { get; set; }
         public DbSet<Region> Regions { get; set; }
         public DbSet<TouristicSpot> TouristicSpots { get; set; }
+        public DbSet<Tourist> Tourists { get; set; }
         public BookedUYContext() 
         {
         }
