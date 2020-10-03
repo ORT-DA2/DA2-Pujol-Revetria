@@ -206,5 +206,53 @@ namespace DataAccess.Tests
             listToReturn.Add(bookingStage3);
             Assert.IsTrue(result.Count()==0);
         }
+
+        [TestMethod]
+        public void DeleteBookingStageTest()
+        {
+            int id = 1;
+            BookingStage bookingStage = new BookingStage()
+            {
+                Id = id,
+                Description = "The booking was rejected due to payment issues, please contact your bank",
+                Administrator = null,
+                AdministratorId = 0,
+                AsociatedBooking = null,
+                AsociatedBookingId = 2,
+                EntryDate = DateTime.Now,
+                Status = new Status(),
+            };
+            _context.Add(bookingStage);
+            _context.SaveChanges();
+            var repository = new BookingStageRepository(_context);
+
+            repository.Delete(bookingStage);
+
+            Assert.IsNull(_context.Find<BookingStage>(id));
+        }
+
+        [TestMethod]
+        public void TestGetByIdBookingStage()
+        {
+            int testId = 1;
+            BookingStage testBookingStage = new BookingStage()
+            {
+                Id = testId,
+                Description = "The booking was rejected due to payment issues, please contact your bank",
+                Administrator = null,
+                AdministratorId = 0,
+                AsociatedBooking = null,
+                AsociatedBookingId = 2,
+                EntryDate = DateTime.Now,
+                Status = new Status(),
+            };
+            _context.Add(testBookingStage);
+            _context.SaveChanges();
+            var repository = new BookingStageRepository(_context);
+
+            var result = repository.GetById(testId);
+
+            Assert.AreEqual(testBookingStage, result);
+        }
     }
 }

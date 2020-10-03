@@ -35,5 +35,10 @@ namespace DataAccess.Repositories
             this.accommodations.Remove(accommodation);
             this.bookedUYContext.SaveChanges();
         }
+
+        public Accommodation GetById(int id)
+        {
+            return this.accommodations.Find(id);
+        }
     }
 }

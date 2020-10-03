@@ -61,5 +61,24 @@ namespace DataAccess.Tests
 
             Assert.IsTrue(administratorsToReturn.SequenceEqual(result));
         }
+
+        [TestMethod]
+        public void DeleteAdministratorTest()
+        {
+            int id = 1;
+            Administrator administrator = new Administrator()
+            {
+                Id = id,
+                Email = "prueba3@prueba3.com",
+                Password = "P@5Sw0rd3"
+            };
+            _context.Add(administrator);
+            _context.SaveChanges();
+            var repository = new AdministratorRepository(_context);
+
+            repository.Delete(administrator);
+
+            Assert.IsNull(_context.Find<Administrator>(id));
+        }
     }
 }
