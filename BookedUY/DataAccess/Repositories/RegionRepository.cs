@@ -20,12 +20,14 @@ namespace DataAccess.Repositories
 
         public void Add(Region obj)
         {
-            throw new NotImplementedException();
+            this.regions.Add(obj);
+            bookUYContext.SaveChanges();
         }
 
         public void Delete(Region obj)
         {
-            throw new NotImplementedException();
+            this.regions.Remove(obj);
+            bookUYContext.SaveChanges();
         }
 
         public IEnumerable<Region> GetAll()
@@ -35,7 +37,7 @@ namespace DataAccess.Repositories
 
         public Region GetById(int id)
         {
-            throw new NotImplementedException();
+            return this.regions.Find(id);
         }
     }
 }

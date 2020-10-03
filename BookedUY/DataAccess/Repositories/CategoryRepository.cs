@@ -3,6 +3,7 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DataAccess.Repositories
@@ -20,12 +21,14 @@ namespace DataAccess.Repositories
 
         public void Add(Category obj)
         {
-            throw new NotImplementedException();
+            this.categories.Add(obj);
+            bookUYContext.SaveChanges();
         }
 
         public void Delete(Category obj)
         {
-            throw new NotImplementedException();
+            this.categories.Remove(obj);
+            bookUYContext.SaveChanges();
         }
 
         public IEnumerable<Category> GetAll()
@@ -35,7 +38,7 @@ namespace DataAccess.Repositories
 
         public Category GetById(int id)
         {
-            throw new NotImplementedException();
+            return this.categories.Find(id);
         }
     }
 }
