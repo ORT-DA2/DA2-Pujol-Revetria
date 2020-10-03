@@ -18,9 +18,24 @@ namespace DataAccess.Repositories
             this.categories = bookUYContext.Set<Category>();
         }
 
+        public void Add(Category obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Category obj)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Category> GetAll()
         {
             return this.categories;
+        }
+
+        public Category GetById(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

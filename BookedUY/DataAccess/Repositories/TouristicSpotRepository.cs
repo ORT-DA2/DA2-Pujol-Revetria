@@ -58,5 +58,10 @@ namespace DataAccess.Repositories
             this.spots.Remove(touristicSpot);
             bookUYContext.SaveChanges();
         }
+
+        public TouristicSpot GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

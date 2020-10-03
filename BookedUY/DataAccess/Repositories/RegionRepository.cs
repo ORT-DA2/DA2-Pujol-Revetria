@@ -18,10 +18,24 @@ namespace DataAccess.Repositories
             this.regions = bookUYContext.Set<Region>();
         }
 
+        public void Add(Region obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Region obj)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Region> GetAll()
         {
             return this.regions;
         }
-        
+
+        public Region GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

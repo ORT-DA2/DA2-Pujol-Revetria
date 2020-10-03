@@ -18,10 +18,24 @@ namespace DataAccess.Repositories
             this.tourists = bookUYContext.Set<Tourist>();
         }
 
+        public void Add(Tourist obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Tourist obj)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Tourist> GetAll()
         {
             return this.tourists;
         }
 
+        public Tourist GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
