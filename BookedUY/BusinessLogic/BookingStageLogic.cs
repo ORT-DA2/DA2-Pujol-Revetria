@@ -1,4 +1,5 @@
 ﻿using DataAccessInterface;
+using Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,9 +8,9 @@ namespace BusinessLogic
 {
     public class BookingStageLogic
     {
-        private readonly IBookingStageRepository bookingStageRepository;
+        private readonly IRepository<BookingStage> bookingStageRepository;
 
-        public BookingStageLogic(IBookingStageRepository bookingStageRepository)
+        public BookingStageLogic(IRepository<BookingStage> bookingStageRepository)
         {
             this.bookingStageRepository = bookingStageRepository;
         }
