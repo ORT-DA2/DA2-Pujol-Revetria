@@ -55,5 +55,73 @@ namespace DataAccess.Tests
 
             Assert.IsTrue(categoriesToReturn.SequenceEqual(result));
         }
+
+        [TestMethod]
+        public void TestAdd()
+        {
+            Category category = new Category()
+            {
+                Id = 1,
+                Name = "Playa",
+                Spots = null
+            };
+            var repository = new CategoryRepository(_context);
+            repository.Add(category);
+
+            Assert.AreEqual(_context.Find<Category>(category.Id), category);
+        }
+
+        [TestMethod]
+        public void TestDelete()
+        {
+            Category category = new Category()
+            {
+                Id = 1,
+                Name = "Playa",
+                Spots = null
+            };
+
+            _context.Add(category);
+            _context.SaveChanges();
+            var repository = new CategoryRepository(_context);
+
+            repository.Delete(category);
+
+            Assert.IsNull(_context.Find<Category>(category.Id));
+        }
+
+        [TestMethod]
+        public void TestGetById()
+        {
+            Category category = new Category()
+            {
+                Id = 1,
+                Name = "Playa",
+                Spots = null
+            };
+
+            _context.Add(category);
+            _context.SaveChanges();
+            var repository = new CategoryRepository(_context);
+
+            Assert.AreEqual(_context.Find<Category>(category.Id), category);
+        }
+
+        [TestMethod]
+        public void TestGetByIdNull()
+        {
+            Category category = new Category()
+            {
+                Id = 1,
+                Name = "Playa",
+                Spots = null
+            };
+
+            _context.Add(category);
+            _context.SaveChanges();
+            var repository = new CategoryRepository(_context);
+
+            Assert.IsNull(_context.Find<Category>(2));
+        }
     }
 }

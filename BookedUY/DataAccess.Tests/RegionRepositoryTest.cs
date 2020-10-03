@@ -54,5 +54,73 @@ namespace DataAccess.Tests
 
             Assert.IsTrue(regionsToReturn.SequenceEqual(result));
         }
+
+        [TestMethod]
+        public void TestAdd()
+        {
+            Region region = new Region()
+            {
+                Id = 1,
+                Name = "Region Pajaros Pintados",
+                Spots = null
+            };
+            var repository = new RegionRepository(_context);
+            repository.Add(region);
+
+            Assert.AreEqual(_context.Find<Region>(region.Id), region);
+        }
+
+        [TestMethod]
+        public void TestDelete()
+        {
+            Region region = new Region()
+            {
+                Id = 1,
+                Name = "Region Pajaros Pintados",
+                Spots = null
+            };
+
+            _context.Add(region);
+            _context.SaveChanges();
+            var repository = new RegionRepository(_context);
+
+            repository.Delete(region);
+
+            Assert.IsNull(_context.Find<Region>(region.Id));
+        }
+
+        [TestMethod]
+        public void TestGetById()
+        {
+            Region region = new Region()
+            {
+                Id = 1,
+                Name = "Region Pajaros Pintados",
+                Spots = null
+            };
+
+            _context.Add(region);
+            _context.SaveChanges();
+            var repository = new RegionRepository(_context);
+
+            Assert.AreEqual(_context.Find<Region>(region.Id), region);
+        }
+
+        [TestMethod]
+        public void TestGetByIdNull()
+        {
+            Region region = new Region()
+            {
+                Id = 1,
+                Name = "Region Pajaros Pintados",
+                Spots = null
+            };
+
+            _context.Add(region);
+            _context.SaveChanges();
+            var repository = new RegionRepository(_context);
+
+            Assert.IsNull(_context.Find<Region>(2));
+        }
     }
 }

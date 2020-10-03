@@ -1,5 +1,6 @@
 ﻿using BusinessLogicInterface;
 using DataAccessInterface;
+using Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,9 +9,9 @@ namespace BusinessLogic
 {
     public class TouristicSpotLogic : ITouristicSpotLogic
     {
-        private readonly ITouristicSpotRepository touristicSpotRepository;
+        private readonly IRepository<TouristicSpot> touristicSpotRepository;
 
-        public TouristicSpotLogic(ITouristicSpotRepository touristicSpotRepository)
+        public TouristicSpotLogic(IRepository<TouristicSpot> touristicSpotRepository)
         {
             this.touristicSpotRepository = touristicSpotRepository;
         }
