@@ -124,7 +124,7 @@ namespace DataAccess.Tests
             spotsToReturn.ForEach(s => _context.Add(s));
             _context.SaveChanges();
             var repository = new TouristicSpotRepository(_context);
-            var result = repository.GetFromRegion(1);
+            var result = repository.GetByRegion(1);
             List<TouristicSpot> list = new List<TouristicSpot>();
             list.Add(touristicSpot);
             Assert.IsTrue(list.SequenceEqual(result));
@@ -180,7 +180,7 @@ namespace DataAccess.Tests
             spots.ForEach(s => _context.Add(s));
             _context.SaveChanges();
             var repository = new TouristicSpotRepository(_context);
-            var result = repository.GetFromCategory(list1);
+            var result = repository.GetByCategory(list1);
             List<TouristicSpot> listToReturn = new List<TouristicSpot>();
             listToReturn.Add(touristicSpot);
             Assert.IsTrue(listToReturn.SequenceEqual(result));
@@ -248,7 +248,7 @@ namespace DataAccess.Tests
             spots.ForEach(s => _context.Add(s));
             _context.SaveChanges();
             var repository = new TouristicSpotRepository(_context);
-            var result = repository.GetFromCategoryAndRegion(list1, 2);
+            var result = repository.GetByCategoryAndRegion(list1, 2);
             List<TouristicSpot> listToReturn = new List<TouristicSpot>();
             listToReturn.Add(touristicSpotToReturn);
             Assert.IsTrue(listToReturn.SequenceEqual(result));
@@ -291,6 +291,35 @@ namespace DataAccess.Tests
             var repository = new TouristicSpotRepository(_context);
             var result = repository.GetByID(1);
             Assert.IsTrue(spotToReturn.Equals(result));
+        }
+
+        [TestMethod]
+        public void TestDelete()
+        {
+            TouristicSpot spot = new TouristicSpot()
+            {
+                Id = 1,
+                Name = "Villa Serrana",
+                Accommodations = null,
+                Description = "Villa Serrana es un poblado ubicado en el departamento de Lavalleja de Uruguay," +
+                " a 25 kilómetros al noreste de la capital departamental," +
+                " Minas, entre los valles de los arroyos Penitente y Marmarajá.",
+                Region = null,
+                RegionId = 2,
+                Categories = null,
+            };
+            List<TouristicSpot> spots = new List<TouristicSpot>()
+            {
+                spot,
+            };
+
+            _context.Add(spot);
+            _context.SaveChanges();
+            var repository = new TouristicSpotRepository(_context);
+
+            repository.Delete(spot);
+
+            Assert.IsNull(_context.Find<TouristicSpot>(spot.Id));
         }
     }
 }

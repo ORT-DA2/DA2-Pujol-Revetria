@@ -32,25 +32,31 @@ namespace DataAccess.Repositories
             this.bookUYContext.SaveChanges();
         }
 
-        public IEnumerable<TouristicSpot> GetFromRegion(int id)
+        public IEnumerable<TouristicSpot> GetByRegion(int id)
         {
             return this.spots.Where(s => s.RegionId == id);
         }
 
-        public IEnumerable<TouristicSpot> GetFromCategory(List<int> categoriesId)
+        public IEnumerable<TouristicSpot> GetByCategory(List<int> categoriesId)
         {
             return this.spots.Where(s => s.Categories.Any(c => categoriesId.Contains(c.CategoryId)));
         }
 
-        public IEnumerable<TouristicSpot> GetFromCategoryAndRegion(List<int> category, int region)
+        public IEnumerable<TouristicSpot> GetByCategoryAndRegion(List<int> category, int region)
         {
-            IEnumerable<TouristicSpot> touristicSpotFromCategory = GetFromCategory(category);
-            return GetFromRegion(region).Where(l => touristicSpotFromCategory.Contains(l));
+            IEnumerable<TouristicSpot> touristicSpotFromCategory = GetByCategory(category);
+            return GetByRegion(region).Where(l => touristicSpotFromCategory.Contains(l));
         }
 
         public TouristicSpot GetByID(int id)
         {
             return this.spots.Where(t => t.Id == id).First();
+        }
+
+        public void Delete(TouristicSpot touristicSpot)
+        {
+            this.spots.Remove(touristicSpot);
+            bookUYContext.SaveChanges();
         }
     }
 }
