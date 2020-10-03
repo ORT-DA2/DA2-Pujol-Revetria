@@ -157,7 +157,7 @@ namespace DataAccess.Tests
             accommodationList.Add(testAccommodation);
             accommodationList.ForEach(r => _context.Add(r));
             _context.SaveChanges();
-            var repository = new BookingRepository(_context);
+            var repository = new AccommodationRepository(_context);
 
             var result = repository.GetById(testId);
 

@@ -58,5 +58,78 @@ namespace DataAccess.Tests
             var result = repository.GetAll();
             Assert.IsTrue(touristsToReturn.SequenceEqual(result));
         }
+
+        [TestMethod]
+        public void TestAddTourist()
+        {
+            int id = 3;
+            Tourist tourist = new Tourist()
+            {
+                Id = id,
+                Name = "Pepe",
+                LastName = "Lopez",
+                Email = "pepelopez@gmail.com",
+                Bookings = null,
+            };
+            var repository = new TouristRepository(_context);
+            repository.Add(tourist);
+
+            Assert.AreEqual(_context.Find<Tourist>(id), tourist);
+        }
+
+        [TestMethod]
+        public void TestGetByIdTourist()
+        {
+            int testId = 1;
+            Tourist testTourist = new Tourist()
+            {
+                Id = testId,
+                Name = "Pepe",
+                LastName = "Lopez",
+                Email = "pepelopez@gmail.com",
+                Bookings = null,
+            };
+            List<Tourist> touristList = new List<Tourist>()
+            {
+
+                new Tourist()
+                {
+                    Id=2,
+                    Name="Pepe",
+                    LastName="Lopez",
+                    Email="pepelopez@gmail.com",
+                    Bookings=null,
+                },
+            };
+            touristList.Add(testTourist);
+            touristList.ForEach(r => _context.Add(r));
+            _context.SaveChanges();
+            var repository = new TouristRepository(_context);
+
+            var result = repository.GetById(testId);
+
+            Assert.AreEqual(testTourist, result);
+        }
+
+        [TestMethod]
+        public void DeleteTouristsTest()
+        {
+            int id = 1;
+            Tourist tourist = new Tourist()
+            {
+                Id = id,
+                Name = "Pedro",
+                LastName = "Korea",
+                Email = "pedroKora@gmail.com",
+                Bookings = null,
+            };
+            _context.Add(tourist);
+            _context.SaveChanges();
+            var repository = new TouristRepository(_context);
+
+            repository.Delete(tourist);
+
+            Assert.IsNull(_context.Find<Tourist>(id));
+        }
     }
 }

@@ -48,20 +48,15 @@ namespace DataAccess.Repositories
             return GetByRegion(region).Where(l => touristicSpotFromCategory.Contains(l));
         }
 
-        public TouristicSpot GetByID(int id)
+        public TouristicSpot GetById(int id)
         {
-            return this.spots.Where(t => t.Id == id).First();
+            return this.spots.Find(id);
         }
 
         public void Delete(TouristicSpot touristicSpot)
         {
             this.spots.Remove(touristicSpot);
             bookUYContext.SaveChanges();
-        }
-
-        public TouristicSpot GetById(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

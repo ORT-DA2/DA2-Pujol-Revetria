@@ -20,12 +20,14 @@ namespace DataAccess.Repositories
 
         public void Add(Tourist obj)
         {
-            throw new NotImplementedException();
+            this.tourists.Add(obj);
+            this.bookUYContext.SaveChanges();
         }
 
         public void Delete(Tourist obj)
         {
-            throw new NotImplementedException();
+            this.tourists.Remove(obj);
+            this.bookUYContext.SaveChanges();
         }
 
         public IEnumerable<Tourist> GetAll()
@@ -35,7 +37,7 @@ namespace DataAccess.Repositories
 
         public Tourist GetById(int id)
         {
-            throw new NotImplementedException();
+            return this.tourists.Find(id);
         }
     }
 }

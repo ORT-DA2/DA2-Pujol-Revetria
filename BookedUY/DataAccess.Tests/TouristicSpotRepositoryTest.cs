@@ -289,7 +289,7 @@ namespace DataAccess.Tests
             spots.ForEach(s => _context.Add(s));
             _context.SaveChanges();
             var repository = new TouristicSpotRepository(_context);
-            var result = repository.GetByID(1);
+            var result = repository.GetById(1);
             Assert.IsTrue(spotToReturn.Equals(result));
         }
 
