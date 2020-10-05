@@ -12,5 +12,28 @@ namespace BusinessLogic
         {
             this.bookingRepository = bookingRepository;
         }
+
+        public void AddBooking(Booking booking)
+        {
+            try
+            {
+                int totalprice = CalculateTotalPrice(booking);
+                booking.TotalPrice = totalprice;
+                this.bookingRepository.Add(booking);
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private int CalculateTotalPrice(Booking booking)
+        {
+            double total = 0;
+            foreach (Guest guest in booking.Guests)
+            {
+                total += guest.Amount * guest.Multiplier;
+            }
+        }
     }
 }

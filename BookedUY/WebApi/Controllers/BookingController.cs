@@ -35,6 +35,7 @@ namespace Migrations.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
+
         }
 
         // PUT api/<BookingController>/5

@@ -15,5 +15,7 @@ namespace BusinessLogic
         {
             this.touristicSpotRepository = touristicSpotRepository;
         }
+
+        
     }
 }

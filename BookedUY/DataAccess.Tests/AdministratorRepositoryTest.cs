@@ -80,5 +80,23 @@ namespace DataAccess.Tests
 
             Assert.IsNull(_context.Find<Administrator>(id));
         }
+
+        [TestMethod]
+        public void TestAddBooking()
+        {
+            int id = 1;
+            Administrator administrator = new Administrator()
+            {
+                Id = id,
+                Email = "prueba3@prueba3.com",
+                Password = "P@5Sw0rd3"
+            };
+
+            var repository = new AdministratorRepository(_context);
+            repository.Add(administrator);
+
+            Assert.AreEqual(_context.Find<Administrator>(id), administrator);
+
+        }
     }
 }
