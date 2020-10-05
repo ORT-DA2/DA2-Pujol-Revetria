@@ -18,29 +18,21 @@ namespace BusinessLogic
 
         public IEnumerable<Region> GetRegions()
         {
-            try
-            {
-                return this.regionRepository.GetAll();
-            }
-            catch (Exception) 
-            {
-                Console.WriteLine("Error GetAll");
-                return null;
-            };
+            return this.regionRepository.GetAll();
         }
 
-        public Region GetRegion(int id)
-        {
+        //public Region GetRegion(int id)
+        //{
 
-            var ret =  this.regionRepository.GetById(id);
-            if (ret == null)
-            {
-                throw
-            }
-            else
-            {
+        //    var ret =  this.regionRepository.GetById(id);
+        //    if (ret == null)
+        //    {
+               
+        //    }
+        //    else
+        //    {
 
-            }
-        }
+        //    }
+        //}
     }
 }

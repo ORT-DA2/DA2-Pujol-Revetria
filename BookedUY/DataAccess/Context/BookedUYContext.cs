@@ -43,15 +43,16 @@ namespace DataAccess.Context
             modelBuilder.Entity<BookingStage>().HasOne<Booking>(s => s.AsociatedBooking).WithMany(b => b.BookingHistory).HasForeignKey(s => s.AsociatedBookingId);
 
             modelBuilder.Entity<Administrator>().HasKey(a => a.Id);
-            modelBuilder.Entity<Administrator>().Property(a => a.Email);
+            modelBuilder.Entity<Administrator>().HasAlternateKey(a => a.Email);
             modelBuilder.Entity<Administrator>().Property(a => a.Password).IsRequired();
+
             modelBuilder.Entity<TouristicSpot>().HasKey(t => t.Id);
-            modelBuilder.Entity<TouristicSpot>().Property(t => t.Name);
+            modelBuilder.Entity<TouristicSpot>().HasAlternateKey(t => t.Name);
             modelBuilder.Entity<TouristicSpot>().HasOne<Region>(b => b.Region).WithMany(t => t.Spots).HasForeignKey(b => b.RegionId);
 
             modelBuilder.Entity<Accommodation>().HasKey(a => a.Id);
             modelBuilder.Entity<Accommodation>().Property(a => a.Full);
-            modelBuilder.Entity<Accommodation>().Property(a => a.Name);
+            modelBuilder.Entity<Accommodation>().HasAlternateKey(a => a.Name);
             modelBuilder.Entity<Accommodation>().Property(a => a.Address);
             modelBuilder.Entity<Accommodation>().Property(a => a.ContactNumber);
             modelBuilder.Entity<Accommodation>().Property(a => a.Information);
@@ -59,7 +60,7 @@ namespace DataAccess.Context
             modelBuilder.Entity<Accommodation>().HasOne<TouristicSpot>(a => a.Spot).WithMany(t => t.Accommodations).HasForeignKey(a => a.SpotId);
 
             modelBuilder.Entity<Tourist>().HasKey(t => t.Id);
-            modelBuilder.Entity<Tourist>().Property(t => t.Email);
+            modelBuilder.Entity<Tourist>().HasAlternateKey(t => t.Email);
             modelBuilder.Entity<Tourist>().Property(t => t.Name);
             modelBuilder.Entity<Tourist>().Property(t => t.LastName);
 
@@ -67,7 +68,7 @@ namespace DataAccess.Context
             modelBuilder.Entity<Region>().Property(t => t.Name);
 
             modelBuilder.Entity<Category>().HasKey(c => c.Id);
-            modelBuilder.Entity<Category>().Property(t => t.Name);
+            modelBuilder.Entity<Category>().HasAlternateKey(t => t.Name);
 
             modelBuilder.Entity<BookingStage>().HasOne<Administrator>(a => a.Administrator).WithMany(b => b.Entries).HasForeignKey(s => s.AdministratorId);
 
