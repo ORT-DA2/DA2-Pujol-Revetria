@@ -9,9 +9,9 @@ namespace BusinessLogic
 {
     public class AccommodationLogic : IAccommodationLogic
     {
-        private readonly IRepository<Accommodation> accommodationRepository;
+        private readonly IAccommodationRepository accommodationRepository;
 
-        public AccommodationLogic(IRepository<Accommodation> accommodationRepository)
+        public AccommodationLogic(IAccommodationRepository accommodationRepository)
         {
             this.accommodationRepository = accommodationRepository;
         }

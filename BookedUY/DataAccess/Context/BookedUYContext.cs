@@ -84,17 +84,17 @@ namespace DataAccess.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //if (!optionsBuilder.IsConfigured)
-                //{
-                //    string directory = Directory.GetCurrentDirectory();
-                //    IConfigurationRoot configuration = new ConfigurationBuilder()
-                //    .SetBasePath(directory)
-                //    .AddJsonFile("appsettings.json")
-                //    .Build();
-                //    var connectionString = configuration.GetConnectionString(@"BookingUYDB");
-                //    optionsBuilder.UseSqlServer(connectionString);
-                //}
-                optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database = BookedUYDB; Integrated Security = True;Trusted_Connection = True;MultipleActiveResultSets = True");
+                if (!optionsBuilder.IsConfigured)
+                {
+                    string directory = Directory.GetCurrentDirectory();
+                    IConfigurationRoot configuration = new ConfigurationBuilder()
+                    .SetBasePath(directory)
+                    .AddJsonFile("appsettings.json")
+                    .Build();
+                    var connectionString = configuration.GetConnectionString(@"BookingUYDB");
+                    optionsBuilder.UseSqlServer(connectionString);
+                }
+                //optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database = BookedUYDB; Integrated Security = True;Trusted_Connection = True;MultipleActiveResultSets = True");
             }
         }
 

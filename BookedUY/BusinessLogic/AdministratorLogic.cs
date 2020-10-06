@@ -9,9 +9,9 @@ namespace BusinessLogic
 {
     public class AdministratorLogic : IAdministratorLogic
     {
-        private readonly IRepository<Administrator> administratorRepository;
+        private readonly IAccommodationRepository administratorRepository;
 
-        public AdministratorLogic(IRepository<Administrator> administratorRepository)
+        public AdministratorLogic(IAccommodationRepository administratorRepository)
         {
             this.administratorRepository = administratorRepository;
         }

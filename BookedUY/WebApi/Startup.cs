@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.Repositories;
 using DataAccessInterface;
+using Domain;
 using Factory;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,7 +32,6 @@ namespace Migrations
             services.AddControllers();
             ServicesFactory.AddDbContextServices(services, this.Configuration.GetConnectionString("BookedUYDb"));
             ServicesFactory.AddMyServices(services);
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

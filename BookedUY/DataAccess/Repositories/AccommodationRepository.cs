@@ -11,10 +11,10 @@ namespace DataAccess.Repositories
 {
     public class AccommodationRepository : IAccommodationRepository
     {
-        private DbSet<Accommodation> accommodations;
-        private BookedUYContext bookedUYContext;
+        private readonly DbSet<Accommodation> accommodations;
+        private readonly DbContext bookedUYContext;
 
-        public AccommodationRepository(BookedUYContext context)
+        public AccommodationRepository(DbContext context)
         {
             this.bookedUYContext = context;
             this.accommodations = context.Set<Accommodation>();

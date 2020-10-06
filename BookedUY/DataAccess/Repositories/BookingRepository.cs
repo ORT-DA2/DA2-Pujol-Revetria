@@ -10,10 +10,10 @@ namespace DataAccess.Repositories
 {
     public class BookingRepository : IRepository<Booking>
     {
-        private DbSet<Booking> bookings;
-        private BookedUYContext bookedUYContext;
+        private readonly DbSet<Booking> bookings;
+        private readonly DbContext bookedUYContext;
 
-        public BookingRepository(BookedUYContext context)
+        public BookingRepository(DbContext context)
         {
             this.bookedUYContext = context;
             this.bookings = context.Set<Booking>();

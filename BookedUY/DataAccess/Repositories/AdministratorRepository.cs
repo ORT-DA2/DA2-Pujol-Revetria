@@ -11,10 +11,10 @@ namespace DataAccess.Repositories
 {
     public class AdministratorRepository : IAdministratorRepository
     {
-        private DbSet<Administrator> administrators;
-        private BookedUYContext bookedUYContext;
+        private readonly DbSet<Administrator> administrators;
+        private readonly DbContext bookedUYContext;
 
-        public AdministratorRepository(BookedUYContext context)
+        public AdministratorRepository(DbContext context)
         {
             this.bookedUYContext = context;
             this.administrators = context.Set<Administrator>();
