@@ -8,7 +8,7 @@ using System.Text;
 
 namespace DataAccess.Repositories
 {
-    public class AdministratorRepository : IRepository<Administrator>
+    public class AdministratorRepository : IAdministratorRepository
     {
         private DbSet<Administrator> administrators;
         private BookedUYContext bookedUYContext;

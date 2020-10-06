@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataAccessInterface
 {
-    interface IAdministratorRepository : IRepository<Administrator>
+    public interface IAdministratorRepository : IRepository<Administrator>
     {
 
     }

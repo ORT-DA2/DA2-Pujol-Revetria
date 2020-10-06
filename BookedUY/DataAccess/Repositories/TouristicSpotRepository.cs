@@ -10,7 +10,7 @@ using System.Text;
 
 namespace DataAccess.Repositories
 {
-    public class TouristicSpotRepository : IRepository<TouristicSpot>
+    public class TouristicSpotRepository : ITouristicSpotRepository
     {
         private readonly DbSet<TouristicSpot> spots;
         private readonly DbContext bookUYContext;

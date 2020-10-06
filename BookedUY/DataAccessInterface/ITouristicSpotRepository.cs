@@ -5,8 +5,10 @@ using System.Text;
 
 namespace DataAccessInterface
 {
-    interface ITouristicSpotRepository : IRepository<TouristicSpot>
+    public interface ITouristicSpotRepository : IRepository<TouristicSpot>
     {
-        
+        IEnumerable<TouristicSpot> GetByCategory(List<int> categoriesId);
+
+        IEnumerable<TouristicSpot> GetByCategoryAndRegion(List<int> category, int region);
     }
 }

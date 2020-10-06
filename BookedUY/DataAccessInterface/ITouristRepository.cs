@@ -5,7 +5,8 @@ using System.Text;
 
 namespace DataAccessInterface
 {
-    interface ITouristRepository : IRepository<Tourist>
+    public interface ITouristRepository : IRepository<Tourist>
     {
+
     }
 }
