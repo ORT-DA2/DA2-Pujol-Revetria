@@ -9,9 +9,9 @@ namespace BusinessLogic
 {
     public class TouristicSpotLogic : ITouristicSpotLogic
     {
-        private readonly IRepository<TouristicSpot> touristicSpotRepository;
+        private readonly ITouristicSpotRepository touristicSpotRepository;
 
-        public TouristicSpotLogic(IRepository<TouristicSpot> touristicSpotRepository)
+        public TouristicSpotLogic(ITouristicSpotRepository touristicSpotRepository)
         {
             this.touristicSpotRepository = touristicSpotRepository;
         }

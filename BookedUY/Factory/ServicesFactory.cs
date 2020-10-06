@@ -15,19 +15,20 @@ namespace Factory
     {
         public static void AddMyServices(IServiceCollection services)
         {
+
+            services.AddScoped<IRepository<Booking>, BookingRepository>();
+            services.AddScoped<IAccommodationRepository, AccommodationRepository>();
+            services.AddScoped<IRepository<BookingStage>, BookingStageRepository>();
+            services.AddScoped<IRepository<Category>, CategoryRepository>();
+            services.AddScoped<IRepository<Region>, RegionRepository>();
+            services.AddScoped<ITouristRepository, TouristRepository>();
+            services.AddScoped<ITouristicSpotRepository, TouristicSpotRepository>();
+            services.AddScoped<IAdministratorRepository, AdministratorRepository>();
             services.AddScoped<IBookingLogic, BookingLogic>();
             services.AddScoped<IAdministratorLogic, AdministratorLogic>();
             services.AddScoped<IAccommodationLogic, AccommodationLogic>();
             services.AddScoped<IRegionLogic, RegionLogic>();
             services.AddScoped<ITouristicSpotLogic, TouristicSpotLogic>();
-            services.AddScoped<IRepository<Booking>, BookingRepository>();
-            services.AddScoped<IRepository<Accommodation>, AccommodationRepository>();
-            services.AddScoped<IRepository<BookingStage>, BookingStageRepository>();
-            services.AddScoped<IRepository<Category>, CategoryRepository>();
-            services.AddScoped<IRepository<Region>, RegionRepository>();
-            services.AddScoped<IRepository<Tourist>, TouristRepository>();
-            services.AddScoped<IRepository<TouristicSpot>, TouristicSpotRepository>();
-            services.AddScoped<IRepository<Administrator>, AdministratorRepository>();
         }
 
         public static void AddDbContextServices(IServiceCollection services, string connectionString)
