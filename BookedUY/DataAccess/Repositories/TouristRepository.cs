@@ -3,6 +3,7 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DataAccess.Repositories
@@ -38,6 +39,11 @@ namespace DataAccess.Repositories
         public Tourist GetById(int id)
         {
             return this.tourists.Find(id);
+        }
+
+        public Tourist GetByEmail(string email)
+        {
+            return this.tourists.Where(t => t.Email == email).FirstOrDefault();
         }
     }
 }

@@ -10,5 +10,6 @@ namespace DataAccessInterface
         IEnumerable<TouristicSpot> GetByCategory(List<int> categoriesId);
 
         IEnumerable<TouristicSpot> GetByCategoryAndRegion(List<int> category, int region);
+        TouristicSpot GetByName(string name);
     }
 }

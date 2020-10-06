@@ -163,5 +163,89 @@ namespace DataAccess.Tests
 
             Assert.AreEqual(testAccommodation, result);
         }
+
+        [TestMethod]
+        public void TestGetByNameNull()
+        {
+            int testId = 1;
+            Accommodation testAccommodation = new Accommodation()
+            {
+                Id = testId,
+                Address = "Test1",
+                Bookings = null,
+                ContactNumber = "0993456611",
+                Full = false,
+                Name = "Hilton",
+                Information = "Epic",
+                PricePerNight = 120.76,
+                Spot = null,
+                SpotId = 2
+            };
+            List<Accommodation> accommodationList = new List<Accommodation>()
+            {
+
+                new Accommodation()
+                {
+                    Id = 2,
+                    Address = "Test",
+                    Bookings = null,
+                    ContactNumber = "09934566",
+                    Full = false,
+                    Name = "Radisson",
+                    Information = "nice",
+                    PricePerNight = 1.76,
+                    Spot = null,
+                    SpotId = 1
+                },testAccommodation,
+            };
+
+            accommodationList.ForEach(s => _context.Add(s));
+            _context.SaveChanges();
+            var repository = new AccommodationRepository(_context);
+            var result = repository.GetByName("Hil");
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void TestGetByName()
+        {
+            int testId = 1;
+            Accommodation testAccommodation = new Accommodation()
+            {
+                Id = testId,
+                Address = "Test1",
+                Bookings = null,
+                ContactNumber = "0993456611",
+                Full = false,
+                Name = "Hilton",
+                Information = "Epic",
+                PricePerNight = 120.76,
+                Spot = null,
+                SpotId = 2
+            };
+            List<Accommodation> accommodationList = new List<Accommodation>()
+            {
+
+                new Accommodation()
+                {
+                    Id = 2,
+                    Address = "Test",
+                    Bookings = null,
+                    ContactNumber = "09934566",
+                    Full = false,
+                    Name = "Radisson",
+                    Information = "nice",
+                    PricePerNight = 1.76,
+                    Spot = null,
+                    SpotId = 1
+                },testAccommodation,
+            };
+
+            accommodationList.ForEach(s => _context.Add(s));
+            _context.SaveChanges();
+            var repository = new AccommodationRepository(_context);
+            var result = repository.GetByName("Hilton");
+            Assert.IsTrue(testAccommodation.Equals(result));
+        }
     }
 }

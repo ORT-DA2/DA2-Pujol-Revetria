@@ -40,5 +40,11 @@ namespace DataAccess.Repositories
         {
             return this.categories.Find(id);
         }
+
+        public Category GetByName(string name)
+        {
+            return this.categories.Where(c => c.Name == name).FirstOrDefault();
+        }
+
     }
 }

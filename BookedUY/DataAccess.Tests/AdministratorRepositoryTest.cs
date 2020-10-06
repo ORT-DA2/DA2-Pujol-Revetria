@@ -98,5 +98,61 @@ namespace DataAccess.Tests
             Assert.AreEqual(_context.Find<Administrator>(id), administrator);
 
         }
+
+        [TestMethod]
+        public void TestGetByEmail()
+        {
+            int id = 1;
+            Administrator admin = new Administrator()
+            {
+                Id = id,
+                Email = "prueba3@prueba3.com",
+                Password = "P@5Sw0rd3"
+            };
+            List<Administrator> admins = new List<Administrator>()
+            {
+                admin,
+                new Administrator()
+                {
+                    Id=2,
+                    Email = "prueba2@prueba2.com",
+                    Password = "P@5Sw0rd3"
+                },
+            };
+
+            admins.ForEach(s => _context.Add(s));
+            _context.SaveChanges();
+            var repository = new AdministratorRepository(_context);
+            var result = repository.GetByEmail("prueba3@prueba3.com");
+            Assert.IsTrue(admin.Equals(result));
+        }
+
+        [TestMethod]
+        public void TestGetByEmailNull()
+        {
+            int id = 1;
+            Administrator admin = new Administrator()
+            {
+                Id = id,
+                Email = "prueba3@prueba3.com",
+                Password = "P@5Sw0rd3"
+            };
+            List<Administrator> admins = new List<Administrator>()
+            {
+                admin,
+                new Administrator()
+                {
+                    Id=2,
+                    Email = "prueba2@prueba2.com",
+                    Password = "P@5Sw0rd3"
+                },
+            };
+
+            admins.ForEach(s => _context.Add(s));
+            _context.SaveChanges();
+            var repository = new AdministratorRepository(_context);
+            var result = repository.GetByEmail("prueb@prue.com");
+            Assert.IsNull(result);
+        }
     }
 }

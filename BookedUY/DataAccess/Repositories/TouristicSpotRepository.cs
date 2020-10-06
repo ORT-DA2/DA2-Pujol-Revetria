@@ -58,5 +58,10 @@ namespace DataAccess.Repositories
             this.spots.Remove(touristicSpot);
             bookUYContext.SaveChanges();
         }
+
+        public TouristicSpot GetByName(string name)
+        {
+            return spots.Where(s => s.Name == name).FirstOrDefault();
+        }
     }
 }

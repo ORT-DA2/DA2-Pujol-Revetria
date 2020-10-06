@@ -7,6 +7,6 @@ namespace DataAccessInterface
 {
     public interface IAccommodationRepository : IRepository<Accommodation>
     {
-
+        Accommodation GetByName(string name);
     }
 }

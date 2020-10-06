@@ -4,6 +4,7 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DataAccess.Repositories
@@ -39,6 +40,11 @@ namespace DataAccess.Repositories
         public Accommodation GetById(int id)
         {
             return this.accommodations.Find(id);
+        }
+
+        public Accommodation GetByName(string name)
+        {
+            return this.accommodations.Where(a => a.Name == name).FirstOrDefault();
         }
     }
 }

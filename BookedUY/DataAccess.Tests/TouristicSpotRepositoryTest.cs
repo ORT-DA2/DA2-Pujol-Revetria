@@ -321,5 +321,85 @@ namespace DataAccess.Tests
 
             Assert.IsNull(_context.Find<TouristicSpot>(spot.Id));
         }
+
+        [TestMethod]
+        public void TestGetByNameNull()
+        {
+            int id = 1;
+            TouristicSpot spot = new TouristicSpot()
+            {
+                Id = 1,
+                Name = "Villa Serrana",
+                Accommodations = null,
+                Description = "Villa Serrana es un poblado ubicado en el departamento de Lavalleja de Uruguay," +
+                            " a 25 kilómetros al noreste de la capital departamental," +
+                            " Minas, entre los valles de los arroyos Penitente y Marmarajá.",
+                Region = null,
+                RegionId = 2,
+                Categories = null,
+            };
+            List<TouristicSpot> spots = new List<TouristicSpot>()
+            {
+                spot,
+                new TouristicSpot()
+                {
+                    Id=2,
+                    Name="Colonia del Sacramento",
+                    Accommodations=null,
+                    Description="Es conocida por su Barrio Histórico con calles de" +
+                    " adoquines rodeadas de edificios que datan de la" +
+                    " época en que era un asentamiento portugués.",
+                    Region=null,
+                    RegionId=1,
+                    Categories=null,
+                },
+            };
+
+            spots.ForEach(s => _context.Add(s));
+            _context.SaveChanges();
+            var repository = new TouristicSpotRepository(_context);
+            var result = repository.GetByName("Via");
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void TestGetByName()
+        {
+            int id = 1;
+            TouristicSpot spot = new TouristicSpot()
+            {
+                Id = 1,
+                Name = "Villa Serrana",
+                Accommodations = null,
+                Description = "Villa Serrana es un poblado ubicado en el departamento de Lavalleja de Uruguay," +
+                            " a 25 kilómetros al noreste de la capital departamental," +
+                            " Minas, entre los valles de los arroyos Penitente y Marmarajá.",
+                Region = null,
+                RegionId = 2,
+                Categories = null,
+            };
+            List<TouristicSpot> spots = new List<TouristicSpot>()
+            {
+                spot,
+                new TouristicSpot()
+                {
+                    Id=2,
+                    Name="Colonia del Sacramento",
+                    Accommodations=null,
+                    Description="Es conocida por su Barrio Histórico con calles de" +
+                    " adoquines rodeadas de edificios que datan de la" +
+                    " época en que era un asentamiento portugués.",
+                    Region=null,
+                    RegionId=1,
+                    Categories=null,
+                },
+            };
+
+            spots.ForEach(s => _context.Add(s));
+            _context.SaveChanges();
+            var repository = new TouristicSpotRepository(_context);
+            var result = repository.GetByName("Villa Serrana");
+            Assert.IsTrue(spot.Equals(result));
+        }
     }
 }

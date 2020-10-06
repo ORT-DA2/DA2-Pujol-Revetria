@@ -123,5 +123,39 @@ namespace DataAccess.Tests
 
             Assert.IsNull(_context.Find<Category>(2));
         }
+
+        [TestMethod]
+        public void TestGetByNameNull()
+        {
+            Category category = new Category()
+            {
+                Id = 1,
+                Name = "Playa",
+                Spots = null
+            };
+
+            _context.Add(category);
+            _context.SaveChanges();
+            var repository = new CategoryRepository(_context);
+            var result = repository.GetByName("a");
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void TestGetByName()
+        {
+            Category category = new Category()
+            {
+                Id = 1,
+                Name = "Playa",
+                Spots = null
+            };
+
+            _context.Add(category);
+            _context.SaveChanges();
+            var repository = new CategoryRepository(_context);
+            var result = repository.GetByName("Playa");
+            Assert.AreEqual(result, category);
+        }
     }
 }

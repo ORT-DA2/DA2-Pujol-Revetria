@@ -97,7 +97,7 @@ namespace DataAccess.Tests
                     Id=2,
                     Name="Pepe",
                     LastName="Lopez",
-                    Email="pepelopez@gmail.com",
+                    Email="pepe00lopez@gmail.com",
                     Bookings=null,
                 },
             };
@@ -130,6 +130,70 @@ namespace DataAccess.Tests
             repository.Delete(tourist);
 
             Assert.IsNull(_context.Find<Tourist>(id));
+        }
+
+        [TestMethod]
+        public void TestGetByEmailNull()
+        {
+            int testId = 1;
+            Tourist testTourist = new Tourist()
+            {
+                Id = testId,
+                Name = "Pepe",
+                LastName = "Lopez",
+                Email = "pepelopez@gmail.com",
+                Bookings = null,
+            };
+            List<Tourist> touristList = new List<Tourist>()
+            {
+
+                new Tourist()
+                {
+                    Id=2,
+                    Name="Pepe",
+                    LastName="Lopez",
+                    Email="pepelopez@gmail.com",
+                    Bookings=null,
+                },
+            };
+
+            touristList.ForEach(s => _context.Add(s));
+            _context.SaveChanges();
+            var repository = new TouristRepository(_context);
+            var result = repository.GetByEmail("Hil");
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void TestGetByEmail()
+        {
+            int testId = 1;
+            Tourist testTourist = new Tourist()
+            {
+                Id = testId,
+                Name = "Pepe",
+                LastName = "Lopez",
+                Email = "pepelopez@gmail.com",
+                Bookings = null,
+            };
+            List<Tourist> touristList = new List<Tourist>()
+            {
+
+                new Tourist()
+                {
+                    Id=2,
+                    Name="Pepe",
+                    LastName="Lopez",
+                    Email="pepeooolopez@gmail.com",
+                    Bookings=null,
+                },testTourist
+            };
+
+            touristList.ForEach(s => _context.Add(s));
+            _context.SaveChanges();
+            var repository = new TouristRepository(_context);
+            var result = repository.GetByEmail("pepelopez@gmail.com");
+            Assert.IsTrue(testTourist.Equals(result));
         }
     }
 }
