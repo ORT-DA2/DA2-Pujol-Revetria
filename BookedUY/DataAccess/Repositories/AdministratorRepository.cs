@@ -9,41 +9,41 @@ using System.Text;
 
 namespace DataAccess.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class AdministratorRepository : IAdministratorRepository
     {
-        private readonly DbSet<User> administrators;
+        private readonly DbSet<Administrator> administrators;
         private readonly DbContext bookedUYContext;
 
-        public UserRepository(DbContext context)
+        public AdministratorRepository(DbContext context)
         {
             this.bookedUYContext = context;
-            this.administrators = context.Set<User>();
+            this.administrators = context.Set<Administrator>();
         }
 
-        public IEnumerable<User> GetAll()
+        public IEnumerable<Administrator> GetAll()
         {
             return this.administrators;
         }
 
-        public void Delete(User user)
+        public void Delete(Administrator administrator)
         {
-            this.administrators.Remove(user);
+            this.administrators.Remove(administrator);
             bookedUYContext.SaveChanges();
         }
 
-        public User Add(User obj)
+        public Administrator Add(Administrator obj)
         {
             this.administrators.Add(obj);
             bookedUYContext.SaveChanges();
             return obj;
         }
 
-        public User GetById(int id)
+        public Administrator GetById(int id)
         {
             return administrators.Find(id);
         }
 
-        public User GetByEmail(string email)
+        public Administrator GetByEmail(string email)
         {
             return administrators.Where(a => a.Email == email).FirstOrDefault();
         }

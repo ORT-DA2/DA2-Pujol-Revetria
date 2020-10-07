@@ -5,9 +5,9 @@ using System.Text;
 
 namespace BusinessLogicInterface
 {
-    public interface IUserLogic
+    public interface IAdministratorLogic
     {
-        User AddUser(User user);
+        Administrator AddAdministrator(Administrator administrator);
 
     }
 }

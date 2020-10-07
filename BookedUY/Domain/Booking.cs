@@ -49,7 +49,7 @@ namespace Domain
         }
         public double TotalPrice { get; set; }
         public List<Guest> Guests { get; set; }
-        public User HeadGuest { get; set; }
+        public Tourist HeadGuest { get; set; }
         public int GuestId { get; set; }
         public List<BookingStage> BookingHistory { get; set; }
 
