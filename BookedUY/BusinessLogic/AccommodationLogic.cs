@@ -25,5 +25,28 @@ namespace BusinessLogic
             }
             throw new AlreadyExistsException();
         }
+
+        public void DeleteAccommodation(Accommodation accommodation)
+        {
+            if (this.accommodationRepository.GetByName(accommodation.Name) != null)
+            {
+                this.accommodationRepository.Delete(accommodation);
+            }
+            throw new AccommodationNotFoundException();
+        }
+
+        public IEnumerable<Accommodation> GetAvailableAccommodationBySpot(int spotId)
+        {
+            return this.accommodationRepository.GetAvailableBySpot(spotId);
+        }
+
+        public void UpdateCapacity(int accommodationId,bool capacity)
+        {
+            if (this.accommodationRepository.GetById(accommodationId) != null)
+            {
+                this.accommodationRepository.UpdateCapacity(accommodationId, capacity);
+            }
+            throw new AccommodationNotFoundException();
+        }
     }
 }

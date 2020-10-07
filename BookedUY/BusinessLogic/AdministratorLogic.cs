@@ -25,5 +25,29 @@ namespace BusinessLogic
             }
             throw new AlreadyExistsException();
         }
+
+        public Administrator GetByEmailAndPassword(string email, string password)
+        {
+            var admin = this.administratorRepository.GetByEmail(email);
+            if (admin.Password == password)
+            {
+                return admin;
+            }
+            throw new UserNotFoundException();
+        }
+
+        public IEnumerable<Administrator> GetAll()
+        {
+            return this.administratorRepository.GetAll();
+        }
+
+        public void Delete(Administrator administrator)
+        {
+            if (this.administratorRepository.GetByEmail(administrator.Email) != null)
+            {
+                this.administratorRepository.Delete(administrator);
+            }
+            throw new AdministratorNotFoundException();
+        }
     }
 }

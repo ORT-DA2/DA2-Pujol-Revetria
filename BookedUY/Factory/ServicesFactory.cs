@@ -18,7 +18,7 @@ namespace Factory
 
             services.AddScoped<IRepository<Booking>, BookingRepository>();
             services.AddScoped<IAccommodationRepository, AccommodationRepository>();
-            services.AddScoped<IRepository<BookingStage>, BookingStageRepository>();
+            services.AddScoped<IBookingStageRepository, BookingStageRepository>();
             services.AddScoped<IRepository<Category>, CategoryRepository>();
             services.AddScoped<IRepository<Region>, RegionRepository>();
             services.AddScoped<ITouristRepository, TouristRepository>();

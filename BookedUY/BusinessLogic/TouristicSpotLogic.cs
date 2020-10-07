@@ -25,5 +25,19 @@ namespace BusinessLogic
             }
             throw new AlreadyExistsException();
         }
+
+        public IEnumerable<TouristicSpot> GetSpotsByRegionAndCategory(List<int> category, int region)
+        {
+            if (category == null && region == -1)
+            {
+                return this.touristicSpotRepository.GetAll();
+                
+            }
+            if (category == null)
+            {
+                return this.touristicSpotRepository.GetByRegion(region);
+            }
+            return this.touristicSpotRepository.GetByCategory(category);
+        }
     }
 }
