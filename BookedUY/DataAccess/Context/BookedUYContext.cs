@@ -96,7 +96,7 @@ namespace DataAccess.Context
                     .SetBasePath(directory)
                     .AddJsonFile("appsettings.json")
                     .Build();
-                    var connectionString = configuration.GetConnectionString(@"BookingUYDB");
+                    var connectionString = configuration.GetConnectionString(@"BookedUYDB");
                     optionsBuilder.UseSqlServer(connectionString);
                 }
                 //optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database = BookedUYDB; Integrated Security = True;Trusted_Connection = True;MultipleActiveResultSets = True");

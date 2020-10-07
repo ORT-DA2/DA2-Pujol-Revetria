@@ -47,5 +47,18 @@ namespace DataAccess.Repositories
         {
             return this.accommodations.Where(a => a.Name == name).FirstOrDefault();
         }
+
+        public IEnumerable<Accommodation> GetAvailableBySpot(int spotId)
+        {
+            return this.accommodations.Where(a => a.SpotId == spotId && a.Full == false);
+        }
+
+        public void UpdateCapacity(int accommodationId, bool capacity)
+        {
+            var accommodation = this.accommodations.Find(accommodationId);
+            accommodation.Full = capacity;
+            this.accommodations.Update(accommodation);
+            this.bookedUYContext.SaveChanges();
+        }
     }
 }

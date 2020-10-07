@@ -91,4 +91,49 @@ namespace Domain
             }
         }
     }
+
+    public class UserNotFoundException : Exception
+    {
+        public override string Message
+        {
+            get
+            {
+                return "User not found";
+            }
+        }
+    }
+
+    public class AccommodationNotFoundException : Exception
+    {
+        public override string Message
+        {
+            get
+            {
+                return "Accommodation not found";
+            }
+        }
+    }
+
+    public class BookingNotFoundException : Exception
+    {
+        public override string Message
+        {
+            get
+            {
+                return "Booking not found";
+            }
+        }
+    }
+
+    public class AdministratorNotFoundException : Exception
+    {
+        public override string Message
+        {
+            get
+            {
+                return "Administrator not found";
+            }
+        }
+    }
+
 }
