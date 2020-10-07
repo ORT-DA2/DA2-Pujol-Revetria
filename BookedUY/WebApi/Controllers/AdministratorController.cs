@@ -12,11 +12,11 @@ namespace Migrations.Controllers
     [Route("api/administrator")]
     public class AdministratorController : BookedUYController
     {
-        private readonly IAdministratorLogic administratorLogic;
+        private readonly IUserLogic userLogic;
 
-        public AdministratorController(IAdministratorLogic administratorLogic)
+        public AdministratorController(IUserLogic userLogic)
         {
-            this.administratorLogic = administratorLogic;
+            this.userLogic = userLogic;
         }
 
 

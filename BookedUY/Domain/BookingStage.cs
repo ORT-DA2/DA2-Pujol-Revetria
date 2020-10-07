@@ -7,7 +7,7 @@ namespace Domain
     public class BookingStage
     {
         public int Id { get; set; }
-        public Administrator Administrator { get; set; }
+        public User Administrator { get; set; }
         public int AdministratorId { get; set; }
 
         public Status Status { get; set; }

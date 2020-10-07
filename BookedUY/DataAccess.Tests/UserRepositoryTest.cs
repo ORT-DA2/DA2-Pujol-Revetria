@@ -11,7 +11,7 @@ using System.Text;
 namespace DataAccess.Tests
 {
     [TestClass]
-    public class AdministratorRepositoryTest
+    public class UserRepositoryTest
     {
         private DbContextOptions<BookedUYContext> _options = new DbContextOptionsBuilder<BookedUYContext>()
                 .UseInMemoryDatabase(databaseName: "BookedUYDB").Options;
@@ -30,23 +30,23 @@ namespace DataAccess.Tests
         }
 
         [TestMethod]
-        public void TestGetAllAdministrator()
+        public void TestGetAllUser()
         {
-            List<Administrator> administratorsToReturn = new List<Administrator>()
+            List<User> administratorsToReturn = new List<User>()
                 {
-                    new Administrator()
+                    new User()
                     {
                         Id = 1,
                         Email = "prueba@prueba.com",
                         Password = "P@5Sw0rd"
                     },
-                    new Administrator()
+                    new User()
                     {
                         Id=2,
                         Email = "prueba2@prueba2.com",
                         Password = "P@5Sw0rd3"
                     },
-                    new Administrator()
+                    new User()
                     {
                         Id=3,
                         Email = "prueba3@prueba3.com",
@@ -55,7 +55,7 @@ namespace DataAccess.Tests
                 };
             administratorsToReturn.ForEach(a => _context.Add(a));
             _context.SaveChanges();
-            var repository = new AdministratorRepository(_context);
+            var repository = new UserRepository(_context);
 
             var result = repository.GetAll();
 
@@ -63,10 +63,10 @@ namespace DataAccess.Tests
         }
 
         [TestMethod]
-        public void DeleteAdministratorTest()
+        public void DeleteUserTest()
         {
             int id = 1;
-            Administrator administrator = new Administrator()
+            User administrator = new User()
             {
                 Id = id,
                 Email = "prueba3@prueba3.com",
@@ -74,28 +74,28 @@ namespace DataAccess.Tests
             };
             _context.Add(administrator);
             _context.SaveChanges();
-            var repository = new AdministratorRepository(_context);
+            var repository = new UserRepository(_context);
 
             repository.Delete(administrator);
 
-            Assert.IsNull(_context.Find<Administrator>(id));
+            Assert.IsNull(_context.Find<User>(id));
         }
 
         [TestMethod]
-        public void TestAddBooking()
+        public void TestAddUser()
         {
             int id = 1;
-            Administrator administrator = new Administrator()
+            User administrator = new User()
             {
                 Id = id,
                 Email = "prueba3@prueba3.com",
                 Password = "P@5Sw0rd3"
             };
 
-            var repository = new AdministratorRepository(_context);
+            var repository = new UserRepository(_context);
             repository.Add(administrator);
 
-            Assert.AreEqual(_context.Find<Administrator>(id), administrator);
+            Assert.AreEqual(_context.Find<User>(id), administrator);
 
         }
 
@@ -103,16 +103,16 @@ namespace DataAccess.Tests
         public void TestGetByEmail()
         {
             int id = 1;
-            Administrator admin = new Administrator()
+            User admin = new User()
             {
                 Id = id,
                 Email = "prueba3@prueba3.com",
                 Password = "P@5Sw0rd3"
             };
-            List<Administrator> admins = new List<Administrator>()
+            List<User> admins = new List<User>()
             {
                 admin,
-                new Administrator()
+                new User()
                 {
                     Id=2,
                     Email = "prueba2@prueba2.com",
@@ -122,7 +122,7 @@ namespace DataAccess.Tests
 
             admins.ForEach(s => _context.Add(s));
             _context.SaveChanges();
-            var repository = new AdministratorRepository(_context);
+            var repository = new UserRepository(_context);
             var result = repository.GetByEmail("prueba3@prueba3.com");
             Assert.IsTrue(admin.Equals(result));
         }
@@ -131,16 +131,16 @@ namespace DataAccess.Tests
         public void TestGetByEmailNull()
         {
             int id = 1;
-            Administrator admin = new Administrator()
+            User admin = new User()
             {
                 Id = id,
                 Email = "prueba3@prueba3.com",
                 Password = "P@5Sw0rd3"
             };
-            List<Administrator> admins = new List<Administrator>()
+            List<User> admins = new List<User>()
             {
                 admin,
-                new Administrator()
+                new User()
                 {
                     Id=2,
                     Email = "prueba2@prueba2.com",
@@ -150,7 +150,7 @@ namespace DataAccess.Tests
 
             admins.ForEach(s => _context.Add(s));
             _context.SaveChanges();
-            var repository = new AdministratorRepository(_context);
+            var repository = new UserRepository(_context);
             var result = repository.GetByEmail("prueb@prue.com");
             Assert.IsNull(result);
         }

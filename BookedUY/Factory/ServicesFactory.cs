@@ -21,11 +21,10 @@ namespace Factory
             services.AddScoped<IRepository<BookingStage>, BookingStageRepository>();
             services.AddScoped<IRepository<Category>, CategoryRepository>();
             services.AddScoped<IRepository<Region>, RegionRepository>();
-            services.AddScoped<ITouristRepository, TouristRepository>();
             services.AddScoped<ITouristicSpotRepository, TouristicSpotRepository>();
-            services.AddScoped<IAdministratorRepository, AdministratorRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IBookingLogic, BookingLogic>();
-            services.AddScoped<IAdministratorLogic, AdministratorLogic>();
+            services.AddScoped<IUserLogic, UserLogic>();
             services.AddScoped<IAccommodationLogic, AccommodationLogic>();
             services.AddScoped<IRegionLogic, RegionLogic>();
             services.AddScoped<ITouristicSpotLogic, TouristicSpotLogic>();

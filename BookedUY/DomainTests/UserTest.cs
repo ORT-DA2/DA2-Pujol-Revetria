@@ -7,36 +7,67 @@ using System.Text;
 namespace DomainTests
 {
     [TestClass]
-    public class AdministratorTest
+    public class UserTest
     {
-        Administrator administrator;
+        User user;
 
         [TestInitialize]
         public void StartUp()
         {
-            administrator = new Administrator();
+            user = new User();
         }
 
         [TestCleanup]
         public void CleanUp()
         {
-            administrator = new Administrator();
+            user = new User();
+        }
+        [TestMethod]
+        public void TestNameSet()
+        {
+            string output = "text";
+            user.Name = output;
+            Assert.AreEqual(user.Name, output);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(NullInputException))]
+        public void TestNameSet2()
+        {
+            string output = " ";
+            user.Name = output;
+            Assert.Fail();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NullInputException))]
+        public void TestNameSet3()
+        {
+            string output = "";
+            user.Name = output;
+            Assert.Fail();
+        }
+
+        public void TestLastNameSet()
+        {
+            string output = "text";
+            user.LastName = output;
+            Assert.AreEqual(user.LastName, output);
         }
 
         [TestMethod]
         public void TestEmailSet()
         {
             string test = "facundo@gmail.com";
-            administrator.Email = test;
-            Assert.AreEqual(administrator.Email, test);
+            user.Email = test;
+            Assert.AreEqual(user.Email, test);
         }
 
         [TestMethod]
         public void TestEmailSet2()
         {
             string test = "test.test@com";
-            administrator.Email = test;
-            Assert.AreEqual(administrator.Email, test);
+            user.Email = test;
+            Assert.AreEqual(user.Email, test);
         }
 
         [TestMethod]
@@ -44,7 +75,7 @@ namespace DomainTests
         public void TestEmailSetNull()
         {
             string test = null;
-            administrator.Email = test;
+            user.Email = test;
             Assert.Fail();
         }
 
@@ -53,7 +84,7 @@ namespace DomainTests
         public void TestEmailSetEmpty()
         {
             string test = "";
-            administrator.Email = test;
+            user.Email = test;
             Assert.Fail();
         }
 
@@ -62,7 +93,7 @@ namespace DomainTests
         public void TestEmailSetSpaces()
         {
             string test = "   ";
-            administrator.Email = test;
+            user.Email = test;
             Assert.Fail();
         }
 
@@ -71,7 +102,7 @@ namespace DomainTests
         public void TestEmailSetFail()
         {
             string test = "test";
-            administrator.Email = test;
+            user.Email = test;
             Assert.Fail();
         }
 
@@ -80,7 +111,7 @@ namespace DomainTests
         public void TestEmailSetFail2()
         {
             string test = "test@@@abc";
-            administrator.Email = test;
+            user.Email = test;
             Assert.Fail();
         }
 
@@ -89,7 +120,7 @@ namespace DomainTests
         public void TestEmailSetFail3()
         {
             string test = "test.test@.com";
-            administrator.Email = test;
+            user.Email = test;
             Assert.Fail();
         }
 
@@ -97,8 +128,8 @@ namespace DomainTests
         public void TestPasswordSet()
         {
             string test = "test";
-            administrator.Password = test;
-            Assert.AreEqual(administrator.Password,test);
+            user.Password = test;
+            Assert.AreEqual(user.Password,test);
         }
 
         [TestMethod]
@@ -106,7 +137,7 @@ namespace DomainTests
         public void TestPasswordSetNull()
         {
             string test = null;
-            administrator.Password = test;
+            user.Password = test;
             Assert.Fail();
         }
 
@@ -115,7 +146,7 @@ namespace DomainTests
         public void TestPasswordSetEmpty()
         {
             string test = "";
-            administrator.Password = test;
+            user.Password = test;
             Assert.Fail();
         }
 
@@ -124,7 +155,7 @@ namespace DomainTests
         public void TestPasswordSetSpaces()
         {
             string test = "   ";
-            administrator.Password = test;
+            user.Password = test;
             Assert.Fail();
         }
 
@@ -133,12 +164,12 @@ namespace DomainTests
         {
             int testId = 1;
             string testEmail = "facundo@gmail.com";
-            this.administrator.Id = testId;
-            this.administrator.Email = testEmail;
-            Administrator test = new Administrator();
+            this.user.Id = testId;
+            this.user.Email = testEmail;
+            User test = new User();
             test.Id = testId;
             test.Email = testEmail;
-            Assert.IsTrue(administrator.Equals(test));
+            Assert.IsTrue(user.Equals(test));
         }
 
         [TestMethod]
@@ -147,12 +178,12 @@ namespace DomainTests
             int testId1 = 1;
             int testId2 = 2;
             string testEmail = "facundo@gmail.com";
-            this.administrator.Id = testId1;
-            this.administrator.Email = testEmail;
-            Administrator test = new Administrator();
+            this.user.Id = testId1;
+            this.user.Email = testEmail;
+            User test = new User();
             test.Id = testId2;
             test.Email = testEmail;
-            Assert.IsFalse(administrator.Equals(test));
+            Assert.IsFalse(user.Equals(test));
         }
 
         [TestMethod]
@@ -162,12 +193,12 @@ namespace DomainTests
             int testId2 = 2;
             string testEmail1 = "facundo@gmail.com";
             string testEmail2 = "javier@gmail.com";
-            this.administrator.Id = testId1;
-            this.administrator.Email = testEmail1;
-            Administrator test = new Administrator();
+            this.user.Id = testId1;
+            this.user.Email = testEmail1;
+            User test = new User();
             test.Id = testId2;
             test.Email = testEmail2;
-            Assert.IsFalse(administrator.Equals(test));
+            Assert.IsFalse(user.Equals(test));
         }
 
         [TestMethod]
@@ -175,10 +206,10 @@ namespace DomainTests
         {
             int testId1 = 1;
             string testEmail1 = "facundo@gmail.com";
-            this.administrator.Id = testId1;
-            this.administrator.Email = testEmail1;
-            Administrator test = null;
-            Assert.IsFalse(administrator.Equals(test));
+            this.user.Id = testId1;
+            this.user.Email = testEmail1;
+            User test = null;
+            Assert.IsFalse(user.Equals(test));
         }
 
         [TestMethod]
@@ -186,10 +217,10 @@ namespace DomainTests
         {
             int testId1 = 1;
             string testEmail1 = "facundo@gmail.com";
-            this.administrator.Id = testId1;
-            this.administrator.Email = testEmail1;
+            this.user.Id = testId1;
+            this.user.Email = testEmail1;
             string test = "testing";
-            Assert.IsFalse(administrator.Equals(test));
+            Assert.IsFalse(user.Equals(test));
         }
 
         [TestMethod]
@@ -197,10 +228,10 @@ namespace DomainTests
         {
             int testId1 = 1;
             string testEmail1 = "facundo@gmail.com";
-            this.administrator.Id = testId1;
-            this.administrator.Email = testEmail1;
+            this.user.Id = testId1;
+            this.user.Email = testEmail1;
             Booking test = new Booking();
-            Assert.IsFalse(administrator.Equals(test));
+            Assert.IsFalse(user.Equals(test));
         }
     }
 }

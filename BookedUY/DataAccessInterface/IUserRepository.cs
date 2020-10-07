@@ -5,8 +5,8 @@ using System.Text;
 
 namespace DataAccessInterface
 {
-    public interface ITouristRepository : IRepository<Tourist>
+    public interface IUserRepository : IRepository<User>
     {
-        Tourist GetByEmail(string email);
+        User GetByEmail(string email);
     }
 }
