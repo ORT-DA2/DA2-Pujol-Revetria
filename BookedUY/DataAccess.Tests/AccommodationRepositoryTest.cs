@@ -247,5 +247,147 @@ namespace DataAccess.Tests
             var result = repository.GetByName("Hilton");
             Assert.IsTrue(testAccommodation.Equals(result));
         }
+
+        [TestMethod]
+        public void TestGetAvailableBySpot()
+        {
+            int testId = 1;
+            Accommodation testAccommodation = new Accommodation()
+            {
+                Id = testId,
+                Address = "Test1",
+                Bookings = null,
+                ContactNumber = "0993456611",
+                Full = false,
+                Name = "Hilton",
+                Information = "Epic",
+                PricePerNight = 120.76,
+                Spot = null,
+                SpotId = 2
+            };
+            List<Accommodation> accommodationList = new List<Accommodation>()
+            {
+
+                new Accommodation()
+                {
+                    Id = 2,
+                    Address = "Test",
+                    Bookings = null,
+                    ContactNumber = "09934566",
+                    Full = false,
+                    Name = "Radisson",
+                    Information = "nice",
+                    PricePerNight = 1.76,
+                    Spot = null,
+                    SpotId = 1
+                },testAccommodation,
+            };
+
+            accommodationList.ForEach(s => _context.Add(s));
+            _context.SaveChanges();
+            var repository = new AccommodationRepository(_context);
+            var result = repository.GetAvailableBySpot(2);
+            Assert.IsTrue(testAccommodation.Equals(result.FirstOrDefault()));
+        }
+
+        [TestMethod]
+        public void TestGetAvailableBySpotNull()
+        {
+            int testId = 1;
+            Accommodation testAccommodation = new Accommodation()
+            {
+                Id = testId,
+                Address = "Test1",
+                Bookings = null,
+                ContactNumber = "0993456611",
+                Full = false,
+                Name = "Hilton",
+                Information = "Epic",
+                PricePerNight = 120.76,
+                Spot = null,
+                SpotId = 2
+            };
+            List<Accommodation> accommodationList = new List<Accommodation>()
+            {
+
+                new Accommodation()
+                {
+                    Id = 2,
+                    Address = "Test",
+                    Bookings = null,
+                    ContactNumber = "09934566",
+                    Full = false,
+                    Name = "Radisson",
+                    Information = "nice",
+                    PricePerNight = 1.76,
+                    Spot = null,
+                    SpotId = 1
+                },testAccommodation,
+            };
+
+            accommodationList.ForEach(s => _context.Add(s));
+            _context.SaveChanges();
+            var repository = new AccommodationRepository(_context);
+            var result = repository.GetAvailableBySpot(3);
+            Assert.IsNull(result.FirstOrDefault());
+        }
+
+        [TestMethod]
+        public void TestUpdateCapacityTrue()
+        {
+            int testId = 1;
+            Accommodation testAccommodation = new Accommodation()
+            {
+                Id = testId,
+                Address = "Test1",
+                Bookings = null,
+                ContactNumber = "0993456611",
+                Full = false,
+                Name = "Hilton",
+                Information = "Epic",
+                PricePerNight = 120.76,
+                Spot = null,
+                SpotId = 2
+            };
+            List<Accommodation> accommodationList = new List<Accommodation>()
+            {
+                testAccommodation,
+            };
+
+            accommodationList.ForEach(s => _context.Add(s));
+            _context.SaveChanges();
+            var repository = new AccommodationRepository(_context);
+            repository.UpdateCapacity(1, true);
+            Assert.IsTrue(_context.Accommodations.Find(1).Full);
+        }
+
+        [TestMethod]
+        public void TestUpdateCapacityFalse()
+        {
+            int testId = 1;
+            Accommodation testAccommodation = new Accommodation()
+            {
+                Id = testId,
+                Address = "Test1",
+                Bookings = null,
+                ContactNumber = "0993456611",
+                Full = false,
+                Name = "Hilton",
+                Information = "Epic",
+                PricePerNight = 120.76,
+                Spot = null,
+                SpotId = 2
+            };
+            List<Accommodation> accommodationList = new List<Accommodation>()
+            {
+                testAccommodation,
+            };
+
+            accommodationList.ForEach(s => _context.Add(s));
+            _context.SaveChanges();
+            var repository = new AccommodationRepository(_context);
+            repository.UpdateCapacity(1, false);
+            Assert.IsFalse(_context.Accommodations.Find(1).Full);
+        }
     }
 }
