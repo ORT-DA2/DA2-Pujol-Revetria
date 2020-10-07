@@ -2,6 +2,7 @@
 using DataAccessInterface;
 using Domain;
 using System;
+using System.Collections.Generic;
 
 namespace BusinessLogic
 {
@@ -28,6 +29,11 @@ namespace BusinessLogic
                 total += guest.Amount * guest.Multiplier;
             }
             return total;
+        }
+
+        public IEnumerable<Booking> GetAll()
+        {
+            return this.bookingRepository.GetAll();
         }
     }
 }
