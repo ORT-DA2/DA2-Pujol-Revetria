@@ -80,4 +80,15 @@ namespace Domain
             }
         }
     }
+
+    public class InvalidImageException : Exception
+    {
+        public override string Message
+        {
+            get
+            {
+                return "Invalid Image";
+            }
+        }
+    }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataAccess.Context;
 using DataAccess.Repositories;
 using DataAccessInterface;
 using Domain;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -30,6 +32,10 @@ namespace Migrations
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<BookedUYContext>(o =>
+            {
+                o.UseSqlServer("data source=.; initial catalog = MyImagesDb; integrated security = true");
+            });
             ServicesFactory.AddDbContextServices(services, this.Configuration.GetConnectionString("BookedUYDb"));
             ServicesFactory.AddMyServices(services);
         }

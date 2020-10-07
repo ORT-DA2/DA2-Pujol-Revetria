@@ -15,5 +15,15 @@ namespace BusinessLogic
         {
             this.accommodationRepository = accommodationRepository;
         }
+
+        public Accommodation AddAccommodation(Accommodation accommodation)
+        {
+            if (this.accommodationRepository.GetByName(accommodation.Name)==null)
+            {
+                var newAccom = this.accommodationRepository.Add(accommodation);
+                return newAccom;
+            }
+            throw new AlreadyExistsException();
+        }
     }
 }

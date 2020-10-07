@@ -18,10 +18,11 @@ namespace DataAccess.Repositories
             this.regions = bookUYContext.Set<Region>();
         }
 
-        public void Add(Region obj)
+        public Region Add(Region obj)
         {
             this.regions.Add(obj);
             bookUYContext.SaveChanges();
+            return obj;
         }
 
         public void Delete(Region obj)

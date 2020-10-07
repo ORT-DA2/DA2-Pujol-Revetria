@@ -14,11 +14,12 @@ namespace BusinessLogic
             this.bookingRepository = bookingRepository;
         }
 
-        public void AddBooking(Booking booking)
+        public Booking AddBooking(Booking booking)
         {
-            double totalprice = CalculateTotalPrice(booking);
-            booking.TotalPrice = totalprice;
-            this.bookingRepository.Add(booking);
+              double totalprice = CalculateTotalPrice(booking);
+              booking.TotalPrice = totalprice;
+              var newBooking = this.bookingRepository.Add(booking);
+              return newBooking;
         }
 
         private double CalculateTotalPrice(Booking booking)

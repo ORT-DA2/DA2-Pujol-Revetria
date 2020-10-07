@@ -19,6 +19,7 @@ namespace DataAccess.Context
         public DbSet<Region> Regions { get; set; }
         public DbSet<TouristicSpot> TouristicSpots { get; set; }
         public DbSet<Tourist> Tourists { get; set; }
+        public DbSet<AccommodationImage> AccommodationImages { get; set; }
 
         public DbSet<CategoryTouristicSpot> categoryTouristicSpots { get; set; }
         public BookedUYContext() 
@@ -73,6 +74,10 @@ namespace DataAccess.Context
             modelBuilder.Entity<Category>().HasAlternateKey(t => t.Name);
 
             modelBuilder.Entity<BookingStage>().HasOne<Administrator>(a => a.Administrator).WithMany(b => b.Entries).HasForeignKey(s => s.AdministratorId);
+
+            modelBuilder.Entity<AccommodationImage>().HasKey(i=>i.Id);
+            modelBuilder.Entity<AccommodationImage>().Property(i => i.Image);
+            modelBuilder.Entity<AccommodationImage>().HasOne<Accommodation>(i => i.Accommodation).WithMany(a => a.Images).HasForeignKey(i => i.AccommodationId);
 
             modelBuilder.Entity<CategoryTouristicSpot>().HasKey(t => new {t.CategoryId, t.TouristicSpotId});
             modelBuilder.Entity<CategoryTouristicSpot>().HasOne<Category>(ct => ct.Category).WithMany(c => c.Spots).HasForeignKey(ct => ct.CategoryId);

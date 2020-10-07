@@ -25,10 +25,11 @@ namespace DataAccess.Repositories
             return this.bookings;
         }
 
-        public void Add(Booking booking)
+        public Booking Add(Booking booking)
         {
             this.bookings.Add(booking);
             this.bookedUYContext.SaveChanges();
+            return booking;
         }
 
         public Booking GetById(int id)

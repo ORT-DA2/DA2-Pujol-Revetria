@@ -33,7 +33,7 @@ namespace Factory
 
         public static void AddDbContextServices(IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<DbContext, BookedUYContext>(options=>options.UseSqlServer(connectionString));
+            services.AddDbContext<DbContext, BookedUYContext>(options => options.UseSqlServer(connectionString));
         }
     }
 }

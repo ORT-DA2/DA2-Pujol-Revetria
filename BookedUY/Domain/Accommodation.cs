@@ -102,6 +102,7 @@ namespace Domain
         public bool Full { get; set; }
         public List<Booking> Bookings{ get; set;}
 
+        public List<AccommodationImage> Images { get; set; }
         public override bool Equals(object obj)
         {
             var result = false;

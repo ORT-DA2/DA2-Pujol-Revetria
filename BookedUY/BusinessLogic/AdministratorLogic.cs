@@ -9,11 +9,21 @@ namespace BusinessLogic
 {
     public class AdministratorLogic : IAdministratorLogic
     {
-        private readonly IAccommodationRepository administratorRepository;
+        private readonly IAdministratorRepository administratorRepository;
 
-        public AdministratorLogic(IAccommodationRepository administratorRepository)
+        public AdministratorLogic(IAdministratorRepository administratorRepository)
         {
             this.administratorRepository = administratorRepository;
+        }
+
+        public Administrator AddAdministrator(Administrator administrator)
+        {
+            if (this.administratorRepository.GetByEmail(administrator.Email)==null)
+            {
+                var newAdmin = this.administratorRepository.Add(administrator);
+                return newAdmin;
+            }
+            throw new AlreadyExistsException();
         }
     }
 }

@@ -31,10 +31,11 @@ namespace DataAccess.Repositories
             bookedUYContext.SaveChanges();
         }
 
-        public void Add(Administrator obj)
+        public Administrator Add(Administrator obj)
         {
             this.administrators.Add(obj);
             bookedUYContext.SaveChanges();
+            return obj;
         }
 
         public Administrator GetById(int id)

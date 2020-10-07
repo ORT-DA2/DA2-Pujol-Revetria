@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,7 +9,7 @@ namespace DataAccessInterface
     {
         IEnumerable<T> GetAll();
 
-        void Add(T obj);
+        T Add(T obj);
 
         void Delete(T obj);
 

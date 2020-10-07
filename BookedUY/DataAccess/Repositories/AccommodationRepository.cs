@@ -25,10 +25,11 @@ namespace DataAccess.Repositories
             return this.accommodations;
         }
 
-        public void Add(Accommodation accommodation)
+        public Accommodation Add(Accommodation accommodation)
         {
             this.accommodations.Add(accommodation);
             bookedUYContext.SaveChanges();
+            return accommodation;
         }
 
         public void Delete(Accommodation accommodation)

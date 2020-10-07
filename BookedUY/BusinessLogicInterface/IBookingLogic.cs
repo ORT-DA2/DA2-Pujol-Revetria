@@ -6,8 +6,7 @@ namespace BusinessLogicInterface
 {
     public interface IBookingLogic
     {
-        //object GetBookings();
-        void AddBooking(Booking booking);
+        Booking AddBooking(Booking booking);
 
         IEnumerable<Booking> GetAll();
     }

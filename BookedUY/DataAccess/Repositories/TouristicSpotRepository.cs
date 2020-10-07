@@ -26,10 +26,11 @@ namespace DataAccess.Repositories
             return this.spots;
         }
 
-        public void Add(TouristicSpot spot)
+        public TouristicSpot Add(TouristicSpot spot)
         {
             this.spots.Add(spot);
             this.bookUYContext.SaveChanges();
+            return spot;
         }
 
         public IEnumerable<TouristicSpot> GetByRegion(int id)

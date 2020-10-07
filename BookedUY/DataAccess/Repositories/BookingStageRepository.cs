@@ -24,10 +24,11 @@ namespace DataAccess.Repositories
             return this.bookingStages;
         }
 
-        public void Add(BookingStage bookingStage)
+        public BookingStage Add(BookingStage bookingStage)
         {
             this.bookingStages.Add(bookingStage);
             bookUYContext.SaveChanges();
+            return bookingStage;
         }
 
         public IEnumerable<BookingStage> GetByBooking(int id)

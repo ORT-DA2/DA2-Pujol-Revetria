@@ -19,10 +19,11 @@ namespace DataAccess.Repositories
             this.tourists = bookUYContext.Set<Tourist>();
         }
 
-        public void Add(Tourist obj)
+        public Tourist Add(Tourist obj)
         {
             this.tourists.Add(obj);
             this.bookUYContext.SaveChanges();
+            return obj;
         }
 
         public void Delete(Tourist obj)

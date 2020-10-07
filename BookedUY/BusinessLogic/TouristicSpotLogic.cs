@@ -16,6 +16,14 @@ namespace BusinessLogic
             this.touristicSpotRepository = touristicSpotRepository;
         }
 
-        
+        public TouristicSpot AddTouristicSpot(TouristicSpot spot)
+        {
+            if (this.touristicSpotRepository.GetByName(spot.Name)==null)
+            {
+                var newSpot = this.touristicSpotRepository.Add(spot);
+                return newSpot;
+            }
+            throw new AlreadyExistsException();
+        }
     }
 }
