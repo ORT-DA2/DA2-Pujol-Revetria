@@ -27,7 +27,6 @@ namespace Domain
                 }
             }
         }
-
         private DateTime _checkOut;
         public DateTime CheckOut
         {
