@@ -1,4 +1,5 @@
 ﻿using BusinessLogicInterface;
+using DataAccess.Repositories;
 using DataAccessInterface;
 using Domain;
 using System;
@@ -11,22 +12,22 @@ namespace BusinessLogic
     public class BookingStageLogic : IBookingStageLogic
     {
         private readonly IBookingStageRepository bookingStageRepository;
-        private readonly IBookingStageRepository bookingRepository;
+        private readonly IRepository<Booking> bookingRepository;
 
-        public BookingStageLogic(IBookingStageRepository bookingStageRepository)
+        public BookingStageLogic(IBookingStageRepository bookingStageRepository, IRepository<Booking> bookingRepository)
         {
             this.bookingStageRepository = bookingStageRepository;
+            this.bookingRepository = bookingRepository;
         }
 
         public BookingStage AddBookingStage(BookingStage stage)
         {
             var booking = this.bookingRepository.GetById(stage.AsociatedBookingId);
-            if (booking != null)
+            if (booking == null)
             {
-                var newStage = this.bookingStageRepository.Add(stage);
-                return newStage;
+                throw new BookingNotFoundException();
             }
-            throw new BookingNotFoundException();
+            return this.bookingStageRepository.Add(stage);
         }
 
         public BookingStage GetCurrentStatusByBooking(int bookingId)
@@ -36,6 +37,7 @@ namespace BusinessLogic
             return bookingStage;
             
         }
+
         private BookingStage GetCurrentStatus(IEnumerable<BookingStage> bookingStages)
         {
             BookingStage bookingStage = new BookingStage();
