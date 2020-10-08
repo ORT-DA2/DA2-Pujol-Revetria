@@ -14,5 +14,10 @@ namespace BusinessLogic
         {
             this.categoryRepository = categoryRepository;
         }
+
+        public IEnumerable<Category> GetAll()
+        {
+            return categoryRepository.GetAll();
+        }
     }
 }
