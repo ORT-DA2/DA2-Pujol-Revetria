@@ -17,9 +17,15 @@ namespace Migrations.Controllers
         }
         // GET: api/<BookingController>
         [HttpGet]
-        public void GetBookings()
+        public void Get()
         {
-
+            var bookings = from b in this.bookingLogic.GetAll()
+                          select new BookingModelOut()
+                          {
+                              Id = r.Id,
+                              Name = r.Name,
+                          };
+            return Ok(regions);
         }
 
         // GET api/<BookingController>/5

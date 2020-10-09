@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicInterface;
+using Domain;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -22,16 +23,28 @@ namespace Migrations.Controllers
 
         // GET: api/<AdministratorController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            var administrators = from a in this.administratorLogic.GetAll()
+                          select new AdministratorModelOut()
+                          {
+                              Id = a.Id,
+                              Name = a.Name,
+                          };
+            return Ok(administrators);
         }
 
         // GET api/<AdministratorController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            Administrator administrator = from a in administratorLogic.GetById(id)
+                                 select new AdministratorModelOut()
+                                 {
+                                     Id = a.Id,
+                                     Name = a.Name,
+                                 };
+            return Ok(administrator);
         }
 
         // POST api/<AdministratorController>

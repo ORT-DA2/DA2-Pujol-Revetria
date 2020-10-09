@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicInterface;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.DTOs;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,9 +23,16 @@ namespace Migrations.Controllers
 
         // GET: api/<TouristicSpotController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            var touristicSpots = from t in this.touristicSpotLogic.GetSpotsByRegionAndCategory(null, -1)
+                          select new TouristicSpotModelOut()
+                          {
+                              Id = t.Id,
+                              Name = t.Name,
+                              Description= t.Description
+                          };
+            return Ok(touristicSpots);
         }
 
         // GET api/<TouristicSpotController>/5

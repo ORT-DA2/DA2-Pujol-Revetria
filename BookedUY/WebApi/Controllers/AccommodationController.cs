@@ -4,25 +4,36 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogic;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.DTOs;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Migrations.Controllers
 {
-    [Route("api/acomodation")]
-    public class AcomodationController : BookedUYController
+    [Route("api/accommodation")]
+    public class AccommodationController : BookedUYController
     {
         private readonly AccommodationLogic accommodationLogic;
 
-        public AcomodationController(AccommodationLogic accommodationLogic)
+        public AccommodationController(AccommodationLogic accommodationLogic)
         {
             this.accommodationLogic = accommodationLogic;
         }
 
         [HttpGet("{spot}")]
-        public IEnumerable<string> GetAccommodationsInSpot()
+        public IActionResult GetAccommodationsInSpot(int spot)
         {
-            return null;
+            var accommodations = from r in this.accommodationLogic.GetAvailableAccommodationBySpot(spot)
+                          select new AccommodationModelOut()
+                          {
+                              Id = r.Id,
+                              Name =r.Name,
+                              Information =r.Information,
+                              Address =r.Address,
+                              ContactNumber = r.ContactNumber,
+                              Price = r.PricePerNight
+                          };
+            return Ok(accommodations);
         }
 
         // GET api/<AcomodationController>/5
@@ -30,7 +41,6 @@ namespace Migrations.Controllers
         public ActionResult Get(int id)
         {
 
-            return Ok();
         }
 
         // POST api/<AcomodationController>

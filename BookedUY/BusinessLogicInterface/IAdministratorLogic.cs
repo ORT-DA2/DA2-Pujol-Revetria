@@ -8,6 +8,9 @@ namespace BusinessLogicInterface
     public interface IAdministratorLogic
     {
         Administrator AddAdministrator(Administrator administrator);
-
+        Administrator GetByEmailAndPassword(string email, string password);
+        Administrator GetById(int id);
+        IEnumerable<Administrator> GetAll();
+        void Delete(Administrator administrator)
     }
 }

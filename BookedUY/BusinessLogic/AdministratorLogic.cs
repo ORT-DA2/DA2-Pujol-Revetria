@@ -49,5 +49,15 @@ namespace BusinessLogic
             }
             this.administratorRepository.Delete(administrator);
         }
+
+        public Administrator GetById(int id)
+        {
+            var administrator = this.administratorRepository.GetById(id);
+            if (administrator == null)
+            {
+                throw new AdministratorNotFoundException();
+            }
+            return administrator;
+        }
     }
 }
