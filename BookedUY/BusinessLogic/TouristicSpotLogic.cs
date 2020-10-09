@@ -18,26 +18,28 @@ namespace BusinessLogic
 
         public TouristicSpot AddTouristicSpot(TouristicSpot spot)
         {
-            if (this.touristicSpotRepository.GetByName(spot.Name)==null)
+            if (this.touristicSpotRepository.GetByName(spot.Name) != null)
             {
-                var newSpot = this.touristicSpotRepository.Add(spot);
-                return newSpot;
+                throw new AlreadyExistsException();
             }
-            throw new AlreadyExistsException();
+            return this.touristicSpotRepository.Add(spot);
         }
 
         public IEnumerable<TouristicSpot> GetSpotsByRegionAndCategory(List<int> category, int region)
         {
-            if (category == null && region == -1)
+            if ((category == null || category.Count == 0) && region == -1)
             {
                 return this.touristicSpotRepository.GetAll();
-                
             }
-            if (category == null)
+            if (category == null || category.Count == 0)
             {
                 return this.touristicSpotRepository.GetByRegion(region);
             }
-            return this.touristicSpotRepository.GetByCategory(category);
+            if (region == -1)
+            {
+                return this.touristicSpotRepository.GetByCategory(category);
+            }
+            return touristicSpotRepository.GetByCategoryAndRegion(category, region);
         }
     }
 }

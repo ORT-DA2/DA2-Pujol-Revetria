@@ -8,7 +8,6 @@ namespace BusinessLogicInterface
     public interface IBookingStageLogic
     {
         BookingStage AddBookingStage(BookingStage stage);
-
-        //IEnumerable<BookingStage> GetBookingStagesPerBooking(Booking booking);
+        BookingStage GetCurrentStatusByBooking(int bookingId);
     }
 }

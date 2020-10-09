@@ -18,21 +18,21 @@ namespace BusinessLogic
 
         public Accommodation AddAccommodation(Accommodation accommodation)
         {
-            if (this.accommodationRepository.GetByName(accommodation.Name)==null)
+            if (this.accommodationRepository.GetByName(accommodation.Name) != null)
             {
-                var newAccom = this.accommodationRepository.Add(accommodation);
-                return newAccom;
+                throw new AlreadyExistsException();
             }
-            throw new AlreadyExistsException();
+            var newAccom = this.accommodationRepository.Add(accommodation);
+            return newAccom;
         }
 
         public void DeleteAccommodation(Accommodation accommodation)
         {
-            if (this.accommodationRepository.GetByName(accommodation.Name) != null)
+            if (this.accommodationRepository.GetByName(accommodation.Name) == null)
             {
-                this.accommodationRepository.Delete(accommodation);
+                throw new AccommodationNotFoundException();
             }
-            throw new AccommodationNotFoundException();
+            this.accommodationRepository.Delete(accommodation);
         }
 
         public IEnumerable<Accommodation> GetAvailableAccommodationBySpot(int spotId)
@@ -40,13 +40,13 @@ namespace BusinessLogic
             return this.accommodationRepository.GetAvailableBySpot(spotId);
         }
 
-        public void UpdateCapacity(int accommodationId,bool capacity)
+        public void UpdateCapacity(int accommodationId, bool capacity)
         {
-            if (this.accommodationRepository.GetById(accommodationId) != null)
+            if (this.accommodationRepository.GetById(accommodationId) == null)
             {
-                this.accommodationRepository.UpdateCapacity(accommodationId, capacity);
+                throw new AccommodationNotFoundException();
             }
-            throw new AccommodationNotFoundException();
+            this.accommodationRepository.UpdateCapacity(accommodationId, capacity);
         }
     }
 }
