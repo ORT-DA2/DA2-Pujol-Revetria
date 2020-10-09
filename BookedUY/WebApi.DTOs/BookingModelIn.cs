@@ -4,7 +4,9 @@ using System.Text;
 
 namespace WebApi.DTOs
 {
-    class BookingModelIn
+    public class BookingModelIn
     {
+        public int AccommodationId { get; set; }
+        
     }
 }
