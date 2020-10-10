@@ -7,8 +7,6 @@ using Domain;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Migrations.Controllers
 {
     [Route("api/accommodation")]
@@ -56,22 +54,34 @@ namespace Migrations.Controllers
 
         // POST api/<AcomodationController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult CreateAccommodation(AccommodationModelIn newAccommodation)
         {
-
+            var accom = new Accommodation()
+            {
+                Address = newAccommodation.Address,
+                ContactNumber = newAccommodation.Contact,
+                Information = newAccommodation.Information,
+                Name = newAccommodation.Name,
+                PricePerNight = newAccommodation.Price,
+                SpotId = newAccommodation.SpotId
+            };
+            var response = this.accommodationLogic.AddAccommodation(accom);
+            return Ok(response);
         }
 
         // PUT api/<AcomodationController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void UpdateCapacity(int id, [FromBody] bool status)
         {
-
+            this.accommodationLogic.UpdateCapacity(id, status);
         }
 
         // DELETE api/<AcomodationController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var accomToDelete = this.accommodationLogic.GetById(id);
+            this.accommodationLogic.DeleteAccommodation(accomToDelete);
         }
     }
 }
