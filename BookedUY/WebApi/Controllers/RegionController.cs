@@ -35,12 +35,6 @@ namespace WebApi.Controllers
             return Ok(regions);
         }
 
-        // GET api/<RegionController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
 
         // POST api/<RegionController>
         [HttpPost]

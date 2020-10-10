@@ -27,25 +27,25 @@ namespace Migrations.Controllers
         public IActionResult Get()
         {
             var administrators = from a in this.administratorLogic.GetAll()
-                          select new AdministratorModelOut()
-                          {
-                              Id = a.Id,
-                              Name = a.Name,
-                          };
+                          //select new AdministratorModelOut()
+                          //{
+                          //    Id = a.Id,
+                          //    Name = a.Name,
+                          //};
             return Ok(administrators);
         }
 
         // GET api/<AdministratorController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet]
+        public IActionResult Get(string email, string password)
         {
-            Administrator admin = this.administratorLogic.GetById(id);
-            var ret = new AdministratorModelOut()
-                                 {
-                                     Id = admin.Id,
-                                     Email = admin.Email,
-                                 };
-            return Ok(ret);
+            Administrator admin = this.administratorLogic.GetByEmailAndPassword(email,password);
+            //var ret = new AdministratorModelOut()
+            //                     {
+            //                         Id = admin.Id,
+            //                         Email = admin.Email,
+            //                     };
+            return Ok(admin);
         }
 
         // POST api/<AdministratorController>

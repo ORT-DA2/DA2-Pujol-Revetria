@@ -48,5 +48,13 @@ namespace BusinessLogic
             }
             this.accommodationRepository.UpdateCapacity(accommodationId, capacity);
         }
+        public Accommodation GetById(int id)
+        {
+            if (this.accommodationRepository.GetById(id) == null)
+            {
+                throw new AccommodationNotFoundException();
+            }
+            return this.accommodationRepository.GetById(id);
+        }
     }
 }

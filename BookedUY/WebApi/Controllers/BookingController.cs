@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicInterface;
+using Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Migrations.Controllers
@@ -17,27 +19,42 @@ namespace Migrations.Controllers
         }
         // GET: api/<BookingController>
         [HttpGet]
-        public void Get()
+        public IActionResult Get()
         {
             var bookings = from b in this.bookingLogic.GetAll()
-                          select new BookingModelOut()
-                          {
-                              Id = r.Id,
-                              Name = r.Name,
-                          };
+                           select new BookingModelOut()
+                           {
+                               Id = b.Id,
+                               AccommodationId = b.AccommodationId,
+                               AccommodationName = b.Accommodation.Name,
+                               AccommodationAddress = b.Accommodation.Address,
+                               AccommodationContact = b.Accommodation.ContactNumber,
+                               CheckIn = b.CheckIn,
+                               CheckOut = b.CheckOut,
+                               Price = b.TotalPrice,
+                               GuesEmail = b.HeadGuest.Email
+                           };
             return Ok(bookings);
         }
 
         // GET api/<BookingController>/5
         [HttpGet("{id}")]
-        public void Get(int id)
+        public IActionResult Get(int id)
         {
             var book = this.bookingLogic.GetById(id);
             var booking = new BookingModelOut()
-                           {
-                                
-                           };
-            return Ok(bookings);
+            {
+                Id = b.Id,
+                AccommodationId = b.AccommodationId,
+                AccommodationName = b.Accommodation.Name,
+                AccommodationAddress = b.Accommodation.Address,
+                AccommodationContact = b.Accommodation.ContactNumber,
+                CheckIn = b.CheckIn,
+                CheckOut = b.CheckOut,
+                Price = b.TotalPrice,
+                GuesEmail = b.HeadGuest.Email
+            };
+            return Ok(booking);
         }
 
         // POST api/<BookingController>

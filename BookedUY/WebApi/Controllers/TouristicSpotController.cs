@@ -35,13 +35,6 @@ namespace Migrations.Controllers
             return Ok(touristicSpots);
         }
 
-        // GET api/<TouristicSpotController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         // POST api/<TouristicSpotController>
         [HttpPost]
         public void Post([FromBody] string value)

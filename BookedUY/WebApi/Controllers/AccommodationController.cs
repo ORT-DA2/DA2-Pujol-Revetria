@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogic;
+using Domain;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs;
 
@@ -24,23 +25,33 @@ namespace Migrations.Controllers
         public IActionResult GetAccommodationsInSpot(int spot)
         {
             var accommodations = from r in this.accommodationLogic.GetAvailableAccommodationBySpot(spot)
-                          select new AccommodationModelOut()
-                          {
-                              Id = r.Id,
-                              Name =r.Name,
-                              Information =r.Information,
-                              Address =r.Address,
-                              ContactNumber = r.ContactNumber,
-                              Price = r.PricePerNight
-                          };
+                                 select new AccommodationModelOut()
+                                 {
+                                     Id = r.Id,
+                                     Name = r.Name,
+                                     Information = r.Information,
+                                     Address = r.Address,
+                                     ContactNumber = r.ContactNumber,
+                                     Price = r.PricePerNight
+                                 };
             return Ok(accommodations);
         }
 
         // GET api/<AcomodationController>/5 o /?id=5
         [HttpGet("{id}")]
-        public ActionResult Get(int id)
+        public IActionResult Get(int id)
         {
-
+            Accommodation a = this.accommodationLogic.GetById(id);
+            var ret = new AccommodationModelOut()
+            {
+                Id = a.Id,
+                Name = a.Name,
+                Information = a.Information,
+                Address = a.Address,
+                ContactNumber = a.ContactNumber,
+                Price = a.PricePerNight
+            };
+            return Ok(ret);
         }
 
         // POST api/<AcomodationController>

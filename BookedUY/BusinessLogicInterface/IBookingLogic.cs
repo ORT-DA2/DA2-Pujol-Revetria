@@ -9,5 +9,6 @@ namespace BusinessLogicInterface
         Booking AddBooking(Booking booking);
 
         IEnumerable<Booking> GetAll();
+        Booking GetById(int id);
     }
 }

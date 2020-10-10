@@ -36,5 +36,15 @@ namespace BusinessLogic
         {
             return this.bookingRepository.GetAll();
         }
+
+        public Booking GetById(int id)
+        {
+            var booking = this.bookingRepository.GetById(id);
+            if(booking == null)
+            {
+                throw new BookingNotFoundException();
+            }
+            return booking;
+        }
     }
 }

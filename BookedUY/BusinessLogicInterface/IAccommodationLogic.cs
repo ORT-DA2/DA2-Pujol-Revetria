@@ -11,5 +11,6 @@ namespace BusinessLogicInterface
         void DeleteAccommodation(Accommodation accommodation);
         IEnumerable<Accommodation> GetAvailableAccommodationBySpot(int spotId);
         void UpdateCapacity(int accommodationId, bool capacity);
+        Accommodation GetById(int id);
     }
 }
