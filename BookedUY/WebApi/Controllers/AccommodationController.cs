@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogic;
+using BusinessLogicInterface;
+using DataAccessInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs;
@@ -12,9 +14,9 @@ namespace Migrations.Controllers
     [Route("api/accommodation")]
     public class AccommodationController : BookedUYController
     {
-        private readonly AccommodationLogic accommodationLogic;
+        private readonly IAccommodationLogic accommodationLogic;
 
-        public AccommodationController(AccommodationLogic accommodationLogic)
+        public AccommodationController(IAccommodationLogic accommodationLogic)
         {
             this.accommodationLogic = accommodationLogic;
         }
@@ -47,7 +49,8 @@ namespace Migrations.Controllers
                 Information = a.Information,
                 Address = a.Address,
                 ContactNumber = a.ContactNumber,
-                Price = a.PricePerNight
+                Price = a.PricePerNight,
+                SpotName = a.Spot.Name
             };
             return Ok(ret);
         }

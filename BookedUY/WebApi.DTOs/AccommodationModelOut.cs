@@ -12,5 +12,6 @@ namespace WebApi.DTOs
         public string ContactNumber { get; set; }
         public string Information { get; set; }
         public double Price { get; set; }
+        public string SpotName { get; set; }
     }
 }

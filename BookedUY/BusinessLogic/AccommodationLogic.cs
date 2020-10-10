@@ -10,7 +10,6 @@ namespace BusinessLogic
     public class AccommodationLogic : IAccommodationLogic
     {
         private readonly IAccommodationRepository accommodationRepository;
-
         public AccommodationLogic(IAccommodationRepository accommodationRepository)
         {
             this.accommodationRepository = accommodationRepository;

@@ -21,7 +21,7 @@ namespace DataAccess.Repositories
 
         public IEnumerable<BookingStage> GetAll()
         {
-            return this.bookingStages;
+            return this.bookingStages.Include(b=>b.Administrator).Include(b=>b.AsociatedBooking);
         }
 
         public BookingStage Add(BookingStage bookingStage)
@@ -33,7 +33,7 @@ namespace DataAccess.Repositories
 
         public IEnumerable<BookingStage> GetByBooking(int id)
         {
-            return this.bookingStages.Where(b => b.AsociatedBookingId == id);
+            return this.bookingStages.Include(b => b.Administrator).Include(b => b.AsociatedBooking).Where(b => b.AsociatedBookingId == id);
         }
 
         public void Delete(BookingStage obj)
@@ -44,7 +44,7 @@ namespace DataAccess.Repositories
 
         public BookingStage GetById(int id)
         {
-            return this.bookingStages.Find(id);
+            return this.bookingStages.Include(b => b.Administrator).Include(b => b.AsociatedBooking).Where(b=>b.Id==id).SingleOrDefault();
         }
     }
 }

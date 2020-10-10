@@ -22,7 +22,7 @@ namespace DataAccess.Repositories
 
         public IEnumerable<Accommodation> GetAll()
         {
-            return this.accommodations;
+            return this.accommodations.Include(a => a.Spot);
         }
 
         public Accommodation Add(Accommodation accommodation)
@@ -40,17 +40,17 @@ namespace DataAccess.Repositories
 
         public Accommodation GetById(int id)
         {
-            return this.accommodations.Find(id);
+            return this.accommodations.Include(a=>a.Spot).Where(a=>a.Id==id).SingleOrDefault();
         }
 
         public Accommodation GetByName(string name)
         {
-            return this.accommodations.Where(a => a.Name == name).FirstOrDefault();
+            return this.accommodations.Include(a=>a.Spot).Where(a => a.Name == name).FirstOrDefault();
         }
 
         public IEnumerable<Accommodation> GetAvailableBySpot(int spotId)
         {
-            return this.accommodations.Where(a => a.SpotId == spotId && a.Full == false);
+            return this.accommodations.Include(a=>a.Spot).Where(a => a.SpotId == spotId && a.Full == false);
         }
 
         public void UpdateCapacity(int accommodationId, bool capacity)

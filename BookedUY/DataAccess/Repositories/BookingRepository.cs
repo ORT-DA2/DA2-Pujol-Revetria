@@ -5,6 +5,7 @@ using DataAccess;
 using System;
 using System.Collections.Generic;
 using DataAccess.Context;
+using System.Linq;
 
 namespace DataAccess.Repositories
 {
@@ -22,7 +23,7 @@ namespace DataAccess.Repositories
 
         public IEnumerable<Booking> GetAll()
         {
-            return this.bookings;
+            return this.bookings.Include(b=>b.Accommodation).Include(b=>b.Guests);
         }
 
         public Booking Add(Booking booking)
@@ -34,7 +35,7 @@ namespace DataAccess.Repositories
 
         public Booking GetById(int id)
         {
-            return this.bookings.Find(id);
+            return this.bookings.Include(b => b.Accommodation).Include(b => b.Guests).Where(b => b.Id==id).SingleOrDefault();
         }
 
         public void Delete(Booking booking)
