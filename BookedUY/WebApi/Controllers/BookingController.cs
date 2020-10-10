@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.DTOs;
 
 namespace Migrations.Controllers
 {
@@ -32,7 +33,7 @@ namespace Migrations.Controllers
                                CheckIn = b.CheckIn,
                                CheckOut = b.CheckOut,
                                Price = b.TotalPrice,
-                               GuesEmail = b.HeadGuest.Email
+                               GuestEmail = b.HeadGuest.Email
                            };
             return Ok(bookings);
         }
@@ -41,7 +42,7 @@ namespace Migrations.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var book = this.bookingLogic.GetById(id);
+            var b = this.bookingLogic.GetById(id);
             var booking = new BookingModelOut()
             {
                 Id = b.Id,
@@ -52,7 +53,7 @@ namespace Migrations.Controllers
                 CheckIn = b.CheckIn,
                 CheckOut = b.CheckOut,
                 Price = b.TotalPrice,
-                GuesEmail = b.HeadGuest.Email
+                GuestEmail = b.HeadGuest.Email
             };
             return Ok(booking);
         }

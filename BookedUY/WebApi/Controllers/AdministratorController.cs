@@ -23,17 +23,17 @@ namespace Migrations.Controllers
 
 
         // GET: api/<AdministratorController>
-        [HttpGet]
-        public IActionResult Get()
-        {
-            var administrators = from a in this.administratorLogic.GetAll()
-                          //select new AdministratorModelOut()
-                          //{
-                          //    Id = a.Id,
-                          //    Name = a.Name,
-                          //};
-            return Ok(administrators);
-        }
+        //[HttpGet]
+        //public IActionResult Get()
+        //{
+        //    var administrators = from a in this.administratorLogic.GetAll();
+        //    select new AdministratorModelOut()
+        //    {
+        //        Id = a.Id,
+        //        Name = a.Name,
+        //    };
+        //    return Ok(administrators);
+        //}
 
         // GET api/<AdministratorController>/5
         [HttpGet]
