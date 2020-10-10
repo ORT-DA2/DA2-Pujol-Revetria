@@ -20,7 +20,7 @@ namespace Migrations.Controllers
             this.accommodationLogic = accommodationLogic;
         }
 
-        [HttpGet("{spot}")]
+        [HttpGet("/spot/{spot}")]
         public IActionResult GetAccommodationsInSpot(int spot)
         {
             var accommodations = from r in this.accommodationLogic.GetAvailableAccommodationBySpot(spot)
@@ -36,7 +36,7 @@ namespace Migrations.Controllers
             return Ok(accommodations);
         }
 
-        // GET api/<AcomodationController>/5
+        // GET api/<AcomodationController>/5 o /?id=5
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {

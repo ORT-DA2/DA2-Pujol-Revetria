@@ -25,14 +25,19 @@ namespace Migrations.Controllers
                               Id = r.Id,
                               Name = r.Name,
                           };
-            return Ok(regions);
+            return Ok(bookings);
         }
 
         // GET api/<BookingController>/5
         [HttpGet("{id}")]
         public void Get(int id)
         {
-            
+            var book = this.bookingLogic.GetById(id);
+            var booking = new BookingModelOut()
+                           {
+                                
+                           };
+            return Ok(bookings);
         }
 
         // POST api/<BookingController>

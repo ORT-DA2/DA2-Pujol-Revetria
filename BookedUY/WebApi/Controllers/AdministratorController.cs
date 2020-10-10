@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.DTOs;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -38,19 +39,24 @@ namespace Migrations.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            Administrator administrator = from a in administratorLogic.GetById(id)
-                                 select new AdministratorModelOut()
+            Administrator admin = this.administratorLogic.GetById(id);
+            var ret = new AdministratorModelOut()
                                  {
-                                     Id = a.Id,
-                                     Name = a.Name,
+                                     Id = admin.Id,
+                                     Email = admin.Email,
                                  };
-            return Ok(administrator);
+            return Ok(ret);
         }
 
         // POST api/<AdministratorController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void CreateBooking(BookingModelIn newBooking)
         {
+            /*body{
+             *  accommodationId: 5
+             *  touristName: fa
+             *  }
+             */
         }
 
         // PUT api/<AdministratorController>/5
