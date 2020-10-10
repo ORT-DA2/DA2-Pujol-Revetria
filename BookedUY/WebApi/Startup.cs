@@ -32,11 +32,7 @@ namespace Migrations
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<BookedUYContext>(o =>
-            {
-                o.UseSqlServer("data source=.; initial catalog = MyImagesDb; integrated security = true");
-            });
-            ServicesFactory.AddDbContextServices(services, this.Configuration.GetConnectionString("BookedUYDb"));
+            ServicesFactory.AddDbContextServices(services, this.Configuration.GetConnectionString("BookedUYDB"));
             ServicesFactory.AddMyServices(services);
         }
 
