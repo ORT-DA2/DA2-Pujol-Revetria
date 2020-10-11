@@ -23,7 +23,7 @@ namespace BusinessLogic
                 var newAdmin = this.administratorRepository.Add(administrator);
                 return newAdmin;
             }
-            throw new AlreadyExistsException();
+            throw new AlreadyExistsException("Administrator");
         }
 
         public Administrator GetByEmailAndPassword(string email, string password)
@@ -33,7 +33,7 @@ namespace BusinessLogic
             {
                 return admin;
             }
-            throw new UserNotFoundException();
+            throw new NotFoundException("Administrator");
         }
 
         public IEnumerable<Administrator> GetAll()
@@ -45,7 +45,7 @@ namespace BusinessLogic
         {
             if (this.administratorRepository.GetByEmail(administrator.Email) == null)
             {
-                throw new AdministratorNotFoundException();
+                throw new NotFoundException("Administrator");
             }
             this.administratorRepository.Delete(administrator);
         }
@@ -55,7 +55,7 @@ namespace BusinessLogic
             var administrator = this.administratorRepository.GetById(id);
             if (administrator == null)
             {
-                throw new AdministratorNotFoundException();
+                throw new NotFoundException("Administrator");
             }
             return administrator;
         }

@@ -42,7 +42,7 @@ namespace BusinessLogic
             var booking = this.bookingRepository.GetById(id);
             if(booking == null)
             {
-                throw new BookingNotFoundException();
+                throw new NotFoundException("Booking");
             }
             return booking;
         }

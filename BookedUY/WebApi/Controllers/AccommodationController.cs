@@ -8,6 +8,7 @@ using DataAccessInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs;
+using WebApi.Filters;
 
 namespace Migrations.Controllers
 {
@@ -37,6 +38,7 @@ namespace Migrations.Controllers
             return Ok(accommodations);
         }
 
+        
         // GET api/<AcomodationController>/5 o /?id=5
         [HttpGet("{id}")]
         public IActionResult Get(int id)

@@ -64,7 +64,7 @@ namespace BusinessLogic.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UserNotFoundException))]
+        [ExpectedException(typeof(NotFoundException))]
         public void GetEmailAndPasswordNotFoundTest()
         {
             int testId = 9;
@@ -117,7 +117,7 @@ namespace BusinessLogic.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(AdministratorNotFoundException))]
+        [ExpectedException(typeof(NotFoundException))]
         public void DeleteExceptionTest()
         {
             int testId = 3;

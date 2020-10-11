@@ -20,7 +20,7 @@ namespace BusinessLogic
         {
             if (this.touristicSpotRepository.GetByName(spot.Name) != null)
             {
-                throw new AlreadyExistsException();
+                throw new AlreadyExistsException("Spot");
             }
             return this.touristicSpotRepository.Add(spot);
         }

@@ -61,7 +61,7 @@ namespace BusinessLogic.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(AccommodationNotFoundException))]
+        [ExpectedException(typeof(NotFoundException))]
         public void DeleteExceptionTest()
         {
             int testId = 3;
@@ -127,7 +127,7 @@ namespace BusinessLogic.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(AccommodationNotFoundException))]
+        [ExpectedException(typeof(NotFoundException))]
         public void UpdateCapacityExceptionTest()
         {
             int testId = 2;

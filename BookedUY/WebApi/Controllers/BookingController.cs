@@ -60,21 +60,23 @@ namespace Migrations.Controllers
 
         // POST api/<BookingController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult CreateBooking(BookingModelIn newBooking)
         {
-
-        }
-
-        // PUT api/<BookingController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<BookingController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            var booking = new Booking()
+            {
+                AccommodationId = newBooking.AccommodationId,
+                CheckIn = newBooking.CheckIn,
+                CheckOut = newBooking.CheckOut,
+                Guests = newBooking.Guests.ToList<Guest>(),
+                HeadGuest = new Tourist()
+                {
+                    Email = newBooking.GuestEmail,
+                    LastName = newBooking.GuestLastName,
+                    Name = newBooking.GuestName
+                },
+            };
+            var response = this.bookingLogic.AddBooking(booking);
+            return Ok(response);
         }
     }
 }

@@ -1,9 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml;
 
 namespace Domain
 {
+    public class APIException : Exception
+    {
+        public int StatusCode { get; set; }
+
+        public APIException(string message, int statusCode) :base(message)
+        {
+            StatusCode = statusCode;
+        }
+    }
     public class NullInputException : Exception
     {
         public override string Message
@@ -15,15 +25,10 @@ namespace Domain
         }
     }
 
-    public class AlreadyExistsException : Exception
+    public class AlreadyExistsException : APIException
     {
-        public override string Message
-        {
-            get
-            {
-                return "The object trying to be created already exists";
-            }
-        }
+        public AlreadyExistsException(string entity) : base(String.Format("The {0} Already Exists", entity),409)
+        { }
     }
 
     public class FutureDateException : Exception
@@ -92,48 +97,8 @@ namespace Domain
         }
     }
 
-    public class UserNotFoundException : Exception
+    public class NotFoundException : APIException
     {
-        public override string Message
-        {
-            get
-            {
-                return "User not found";
-            }
-        }
+        public NotFoundException(string entity) : base(String.Format("{0} Not Found",entity),404) { }
     }
-
-    public class AccommodationNotFoundException : Exception
-    {
-        public override string Message
-        {
-            get
-            {
-                return "Accommodation not found";
-            }
-        }
-    }
-
-    public class BookingNotFoundException : Exception
-    {
-        public override string Message
-        {
-            get
-            {
-                return "Booking not found";
-            }
-        }
-    }
-
-    public class AdministratorNotFoundException : Exception
-    {
-        public override string Message
-        {
-            get
-            {
-                return "Administrator not found";
-            }
-        }
-    }
-
 }

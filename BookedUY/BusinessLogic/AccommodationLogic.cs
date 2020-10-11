@@ -19,7 +19,7 @@ namespace BusinessLogic
         {
             if (this.accommodationRepository.GetByName(accommodation.Name) != null)
             {
-                throw new AlreadyExistsException();
+                throw new AlreadyExistsException("Accommodation");
             }
             var newAccom = this.accommodationRepository.Add(accommodation);
             return newAccom;
@@ -29,7 +29,7 @@ namespace BusinessLogic
         {
             if (this.accommodationRepository.GetByName(accommodation.Name) == null)
             {
-                throw new AccommodationNotFoundException();
+                throw new NotFoundException("Accommodation");
             }
             this.accommodationRepository.Delete(accommodation);
         }
@@ -43,7 +43,7 @@ namespace BusinessLogic
         {
             if (this.accommodationRepository.GetById(accommodationId) == null)
             {
-                throw new AccommodationNotFoundException();
+                throw new NotFoundException("Accommodation");
             }
             this.accommodationRepository.UpdateCapacity(accommodationId, capacity);
         }
@@ -51,7 +51,7 @@ namespace BusinessLogic
         {
             if (this.accommodationRepository.GetById(id) == null)
             {
-                throw new AccommodationNotFoundException();
+                throw new NotFoundException("Accommodation");
             }
             return this.accommodationRepository.GetById(id);
         }

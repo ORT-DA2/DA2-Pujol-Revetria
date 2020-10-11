@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.ComponentModel.Design;
+using System.Text;
 
 namespace Factory
 {
@@ -29,6 +30,11 @@ namespace Factory
             services.AddScoped<IAccommodationLogic, AccommodationLogic>();
             services.AddScoped<IRegionLogic, RegionLogic>();
             services.AddScoped<ITouristicSpotLogic, TouristicSpotLogic>();
+        }
+
+        public static void AddAuthentication(IServiceCollection services, string v)
+        {
+            
         }
 
         public static void AddDbContextServices(IServiceCollection services, string connectionString)

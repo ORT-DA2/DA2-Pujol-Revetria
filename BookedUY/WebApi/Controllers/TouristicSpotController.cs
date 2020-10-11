@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicInterface;
+using Domain;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs;
 
@@ -26,12 +27,26 @@ namespace Migrations.Controllers
         public IActionResult Get()
         {
             var touristicSpots = from t in this.touristicSpotLogic.GetSpotsByRegionAndCategory(null, -1)
-                          select new TouristicSpotModelOut()
-                          {
-                              Id = t.Id,
-                              Name = t.Name,
-                              Description= t.Description
-                          };
+                                 select new TouristicSpotModelOut()
+                                 {
+                                     Id = t.Id,
+                                     Name = t.Name,
+                                     Description = t.Description
+                                 };
+            return Ok(touristicSpots);
+        }
+
+        // GET: api/<TouristicSpotController>
+        [HttpGet]
+        public IActionResult GetByRegionCategory([FromQuery]int regionId,[FromQuery]List<int> categories)
+        {
+            var touristicSpots = from t in this.touristicSpotLogic.GetSpotsByRegionAndCategory(categories, regionId)
+                                 select new TouristicSpotModelOut()
+                                 {
+                                     Id = t.Id,
+                                     Name = t.Name,
+                                     Description = t.Description
+                                 };
             return Ok(touristicSpots);
         }
 
@@ -39,18 +54,7 @@ namespace Migrations.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
-        }
 
-        // PUT api/<TouristicSpotController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<TouristicSpotController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

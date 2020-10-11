@@ -31,7 +31,7 @@ namespace BusinessLogic.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(BookingNotFoundException))]
+        [ExpectedException(typeof(NotFoundException))]
         public void AddBookingStageExceptionTest()
         {
             int testId = 5;

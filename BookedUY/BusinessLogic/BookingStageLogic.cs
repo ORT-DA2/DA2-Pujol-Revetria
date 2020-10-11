@@ -25,7 +25,7 @@ namespace BusinessLogic
             var booking = this.bookingRepository.GetById(stage.AsociatedBookingId);
             if (booking == null)
             {
-                throw new BookingNotFoundException();
+                throw new NotFoundException("Booking");
             }
             return this.bookingStageRepository.Add(stage);
         }

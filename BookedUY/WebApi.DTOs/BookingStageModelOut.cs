@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WebApi.DTOs
 {
-    public class BookingStageOut
+    public class BookingStageModelOut
     {
         public string Descripcion { get; set; }
         public string Status { get; set; }

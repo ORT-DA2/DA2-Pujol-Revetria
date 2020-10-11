@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WebApi.DTOs
 {
-    public class TouristicSpotIn
+    public class TouristicSpotModelIn
     {
         public string Name { get; set; }
         public int RegionId { get; set; }
