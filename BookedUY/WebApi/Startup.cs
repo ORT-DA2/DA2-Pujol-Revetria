@@ -37,9 +37,7 @@ namespace Migrations
             services.AddControllers(options => options.Filters.Add(typeof(ExceptionFilter)));
             ServicesFactory.AddDbContextServices(services, this.Configuration.GetConnectionString("BookedUYDB"));
             ServicesFactory.AddMyServices(services);
-            //ServicesFactory.AddAuthentication(services, this.Configuration.GetConnectionString("SecretKey"));
-            var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("SecretKey"));
-
+            var key = Encoding.ASCII.GetBytes(Configuration["SecretKey"]);
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -73,7 +71,9 @@ namespace Migrations
 
             app.UseAuthentication();
 
-            app.UseMvc();
+            app.UseAuthorization();
+            
+            //app.UseMvc();
 
             app.UseEndpoints(endpoints =>
             {
