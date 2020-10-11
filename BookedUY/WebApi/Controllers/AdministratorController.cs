@@ -23,7 +23,7 @@ namespace Migrations.Controllers
         public AdministratorController(IAdministratorLogic administratorLogic, IConfiguration configuration)
         {
             this.administratorLogic = administratorLogic;
-            this.configuration = configuration;
+            this._configuration = configuration;
         }
         [HttpGet]
         public IActionResult Login(string email, string password)
@@ -55,7 +55,7 @@ namespace Migrations.Controllers
 
             //    return tokenHandler.WriteToken(createdToken);
             //}
-        }
+        //}
             return Ok(admin);
         }
 
