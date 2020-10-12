@@ -22,19 +22,11 @@ namespace Migrations.Controllers
             this.accommodationLogic = accommodationLogic;
         }
 
-        [HttpGet("/spot/{spot}")]
+        [HttpGet("spot/{spot}")]
         public IActionResult GetAccommodationsInSpot(int spot)
         {
             var accommodations = from r in this.accommodationLogic.GetAvailableAccommodationBySpot(spot)
-                                 select new AccommodationModelOut()
-                                 {
-                                     Id = r.Id,
-                                     Name = r.Name,
-                                     Information = r.Information,
-                                     Address = r.Address,
-                                     ContactNumber = r.ContactNumber,
-                                     Price = r.PricePerNight
-                                 };
+                                 select new AccommodationModelOut(r);
             return Ok(accommodations);
         }
 
@@ -44,15 +36,7 @@ namespace Migrations.Controllers
         public IActionResult Get(int id)
         {
             Accommodation a = this.accommodationLogic.GetById(id);
-            var ret = new AccommodationModelOut()
-            {
-                Id = a.Id,
-                Name = a.Name,
-                Information = a.Information,
-                Address = a.Address,
-                ContactNumber = a.ContactNumber,
-                Price = a.PricePerNight,
-            };
+            var ret = new AccommodationModelOut(a);
             return Ok(ret);
         }
 
@@ -60,15 +44,7 @@ namespace Migrations.Controllers
         [HttpPost]
         public IActionResult CreateAccommodation(AccommodationModelIn newAccommodation)
         {
-            var accom = new Accommodation()
-            {
-                Address = newAccommodation.Address,
-                ContactNumber = newAccommodation.Contact,
-                Information = newAccommodation.Information,
-                Name = newAccommodation.Name,
-                PricePerNight = newAccommodation.Price,
-                SpotId = newAccommodation.SpotId
-            };
+            var accom = newAccommodation.FromModelInToAccommodation();
             var response = this.accommodationLogic.AddAccommodation(accom);
             return Ok(response);
         }

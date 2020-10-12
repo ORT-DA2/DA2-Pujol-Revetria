@@ -47,11 +47,7 @@ namespace Migrations.Controllers
         [HttpPost]
         public IActionResult CreateAdmin(AdministratorModelIn newAdministrator)
         {
-            var admin = new Administrator()
-            {
-                Email = newAdministrator.Email,
-                Password = newAdministrator.Password,
-            };
+            var admin = newAdministrator.FromModelInToAdministrator();
             var response = this.administratorLogic.AddAdministrator(admin);
             return Ok(response);
         }

@@ -31,11 +31,7 @@ namespace WebApi.Controllers
         public IActionResult Get()
         {
             var regions = from r in this.regionLogic.GetRegions()
-                          select new RegionModelOut()
-                          {
-                              Id = r.Id,
-                              Name = r.Name,
-                          };
+                          select new RegionModelOut(r);
             return Ok(regions);
         }
     }
