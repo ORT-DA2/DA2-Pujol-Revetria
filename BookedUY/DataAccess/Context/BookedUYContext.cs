@@ -20,8 +20,6 @@ namespace DataAccess.Context
         public DbSet<TouristicSpot> TouristicSpots { get; set; }
         public DbSet<Tourist> Tourists { get; set; }
         public DbSet<AccommodationImage> AccommodationImages { get; set; }
-        public DbSet<TouristicSpotImage> TouristicSpotImages { get; set; }
-
         public DbSet<CategoryTouristicSpot> categoryTouristicSpots { get; set; }
         public BookedUYContext() 
         {
@@ -53,7 +51,7 @@ namespace DataAccess.Context
             modelBuilder.Entity<TouristicSpot>().HasKey(t => t.Id);
             modelBuilder.Entity<TouristicSpot>().HasAlternateKey(t => t.Name);
             modelBuilder.Entity<TouristicSpot>().HasOne<Region>(b => b.Region).WithMany(t => t.Spots).HasForeignKey(b => b.RegionId);
-            modelBuilder.Entity<TouristicSpot>().HasOne<TouristicSpotImage>(t => t.Image).WithOne(c => c.TouristicSpot).HasForeignKey<TouristicSpotImage>(c=>c.TouristicSpotId);
+            modelBuilder.Entity<TouristicSpot>().Property(t => t.Image);
 
             modelBuilder.Entity<Accommodation>().HasKey(a => a.Id);
             modelBuilder.Entity<Accommodation>().Property(a => a.Full);
@@ -81,10 +79,6 @@ namespace DataAccess.Context
             modelBuilder.Entity<AccommodationImage>().HasKey(i=>i.Id);
             modelBuilder.Entity<AccommodationImage>().Property(i => i.Image);
             modelBuilder.Entity<AccommodationImage>().HasOne<Accommodation>(i => i.Accommodation).WithMany(a => a.Images).HasForeignKey(i => i.AccommodationId);
-
-            modelBuilder.Entity<TouristicSpotImage>().HasKey(i => i.Id);
-            modelBuilder.Entity<TouristicSpotImage>().Property(i => i.Image);
-            modelBuilder.Entity<TouristicSpotImage>().HasOne<TouristicSpot>(i => i.TouristicSpot).WithOne(t => t.Image).HasForeignKey<TouristicSpotImage>(i => i.TouristicSpotId);
 
             modelBuilder.Entity<CategoryTouristicSpot>().HasKey(t => new {t.CategoryId, t.TouristicSpotId});
             modelBuilder.Entity<CategoryTouristicSpot>().HasOne<Category>(ct => ct.Category).WithMany(c => c.Spots).HasForeignKey(ct => ct.CategoryId);

@@ -31,7 +31,8 @@ namespace Migrations.Controllers
                                  {
                                      Id = t.Id,
                                      Name = t.Name,
-                                     Description = t.Description
+                                     Description = t.Description,
+                                     Image = t.Image
                                  };
             return Ok(touristicSpots);
         }
@@ -46,7 +47,7 @@ namespace Migrations.Controllers
                                      Id = t.Id,
                                      Name = t.Name,
                                      Description = t.Description,
-                                     Image = t.Image.Image
+                                     Image = t.Image
                                  };
             return Ok(touristicSpots);
         }
@@ -68,15 +69,13 @@ namespace Migrations.Controllers
                 c.CategoryId = item;
                 listCategories.Add(c);
             }
-            TouristicSpotImage image = new TouristicSpotImage();
-            image.Image = modelIn.image;
             TouristicSpot touristicSpot = new TouristicSpot()
             {
                 Name = modelIn.Name,
                 Description = modelIn.Description,
                 RegionId = modelIn.RegionId,
                 Categories = listCategories,
-                Image = image
+                Image = modelIn.image
             };
             return touristicSpot;
         }

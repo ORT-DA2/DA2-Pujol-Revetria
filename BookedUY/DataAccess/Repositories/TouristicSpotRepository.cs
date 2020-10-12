@@ -20,7 +20,7 @@ namespace DataAccess.Repositories
 
         public IEnumerable<TouristicSpot> GetAll()
         {
-            return this.spots.Include(t=>t.Region).Include(t=>t.Categories).Include(t=>t.Image);
+            return this.spots.Include(t=>t.Region).Include(t=>t.Categories);
         }
 
         public TouristicSpot Add(TouristicSpot spot)
@@ -32,7 +32,7 @@ namespace DataAccess.Repositories
 
         public IEnumerable<TouristicSpot> GetByRegion(int id)
         {
-            return this.spots.Include(t => t.Region).Include(t => t.Categories).Include(t => t.Image).Where(s => s.RegionId == id);
+            return this.spots.Include(t => t.Region).Include(t => t.Categories).Where(s => s.RegionId == id);
         }
 
         public IEnumerable<TouristicSpot> GetByCategory(List<int> categoriesId)

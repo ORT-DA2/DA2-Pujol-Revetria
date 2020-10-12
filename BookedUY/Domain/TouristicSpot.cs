@@ -44,7 +44,7 @@ namespace Domain
         }
         public List<CategoryTouristicSpot> Categories { get; set; }
         public List<Accommodation> Accommodations { get; set; }
-        public TouristicSpotImage Image { get; set; }
+        public string Image { get; set; }
         public bool SpotsEqual()
         {
             return true;
