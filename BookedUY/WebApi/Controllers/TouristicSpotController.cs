@@ -37,7 +37,7 @@ namespace Migrations.Controllers
         }
 
         // GET: api/<TouristicSpotController>
-        [HttpGet]
+        [HttpGet("{regionId}")]
         public IActionResult GetByRegionCategory([FromQuery]int regionId,[FromQuery]List<int> categories)
         {
             var touristicSpots = from t in this.touristicSpotLogic.GetSpotsByRegionAndCategory(categories, regionId)
@@ -52,9 +52,15 @@ namespace Migrations.Controllers
 
         // POST api/<TouristicSpotController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult CreateSpot(TouristicSpotModelIn tourisitcSpotModelIn)
         {
-
+            TouristicSpot touristicSpot = new TouristicSpot()
+            {
+                Name = tourisitcSpotModelIn.Name,
+                Description = tourisitcSpotModelIn.Description,
+                RegionId = tourisitcSpotModelIn.RegionId
+            };
+            return Ok(touristicSpotLogic.AddTouristicSpot(touristicSpot));
         }
     }
 }

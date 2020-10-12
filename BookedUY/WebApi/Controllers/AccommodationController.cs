@@ -52,7 +52,6 @@ namespace Migrations.Controllers
                 Address = a.Address,
                 ContactNumber = a.ContactNumber,
                 Price = a.PricePerNight,
-                SpotName = a.Spot.Name
             };
             return Ok(ret);
         }

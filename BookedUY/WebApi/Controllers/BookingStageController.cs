@@ -47,7 +47,7 @@ namespace WebApi.Controllers
                 AsociatedBookingId = newStage.BookingId,
                 Status = StatusMethods.StringToStatus(newStage.Status),
             };
-            return Ok(stage);
+            return Ok(this.bookingStageLogic.AddBookingStage(stage));
         }
     }
 }
