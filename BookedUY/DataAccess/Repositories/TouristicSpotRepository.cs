@@ -1,12 +1,10 @@
 ﻿using DataAccessInterface;
 using Domain;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
+using System.Linq.Dynamic;
 
 namespace DataAccess.Repositories
 {
@@ -40,7 +38,25 @@ namespace DataAccess.Repositories
 
         public IEnumerable<TouristicSpot> GetByCategory(List<int> categoriesId)
         {
-            return this.spots.Include(t => t.Region).Where(s => s.Categories.Any(c => categoriesId.Contains(c.CategoryId)));
+            var all = GetAll();
+            
+            var categories = 
+            List<TouristicSpot> list = new List<TouristicSpot>();
+            foreach (TouristicSpot item in all)
+            {
+                categoriesId.All(c => null != item.Categories.Find(k=>k.CategoryId==c));
+                if(item.Categories.All(c => categoriesId.Contains<(k=>k.)))
+                {
+                    list.Add(item);
+                }
+            }
+            return list;
+            //var customers = this.spots.Where("Categories.Contains(@0)", categoriesId);
+
+            //return this.spots.Include(t => t.Region).AsQueryable().AsQueryable()
+            //    .Where("@0.Contains(outerIt.)", categoriesId);
+                //new List<string>() { "Austria", "Poland" }, 1955);
+            //.Where(s => s.Categories.Any(c => categoriesId.Contains(c.CategoryId)));
         }
 
         public IEnumerable<TouristicSpot> GetByCategoryAndRegion(List<int> category, int region)

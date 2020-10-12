@@ -29,33 +29,6 @@ namespace Migrations.Controllers
         public IActionResult Login(string email, string password)
         {
             Administrator admin = this.administratorLogic.GetByEmailAndPassword(email, password);
-            //if (admin != null)
-            //{
-            //    var secretKey = _configuration.GetValue<string>("SecretKey");
-            //    var key = Encoding.ASCII.GetBytes(secretKey);
-
-            //    // Creamos los claims (pertenencias, características) del usuario
-            //    var claims = new[]
-            //    {
-            //        new Claim(ClaimTypes.NameIdentifier, user.UserId),
-            //        new Claim(ClaimTypes.Email, user.Email)
-            //    };
-
-            //    var tokenDescriptor = new SecurityTokenDescriptor
-            //    {
-            //        Subject = claims,
-            //        // Nuestro token va a durar un día
-            //        Expires = DateTime.UtcNow.AddDays(1),
-            //        // Credenciales para generar el token usando nuestro secretykey y el algoritmo hash 256
-            //        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            //    };
-
-            //    var tokenHandler = new JwtSecurityTokenHandler();
-            //    var createdToken = tokenHandler.CreateToken(tokenDescriptor);
-
-            //    return tokenHandler.WriteToken(createdToken);
-            //}
-        //}
             return Ok(admin);
         }
 

@@ -65,6 +65,11 @@ namespace Domain
                 this._image = value;
             }
         }
+
+        public bool SpotsEqual()
+        {
+            return true;
+        }
         public override bool Equals(object obj)
         {
             var result = false;

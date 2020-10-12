@@ -33,5 +33,25 @@ namespace WebApi.Tests
             Assert.AreEqual(200, result.StatusCode);
         }
         
+        [TestMethod]
+        public void CreateStage()
+        {
+            BookingStage bookingStage = new BookingStage();
+            bookingStage.Description = "a";
+            bookingStage.Status = Status.Accepted;
+            bookingStage.AsociatedBookingId = 1;
+            bookingStage.AdministratorId = 1;
+            BookingStageModelIn bookingStageModel = new BookingStageModelIn();
+            bookingStageModel.Description = bookingStage.Description;
+            bookingStageModel.Status = bookingStage.Status.ToString();
+            bookingStageModel.BookingId = bookingStage.AsociatedBookingId;
+            bookingStageModel.AdminId = bookingStage.AdministratorId;
+            var mock = new Mock<IBookingStageLogic>(MockBehavior.Strict);
+            mock.Setup(p => p.AddBookingStage(It.IsAny<BookingStage>())).Returns(bookingStage);
+            var controller = new BookingStageController(mock.Object);
+            var result = controller.NewStage(bookingStageModel) as OkObjectResult;
+            mock.VerifyAll();
+            Assert.AreEqual(200, result.StatusCode);
+        }
     }
 }
