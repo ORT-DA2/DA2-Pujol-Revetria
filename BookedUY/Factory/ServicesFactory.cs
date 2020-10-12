@@ -6,6 +6,7 @@ using DataAccessInterface;
 using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using SessionInterface;
 using System;
 using System.ComponentModel.Design;
 using System.Text;
@@ -30,6 +31,7 @@ namespace Factory
             services.AddScoped<IAccommodationLogic, AccommodationLogic>();
             services.AddScoped<IRegionLogic, RegionLogic>();
             services.AddScoped<ITouristicSpotLogic, TouristicSpotLogic>();
+            services.AddScoped<ISessionLogic, SessionLogic>();
         }
 
         public static void AddAuthentication(IServiceCollection services, string v)

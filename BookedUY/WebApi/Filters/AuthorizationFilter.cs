@@ -3,19 +3,22 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using SessionInterface;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebApi.Filters
 {
-    public class AuthorizationAttributeFilte : IAuthorizationFilter
+    public class AuthorizationFilter : IAuthorizationFilter
     {
         private readonly ISessionLogic sessions;
 
-        public AuthorizationAttributeFilte(ISessionLogic sessions)
+        public AuthorizationFilter(ISessionLogic sessions)
         {
             this.sessions = sessions;
         }
+
+        
 
         public void OnAuthorization(AuthorizationFilterContext context)
         {
