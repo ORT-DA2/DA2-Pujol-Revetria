@@ -28,11 +28,7 @@ namespace WebApi.Controllers
         public IActionResult GetBookingStatus(int id)
         {
             var stage = this.bookingStageLogic.GetCurrentStatusByBooking(id);
-            var response = new BookingStageModelOut()
-            {
-                Descripcion = stage.Description,
-                Status = stage.Status.ToString(),
-            };
+            var response = new BookingStageModelOut(stage);
             return Ok(response);
         }
 
@@ -40,13 +36,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public IActionResult NewStage(BookingStageModelIn newStage)
         {
-            var stage = new BookingStage()
-            {
-                Description = newStage.Description,
-                AdministratorId = newStage.AdminId,
-                AsociatedBookingId = newStage.BookingId,
-                Status = StatusMethods.StringToStatus(newStage.Status),
-            };
+            var stage = newStage.FromModelInToBookingStage();
             return Ok(this.bookingStageLogic.AddBookingStage(stage));
         }
     }

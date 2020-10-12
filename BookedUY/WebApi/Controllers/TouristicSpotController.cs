@@ -23,31 +23,23 @@ namespace Migrations.Controllers
 
 
         // GET: api/<TouristicSpotController>
-        [HttpGet]
         public IActionResult Get()
         {
             var touristicSpots = from t in this.touristicSpotLogic.GetSpotsByRegionAndCategory(null, -1)
-                                 select new TouristicSpotModelOut()
-                                 {
-                                     Id = t.Id,
-                                     Name = t.Name,
-                                     Description = t.Description
-                                 };
+                                 select new TouristicSpotModelOut(t);
             return Ok(touristicSpots);
         }
 
         // GET: api/<TouristicSpotController>
-        [HttpGet("{regionId}")]
+        [HttpGet]
         public IActionResult GetByRegionCategory([FromQuery]int regionId,[FromQuery]List<int> categories)
         {
+            if(regionId==0 && categories == null)
+            {
+                return Get();
+            }
             var touristicSpots = from t in this.touristicSpotLogic.GetSpotsByRegionAndCategory(categories, regionId)
-                                 select new TouristicSpotModelOut()
-                                 {
-                                     Id = t.Id,
-                                     Name = t.Name,
-                                     Description = t.Description,
-                                     Image = t.Image.Image
-                                 };
+                                 select new TouristicSpotModelOut(t);
             return Ok(touristicSpots);
         }
 
@@ -55,41 +47,10 @@ namespace Migrations.Controllers
         [HttpPost]
         public IActionResult CreateSpot(TouristicSpotModelIn tourisitcSpotModelIn)
         {
-            TouristicSpot touristicSpot = FromModelInToTouristicSpot(tourisitcSpotModelIn);
+            TouristicSpot touristicSpot = tourisitcSpotModelIn.FromModelInToTouristicSpot();
             return Ok(touristicSpotLogic.AddTouristicSpot(touristicSpot));
         }
 
-        private TouristicSpot FromModelInToTouristicSpot(TouristicSpotModelIn modelIn)
-        {
-            List<CategoryTouristicSpot> listCategories = new List<CategoryTouristicSpot>();
-            foreach (int item in modelIn.Categories)
-            {
-                CategoryTouristicSpot c = new CategoryTouristicSpot();
-                c.CategoryId = item;
-                listCategories.Add(c);
-            }
-            TouristicSpotImage image = new TouristicSpotImage();
-            image.Image = modelIn.image;
-            TouristicSpot touristicSpot = new TouristicSpot()
-            {
-                Name = modelIn.Name,
-                Description = modelIn.Description,
-                RegionId = modelIn.RegionId,
-                Categories = listCategories,
-                Image = image
-            };
-            return touristicSpot;
-        }
 
-        private TouristicSpotModelOut FromTouristicSpotToModelOut(TouristicSpot touristicSpot)
-        {
-            TouristicSpotModelOut modelOut = new TouristicSpotModelOut()
-            {
-                Id = touristicSpot.Id,
-                Name = touristicSpot.Name,
-                Description = touristicSpot.Description
-            };
-            return modelOut;
-        }
     }
 }

@@ -13,6 +13,26 @@ namespace WebApi.DTOs
         public string GuestName { get; set; }
         public string GuestEmail { get; set; }
         public string GuestLastName { get; set; }
-        public Guest[] Guests { get; set; }
+        public List<Guest> Guests { get; set; }
+
+        public Booking FromModelInToBooking()
+        {
+            Tourist g = new Tourist()
+            {
+                Name = GuestName,
+                Email = GuestEmail,
+                LastName = GuestLastName
+            };
+            Booking booking = new Booking()
+            {
+                AccommodationId = this.AccommodationId,
+                CheckIn = this.CheckIn,
+                CheckOut = this.CheckOut,
+                HeadGuest = g,
+                Guests=Guests
+                
+            };
+            return booking;
+        }
     }
 }

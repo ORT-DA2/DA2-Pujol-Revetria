@@ -44,7 +44,9 @@ namespace DataAccess.Tests
                     Name="Radisson",
                     Information="nice",
                     PricePerNight=1.76,
-                    Spot=null,
+                    Spot=new TouristicSpot(){
+                        Name = "a"
+                    },
                     SpotId=1
                 },
                 new Accommodation()
@@ -57,17 +59,16 @@ namespace DataAccess.Tests
                     Name="Hilton",
                     Information="Epic",
                     PricePerNight=120.76,
-                    Spot=null,
+                    Spot=new TouristicSpot(){
+                        Name = "h"
+                    },
                     SpotId=2
                 },
             };
-            
             accommodationsToReturn.ForEach(a => _context.Add(a));
             _context.SaveChanges();
             var repository = new AccommodationRepository(_context);
-
             var result = repository.GetAll();
-
             Assert.IsTrue(accommodationsToReturn.SequenceEqual(result));
         }
 
