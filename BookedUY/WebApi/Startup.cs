@@ -37,6 +37,8 @@ namespace Migrations
             services.AddControllers(options => options.Filters.Add(typeof(ExceptionFilter)));
             ServicesFactory.AddDbContextServices(services, this.Configuration.GetConnectionString("BookedUYDB"));
             ServicesFactory.AddMyServices(services);
+            services.AddScoped<AuthorizationFilter>();
+
             //var key = Encoding.ASCII.GetBytes(Configuration["SecretKey"]);
             //services.AddAuthentication(x =>
             //{

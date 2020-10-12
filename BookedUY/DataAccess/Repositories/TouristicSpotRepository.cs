@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Dynamic;
 
 namespace DataAccess.Repositories
 {
@@ -39,13 +38,11 @@ namespace DataAccess.Repositories
         public IEnumerable<TouristicSpot> GetByCategory(List<int> categoriesId)
         {
             var all = GetAll();
-            
-            var categories = 
             List<TouristicSpot> list = new List<TouristicSpot>();
             foreach (TouristicSpot item in all)
             {
-                categoriesId.All(c => null != item.Categories.Find(k=>k.CategoryId==c));
-                if(item.Categories.All(c => categoriesId.Contains<(k=>k.)))
+                
+                if(categoriesId.All(c => null != item.Categories.Find(k => k.CategoryId == c)))
                 {
                     list.Add(item);
                 }

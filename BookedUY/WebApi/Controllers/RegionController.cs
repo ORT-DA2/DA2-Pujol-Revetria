@@ -27,6 +27,7 @@ namespace WebApi.Controllers
 
         // GET: api/<RegionController>
         [HttpGet]
+        [ServiceFilter(typeof(AuthorizationFilter))]
         public IActionResult Get()
         {
             var regions = from r in this.regionLogic.GetRegions()

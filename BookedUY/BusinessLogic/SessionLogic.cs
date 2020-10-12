@@ -61,10 +61,11 @@ namespace BusinessLogic
             return false;
         }
 
-        public string generateToken(Administrator admin, string secret)
+        public string GenerateToken(Administrator admin)
         {
+            Console.WriteLine(this.secretKey);
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(secret);
+            var key = Encoding.ASCII.GetBytes(this.secretKey);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] { new Claim("email", admin.Email) }),

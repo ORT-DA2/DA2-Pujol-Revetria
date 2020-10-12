@@ -8,6 +8,7 @@ using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using SessionInterface;
 using WebApi.DTOs;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -18,18 +19,19 @@ namespace Migrations.Controllers
     public class AdministratorController : BookedUYController
     {
         private readonly IAdministratorLogic administratorLogic;
-        private readonly IConfiguration _configuration;
+        private readonly ISessionLogic sessionLogic;
 
-        public AdministratorController(IAdministratorLogic administratorLogic, IConfiguration configuration)
+        public AdministratorController(IAdministratorLogic administratorLogic, ISessionLogic session)
         {
             this.administratorLogic = administratorLogic;
-            this._configuration = configuration;
+            this.sessionLogic = session;
         }
         [HttpGet]
-        public IActionResult Login(string email, string password)
+        public IActionResult Login([FromQuery]string email, [FromQuery] string password)
         {
             Administrator admin = this.administratorLogic.GetByEmailAndPassword(email, password);
-            return Ok(admin);
+            string token = sessionLogic.GenerateToken(admin);
+            return Ok(token);
         }
 
         // DELETE api/<AdministratorController>/5
@@ -37,6 +39,18 @@ namespace Migrations.Controllers
         public void Delete(int id)
         {
             
+        }
+
+        [HttpPost]
+        public IActionResult CreateAdmin(AdministratorModelIn newAdministrator)
+        {
+            var admin = new Administrator()
+            {
+                Email = newAdministrator.Email,
+                Password = newAdministrator.Password,
+            };
+            var response = this.administratorLogic.AddAdministrator(admin);
+            return Ok(response);
         }
     }
 }

@@ -30,12 +30,12 @@ namespace WebApi.Filters
                     Content = ex.Message
                 };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 context.Result = new ContentResult()
                 {
                     StatusCode = 500,
-                    Content = "Problemas del servidor, que se le va hacer?"
+                    Content = ex.ToString()
                 };
             }
         }
