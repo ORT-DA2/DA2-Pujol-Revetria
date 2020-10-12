@@ -45,7 +45,8 @@ namespace Migrations.Controllers
                                  {
                                      Id = t.Id,
                                      Name = t.Name,
-                                     Description = t.Description
+                                     Description = t.Description,
+                                     Image = t.Image.Image
                                  };
             return Ok(touristicSpots);
         }
@@ -54,13 +55,41 @@ namespace Migrations.Controllers
         [HttpPost]
         public IActionResult CreateSpot(TouristicSpotModelIn tourisitcSpotModelIn)
         {
+            TouristicSpot touristicSpot = FromModelInToTouristicSpot(tourisitcSpotModelIn);
+            return Ok(touristicSpotLogic.AddTouristicSpot(touristicSpot));
+        }
+
+        private TouristicSpot FromModelInToTouristicSpot(TouristicSpotModelIn modelIn)
+        {
+            List<CategoryTouristicSpot> listCategories = new List<CategoryTouristicSpot>();
+            foreach (int item in modelIn.Categories)
+            {
+                CategoryTouristicSpot c = new CategoryTouristicSpot();
+                c.CategoryId = item;
+                listCategories.Add(c);
+            }
+            TouristicSpotImage image = new TouristicSpotImage();
+            image.Image = modelIn.image;
             TouristicSpot touristicSpot = new TouristicSpot()
             {
-                Name = tourisitcSpotModelIn.Name,
-                Description = tourisitcSpotModelIn.Description,
-                RegionId = tourisitcSpotModelIn.RegionId
+                Name = modelIn.Name,
+                Description = modelIn.Description,
+                RegionId = modelIn.RegionId,
+                Categories = listCategories,
+                Image = image
             };
-            return Ok(touristicSpotLogic.AddTouristicSpot(touristicSpot));
+            return touristicSpot;
+        }
+
+        private TouristicSpotModelOut FromTouristicSpotToModelOut(TouristicSpot touristicSpot)
+        {
+            TouristicSpotModelOut modelOut = new TouristicSpotModelOut()
+            {
+                Id = touristicSpot.Id,
+                Name = touristicSpot.Name,
+                Description = touristicSpot.Description
+            };
+            return modelOut;
         }
     }
 }

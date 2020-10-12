@@ -9,7 +9,6 @@ namespace Domain
         public int Id { get; set; }
         public TouristicSpot Spot{ get; set; }
         public int SpotId { get; set; }
-
         private string _name;
         public string Name
         {
@@ -101,7 +100,6 @@ namespace Domain
         }
         public bool Full { get; set; }
         public List<Booking> Bookings{ get; set;}
-
         public List<AccommodationImage> Images { get; set; }
         public override bool Equals(object obj)
         {

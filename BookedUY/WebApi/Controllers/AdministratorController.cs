@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using SessionInterface;
 using WebApi.DTOs;
+using WebApi.Filters;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -35,12 +36,14 @@ namespace Migrations.Controllers
         }
 
         // DELETE api/<AdministratorController>/5
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            
+            this.administratorLogic.Delete(this.administratorLogic.GetById(id));
         }
 
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpPost]
         public IActionResult CreateAdmin(AdministratorModelIn newAdministrator)
         {

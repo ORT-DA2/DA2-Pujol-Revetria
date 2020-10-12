@@ -44,28 +44,7 @@ namespace Domain
         }
         public List<CategoryTouristicSpot> Categories { get; set; }
         public List<Accommodation> Accommodations { get; set; }
-
-        private byte[] _image;
-        public byte[] Image
-        {
-            get
-            {
-                return _image;
-            }
-            set
-            {
-                if (value == null)
-                {
-                    throw new InvalidImageException();
-                }
-                if (value.Length <= 0)
-                {
-                    throw new InvalidImageException();
-                }
-                this._image = value;
-            }
-        }
-
+        public TouristicSpotImage Image { get; set; }
         public bool SpotsEqual()
         {
             return true;

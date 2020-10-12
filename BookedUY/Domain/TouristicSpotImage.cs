@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Domain
 {
-    public class AccommodationImage
+    public class TouristicSpotImage
     {
         public int Id { get; set; }
         private string _image;
@@ -26,7 +26,7 @@ namespace Domain
                 }
             }
         }
-    public int AccommodationId { get; set; }
-    public Accommodation Accommodation { get; set; }
-}
+        public int TouristicSpotId { get; set; }
+        public TouristicSpot TouristicSpot { get; set; }
+    }
 }
