@@ -29,7 +29,7 @@ namespace DataAccess.Repositories
 
         public Booking Add(Booking booking)
         {
-            var tourist = this.tourists.Where(t => t.Email == booking.HeadGuest.Email).Single<Tourist>();
+            var tourist = this.tourists.Where(t => t.Email == booking.HeadGuest.Email).SingleOrDefault<Tourist>();
             if ( tourist != null)
             {
                 booking.HeadGuest = tourist;

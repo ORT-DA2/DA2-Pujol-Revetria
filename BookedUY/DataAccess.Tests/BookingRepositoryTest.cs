@@ -95,7 +95,13 @@ namespace DataAccess.Tests
                 HeadGuest = null,
                 TotalPrice = 142
             };
-
+            Tourist tourist = new Tourist() { 
+                Email="a@a.com",
+                LastName="a",
+                Name="a"
+            };
+            booking.HeadGuest = tourist;
+            Console.WriteLine(booking.Id);
             var repository = new BookingRepository(_context);
             repository.Add(booking);
             Assert.AreEqual(_context.Find<Booking>(id), booking);
