@@ -22,6 +22,7 @@ namespace BusinessLogic
 
         public BookingStage AddBookingStage(BookingStage stage)
         {
+            Console.WriteLine(stage.AsociatedBookingId);
             var booking = this.bookingRepository.GetById(stage.AsociatedBookingId);
             if (booking == null)
             {
@@ -48,6 +49,10 @@ namespace BusinessLogic
                 {
                     bookingStage = bs;
                 }
+            }
+            if (bookingStage.Id == -1)
+            {
+                throw new APIException("The booking has not been changed by an Administrator",400);
             }
             return bookingStage;
         }

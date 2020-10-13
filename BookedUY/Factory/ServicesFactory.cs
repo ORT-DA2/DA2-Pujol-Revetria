@@ -27,18 +27,13 @@ namespace Factory
             services.AddScoped<ITouristicSpotRepository, TouristicSpotRepository>();
             services.AddScoped<IAdministratorRepository, AdministratorRepository>();
             services.AddScoped<IBookingLogic, BookingLogic>();
+            services.AddScoped<IBookingStageLogic, BookingStageLogic>();
             services.AddScoped<IAdministratorLogic, AdministratorLogic>();
             services.AddScoped<IAccommodationLogic, AccommodationLogic>();
             services.AddScoped<IRegionLogic, RegionLogic>();
             services.AddScoped<ITouristicSpotLogic, TouristicSpotLogic>();
             services.AddScoped<ISessionLogic, SessionLogic>();
         }
-
-        public static void AddAuthentication(IServiceCollection services, string v)
-        {
-            
-        }
-
         public static void AddDbContextServices(IServiceCollection services, string connectionString)
         {
             services.AddDbContext<DbContext, BookedUYContext>(options => options.UseSqlServer(connectionString));

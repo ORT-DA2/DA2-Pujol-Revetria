@@ -17,7 +17,7 @@ namespace WebApi.DTOs
             BookingStage bookingStage = new BookingStage()
             {
                 AsociatedBookingId = this.BookingId,
-                Description=this.Description,
+                Description = this.Description,
                 Status=StatusMethods.StringToStatus(this.Status),
                 AdministratorId = this.AdminId
                 

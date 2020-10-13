@@ -6,6 +6,7 @@ using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs;
+using WebApi.Filters;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -44,6 +45,7 @@ namespace Migrations.Controllers
         }
 
         // POST api/<TouristicSpotController>
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpPost]
         public IActionResult CreateSpot(TouristicSpotModelIn tourisitcSpotModelIn)
         {

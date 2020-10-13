@@ -50,8 +50,8 @@ namespace Migrations.Controllers
         public IActionResult CreateAdmin(AdministratorModelIn newAdministrator)
         {
             var admin = newAdministrator.FromModelInToAdministrator();
-            var response = this.administratorLogic.AddAdministrator(admin);
-            return Ok(response);
+            this.administratorLogic.AddAdministrator(admin);
+            return Ok("Administrator Created Successfully");
         }
     }
 }

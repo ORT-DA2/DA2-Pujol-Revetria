@@ -6,12 +6,13 @@ using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs;
+using WebApi.Filters;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/bookingStage")]
     [ApiController]
     public class BookingStageController : ControllerBase
     {
@@ -33,12 +34,13 @@ namespace WebApi.Controllers
         }
 
         // POST api/<BookingStageController>
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpPost]
         public IActionResult NewStage(BookingStageModelIn newStage)
         {
             var stage = newStage.FromModelInToBookingStage();
-            
-            return Ok(this.bookingStageLogic.AddBookingStage(stage));
+            var ret = this.bookingStageLogic.AddBookingStage(stage);
+            return Ok(new BookingStageModelOut(ret));
         }
     }
 }

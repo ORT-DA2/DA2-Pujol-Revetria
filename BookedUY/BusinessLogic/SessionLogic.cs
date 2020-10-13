@@ -76,7 +76,6 @@ namespace BusinessLogic
 
         public string GenerateToken(Administrator admin)
         {
-            Console.WriteLine(this.secretKey);
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(this.secretKey);
             var tokenDescriptor = new SecurityTokenDescriptor

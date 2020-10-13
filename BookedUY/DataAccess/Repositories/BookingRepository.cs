@@ -12,22 +12,28 @@ namespace DataAccess.Repositories
     public class BookingRepository : IRepository<Booking>
     {
         private readonly DbSet<Booking> bookings;
+        private readonly DbSet<Tourist> tourists;
         private readonly DbContext bookedUYContext;
 
         public BookingRepository(DbContext context)
         {
             this.bookedUYContext = context;
             this.bookings = context.Set<Booking>();
-            
+            this.tourists = context.Set<Tourist>();
         }
 
         public IEnumerable<Booking> GetAll()
         {
-            return this.bookings.Include(b=>b.Accommodation).Include(b=>b.Guests);
+            return this.bookings.Include(b=>b.Accommodation).Include(b=>b.Guests).Include(b => b.HeadGuest);
         }
 
         public Booking Add(Booking booking)
         {
+            var tourist = this.tourists.Where(t => t.Email == booking.HeadGuest.Email).Single<Tourist>();
+            if ( tourist != null)
+            {
+                booking.HeadGuest = tourist;
+            }
             this.bookings.Add(booking);
             this.bookedUYContext.SaveChanges();
             return booking;
@@ -35,7 +41,7 @@ namespace DataAccess.Repositories
 
         public Booking GetById(int id)
         {
-            return this.bookings.Include(b => b.Accommodation).Include(b => b.Guests).Where(b => b.Id==id).SingleOrDefault();
+            return this.bookings.Include(b => b.Accommodation).Include(b => b.Guests).Include(b=>b.HeadGuest).Where(b => b.Id==id).SingleOrDefault();
         }
 
         public Booking Delete(Booking booking)

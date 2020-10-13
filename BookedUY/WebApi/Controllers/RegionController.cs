@@ -14,7 +14,7 @@ using WebApi.Filters;
 
 namespace WebApi.Controllers 
 {
-    [Route("api/[controller]")]
+    [Route("api/region")]
     public class RegionController : BookedUYController
     {
         private IRegionLogic regionLogic;

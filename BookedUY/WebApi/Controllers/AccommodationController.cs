@@ -41,6 +41,7 @@ namespace Migrations.Controllers
         }
 
         // POST api/<AcomodationController>
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpPost]
         public IActionResult CreateAccommodation(AccommodationModelIn newAccommodation)
         {
@@ -50,6 +51,7 @@ namespace Migrations.Controllers
         }
 
         // PUT api/<AcomodationController>/5
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpPut("{id}")]
         public IActionResult UpdateCapacity(int id, [FromBody] bool status)
         {
@@ -58,6 +60,7 @@ namespace Migrations.Controllers
         }
 
         // DELETE api/<AcomodationController>/5
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
