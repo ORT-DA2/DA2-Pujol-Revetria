@@ -20,9 +20,7 @@ namespace WebApi.Tests
             BookingStage bookingStage = new BookingStage();
             bookingStage.Description = "a";
             bookingStage.Status = Status.Accepted;
-            BookingStageModelOut bookingStageModel = new BookingStageModelOut();
-            bookingStageModel.Descripcion = bookingStage.Description;
-            bookingStageModel.Status = bookingStage.Status.ToString();
+            BookingStageModelOut bookingStageModel = new BookingStageModelOut(bookingStage);
             List<BookingStageModelOut> list = new List<BookingStageModelOut>();
             list.Add(bookingStageModel);
             var mock = new Mock<IBookingStageLogic>(MockBehavior.Strict);
