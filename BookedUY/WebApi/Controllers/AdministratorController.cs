@@ -27,7 +27,9 @@ namespace Migrations.Controllers
             this.administratorLogic = administratorLogic;
             this.sessionLogic = session;
         }
-        [HttpGet]
+
+
+        [HttpGet("login")]
         public IActionResult Login([FromQuery]string email, [FromQuery] string password)
         {
             Administrator admin = this.administratorLogic.GetByEmailAndPassword(email, password);

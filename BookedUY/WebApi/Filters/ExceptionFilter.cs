@@ -30,6 +30,14 @@ namespace WebApi.Filters
                     Content = ex.Message
                 };
             }
+            catch (NullReferenceException ex)
+            {
+                context.Result = new ContentResult()
+                {
+                    StatusCode = 400,
+                    Content = "Object referenced doesnt Exist"
+                };
+            }
             catch (InvalidImageException ex)
             {
                 context.Result = new ContentResult()
