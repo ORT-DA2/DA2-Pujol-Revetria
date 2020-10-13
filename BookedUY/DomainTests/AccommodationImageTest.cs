@@ -24,6 +24,9 @@ namespace DomainTests
         {
             string test = "test";
             accommodationImage.Image = test;
+            accommodationImage.AccommodationId = 0;
+            accommodationImage.Id = 0;
+            accommodationImage.Accommodation = new Accommodation();
             Assert.AreEqual(accommodationImage.Image, test);
         }
 
@@ -33,7 +36,7 @@ namespace DomainTests
         {
             string test = null;
             accommodationImage.Image = test;
-            Assert.Fail();
+
         }
 
         [TestMethod]
@@ -42,7 +45,6 @@ namespace DomainTests
         {
             string test = "";
             accommodationImage.Image = test;
-            Assert.Fail();
         }
 
         [TestMethod]
@@ -51,7 +53,6 @@ namespace DomainTests
         {
             string test = "   ";
             accommodationImage.Image = test;
-            Assert.Fail();
         }
     }
 }
