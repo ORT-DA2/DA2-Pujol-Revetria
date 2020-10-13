@@ -18,7 +18,7 @@ namespace Domain
             {
                 if (value < 0)
                 {
-                    throw new NegativeAmountException();
+                    throw new NegativeAmountException("Guest Amount");
                 }
                 else
                 {

@@ -30,14 +30,6 @@ namespace WebApi.Filters
                     Content = ex.Message
                 };
             }
-            catch (InvalidImageException ex)
-            {
-                context.Result = new ContentResult()
-                {
-                    StatusCode = 400,
-                    Content = ex.Message
-                };
-            }
             catch (Exception ex)
             {
                 context.Result = new ContentResult()

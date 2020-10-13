@@ -32,7 +32,7 @@ namespace Domain
                 }
                 if (!isEmail)
                 {
-                    throw new EmailException();
+                    throw new EmailException("Admin Email");
                 }
                 else
                 {

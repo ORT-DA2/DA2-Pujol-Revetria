@@ -70,7 +70,7 @@ namespace Domain
                 }
                 if (!isEmail)
                 {
-                    throw new EmailException();
+                    throw new EmailException("Tourist Email");
                 }
                 else
                 {

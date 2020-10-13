@@ -19,7 +19,7 @@ namespace Domain
             {
                 if (value.Date < DateTime.Now.Date)
                 {
-                    throw new InvalidDateException();
+                    throw new InvalidDateException("CheckIn");
                 }
                 else
                 {
@@ -38,7 +38,7 @@ namespace Domain
             {
                 if (value.Date < DateTime.Now.Date||value.Date<CheckIn)
                 {
-                    throw new InvalidDateException();
+                    throw new InvalidDateException("CheckOut");
                 }
                 else
                 {

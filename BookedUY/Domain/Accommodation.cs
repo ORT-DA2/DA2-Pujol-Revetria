@@ -90,7 +90,7 @@ namespace Domain
             {
                 if (value < 0)
                 {
-                    throw new NegativePriceException();
+                    throw new NegativePriceException("Price per Night");
                 }
                 else
                 {

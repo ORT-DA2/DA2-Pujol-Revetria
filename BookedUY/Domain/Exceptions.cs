@@ -26,70 +26,40 @@ namespace Domain
         { }
     }
 
-    public class FutureDateException : Exception
+    public class FutureDateException : APIException
     {
-        public override string Message
-        {
-            get
-            {
-                return "The date entered is in the future";
-            }
-        }
+        public FutureDateException(string entity) : base(String.Format("The {0} entered is in the future", entity), 409)
+        { }
     }
 
-    public class InvalidDateException : Exception
+    public class InvalidDateException : APIException
     {
-        public override string Message
-        {
-            get
-            {
-                return "The date entered is invalid";
-            }
-        }
+        public InvalidDateException(string entity) : base(String.Format("The {0} entered is invalid", entity), 409)
+        { }
     }
 
-    public class NegativePriceException : Exception
+    public class NegativePriceException : APIException
     {
-        public override string Message
-        {
-            get
-            {
-                return "The price entered is negative";
-            }
-        }
+        public NegativePriceException(string entity) : base(String.Format("The {0} entered was negative", entity), 409)
+        { }
     }
 
-    public class EmailException : Exception
+    public class EmailException : APIException
     {
-        public override string Message
-        {
-            get
-            {
-                return "The input is not an Email";
-            }
-        }
+        public EmailException(string entity) : base(String.Format("The {0} was invalid", entity), 409)
+        { }
     }
 
-    public class NegativeAmountException : Exception
+    public class NegativeAmountException : APIException
     {
-        public override string Message
-        {
-            get
-            {
-                return "The amount entered is negative";
-            }
-        }
+        public NegativeAmountException(string entity) : base(String.Format("The {0} entered was negative", entity), 409)
+        { }
     }
 
-    public class InvalidImageException : Exception
+    public class InvalidImageException : APIException
     {
-        public override string Message
-        {
-            get
-            {
-                return "Invalid Image";
-            }
-        }
+        public InvalidImageException(string entity) : base(String.Format("The {0} entered was negative", entity), 409)
+        { }
     }
 
     public class NotFoundException : APIException
