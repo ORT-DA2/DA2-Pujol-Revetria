@@ -11,6 +11,6 @@ namespace BusinessLogicInterface
         Administrator GetByEmailAndPassword(string email, string password);
         Administrator GetById(int id);
         IEnumerable<Administrator> GetAll();
-        void Delete(Administrator administrator);
+        Administrator Delete(Administrator administrator);
     }
 }

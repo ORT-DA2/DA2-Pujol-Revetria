@@ -54,10 +54,11 @@ namespace BusinessLogic.Tests
             accommodation.Name = "abz";
             var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns(accommodation);
-            mock.Setup(p => p.Delete(It.IsAny<Accommodation>()));
+            mock.Setup(p => p.Delete(It.IsAny<Accommodation>())).Returns(accommodation);
             var logic = new AccommodationLogic(mock.Object);
-            logic.DeleteAccommodation(accommodation);
+            var result = logic.DeleteAccommodation(accommodation);
             mock.VerifyAll();
+            Assert.AreEqual(result, accommodation);
         }
 
         [TestMethod]
@@ -70,7 +71,7 @@ namespace BusinessLogic.Tests
             accommodation.Name = "ayi";
             var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
-            mock.Setup(p => p.Delete(It.IsAny<Accommodation>()));
+            mock.Setup(p => p.Delete(It.IsAny<Accommodation>())).Returns(accommodation);
             var logic = new AccommodationLogic(mock.Object);
             logic.DeleteAccommodation(accommodation);
             mock.VerifyAll();
