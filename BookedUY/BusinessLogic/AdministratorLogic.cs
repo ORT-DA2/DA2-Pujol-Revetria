@@ -41,13 +41,13 @@ namespace BusinessLogic
             return this.administratorRepository.GetAll();
         }
 
-        public void Delete(Administrator administrator)
+        public Administrator Delete(Administrator administrator)
         {
             if (this.administratorRepository.GetByEmail(administrator.Email) == null)
             {
                 throw new NotFoundException("Administrator");
             }
-            this.administratorRepository.Delete(administrator);
+            return this.administratorRepository.Delete(administrator);
         }
 
         public Administrator GetById(int id)

@@ -47,12 +47,6 @@ namespace DataAccess.Repositories
                 }
             }
             return list;
-            //var customers = this.spots.Where("Categories.Contains(@0)", categoriesId);
-
-            //return this.spots.Include(t => t.Region).AsQueryable().AsQueryable()
-            //    .Where("@0.Contains(outerIt.)", categoriesId);
-                //new List<string>() { "Austria", "Poland" }, 1955);
-            //.Where(s => s.Categories.Any(c => categoriesId.Contains(c.CategoryId)));
         }
 
         public IEnumerable<TouristicSpot> GetByCategoryAndRegion(List<int> category, int region)

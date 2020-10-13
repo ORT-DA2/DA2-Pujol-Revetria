@@ -131,11 +131,12 @@ namespace WebApi.Tests
             accommodation.PricePerNight = 5.0;
             accommodation.Full = true;
             var mock = new Mock<IAccommodationLogic>(MockBehavior.Strict);
-            mock.Setup(p => p.DeleteAccommodation(It.IsAny<Accommodation>()));
+            mock.Setup(p => p.DeleteAccommodation(It.IsAny<Accommodation>())).Returns(accommodation);
             mock.Setup(p => p.GetById(It.IsAny<int>())).Returns(accommodation);
             var controller = new AccommodationController(mock.Object);
-            controller.Delete(5);
+            var result = controller.Delete(5) as OkObjectResult;
             mock.VerifyAll();
+            Assert.AreEqual(200, result.StatusCode);
         }
     }
 }

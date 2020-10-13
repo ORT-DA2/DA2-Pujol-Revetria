@@ -11,7 +11,7 @@ using System.Text;
 namespace DataAccess.Tests
 {
     [TestClass]
-    class BookingRepositoryTest
+    public class BookingRepositoryTest
     {
         private DbContextOptions<BookedUYContext> _options = new DbContextOptionsBuilder<BookedUYContext>()
                 .UseInMemoryDatabase(databaseName: "BookedUYDB").Options;
@@ -37,27 +37,34 @@ namespace DataAccess.Tests
                 new Booking()
                 {
                     Id=1,
-                    Accommodation = null,
+                    Accommodation = new Accommodation(){
+                        Name="b"
+                    },
                     AccommodationId = 1,
-                    BookingHistory = null,
+                    BookingHistory = new List<BookingStage>(),
                     CheckIn = DateTime.Now,
                     CheckOut = DateTime.Now.AddDays(3),
                     GuestId = 2,
                     Guests = new List<Guest>(),
-                    HeadGuest = null,
+                    HeadGuest = new Tourist(){
+                        Email="a@a.com"
+                    },
                     TotalPrice = 35
                 },
                 new Booking()
                 {
                     Id=2,
-                    Accommodation = null,
+                    Accommodation = new Accommodation(){
+                        Name="a"},
                     AccommodationId = 1,
-                    BookingHistory = null,
+                    BookingHistory = new List<BookingStage>(),
                     CheckIn = DateTime.Now,
                     CheckOut = DateTime.Now.AddDays(7),
                     GuestId = 6,
                     Guests = new List<Guest>(),
-                    HeadGuest = null,
+                    HeadGuest = new Tourist(){
+                        Email="b@b.com"
+                    },
                     TotalPrice = 142
                 },
             };
@@ -67,7 +74,7 @@ namespace DataAccess.Tests
             var repository = new BookingRepository(_context);
 
             var result = repository.GetAll();
-
+            Console.WriteLine(result.Count());
             Assert.IsTrue(bookingsToReturn.SequenceEqual(result));
         }
 
@@ -102,30 +109,40 @@ namespace DataAccess.Tests
             Booking testBooking = new Booking()
             {
                 Id = 1,
-                Accommodation = null,
+                Accommodation = new Accommodation() { 
+                    Name = "a" 
+                },
                 AccommodationId = 1,
-                BookingHistory = null,
+                BookingHistory = new List<BookingStage>(),
                 CheckIn = DateTime.Now,
                 CheckOut = DateTime.Now.AddDays(3),
                 GuestId = 2,
                 Guests = new List<Guest>(),
-                HeadGuest = null,
+                HeadGuest = new Tourist() { 
+                    Email = "a@a.com" 
+                },
                 TotalPrice = 35
             };
             List<Booking> bookingsList = new List<Booking>()
             {
-                
+
                 new Booking()
                 {
                     Id=2,
-                    Accommodation = null,
+                    Accommodation = new Accommodation()
+                    {
+                        Name="b"
+                    },
                     AccommodationId = 1,
-                    BookingHistory = null,
+                    BookingHistory = new List<BookingStage>(),
                     CheckIn = DateTime.Now,
                     CheckOut = DateTime.Now.AddDays(7),
                     GuestId = 6,
                     Guests = new List<Guest>(),
-                    HeadGuest = null,
+                    HeadGuest = new Tourist()
+                    { 
+                        Email = "b@b.com"
+                    },
                     TotalPrice = 142
                 },
             };
@@ -136,7 +153,7 @@ namespace DataAccess.Tests
 
             var result = repository.GetById(testId);
 
-            Assert.AreEqual(testBooking,result);
+            Assert.AreEqual(testBooking, result);
         }
 
         [TestMethod]

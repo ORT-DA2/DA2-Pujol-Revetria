@@ -62,8 +62,8 @@ namespace Migrations.Controllers
         public IActionResult Delete(int id)
         {
             var accomToDelete = this.accommodationLogic.GetById(id);
-            this.accommodationLogic.DeleteAccommodation(accomToDelete);
-            return Ok();
+            var ret =this.accommodationLogic.DeleteAccommodation(accomToDelete);
+            return Ok(ret);
         }
     }
 }

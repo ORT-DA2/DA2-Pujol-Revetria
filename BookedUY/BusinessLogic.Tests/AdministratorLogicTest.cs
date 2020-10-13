@@ -110,10 +110,11 @@ namespace BusinessLogic.Tests
             administrators.Add(administrator);
             var mock = new Mock<IAdministratorRepository>(MockBehavior.Strict);
             mock.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns(administrator);
-            mock.Setup(p => p.Delete(It.IsAny<Administrator>()));
+            mock.Setup(p => p.Delete(It.IsAny<Administrator>())).Returns(administrator);
             var logic = new AdministratorLogic(mock.Object);
-            logic.Delete(administrator);
+            var result = logic.Delete(administrator);
             mock.VerifyAll();
+            Assert.AreEqual(result, administrator);
         }
 
         [TestMethod]
@@ -129,7 +130,7 @@ namespace BusinessLogic.Tests
             administrators.Add(administrator);
             var mock = new Mock<IAdministratorRepository>(MockBehavior.Strict);
             mock.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns<Administrator>(null);
-            mock.Setup(p => p.Delete(It.IsAny<Administrator>()));
+            mock.Setup(p => p.Delete(It.IsAny<Administrator>())).Returns(administrator);
             var logic = new AdministratorLogic(mock.Object);
             logic.Delete(administrator);
             mock.VerifyAll();

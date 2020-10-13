@@ -34,7 +34,7 @@ namespace Migrations.Controllers
         [HttpGet]
         public IActionResult GetByRegionCategory([FromQuery] int regionId, [FromQuery] List<int> categories)
         {
-            if (regionId == 0 && (categories == null||categories.Count == 0))
+            if (regionId <= 0 && (categories == null||categories.Count == 0))
             {
                 return Get();
             }
