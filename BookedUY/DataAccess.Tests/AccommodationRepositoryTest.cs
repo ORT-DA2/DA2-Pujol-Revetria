@@ -86,7 +86,10 @@ namespace DataAccess.Tests
                 Name = "Radisson",
                 Information = "nice",
                 PricePerNight = 1.76,
-                Spot = null,
+                Spot = new TouristicSpot()
+                {
+                    Name = "h"
+                },
                 SpotId = 1
             };
             var repository = new AccommodationRepository(_context);
@@ -109,7 +112,10 @@ namespace DataAccess.Tests
                 Name = "Hilton",
                 Information = "Epic",
                 PricePerNight = 120.76,
-                Spot = null,
+                Spot = new TouristicSpot()
+                {
+                    Name = "h"
+                },
                 SpotId = 2
             };
             _context.Add(accommodation);
@@ -135,7 +141,10 @@ namespace DataAccess.Tests
                 Name = "Hilton",
                 Information = "Epic",
                 PricePerNight = 120.76,
-                Spot = null,
+                Spot = new TouristicSpot()
+                {
+                    Name = "h"
+                },
                 SpotId = 2
             };
             List<Accommodation> accommodationList = new List<Accommodation>()
@@ -151,7 +160,9 @@ namespace DataAccess.Tests
                     Name = "Radisson",
                     Information = "nice",
                     PricePerNight = 1.76,
-                    Spot = null,
+                    Spot=new TouristicSpot(){
+                        Name = "a"
+                    },
                     SpotId = 1
                 },
             };
@@ -179,7 +190,10 @@ namespace DataAccess.Tests
                 Name = "Hilton",
                 Information = "Epic",
                 PricePerNight = 120.76,
-                Spot = null,
+                Spot = new TouristicSpot()
+                {
+                    Name = "a"
+                },
                 SpotId = 2
             };
             List<Accommodation> accommodationList = new List<Accommodation>()
@@ -195,7 +209,9 @@ namespace DataAccess.Tests
                     Name = "Radisson",
                     Information = "nice",
                     PricePerNight = 1.76,
-                    Spot = null,
+                    Spot=new TouristicSpot(){
+                        Name = "h"
+                    },
                     SpotId = 1
                 },testAccommodation,
             };
@@ -221,7 +237,10 @@ namespace DataAccess.Tests
                 Name = "Hilton",
                 Information = "Epic",
                 PricePerNight = 120.76,
-                Spot = null,
+                Spot = new TouristicSpot()
+                {
+                    Name = "h"
+                },
                 SpotId = 2
             };
             List<Accommodation> accommodationList = new List<Accommodation>()
@@ -237,7 +256,9 @@ namespace DataAccess.Tests
                     Name = "Radisson",
                     Information = "nice",
                     PricePerNight = 1.76,
-                    Spot = null,
+                    Spot=new TouristicSpot(){
+                        Name = "a"
+                    },
                     SpotId = 1
                 },testAccommodation,
             };
@@ -263,7 +284,10 @@ namespace DataAccess.Tests
                 Name = "Hilton",
                 Information = "Epic",
                 PricePerNight = 120.76,
-                Spot = null,
+                Spot = new TouristicSpot()
+                {
+                    Name = "a"
+                },
                 SpotId = 2
             };
             List<Accommodation> accommodationList = new List<Accommodation>()
@@ -279,7 +303,9 @@ namespace DataAccess.Tests
                     Name = "Radisson",
                     Information = "nice",
                     PricePerNight = 1.76,
-                    Spot = null,
+                    Spot=new TouristicSpot(){
+                        Name = "h"
+                    },
                     SpotId = 1
                 },testAccommodation,
             };
@@ -305,7 +331,10 @@ namespace DataAccess.Tests
                 Name = "Hilton",
                 Information = "Epic",
                 PricePerNight = 120.76,
-                Spot = null,
+                Spot = new TouristicSpot()
+                {
+                    Name = "h"
+                },
                 SpotId = 2
             };
             List<Accommodation> accommodationList = new List<Accommodation>()
@@ -321,7 +350,9 @@ namespace DataAccess.Tests
                     Name = "Radisson",
                     Information = "nice",
                     PricePerNight = 1.76,
-                    Spot = null,
+                    Spot=new TouristicSpot(){
+                        Name = "a"
+                    },
                     SpotId = 1
                 },testAccommodation,
             };
@@ -347,7 +378,10 @@ namespace DataAccess.Tests
                 Name = "Hilton",
                 Information = "Epic",
                 PricePerNight = 120.76,
-                Spot = null,
+                Spot = new TouristicSpot()
+                {
+                    Name = "h"
+                },
                 SpotId = 2
             };
             List<Accommodation> accommodationList = new List<Accommodation>()
@@ -376,7 +410,10 @@ namespace DataAccess.Tests
                 Name = "Hilton",
                 Information = "Epic",
                 PricePerNight = 120.76,
-                Spot = null,
+                Spot = new TouristicSpot()
+                {
+                    Name = "h"
+                },
                 SpotId = 2
             };
             List<Accommodation> accommodationList = new List<Accommodation>()

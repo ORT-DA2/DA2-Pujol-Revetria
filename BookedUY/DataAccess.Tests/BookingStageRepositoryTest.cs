@@ -38,9 +38,11 @@ namespace DataAccess.Tests
                 {
                     Id=1,
                     Description="The booking was added correctly, awaiting payment",
-                    Administrator = null,
+                    Administrator = new Administrator(){
+                    Email="b@b.com"
+                    },
                     AdministratorId=0,
-                    AsociatedBooking=null,
+                    AsociatedBooking= new Booking(),
                     AsociatedBookingId=0,
                     EntryDate= DateTime.Now,
                     Status = new Status(),
@@ -49,9 +51,11 @@ namespace DataAccess.Tests
                 {
                     Id=2,
                     Description = "The booking was rejected due to payment issues, please contact your bank",
-                    Administrator = null,
+                    Administrator = new Administrator(){ 
+                        Email="a@a.com"
+                    },
                     AdministratorId = 0,
-                    AsociatedBooking = null,
+                    AsociatedBooking = new Booking(),
                     AsociatedBookingId = 0,
                     EntryDate = DateTime.Now,
                     Status = new Status(),
@@ -63,7 +67,7 @@ namespace DataAccess.Tests
             var repository = new BookingStageRepository(_context);
 
             var result = repository.GetAll();
-
+            Console.WriteLine(result.Count());
             Assert.IsTrue(bookingStagesToReturn.SequenceEqual(result));
         }
 
@@ -108,9 +112,12 @@ namespace DataAccess.Tests
             {
                 Id = 1,
                 Description = "The booking was added correctly, awaiting payment",
-                Administrator = null,
+                Administrator = new Administrator()
+                {
+                    Email = "a@a.com"
+                },
                 AdministratorId = 0,
-                AsociatedBooking = null,
+                AsociatedBooking = new Booking(),
                 AsociatedBookingId = 1,
                 EntryDate = DateTime.Now,
                 Status = new Status(),
@@ -119,9 +126,12 @@ namespace DataAccess.Tests
             {
                 Id = 3,
                 Description = "Theaiting payment",
-                Administrator = null,
+                Administrator = new Administrator()
+                {
+                    Email = "b@b.com"
+                },
                 AdministratorId = 0,
-                AsociatedBooking = null,
+                AsociatedBooking = bookingStage1.AsociatedBooking,
                 AsociatedBookingId = 1,
                 EntryDate = DateTime.Now,
                 Status = new Status(),
@@ -135,9 +145,11 @@ namespace DataAccess.Tests
                 {
                     Id=2,
                     Description = "The booking was rejected due to payment issues, please contact your bank",
-                    Administrator = null,
+                    Administrator = new Administrator(){
+                        Email="c@c.com"
+                    },
                     AdministratorId = 0,
-                    AsociatedBooking = null,
+                    AsociatedBooking = new Booking(),
                     AsociatedBookingId = 2,
                     EntryDate = DateTime.Now,
                     Status = new Status(),
@@ -161,7 +173,10 @@ namespace DataAccess.Tests
             {
                 Id = 1,
                 Description = "The booking was added correctly, awaiting payment",
-                Administrator = null,
+                Administrator = new Administrator()
+                {
+                    Email = "a@a.com"
+                },
                 AdministratorId = 0,
                 AsociatedBooking = null,
                 AsociatedBookingId = 1,
@@ -172,7 +187,10 @@ namespace DataAccess.Tests
             {
                 Id = 3,
                 Description = "Theaiting payment",
-                Administrator = null,
+                Administrator = new Administrator()
+                {
+                    Email = "b@b.com"
+                },
                 AdministratorId = 0,
                 AsociatedBooking = null,
                 AsociatedBookingId = 1,
@@ -188,7 +206,9 @@ namespace DataAccess.Tests
                 {
                     Id=2,
                     Description = "The booking was rejected due to payment issues, please contact your bank",
-                    Administrator = null,
+                    Administrator = new Administrator(){
+                        Email="c@c.com"
+                    },
                     AdministratorId = 0,
                     AsociatedBooking = null,
                     AsociatedBookingId = 2,
@@ -215,7 +235,10 @@ namespace DataAccess.Tests
             {
                 Id = id,
                 Description = "The booking was rejected due to payment issues, please contact your bank",
-                Administrator = null,
+                Administrator = new Administrator()
+                {
+                    Email = "a@a.com"
+                },
                 AdministratorId = 0,
                 AsociatedBooking = null,
                 AsociatedBookingId = 2,
@@ -239,10 +262,13 @@ namespace DataAccess.Tests
             {
                 Id = testId,
                 Description = "The booking was rejected due to payment issues, please contact your bank",
-                Administrator = null,
+                Administrator = new Administrator()
+                {
+                    Email = "a@a.com"
+                },
                 AdministratorId = 0,
-                AsociatedBooking = null,
-                AsociatedBookingId = 2,
+                AsociatedBooking = new Booking(),
+                AsociatedBookingId = 1,
                 EntryDate = DateTime.Now,
                 Status = new Status(),
             };

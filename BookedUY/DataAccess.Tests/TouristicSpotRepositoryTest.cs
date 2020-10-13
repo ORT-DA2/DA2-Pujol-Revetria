@@ -38,12 +38,12 @@ namespace DataAccess.Tests
                 {
                     Id=1,
                     Name="Villa Serrana",
-                    Accommodations=null,
+                    Accommodations=new List<Accommodation>(),
                     Description="Villa Serrana es un poblado ubicado en el departamento de Lavalleja de Uruguay," +
                     " a 25 kilómetros al noreste de la capital departamental," +
                     " Minas, entre los valles de los arroyos Penitente y Marmarajá.",
-                    Region=null,
-                    RegionId=2,
+                    Region=new Region(),
+                    RegionId=1,
                     Categories=null,
                 },
                 new TouristicSpot()
@@ -54,8 +54,8 @@ namespace DataAccess.Tests
                     Description="Es conocida por su Barrio Histórico con calles de" +
                     " adoquines rodeadas de edificios que datan de la" +
                     " época en que era un asentamiento portugués.",
-                    Region=null,
-                    RegionId=1,
+                    Region=new Region(),
+                    RegionId=2,
                     Categories=null,
                 },
             };
@@ -97,13 +97,13 @@ namespace DataAccess.Tests
             {
                 Id = 4,
                 Name = "Colonia del Sacramento",
-                Accommodations = null,
+                Accommodations = new List<Accommodation>(),
                 Description = "Es conocida por su Barrio Histórico con calles de" +
                 " adoquines rodeadas de edificios que datan de la" +
                 " época en que era un asentamiento portugués.",
-                Region = null,
+                Region = new Region(),
                 RegionId = 1,
-                Categories = null,
+                Categories = new List<CategoryTouristicSpot>(),
             };
             List<TouristicSpot> spotsToReturn = new List<TouristicSpot>()
             {
@@ -111,13 +111,13 @@ namespace DataAccess.Tests
                 {
                     Id=1,
                     Name="Villa Serrana",
-                    Accommodations=null,
+                    Accommodations=new List<Accommodation>(),
                     Description="Villa Serrana es un poblado ubicado en el departamento de Lavalleja de Uruguay," +
                     " a 25 kilómetros al noreste de la capital departamental," +
                     " Minas, entre los valles de los arroyos Penitente y Marmarajá.",
-                    Region=null,
-                    RegionId=2,
-                    Categories=null,
+                    Region=new Region(){Id=3 },
+                    RegionId=3,
+                    Categories=new List<CategoryTouristicSpot>(),
                 },touristicSpot,
             };
 
@@ -135,16 +135,26 @@ namespace DataAccess.Tests
         {
             List<int> list1 = new List<int>();
             list1.Add(1);
-            list1.Add(4);
+            list1.Add(3);
 
             List<CategoryTouristicSpot> listCat1 = new List<CategoryTouristicSpot>();
             List<CategoryTouristicSpot> listCat2 = new List<CategoryTouristicSpot>();
-            CategoryTouristicSpot cat1 = new CategoryTouristicSpot();
-            cat1.CategoryId = 1;
-            CategoryTouristicSpot cat2 = new CategoryTouristicSpot();
-            cat2.CategoryId = 2;
-            CategoryTouristicSpot cat3 = new CategoryTouristicSpot();
-            cat3.CategoryId = 3;
+            List<CategoryTouristicSpot> listCat3 = new List<CategoryTouristicSpot>();
+            CategoryTouristicSpot cat1 = new CategoryTouristicSpot()
+            {
+                CategoryId = 1,
+                TouristicSpotId = 4
+            };
+            CategoryTouristicSpot cat2 = new CategoryTouristicSpot()
+            {
+                CategoryId = 2,
+                TouristicSpotId = 1
+            };
+            CategoryTouristicSpot cat3 = new CategoryTouristicSpot()
+            {
+                CategoryId = 3,
+                TouristicSpotId = 4
+            };
             listCat1.Add(cat1);
             listCat1.Add(cat3);
             listCat2.Add(cat2);
@@ -153,11 +163,11 @@ namespace DataAccess.Tests
             {
                 Id = 4,
                 Name = "Colonia del Sacramento",
-                Accommodations = null,
+                Accommodations = new List<Accommodation>(),
                 Description = "Es conocida por su Barrio Histórico con calles de" +
                 " adoquines rodeadas de edificios que datan de la" +
                 " época en que era un asentamiento portugués.",
-                Region = null,
+                Region = new Region(),
                 RegionId = 0,
                 Categories = listCat1,
             };
@@ -167,11 +177,11 @@ namespace DataAccess.Tests
                 {
                     Id=1,
                     Name="Villa Serrana",
-                    Accommodations=null,
+                    Accommodations=new List<Accommodation>(),
                     Description="Villa Serrana es un poblado ubicado en el departamento de Lavalleja de Uruguay," +
                     " a 25 kilómetros al noreste de la capital departamental," +
                     " Minas, entre los valles de los arroyos Penitente y Marmarajá.",
-                    Region=null,
+                    Region=new Region(),
                     RegionId=0,
                     Categories=listCat2,
                 },touristicSpot,
@@ -191,7 +201,7 @@ namespace DataAccess.Tests
         {
             List<int> list1 = new List<int>();
             list1.Add(1);
-            list1.Add(4);
+            list1.Add(3);
 
             List<CategoryTouristicSpot> listCat1 = new List<CategoryTouristicSpot>();
             List<CategoryTouristicSpot> listCat2 = new List<CategoryTouristicSpot>();
@@ -209,11 +219,11 @@ namespace DataAccess.Tests
             {
                 Id = 4,
                 Name = "Colonia del Sacramento",
-                Accommodations = null,
+                Accommodations = new List<Accommodation>(),
                 Description = "Es conocida por su Barrio Histórico con calles de" +
                 " adoquines rodeadas de edificios que datan de la" +
                 " época en que era un asentamiento portugués.",
-                Region = null,
+                Region = new Region() { Id = 2 },
                 RegionId = 2,
                 Categories = listCat1,
             };
@@ -223,11 +233,11 @@ namespace DataAccess.Tests
                 {
                     Id=1,
                     Name="Villa Serrana",
-                    Accommodations=null,
+                    Accommodations=new List<Accommodation>(),
                     Description="Villa Serrana es un poblado ubicado en el departamento de Lavalleja de Uruguay," +
                     " a 25 kilómetros al noreste de la capital departamental," +
                     " Minas, entre los valles de los arroyos Penitente y Marmarajá.",
-                    Region=null,
+                    Region=new Region(),
                     RegionId=1,
                     Categories=listCat1,
                 },touristicSpotToReturn,
@@ -236,10 +246,10 @@ namespace DataAccess.Tests
                 {
                     Id=3,
                     Name="Vierrana",
-                    Accommodations=null,
+                    Accommodations=new List<Accommodation>(),
                     Description="Vilartamento de Lavalleja de Uruguay," +
                     " a 25 kilómetros",
-                    Region=null,
+                    Region=touristicSpotToReturn.Region,
                     RegionId=2,
                     Categories=listCat2,
                 },
@@ -251,6 +261,7 @@ namespace DataAccess.Tests
             var result = repository.GetByCategoryAndRegion(list1, 2);
             List<TouristicSpot> listToReturn = new List<TouristicSpot>();
             listToReturn.Add(touristicSpotToReturn);
+            Console.WriteLine(touristicSpotToReturn.RegionId);
             Assert.IsTrue(listToReturn.SequenceEqual(result));
         }
 
@@ -261,7 +272,7 @@ namespace DataAccess.Tests
             {
                 Id = 1,
                 Name = "Villa Serrana",
-                Accommodations = null,
+                Accommodations = new List<Accommodation>(),
                 Description = "Villa Serrana es un poblado ubicado en el departamento de Lavalleja de Uruguay," +
                 " a 25 kilómetros al noreste de la capital departamental," +
                 " Minas, entre los valles de los arroyos Penitente y Marmarajá.",
@@ -276,7 +287,7 @@ namespace DataAccess.Tests
                 {
                     Id=2,
                     Name="Colonia del Sacramento",
-                    Accommodations=null,
+                    Accommodations=new List<Accommodation>(),
                     Description="Es conocida por su Barrio Histórico con calles de" +
                     " adoquines rodeadas de edificios que datan de la" +
                     " época en que era un asentamiento portugués.",
