@@ -4,6 +4,7 @@ using Domain;
 using Microsoft.IdentityModel.Tokens;
 using SessionInterface;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
@@ -12,6 +13,7 @@ using System.Text;
 
 namespace BusinessLogic
 {
+    [ExcludeFromCodeCoverage]
     public class SessionLogic : ISessionLogic
     {
         private IAdministratorRepository administratorRepository;
