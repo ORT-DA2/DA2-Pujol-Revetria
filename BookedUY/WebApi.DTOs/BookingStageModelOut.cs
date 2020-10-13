@@ -7,13 +7,13 @@ namespace WebApi.DTOs
 {
     public class BookingStageModelOut
     {
-        public string Descripcion { get; set; }
+        public string Description { get; set; }
         public string Status { get; set; }
 
         public BookingStageModelOut(BookingStage b)
         {
-            Descripcion = b.Descripcion;
-            Status = b.Status;
+            Description = b.Description;
+            Status = b.Status.ToString();
         }
     }
 }

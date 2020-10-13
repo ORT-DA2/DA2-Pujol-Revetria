@@ -42,7 +42,7 @@ namespace Migrations.Controllers
         {
             var booking = newBooking.FromModelInToBooking();
             var response = this.bookingLogic.AddBooking(booking);
-            return Ok(response);
+            return Ok(new BookingModelOut(response));
         }
     }
 }

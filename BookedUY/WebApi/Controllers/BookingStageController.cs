@@ -37,6 +37,7 @@ namespace WebApi.Controllers
         public IActionResult NewStage(BookingStageModelIn newStage)
         {
             var stage = newStage.FromModelInToBookingStage();
+            
             return Ok(this.bookingStageLogic.AddBookingStage(stage));
         }
     }

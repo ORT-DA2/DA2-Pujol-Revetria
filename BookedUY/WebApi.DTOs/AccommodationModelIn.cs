@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO.Pipes;
+using System.Linq;
 using System.Text;
 
 namespace WebApi.DTOs
@@ -14,9 +15,18 @@ namespace WebApi.DTOs
         public string Contact { get; set; }
         public string Information { get; set; }
         public int SpotId { get; set; }
+        public string[] Images { get; set; }
 
         public Accommodation FromModelInToAccommodation()
         {
+            List<AccommodationImage> images = new List<AccommodationImage>();
+            for (int i = 0; i < Images.Length; i++)
+            {
+                images.Add(new AccommodationImage()
+                {
+                    Image = Images[i]
+                });
+            }
             Accommodation accommodation = new Accommodation()
             {
                 Name = Name,
@@ -24,7 +34,8 @@ namespace WebApi.DTOs
                 PricePerNight = Price,
                 ContactNumber = Contact,
                 Information = Information,
-                SpotId = SpotId
+                SpotId = SpotId,
+                Images = images
             };
             return accommodation;
         }

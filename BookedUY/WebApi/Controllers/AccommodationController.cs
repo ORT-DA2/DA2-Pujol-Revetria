@@ -46,7 +46,7 @@ namespace Migrations.Controllers
         {
             var accom = newAccommodation.FromModelInToAccommodation();
             var response = this.accommodationLogic.AddAccommodation(accom);
-            return Ok(response);
+            return Ok(new AccommodationModelOut(response));
         }
 
         // PUT api/<AcomodationController>/5

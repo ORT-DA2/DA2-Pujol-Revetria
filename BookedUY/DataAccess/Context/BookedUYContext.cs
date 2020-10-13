@@ -61,7 +61,6 @@ namespace DataAccess.Context
             modelBuilder.Entity<Accommodation>().Property(a => a.Information);
             modelBuilder.Entity<Accommodation>().Property(a => a.PricePerNight);
             modelBuilder.Entity<Accommodation>().HasOne<TouristicSpot>(a => a.Spot).WithMany(t => t.Accommodations).HasForeignKey(a => a.SpotId);
-            modelBuilder.Entity<Accommodation>().HasMany<AccommodationImage>(a => a.Images).WithOne(c => c.Accommodation).HasForeignKey(a => a.AccommodationId);
 
             modelBuilder.Entity<Tourist>().HasKey(t => t.Id);
             modelBuilder.Entity<Tourist>().HasAlternateKey(t => t.Email);

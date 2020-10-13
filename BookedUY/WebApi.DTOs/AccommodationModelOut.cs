@@ -13,6 +13,7 @@ namespace WebApi.DTOs
         public string ContactNumber { get; set; }
         public string Information { get; set; }
         public double Price { get; set; }
+        public List<string> Images { get; set; }
         public AccommodationModelOut(Accommodation a)
         {
             Id = a.Id;
@@ -21,6 +22,17 @@ namespace WebApi.DTOs
             ContactNumber = a.ContactNumber;
             Information = a.Information;
             Price = a.PricePerNight;
+            Images = ImagesToStrings(a.Images);
+        }
+
+        private List<string> ImagesToStrings(List<AccommodationImage> images)
+        {
+            List<string> imagesString = new List<string>();
+            foreach (var item in images)
+            {
+                imagesString.Add(item.Image);
+            }
+            return imagesString;
         }
     }
 }

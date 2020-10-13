@@ -22,15 +22,13 @@ namespace WebApi.DTOs
                 c.CategoryId = item;
                 listCategories.Add(c);
             }
-            TouristicSpotImage image = new TouristicSpotImage();
-            image.Image = this.Image;
             TouristicSpot touristicSpot = new TouristicSpot()
             {
                 Name = this.Name,
                 Description = this.Description,
                 RegionId = this.RegionId,
                 Categories = listCategories,
-                Image = image
+                Image = this.Image
             };
             return touristicSpot;
         }

@@ -15,7 +15,7 @@ namespace WebApi.DTOs
             Id = t.Id;
             Name = t.Name;
             Description = t.Description;
-            Image = t.Image.Image;
+            Image = t.Image;
         }
     }
 }
