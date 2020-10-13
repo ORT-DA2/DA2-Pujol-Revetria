@@ -26,10 +26,11 @@ namespace DataAccess.Repositories
             return obj;
         }
 
-        public void Delete(Tourist obj)
+        public Tourist Delete(Tourist obj)
         {
             this.tourists.Remove(obj);
             this.bookUYContext.SaveChanges();
+            return obj;
         }
 
         public IEnumerable<Tourist> GetAll()

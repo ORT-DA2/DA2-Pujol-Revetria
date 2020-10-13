@@ -32,10 +32,11 @@ namespace DataAccess.Repositories
             return accommodation;
         }
 
-        public void Delete(Accommodation accommodation)
+        public Accommodation Delete(Accommodation accommodation)
         {
             this.accommodations.Remove(accommodation);
             this.bookedUYContext.SaveChanges();
+            return accommodation;
         }
 
         public Accommodation GetById(int id)

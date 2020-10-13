@@ -16,7 +16,7 @@ namespace Domain
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new NullInputException();
+                    throw new NullInputException("Spot Name");
                 }
                 else
                 {
@@ -34,7 +34,7 @@ namespace Domain
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new NullInputException();
+                    throw new NullInputException("Spot Description");
                 }
                 else
                 {

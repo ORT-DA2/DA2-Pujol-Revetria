@@ -14,15 +14,10 @@ namespace Domain
             StatusCode = statusCode;
         }
     }
-    public class NullInputException : Exception
+    public class NullInputException : APIException
     {
-        public override string Message
-        {
-            get
-            {
-                return "The input received was empty";
-            }
-        }
+        public NullInputException(string entity) : base(String.Format("The {0} cannot be null", entity), 409)
+        { }
     }
 
     public class AlreadyExistsException : APIException

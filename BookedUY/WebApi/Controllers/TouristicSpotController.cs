@@ -48,7 +48,8 @@ namespace Migrations.Controllers
         public IActionResult CreateSpot(TouristicSpotModelIn tourisitcSpotModelIn)
         {
             TouristicSpot touristicSpot = tourisitcSpotModelIn.FromModelInToTouristicSpot();
-            return Ok(touristicSpotLogic.AddTouristicSpot(touristicSpot));
+            var ret = new TouristicSpotModelOut(touristicSpotLogic.AddTouristicSpot(touristicSpot));
+            return Ok(ret);
         }
 
 

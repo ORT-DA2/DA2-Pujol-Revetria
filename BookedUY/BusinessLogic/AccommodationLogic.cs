@@ -25,13 +25,13 @@ namespace BusinessLogic
             return newAccom;
         }
 
-        public void DeleteAccommodation(Accommodation accommodation)
+        public Accommodation DeleteAccommodation(Accommodation accommodation)
         {
             if (this.accommodationRepository.GetByName(accommodation.Name) == null)
             {
                 throw new NotFoundException("Accommodation");
             }
-            this.accommodationRepository.Delete(accommodation);
+            return this.accommodationRepository.Delete(accommodation);
         }
 
         public IEnumerable<Accommodation> GetAvailableAccommodationBySpot(int spotId)

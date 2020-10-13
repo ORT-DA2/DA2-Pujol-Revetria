@@ -51,17 +51,19 @@ namespace Migrations.Controllers
 
         // PUT api/<AcomodationController>/5
         [HttpPut("{id}")]
-        public void UpdateCapacity(int id, [FromBody] bool status)
+        public IActionResult UpdateCapacity(int id, [FromBody] bool status)
         {
             this.accommodationLogic.UpdateCapacity(id, status);
+            return Ok("Accommodation Updated");
         }
 
         // DELETE api/<AcomodationController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
             var accomToDelete = this.accommodationLogic.GetById(id);
             this.accommodationLogic.DeleteAccommodation(accomToDelete);
+            return Ok();
         }
     }
 }

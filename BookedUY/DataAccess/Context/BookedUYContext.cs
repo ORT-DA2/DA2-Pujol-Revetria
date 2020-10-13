@@ -50,8 +50,8 @@ namespace DataAccess.Context
 
             modelBuilder.Entity<TouristicSpot>().HasKey(t => t.Id);
             modelBuilder.Entity<TouristicSpot>().HasAlternateKey(t => t.Name);
-            modelBuilder.Entity<TouristicSpot>().HasOne<Region>(b => b.Region).WithMany(t => t.Spots).HasForeignKey(b => b.RegionId);
-            modelBuilder.Entity<TouristicSpot>().Property(t => t.Image);
+            modelBuilder.Entity<TouristicSpot>().HasOne<Region>(b => b.Region).WithMany(t => t.Spots).HasForeignKey(b => b.RegionId).IsRequired();
+            modelBuilder.Entity<TouristicSpot>().Property(t => t.Image).IsRequired();
 
             modelBuilder.Entity<Accommodation>().HasKey(a => a.Id);
             modelBuilder.Entity<Accommodation>().Property(a => a.Full);

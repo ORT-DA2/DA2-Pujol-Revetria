@@ -11,7 +11,7 @@ namespace DataAccessInterface
 
         T Add(T obj);
 
-        void Delete(T obj);
+        T Delete(T obj);
 
         T GetById(int id);
     }

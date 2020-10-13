@@ -41,24 +41,37 @@ namespace BusinessLogic
 
         public bool IsCorrectToken(string token)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(this.secretKey);
-            tokenHandler.ValidateToken(token, new TokenValidationParameters
+            try
             {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(key),
-                ValidateIssuer = false,
-                ValidateAudience = false,
-                ClockSkew = TimeSpan.Zero
-            }, out SecurityToken validatedToken);
-            var jwtToken = (JwtSecurityToken)validatedToken;
-            var adminEmail = jwtToken.Claims.First(x => x.Type == "email").Value;
-            var existsAdmin = this.administratorRepository.GetByEmail(adminEmail);
-            if(existsAdmin!= null)
-            {
-                return true;
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(this.secretKey);
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
+                }, out SecurityToken validatedToken);
+                var jwtToken = (JwtSecurityToken)validatedToken;
+                var adminEmail = jwtToken.Claims.First(x => x.Type == "email").Value;
+                var existsAdmin = this.administratorRepository.GetByEmail(adminEmail);
+                if (existsAdmin != null)
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public class TokenNotVerified : APIException
+        {
+            public TokenNotVerified() : base("Not Valid Token", 403)
+            { }
         }
 
         public string GenerateToken(Administrator admin)

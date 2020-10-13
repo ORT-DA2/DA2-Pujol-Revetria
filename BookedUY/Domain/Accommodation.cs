@@ -17,7 +17,7 @@ namespace Domain
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new NullInputException();
+                    throw new NullInputException("Accommodation Name");
                 }
                 else
                 {
@@ -33,7 +33,7 @@ namespace Domain
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new NullInputException();
+                    throw new NullInputException("Accommodation Address");
                 }
                 else
                 {
@@ -52,7 +52,7 @@ namespace Domain
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new NullInputException();
+                    throw new NullInputException("Accommodation Contact");
                 }
                 else
                 {
@@ -71,7 +71,7 @@ namespace Domain
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new NullInputException();
+                    throw new NullInputException("Accommodation Info");
                 }
                 else
                 {

@@ -18,7 +18,7 @@ namespace Domain
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new NullInputException();
+                    throw new NullInputException("Category Name");
                 }
                 else
                 {

@@ -18,7 +18,7 @@ namespace Domain
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new NullInputException();
+                    throw new NullInputException("Admin Email");
                 }
                 bool isEmail;
                 try
@@ -51,7 +51,7 @@ namespace Domain
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new NullInputException();
+                    throw new NullInputException("Admin Password");
                 }
                 else
                 {

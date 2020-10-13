@@ -25,10 +25,11 @@ namespace DataAccess.Repositories
             return this.administrators;
         }
 
-        public void Delete(Administrator administrator)
+        public Administrator Delete(Administrator administrator)
         {
             this.administrators.Remove(administrator);
             bookedUYContext.SaveChanges();
+            return administrator;
         }
 
         public Administrator Add(Administrator obj)

@@ -25,10 +25,11 @@ namespace DataAccess.Repositories
             return obj;
         }
 
-        public void Delete(Region obj)
+        public Region Delete(Region obj)
         {
             this.regions.Remove(obj);
             bookUYContext.SaveChanges();
+            return obj;
         }
 
         public IEnumerable<Region> GetAll()

@@ -18,7 +18,7 @@ namespace Domain
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new NullInputException();
+                    throw new NullInputException("Tourist Name");
                 }
                 else
                 {
@@ -37,7 +37,7 @@ namespace Domain
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new NullInputException();
+                    throw new NullInputException("Tourist Last Name");
                 }
                 else
                 {
@@ -56,7 +56,7 @@ namespace Domain
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new NullInputException();
+                    throw new NullInputException("Tourist Email");
                 }
                 bool isEmail;
                 try

@@ -11,7 +11,7 @@ namespace WebApi.DTOs
         public string Name { get; set; }
         public int RegionId { get; set; }
         public string Description { get; set; }
-        public List<int> Categories { get; set; }
+        public int[] Categories { get; set; }
         public string Image { get; set; }
         public TouristicSpot FromModelInToTouristicSpot()
         {

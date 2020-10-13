@@ -26,10 +26,11 @@ namespace DataAccess.Repositories
             return obj;
         }
 
-        public void Delete(Category obj)
+        public Category Delete(Category obj)
         {
             this.categories.Remove(obj);
             bookUYContext.SaveChanges();
+            return obj;
         }
 
         public IEnumerable<Category> GetAll()

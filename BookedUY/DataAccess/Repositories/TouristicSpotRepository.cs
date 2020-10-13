@@ -66,10 +66,11 @@ namespace DataAccess.Repositories
             return this.spots.Find(id);
         }
 
-        public void Delete(TouristicSpot touristicSpot)
+        public TouristicSpot Delete(TouristicSpot touristicSpot)
         {
             this.spots.Remove(touristicSpot);
             bookUYContext.SaveChanges();
+            return touristicSpot;
         }
 
         public TouristicSpot GetByName(string name)

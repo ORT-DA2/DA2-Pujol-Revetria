@@ -22,6 +22,14 @@ namespace WebApi.Filters
                     Content = ex.Message
                 };
             }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException ex)
+            {
+                context.Result = new ContentResult()
+                {
+                    StatusCode = 400,
+                    Content = ex.Message
+                };
+            }
             catch (InvalidImageException ex)
             {
                 context.Result = new ContentResult()

@@ -38,9 +38,11 @@ namespace DataAccess.Repositories
             return this.bookings.Include(b => b.Accommodation).Include(b => b.Guests).Where(b => b.Id==id).SingleOrDefault();
         }
 
-        public void Delete(Booking booking)
+        public Booking Delete(Booking booking)
         {
             this.bookings.Remove(booking);
+            this.bookedUYContext.SaveChanges();
+            return booking;
         }
     }
 }
