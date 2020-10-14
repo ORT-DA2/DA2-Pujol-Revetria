@@ -25,7 +25,7 @@ namespace WebApi.Filters
             {
                 context.Result = new ContentResult()
                 {
-                    StatusCode = 500,
+                    StatusCode = 400,
                     Content = ex.ToString()
                 };
             }
