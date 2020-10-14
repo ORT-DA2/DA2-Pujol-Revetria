@@ -9,7 +9,7 @@ namespace WebApi.Controllers
 {
     [Route("api/bookingstages")]
     [ApiController]
-    public class BookingStageController : ControllerBase
+    public class BookingStageController : BookedUYController
     {
         private readonly IBookingStageLogic bookingStageLogic;
 
