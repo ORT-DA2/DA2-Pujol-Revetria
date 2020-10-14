@@ -16,6 +16,14 @@ namespace BusinessLogic
 
         public TouristicSpot AddTouristicSpot(TouristicSpot spot)
         {
+            if (spot.RegionId == 0)
+            {
+                throw new NullInputException("Spot Region");
+            }
+            if (spot.Categories == null)
+            {
+                throw new NullInputException("Spot Categories");
+            }
             if (this.touristicSpotRepository.GetByName(spot.Name) != null)
             {
                 throw new AlreadyExistsException("Spot");

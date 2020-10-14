@@ -16,6 +16,14 @@ namespace BusinessLogic
 
         public Booking AddBooking(Booking booking)
         {
+            if (booking.Guests == null)
+            {
+                throw new NullInputException("Booking Guests");
+            }
+            if (booking.AccommodationId == 0)
+            {
+                throw new NullInputException("Booking Accommodation");
+            }
             double totalprice = CalculateTotalPrice(booking);
             booking.TotalPrice = totalprice;
             var newBooking = this.bookingRepository.Add(booking);

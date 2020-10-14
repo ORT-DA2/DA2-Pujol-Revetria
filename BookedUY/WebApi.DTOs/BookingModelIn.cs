@@ -16,12 +16,17 @@ namespace WebApi.DTOs
 
         public Booking FromModelInToBooking()
         {
+
             Tourist g = new Tourist()
             {
                 Name = GuestName,
                 Email = GuestEmail,
                 LastName = GuestLastName
             };
+            if (Guests == null || Guests.Count<1)
+            {
+                Guests = null;
+            }
             Booking booking = new Booking()
             {
                 AccommodationId = this.AccommodationId,

@@ -19,11 +19,13 @@ namespace BusinessLogic
 
         public BookingStage AddBookingStage(BookingStage stage)
         {
-            Console.WriteLine(stage.AsociatedBookingId);
+            if (stage.AsociatedBookingId == 0) {
+                throw new NullInputException("BookingStage Booking");
+            }
             var booking = this.bookingRepository.GetById(stage.AsociatedBookingId);
             if (booking == null)
             {
-                throw new NotFoundException("Booking");
+                throw new NotFoundException("BookingStage Booking");
             }
             return this.bookingStageRepository.Add(stage);
         }

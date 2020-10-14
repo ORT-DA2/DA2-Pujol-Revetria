@@ -14,11 +14,18 @@ namespace WebApi.DTOs
         public TouristicSpot FromModelInToTouristicSpot()
         {
             List<CategoryTouristicSpot> listCategories = new List<CategoryTouristicSpot>();
-            foreach (int item in this.Categories)
+            if (Categories == null || Categories.Length < 1)
             {
-                CategoryTouristicSpot c = new CategoryTouristicSpot();
-                c.CategoryId = item;
-                listCategories.Add(c);
+                listCategories = null;
+            }
+            else
+            {
+                foreach (int item in this.Categories)
+                {
+                    CategoryTouristicSpot c = new CategoryTouristicSpot();
+                    c.CategoryId = item;
+                    listCategories.Add(c);
+                }
             }
             TouristicSpot touristicSpot = new TouristicSpot()
             {

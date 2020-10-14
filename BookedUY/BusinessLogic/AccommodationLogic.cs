@@ -16,6 +16,14 @@ namespace BusinessLogic
 
         public Accommodation AddAccommodation(Accommodation accommodation)
         {
+            if (accommodation.SpotId == 0)
+            {
+                throw new NullInputException("Accommodation Spot");
+            }
+            if (accommodation.Images == null)
+            {
+                throw new NullInputException("Accommodation Images");
+            }
             if (this.accommodationRepository.GetByName(accommodation.Name) != null)
             {
                 throw new AlreadyExistsException("Accommodation");
