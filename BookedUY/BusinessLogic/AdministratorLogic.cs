@@ -26,6 +26,10 @@ namespace BusinessLogic
 
         public Administrator GetByEmailAndPassword(string email, string password)
         {
+            if (email == null)
+            {
+                throw new NullInputException("Administrator Email");
+            }
             var admin = this.administratorRepository.GetByEmail(email);
             if (admin.Password == password)
             {

@@ -10,11 +10,13 @@ namespace DataAccess.Repositories
     {
         private readonly DbSet<Accommodation> accommodations;
         private readonly DbContext bookedUYContext;
+        private readonly DbSet<TouristicSpot> spots;
 
         public AccommodationRepository(DbContext context)
         {
             this.bookedUYContext = context;
             this.accommodations = context.Set<Accommodation>();
+            this.spots = context.Set<TouristicSpot>();
         }
 
         public IEnumerable<Accommodation> GetAll()
@@ -24,6 +26,11 @@ namespace DataAccess.Repositories
 
         public Accommodation Add(Accommodation accommodation)
         {
+            var spot = spots.Find(accommodation.SpotId);
+            if (spot == null)
+            {
+                throw new NotFoundException("Accommodation Spot");
+            }
             this.accommodations.Add(accommodation);
             bookedUYContext.SaveChanges();
             return accommodation;
