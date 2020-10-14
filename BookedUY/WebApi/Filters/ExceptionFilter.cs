@@ -22,22 +22,6 @@ namespace WebApi.Filters
                     Content = ex.Message
                 };
             }
-            catch (NullReferenceException ex)
-            {
-                context.Result = new ContentResult()
-                {
-                    StatusCode = 400,
-                    Content = "The request has a missing parameter"
-                };
-            }
-            catch (DbUpdateException ex)
-            {
-                context.Result = new ContentResult()
-                {
-                    StatusCode = 400,
-                    Content = "The request has a missing parameter"
-                };
-            }
             catch (Exception ex)
             {
                 context.Result = new ContentResult()
