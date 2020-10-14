@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Domain
 {
@@ -12,6 +10,7 @@ namespace Domain
 
         public Status Status { get; set; }
         private string _description;
+
         public string Description
         {
             get
@@ -30,6 +29,7 @@ namespace Domain
                 }
             }
         }
+
         public DateTime EntryDate { get; set; }
         public Booking AsociatedBooking { get; set; }
         public int AsociatedBookingId { get; set; }

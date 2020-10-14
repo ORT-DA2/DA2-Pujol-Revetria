@@ -1,25 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataAccess.Context;
-using DataAccess.Repositories;
-using DataAccessInterface;
-using Domain;
 using Factory;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
+using System.Diagnostics.CodeAnalysis;
 using WebApi.Filters;
 
 namespace Migrations
@@ -76,7 +61,7 @@ namespace Migrations
             app.UseAuthentication();
 
             app.UseAuthorization();
-            
+
             //app.UseMvc();
 
             app.UseEndpoints(endpoints =>

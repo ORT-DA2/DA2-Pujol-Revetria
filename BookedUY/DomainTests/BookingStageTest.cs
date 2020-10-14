@@ -1,15 +1,13 @@
 ﻿using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DomainTests
 {
     [TestClass]
     public class BookingStageTest
     {
-        BookingStage bookingStage;
+        private BookingStage bookingStage;
+
         [TestInitialize]
         public void StartUp()
         {

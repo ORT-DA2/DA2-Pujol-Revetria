@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BusinessLogic;
-using BusinessLogicInterface;
-using DataAccessInterface;
+﻿using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using WebApi.DTOs;
 using WebApi.Filters;
 
-namespace Migrations.Controllers
+namespace WebApi.Controllers
 {
-    [Route("api/accommodation")]
+    [Route("api/accommodations")]
     public class AccommodationController : BookedUYController
     {
         private readonly IAccommodationLogic accommodationLogic;
@@ -30,7 +25,6 @@ namespace Migrations.Controllers
             return Ok(accommodations);
         }
 
-        
         // GET api/<AcomodationController>/5 o /?id=5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
@@ -65,7 +59,7 @@ namespace Migrations.Controllers
         public IActionResult Delete(int id)
         {
             var accomToDelete = this.accommodationLogic.GetById(id);
-            var ret =this.accommodationLogic.DeleteAccommodation(accomToDelete);
+            var ret = this.accommodationLogic.DeleteAccommodation(accomToDelete);
             return Ok(ret);
         }
     }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Domain
 {
@@ -8,6 +7,7 @@ namespace Domain
     {
         public int Id { get; set; }
         private string _email;
+
         public string Email
         {
             get
@@ -40,7 +40,9 @@ namespace Domain
                 }
             }
         }
+
         private string _password;
+
         public string Password
         {
             get
@@ -59,6 +61,7 @@ namespace Domain
                 }
             }
         }
+
         public List<BookingStage> Entries { get; set; }
 
         public override bool Equals(object obj)

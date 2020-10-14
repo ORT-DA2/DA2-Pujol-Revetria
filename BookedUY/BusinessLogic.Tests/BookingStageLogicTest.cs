@@ -3,7 +3,6 @@ using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace BusinessLogic.Tests
 {
@@ -23,7 +22,7 @@ namespace BusinessLogic.Tests
             mock.Setup(p => p.Add(It.IsAny<BookingStage>())).Returns(bookingStage);
             var mock2 = new Mock<IRepository<Booking>>(MockBehavior.Strict);
             mock2.Setup(u => u.GetById(It.IsAny<int>())).Returns(booking);
-            var logic = new BookingStageLogic(mock.Object,mock2.Object);
+            var logic = new BookingStageLogic(mock.Object, mock2.Object);
             var result = logic.AddBookingStage(bookingStage);
             mock.VerifyAll();
             mock2.VerifyAll();

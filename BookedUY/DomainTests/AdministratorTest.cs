@@ -1,15 +1,12 @@
 ﻿using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DomainTests
 {
     [TestClass]
     public class AdministratorTest
     {
-        Administrator administrator;
+        private Administrator administrator;
 
         [TestInitialize]
         public void StartUp()
@@ -98,7 +95,7 @@ namespace DomainTests
         {
             string test = "test";
             administrator.Password = test;
-            Assert.AreEqual(administrator.Password,test);
+            Assert.AreEqual(administrator.Password, test);
         }
 
         [TestMethod]

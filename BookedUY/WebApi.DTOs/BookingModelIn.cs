@@ -1,7 +1,6 @@
 ﻿using Domain;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace WebApi.DTOs
 {
@@ -29,8 +28,7 @@ namespace WebApi.DTOs
                 CheckIn = this.CheckIn,
                 CheckOut = this.CheckOut,
                 HeadGuest = g,
-                Guests=Guests
-                
+                Guests = Guests
             };
             return booking;
         }

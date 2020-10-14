@@ -1,9 +1,7 @@
 ﻿using BusinessLogicInterface;
 using DataAccessInterface;
 using Domain;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BusinessLogic
 {
@@ -23,15 +21,12 @@ namespace BusinessLogic
 
         //public Region GetRegion(int id)
         //{
-
         //    var ret =  this.regionRepository.GetById(id);
         //    if (ret == null)
         //    {
-               
         //    }
         //    else
         //    {
-
         //    }
         //}
     }

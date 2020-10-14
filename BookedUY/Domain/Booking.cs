@@ -9,6 +9,7 @@ namespace Domain
         public Accommodation Accommodation { get; set; }
         public int AccommodationId { get; set; }
         private DateTime _checkIn;
+
         public DateTime CheckIn
         {
             get
@@ -27,7 +28,9 @@ namespace Domain
                 }
             }
         }
+
         private DateTime _checkOut;
+
         public DateTime CheckOut
         {
             get
@@ -36,7 +39,7 @@ namespace Domain
             }
             set
             {
-                if (value.Date < DateTime.Now.Date||value.Date<CheckIn)
+                if (value.Date < DateTime.Now.Date || value.Date < CheckIn)
                 {
                     throw new InvalidDateException("CheckOut");
                 }
@@ -46,6 +49,7 @@ namespace Domain
                 }
             }
         }
+
         public double TotalPrice { get; set; }
         public List<Guest> Guests { get; set; }
         public Tourist HeadGuest { get; set; }

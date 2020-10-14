@@ -31,7 +31,6 @@ namespace BusinessLogic.Tests
         [TestMethod]
         public void GetRegionsNullTest()
         {
-
             List<Region> regions = new List<Region>();
             var mock = new Mock<IRepository<Region>>(MockBehavior.Strict);
             mock.Setup(p => p.GetAll()).Returns(regions);

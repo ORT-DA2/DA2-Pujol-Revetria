@@ -6,7 +6,8 @@ namespace DomainTests
     [TestClass]
     public class AccommodationImageTest
     {
-        AccommodationImage accommodationImage;
+        private AccommodationImage accommodationImage;
+
         [TestInitialize]
         public void StartUp()
         {
@@ -36,7 +37,6 @@ namespace DomainTests
         {
             string test = null;
             accommodationImage.Image = test;
-
         }
 
         [TestMethod]

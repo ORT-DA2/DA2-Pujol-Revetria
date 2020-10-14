@@ -1,11 +1,8 @@
 ﻿using BusinessLogicInterface;
-using DataAccess.Repositories;
 using DataAccessInterface;
 using Domain;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace BusinessLogic
 {
@@ -36,7 +33,6 @@ namespace BusinessLogic
             var bookingStages = this.bookingStageRepository.GetByBooking(bookingId);
             BookingStage bookingStage = GetCurrentStatus(bookingStages);
             return bookingStage;
-            
         }
 
         private BookingStage GetCurrentStatus(IEnumerable<BookingStage> bookingStages)
@@ -52,7 +48,7 @@ namespace BusinessLogic
             }
             if (bookingStage.Id == -1)
             {
-                throw new APIException("The booking has not been changed by an Administrator",400);
+                throw new APIException("The booking has not been changed by an Administrator", 200);
             }
             return bookingStage;
         }

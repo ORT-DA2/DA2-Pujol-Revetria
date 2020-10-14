@@ -1,11 +1,8 @@
-﻿using DataAccess.Context;
-using DataAccessInterface;
+﻿using DataAccessInterface;
 using Domain;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DataAccess.Repositories
 {
@@ -48,6 +45,5 @@ namespace DataAccess.Repositories
         {
             return administrators.Where(a => a.Email == email).FirstOrDefault();
         }
-
     }
 }

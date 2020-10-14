@@ -6,7 +6,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DataAccess.Tests
 {
@@ -15,6 +14,7 @@ namespace DataAccess.Tests
     {
         private DbContextOptions<BookedUYContext> _options = new DbContextOptionsBuilder<BookedUYContext>()
                 .UseInMemoryDatabase(databaseName: "BookedUYDB").Options;
+
         private BookedUYContext _context;
 
         [TestInitialize]
@@ -99,7 +99,6 @@ namespace DataAccess.Tests
             var repository = new BookingRepository(_context);
             repository.Add(booking);
             Assert.AreEqual(_context.Find<Booking>(id), booking);
-
         }
 
         [TestMethod]
@@ -109,8 +108,9 @@ namespace DataAccess.Tests
             Booking testBooking = new Booking()
             {
                 Id = 1,
-                Accommodation = new Accommodation() { 
-                    Name = "a" 
+                Accommodation = new Accommodation()
+                {
+                    Name = "a"
                 },
                 AccommodationId = 1,
                 BookingHistory = new List<BookingStage>(),
@@ -118,14 +118,14 @@ namespace DataAccess.Tests
                 CheckOut = DateTime.Now.AddDays(3),
                 GuestId = 2,
                 Guests = new List<Guest>(),
-                HeadGuest = new Tourist() { 
-                    Email = "a@a.com" 
+                HeadGuest = new Tourist()
+                {
+                    Email = "a@a.com"
                 },
                 TotalPrice = 35
             };
             List<Booking> bookingsList = new List<Booking>()
             {
-
                 new Booking()
                 {
                     Id=2,
@@ -140,7 +140,7 @@ namespace DataAccess.Tests
                     GuestId = 6,
                     Guests = new List<Guest>(),
                     HeadGuest = new Tourist()
-                    { 
+                    {
                         Email = "b@b.com"
                     },
                     TotalPrice = 142
@@ -175,7 +175,6 @@ namespace DataAccess.Tests
             };
             List<Booking> bookingsList = new List<Booking>()
             {
-
                 new Booking()
                 {
                     Id=2,

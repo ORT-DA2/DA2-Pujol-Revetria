@@ -1,16 +1,13 @@
 ﻿using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 
 namespace DomainTests
 {
     [TestClass]
     public class TouristTest
     {
-        Tourist tourist;
+        private Tourist tourist;
+
         [TestInitialize]
         public void StartUp()
         {
@@ -30,6 +27,7 @@ namespace DomainTests
             tourist.Name = output;
             Assert.AreEqual(tourist.Name, output);
         }
+
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestNameSet2()
@@ -54,6 +52,7 @@ namespace DomainTests
             tourist.LastName = output;
             Assert.AreEqual(tourist.LastName, output);
         }
+
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestLastNameSet2()

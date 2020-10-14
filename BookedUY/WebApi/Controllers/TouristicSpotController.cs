@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BusinessLogicInterface;
+﻿using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
 using WebApi.DTOs;
 using WebApi.Filters;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Migrations.Controllers
+namespace WebApi.Controllers
 {
-    [Route("api/touristicspot")]
+    [Route("api/touristicspots")]
     public class TouristicSpotController : BookedUYController
     {
         private readonly ITouristicSpotLogic touristicSpotLogic;
@@ -21,7 +19,6 @@ namespace Migrations.Controllers
         {
             this.touristicSpotLogic = touristicSpotLogic;
         }
-
 
         // GET: api/<TouristicSpotController>
         public IActionResult Get()
@@ -35,7 +32,7 @@ namespace Migrations.Controllers
         [HttpGet]
         public IActionResult GetByRegionCategory([FromQuery] int regionId, [FromQuery] List<int> categories)
         {
-            if (regionId <= 0 && (categories == null||categories.Count == 0))
+            if (regionId <= 0 && (categories == null || categories.Count == 0))
             {
                 return Get();
             }
@@ -53,7 +50,5 @@ namespace Migrations.Controllers
             var ret = new TouristicSpotModelOut(touristicSpotLogic.AddTouristicSpot(touristicSpot));
             return Ok(ret);
         }
-
-
     }
 }

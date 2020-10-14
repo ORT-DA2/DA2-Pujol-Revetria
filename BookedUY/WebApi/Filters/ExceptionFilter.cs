@@ -1,5 +1,4 @@
-﻿
-using Domain;
+﻿using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
@@ -19,14 +18,6 @@ namespace WebApi.Filters
                 context.Result = new ContentResult()
                 {
                     StatusCode = ex.StatusCode,
-                    Content = ex.Message
-                };
-            }
-            catch (Microsoft.EntityFrameworkCore.DbUpdateException ex)
-            {
-                context.Result = new ContentResult()
-                {
-                    StatusCode = 400,
                     Content = ex.Message
                 };
             }

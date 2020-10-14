@@ -1,7 +1,4 @@
 ﻿using Domain;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace WebApi.DTOs
 {
@@ -18,9 +15,8 @@ namespace WebApi.DTOs
             {
                 AsociatedBookingId = this.BookingId,
                 Description = this.Description,
-                Status=StatusMethods.StringToStatus(this.Status),
+                Status = StatusMethods.StringToStatus(this.Status),
                 AdministratorId = this.AdminId
-                
             };
             return bookingStage;
         }

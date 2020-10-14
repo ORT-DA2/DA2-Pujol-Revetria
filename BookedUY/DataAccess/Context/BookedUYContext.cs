@@ -1,11 +1,7 @@
 ﻿using Domain;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace DataAccess.Context
 {
@@ -21,9 +17,11 @@ namespace DataAccess.Context
         public DbSet<Tourist> Tourists { get; set; }
         public DbSet<AccommodationImage> AccommodationImages { get; set; }
         public DbSet<CategoryTouristicSpot> categoryTouristicSpots { get; set; }
-        public BookedUYContext() 
+
+        public BookedUYContext()
         {
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Booking>().HasKey(b => b.Id);
@@ -36,7 +34,7 @@ namespace DataAccess.Context
             modelBuilder.Entity<Guest>().HasKey(g => g.Id);
             modelBuilder.Entity<Guest>().Property(g => g.Multiplier);
             modelBuilder.Entity<Guest>().Property(g => g.Amount);
-            modelBuilder.Entity<Guest>().HasOne<Booking>(b => b.Booking).WithMany(b => b.Guests).HasForeignKey(b=>b.BookingId);
+            modelBuilder.Entity<Guest>().HasOne<Booking>(b => b.Booking).WithMany(b => b.Guests).HasForeignKey(b => b.BookingId);
 
             modelBuilder.Entity<BookingStage>().HasKey(s => s.Id);
             modelBuilder.Entity<BookingStage>().Property(b => b.EntryDate).IsRequired().HasDefaultValueSql("GETDATE()");
@@ -75,15 +73,18 @@ namespace DataAccess.Context
 
             modelBuilder.Entity<BookingStage>().HasOne<Administrator>(a => a.Administrator).WithMany(b => b.Entries).HasForeignKey(s => s.AdministratorId);
 
-            modelBuilder.Entity<AccommodationImage>().HasKey(i=>i.Id);
+            modelBuilder.Entity<AccommodationImage>().HasKey(i => i.Id);
             modelBuilder.Entity<AccommodationImage>().Property(i => i.Image);
             modelBuilder.Entity<AccommodationImage>().HasOne<Accommodation>(i => i.Accommodation).WithMany(a => a.Images).HasForeignKey(i => i.AccommodationId);
 
-            modelBuilder.Entity<CategoryTouristicSpot>().HasKey(t => new {t.CategoryId, t.TouristicSpotId});
+            modelBuilder.Entity<CategoryTouristicSpot>().HasKey(t => new { t.CategoryId, t.TouristicSpotId });
             modelBuilder.Entity<CategoryTouristicSpot>().HasOne<Category>(ct => ct.Category).WithMany(c => c.Spots).HasForeignKey(ct => ct.CategoryId);
             modelBuilder.Entity<CategoryTouristicSpot>().HasOne<TouristicSpot>(ct => ct.TouristicSpot).WithMany(t => t.Categories).HasForeignKey(ct => ct.TouristicSpotId);
         }
-        public BookedUYContext(DbContextOptions options) : base(options) { }
+
+        public BookedUYContext(DbContextOptions options) : base(options)
+        {
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -102,7 +103,5 @@ namespace DataAccess.Context
                 //optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database = BookedUYDB; Integrated Security = True;Trusted_Connection = True;MultipleActiveResultSets = True");
             }
         }
-
-
     }
 }
