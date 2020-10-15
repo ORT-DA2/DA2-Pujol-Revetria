@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace WebApi.Filters
 {
+    [ExcludeFromCodeCoverage]
     public class ExceptionFilter : IExceptionFilter
     {
         public void OnException(ExceptionContext context)

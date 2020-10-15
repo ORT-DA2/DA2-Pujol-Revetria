@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using SessionInterface;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace WebApi.Filters
 {
+    [ExcludeFromCodeCoverage]
     public class AuthorizationFilter : IAuthorizationFilter
     {
         private readonly ISessionLogic sessions;

@@ -64,6 +64,62 @@ namespace BusinessLogic.Tests
             Assert.IsTrue(result.Equals(touristicSpot));
         }
 
+        [ExpectedException(typeof(NullInputException))]
+        [TestMethod]
+        public void AddAccommodationNullInputTest()
+        {
+            int testId = 5;
+            List<CategoryTouristicSpot> categories = new List<CategoryTouristicSpot>();
+            CategoryTouristicSpot category = new CategoryTouristicSpot()
+            {
+                CategoryId = 1,
+                TouristicSpotId = 5
+            };
+            categories.Add(category);
+            TouristicSpot touristicSpot = new TouristicSpot()
+            {
+                Id = testId,
+                Name = "abm",
+                RegionId = 0,
+                Categories = categories
+            };
+            var mock = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            mock.Setup(p => p.Add(It.IsAny<TouristicSpot>())).Returns(touristicSpot);
+            mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
+            var logic = new TouristicSpotLogic(mock.Object);
+            var result = logic.AddTouristicSpot(touristicSpot);
+            mock.VerifyAll();
+            Assert.IsTrue(result.Equals(touristicSpot));
+        }
+
+        [ExpectedException(typeof(NullInputException))]
+        [TestMethod]
+        public void AddAccommodationNullInput2Test()
+        {
+            int testId = 5;
+            List<CategoryTouristicSpot> categories = new List<CategoryTouristicSpot>();
+            CategoryTouristicSpot category = new CategoryTouristicSpot()
+            {
+                CategoryId = 1,
+                TouristicSpotId = 5
+            };
+            categories.Add(category);
+            TouristicSpot touristicSpot = new TouristicSpot()
+            {
+                Id = testId,
+                Name = "abm",
+                RegionId = 5,
+                Categories = null
+            };
+            var mock = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            mock.Setup(p => p.Add(It.IsAny<TouristicSpot>())).Returns(touristicSpot);
+            mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
+            var logic = new TouristicSpotLogic(mock.Object);
+            var result = logic.AddTouristicSpot(touristicSpot);
+            mock.VerifyAll();
+            Assert.IsTrue(result.Equals(touristicSpot));
+        }
+
         [TestMethod]
         public void GetSpotsByCategoryAndRegionGetAllTest()
         {

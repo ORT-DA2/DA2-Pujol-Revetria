@@ -133,5 +133,39 @@ namespace BusinessLogic.Tests
             logic.Delete(administrator);
             mock.VerifyAll();
         }
+
+        [ExpectedException(typeof(NotFoundException))]
+        [TestMethod]
+        public void GetByIdExceptionTest()
+        {
+            int testId = 5;
+            Administrator administrator = new Administrator();
+            administrator.Id = testId;
+            administrator.Email = "ab@ab.com";
+            administrator.Password = "ab";
+            var mock = new Mock<IAdministratorRepository>(MockBehavior.Strict);
+            mock.Setup(p => p.Add(It.IsAny<Administrator>())).Returns(administrator);
+            mock.Setup(p => p.GetById(It.IsAny<int>())).Returns<Administrator>(null);
+            var logic = new AdministratorLogic(mock.Object);
+            var result = logic.GetById(5);
+            mock.VerifyAll();
+            Assert.IsTrue(result.Equals(administrator));
+        }
+
+        [TestMethod]
+        public void GetByIdTest()
+        {
+            int testId = 5;
+            Administrator administrator = new Administrator();
+            administrator.Id = testId;
+            administrator.Email = "ab@ab.com";
+            administrator.Password = "ab";
+            var mock = new Mock<IAdministratorRepository>(MockBehavior.Strict);
+            mock.Setup(p => p.GetById(It.IsAny<int>())).Returns(administrator);
+            var logic = new AdministratorLogic(mock.Object);
+            var result = logic.GetById(5);
+            mock.VerifyAll();
+            Assert.IsTrue(result.Equals(administrator));
+        }
     }
 }

@@ -8,10 +8,14 @@ namespace BusinessLogic
     public class BookingLogic : IBookingLogic
     {
         private readonly IRepository<Booking> bookingRepository;
+        private readonly IAccommodationRepository accommodationRepository;
+        private readonly ITouristRepository touristRepository;
 
-        public BookingLogic(IRepository<Booking> bookingRepository)
+        public BookingLogic(IRepository<Booking> bookingRepository, IAccommodationRepository accommodationRepository, ITouristRepository touristRepository)
         {
             this.bookingRepository = bookingRepository;
+            this.accommodationRepository = accommodationRepository;
+            this.touristRepository = touristRepository;
         }
 
         public Booking AddBooking(Booking booking)
@@ -23,6 +27,17 @@ namespace BusinessLogic
             if (booking.AccommodationId == 0)
             {
                 throw new NullInputException("Booking Accommodation");
+            }
+            
+            var accommodation = this.accommodationRepository.GetById(booking.AccommodationId);
+            if (accommodation == null)
+            {
+                throw new NotFoundException("Booking Accommodation");
+            }
+            var tourist = this.touristRepository.GetByEmail(booking.HeadGuest.Email);
+            if (tourist != null)
+            {
+                booking.HeadGuest = tourist;
             }
             double totalprice = CalculateTotalPrice(booking);
             booking.TotalPrice = totalprice;

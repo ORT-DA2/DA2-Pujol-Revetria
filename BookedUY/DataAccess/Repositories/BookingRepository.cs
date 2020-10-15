@@ -9,16 +9,12 @@ namespace DataAccess.Repositories
     public class BookingRepository : IRepository<Booking>
     {
         private readonly DbSet<Booking> bookings;
-        private readonly DbSet<Tourist> tourists;
-        private readonly DbSet<Accommodation> accommodations;
         private readonly DbContext bookedUYContext;
 
         public BookingRepository(DbContext context)
         {
             this.bookedUYContext = context;
             this.bookings = context.Set<Booking>();
-            this.tourists = context.Set<Tourist>();
-            this.accommodations = context.Set<Accommodation>();
         }
 
         public IEnumerable<Booking> GetAll()
@@ -28,16 +24,6 @@ namespace DataAccess.Repositories
 
         public Booking Add(Booking booking)
         {
-            var tourist = this.tourists.Where(t => t.Email == booking.HeadGuest.Email).SingleOrDefault<Tourist>();
-            if (tourist != null)
-            {
-                booking.HeadGuest = tourist;
-            }
-            var accommodation = this.accommodations.Find(booking.AccommodationId);
-            if (accommodation == null)
-            {
-                throw new NotFoundException("Booking Accommodation");
-            }
             this.bookings.Add(booking);
             this.bookedUYContext.SaveChanges();
             return booking;

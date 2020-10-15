@@ -8,10 +8,13 @@ namespace BusinessLogic
     public class AccommodationLogic : IAccommodationLogic
     {
         private readonly IAccommodationRepository accommodationRepository;
+        private readonly ITouristicSpotRepository spotRepository;
 
-        public AccommodationLogic(IAccommodationRepository accommodationRepository)
+
+        public AccommodationLogic(IAccommodationRepository accommodationRepository, ITouristicSpotRepository spotRepository)
         {
             this.accommodationRepository = accommodationRepository;
+            this.spotRepository = spotRepository;
         }
 
         public Accommodation AddAccommodation(Accommodation accommodation)
@@ -27,6 +30,10 @@ namespace BusinessLogic
             if (this.accommodationRepository.GetByName(accommodation.Name) != null)
             {
                 throw new AlreadyExistsException("Accommodation");
+            }
+            if (this.spotRepository.GetById(accommodation.SpotId)==null)
+            {
+                throw new NotFoundException("Accommodation Spot");
             }
             var newAccom = this.accommodationRepository.Add(accommodation);
             return newAccom;

@@ -10,11 +10,13 @@ namespace BusinessLogic
     {
         private readonly IBookingStageRepository bookingStageRepository;
         private readonly IRepository<Booking> bookingRepository;
+        private readonly IAdministratorRepository administratorRepository;
 
-        public BookingStageLogic(IBookingStageRepository bookingStageRepository, IRepository<Booking> bookingRepository)
+        public BookingStageLogic(IBookingStageRepository bookingStageRepository, IRepository<Booking> bookingRepository, IAdministratorRepository administratorRepository)
         {
             this.bookingStageRepository = bookingStageRepository;
             this.bookingRepository = bookingRepository;
+            this.administratorRepository = administratorRepository;
         }
 
         public BookingStage AddBookingStage(BookingStage stage)
@@ -26,6 +28,11 @@ namespace BusinessLogic
             if (booking == null)
             {
                 throw new NotFoundException("BookingStage Booking");
+            }
+            var admin = this.administratorRepository.GetById(stage.AdministratorId);
+            if(admin == null)
+            {
+                throw new NotFoundException("BookingStage Admin");
             }
             return this.bookingStageRepository.Add(stage);
         }

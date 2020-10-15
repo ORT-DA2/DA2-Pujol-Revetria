@@ -34,12 +34,20 @@ namespace BusinessLogic.Tests
                 PricePerNight = 5,
                 SpotId = 3,
             };
+            TouristicSpot spot = new TouristicSpot()
+            {
+                Name = "a",
+                Id = 6
+            };
             var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mock.Setup(p => p.Add(It.IsAny<Accommodation>())).Returns(accommodation);
             mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
-            var logic = new AccommodationLogic(mock.Object);
+            var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            mock2.Setup(p => p.GetById(It.IsAny<int>())).Returns(spot);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object);
             var result = logic.AddAccommodation(accommodation);
             mock.VerifyAll();
+            mock2.VerifyAll();
             Assert.IsTrue(result.Equals(accommodation));
         }
 
@@ -66,14 +74,22 @@ namespace BusinessLogic.Tests
                 PricePerNight = 5,
                 SpotId = 3,
             };
+            TouristicSpot spot = new TouristicSpot()
+            {
+                Name = "a",
+                Id = 6
+            };
             var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mock.Setup(p => p.Add(It.IsAny<Accommodation>())).Returns(accommodation);
             mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
             mock.Setup(p => p.GetById(It.IsAny<int>())).Returns(accommodation);
-            var logic = new AccommodationLogic(mock.Object);
+            var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            mock2.Setup(p => p.GetById(It.IsAny<int>())).Returns(spot);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object);
             var result = logic.AddAccommodation(accommodation);
             var expected = logic.GetById(5);
             mock.VerifyAll();
+            mock2.VerifyAll();
             Assert.IsTrue(result.Equals(expected));
         }
 
@@ -101,14 +117,65 @@ namespace BusinessLogic.Tests
                 PricePerNight = 5,
                 SpotId = 3,
             };
+            TouristicSpot spot = new TouristicSpot()
+            {
+                Name = "a",
+                Id = 6
+            };
             var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mock.Setup(p => p.Add(It.IsAny<Accommodation>())).Returns(accommodation);
             mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
             mock.Setup(p => p.GetById(It.IsAny<int>())).Returns<Accommodation>(null);
-            var logic = new AccommodationLogic(mock.Object);
+            var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            mock2.Setup(p => p.GetById(It.IsAny<int>())).Returns(spot);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object);
             var result = logic.AddAccommodation(accommodation);
             var expected = logic.GetById(5);
             mock.VerifyAll();
+            mock2.VerifyAll();
+            Assert.IsTrue(result.Equals(expected));
+        }
+
+        [ExpectedException(typeof(NotFoundException))]
+        [TestMethod]
+        public void AddAccommodationNotFoundTest2()
+        {
+            int testId = 5;
+            List<AccommodationImage> images = new List<AccommodationImage>();
+            AccommodationImage image = new AccommodationImage()
+            {
+                Image = "image",
+                AccommodationId = testId
+
+            };
+            images.Add(image);
+            Accommodation accommodation = new Accommodation()
+            {
+                Id = testId,
+                Name = "abom",
+                Address = "ag",
+                Images = images,
+                ContactNumber = "a",
+                Information = "a",
+                PricePerNight = 5,
+                SpotId = 3,
+            };
+            TouristicSpot spot = new TouristicSpot()
+            {
+                Name = "a",
+                Id = 6
+            };
+            var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
+            mock.Setup(p => p.Add(It.IsAny<Accommodation>())).Returns(accommodation);
+            mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
+            mock.Setup(p => p.GetById(It.IsAny<int>())).Returns(accommodation);
+            var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            mock2.Setup(p => p.GetById(It.IsAny<int>())).Returns<TouristicSpot>(null);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object);
+            var result = logic.AddAccommodation(accommodation);
+            var expected = logic.GetById(5);
+            mock.VerifyAll();
+            mock2.VerifyAll();
             Assert.IsTrue(result.Equals(expected));
         }
 
@@ -136,13 +203,20 @@ namespace BusinessLogic.Tests
                 PricePerNight = 5,
                 SpotId = 3,
             };
-            
+            TouristicSpot spot = new TouristicSpot()
+            {
+                Name = "a",
+                Id = 6
+            };
             var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mock.Setup(p => p.Add(It.IsAny<Accommodation>())).Returns(accommodation);
             mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns(accommodation);
-            var logic = new AccommodationLogic(mock.Object);
+            var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            mock2.Setup(p => p.GetById(It.IsAny<int>())).Returns(spot);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object);
             var result = logic.AddAccommodation(accommodation);
             mock.VerifyAll();
+            mock2.VerifyAll();
             Assert.IsTrue(result.Equals(accommodation));
         }
 
@@ -170,13 +244,20 @@ namespace BusinessLogic.Tests
                 PricePerNight = 5,
                 SpotId = 0,
             };
-
+            TouristicSpot spot = new TouristicSpot()
+            {
+                Name = "a",
+                Id = 6
+            };
             var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mock.Setup(p => p.Add(It.IsAny<Accommodation>())).Returns(accommodation);
             mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns(accommodation);
-            var logic = new AccommodationLogic(mock.Object);
+            var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            mock2.Setup(p => p.GetById(It.IsAny<int>())).Returns(spot);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object);
             var result = logic.AddAccommodation(accommodation);
             mock.VerifyAll();
+            mock2.VerifyAll();
             Assert.IsTrue(result.Equals(accommodation));
         }
 
@@ -197,12 +278,20 @@ namespace BusinessLogic.Tests
                 SpotId = 3,
             };
 
+            TouristicSpot spot = new TouristicSpot()
+            {
+                Name = "a",
+                Id = 6
+            };
             var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mock.Setup(p => p.Add(It.IsAny<Accommodation>())).Returns(accommodation);
             mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns(accommodation);
-            var logic = new AccommodationLogic(mock.Object);
+            var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            mock2.Setup(p => p.GetById(It.IsAny<int>())).Returns(spot);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object);
             var result = logic.AddAccommodation(accommodation);
             mock.VerifyAll();
+            mock2.VerifyAll();
             Assert.IsTrue(result.Equals(accommodation));
         }
 
@@ -216,7 +305,8 @@ namespace BusinessLogic.Tests
             var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns(accommodation);
             mock.Setup(p => p.Delete(It.IsAny<Accommodation>())).Returns(accommodation);
-            var logic = new AccommodationLogic(mock.Object);
+            var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object);
             var result = logic.DeleteAccommodation(accommodation);
             mock.VerifyAll();
             Assert.AreEqual(result, accommodation);
@@ -233,7 +323,8 @@ namespace BusinessLogic.Tests
             var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
             mock.Setup(p => p.Delete(It.IsAny<Accommodation>())).Returns(accommodation);
-            var logic = new AccommodationLogic(mock.Object);
+            var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object);
             logic.DeleteAccommodation(accommodation);
             mock.VerifyAll();
         }
@@ -250,7 +341,8 @@ namespace BusinessLogic.Tests
             accommodations.Add(accommodation);
             var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mock.Setup(p => p.GetAvailableBySpot(It.IsAny<int>())).Returns(accommodations);
-            var logic = new AccommodationLogic(mock.Object);
+            var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object);
             var result = logic.GetAvailableAccommodationBySpot(1);
             mock.VerifyAll();
             Assert.IsTrue(accommodations.SequenceEqual(result));
@@ -267,7 +359,8 @@ namespace BusinessLogic.Tests
             var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mock.Setup(p => p.GetById(It.IsAny<int>())).Returns(accommodation);
             mock.Setup(p => p.UpdateCapacity(It.IsAny<int>(), It.IsAny<bool>()));
-            var logic = new AccommodationLogic(mock.Object);
+            var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object);
             logic.UpdateCapacity(2, true);
             mock.VerifyAll();
         }
@@ -283,7 +376,8 @@ namespace BusinessLogic.Tests
             var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mock.Setup(p => p.GetById(It.IsAny<int>())).Returns(accommodation);
             mock.Setup(p => p.UpdateCapacity(It.IsAny<int>(), It.IsAny<bool>()));
-            var logic = new AccommodationLogic(mock.Object);
+            var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object);
             logic.UpdateCapacity(2, false);
             mock.VerifyAll();
         }
@@ -300,7 +394,8 @@ namespace BusinessLogic.Tests
             var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mock.Setup(p => p.GetById(It.IsAny<int>())).Returns<Accommodation>(null);
             mock.Setup(p => p.UpdateCapacity(It.IsAny<int>(), It.IsAny<bool>()));
-            var logic = new AccommodationLogic(mock.Object);
+            var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object);
             logic.UpdateCapacity(2, false);
             mock.VerifyAll();
         }
