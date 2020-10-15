@@ -75,6 +75,21 @@ namespace DataAccess.Tests
         [TestMethod]
         public void TestAddAccommodation()
         {
+            int testId = 5;
+            List<CategoryTouristicSpot> categories = new List<CategoryTouristicSpot>();
+            CategoryTouristicSpot category = new CategoryTouristicSpot()
+            {
+                CategoryId = 1,
+                TouristicSpotId = 5
+            };
+            categories.Add(category);
+            TouristicSpot spot = new TouristicSpot()
+            {
+                Name = "h",
+                Categories = categories,
+                RegionId = testId
+            };
+            this._context.TouristicSpots.Add(spot);
             int id = 3;
             Accommodation accommodation = new Accommodation()
             {
@@ -86,10 +101,7 @@ namespace DataAccess.Tests
                 Name = "Radisson",
                 Information = "nice",
                 PricePerNight = 1.76,
-                Spot = new TouristicSpot()
-                {
-                    Name = "h"
-                },
+                Spot = spot,
                 SpotId = 1
             };
             var repository = new AccommodationRepository(_context);

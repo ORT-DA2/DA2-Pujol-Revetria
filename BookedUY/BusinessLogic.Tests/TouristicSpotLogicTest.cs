@@ -13,9 +13,20 @@ namespace BusinessLogic.Tests
         public void AddAccommodationTest()
         {
             int testId = 5;
-            TouristicSpot touristicSpot = new TouristicSpot();
-            touristicSpot.Id = testId;
-            touristicSpot.Name = "abm";
+            List<CategoryTouristicSpot> categories = new List<CategoryTouristicSpot>();
+            CategoryTouristicSpot category = new CategoryTouristicSpot()
+            {
+                CategoryId = 1,
+                TouristicSpotId = 5
+            };
+            categories.Add(category);
+            TouristicSpot touristicSpot = new TouristicSpot()
+            {
+                Id = testId,
+                Name = "abm",
+                RegionId = 3,
+                Categories = categories
+            };
             var mock = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
             mock.Setup(p => p.Add(It.IsAny<TouristicSpot>())).Returns(touristicSpot);
             mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
@@ -30,9 +41,20 @@ namespace BusinessLogic.Tests
         public void AddTouristicSpotAlreadyExistsTest()
         {
             int testId = 5;
-            TouristicSpot touristicSpot = new TouristicSpot();
-            touristicSpot.Id = testId;
-            touristicSpot.Name = "abom";
+            List<CategoryTouristicSpot> categories = new List<CategoryTouristicSpot>();
+            CategoryTouristicSpot category = new CategoryTouristicSpot()
+            {
+                CategoryId = 1,
+                TouristicSpotId = 5
+            };
+            categories.Add(category);
+            TouristicSpot touristicSpot = new TouristicSpot()
+            {
+                Id = testId,
+                Name = "abm",
+                RegionId = 3,
+                Categories = categories
+            };
             var mock = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
             mock.Setup(p => p.Add(It.IsAny<TouristicSpot>())).Returns(touristicSpot);
             mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns(touristicSpot);

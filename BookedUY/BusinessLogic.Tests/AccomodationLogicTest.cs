@@ -15,9 +15,25 @@ namespace BusinessLogic.Tests
         public void AddAccommodationTest()
         {
             int testId = 5;
-            Accommodation accommodation = new Accommodation();
-            accommodation.Id = testId;
-            accommodation.Name = "abm";
+            List<AccommodationImage> images = new List<AccommodationImage>();
+            AccommodationImage image = new AccommodationImage()
+            {
+                Image = "image",
+                AccommodationId = testId
+
+            };
+            images.Add(image);
+            Accommodation accommodation = new Accommodation()
+            {
+                Id = testId,
+                Name = "abom",
+                Address = "ag",
+                Images = images,
+                ContactNumber = "a",
+                Information = "a",
+                PricePerNight = 5,
+                SpotId = 3,
+            };
             var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mock.Setup(p => p.Add(It.IsAny<Accommodation>())).Returns(accommodation);
             mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
@@ -28,13 +44,159 @@ namespace BusinessLogic.Tests
         }
 
         [TestMethod]
+        public void AddAccommodationTest2()
+        {
+            int testId = 5;
+            List<AccommodationImage> images = new List<AccommodationImage>();
+            AccommodationImage image = new AccommodationImage()
+            {
+                Image = "image",
+                AccommodationId = testId
+
+            };
+            images.Add(image);
+            Accommodation accommodation = new Accommodation()
+            {
+                Id = testId,
+                Name = "abom",
+                Address = "ag",
+                Images = images,
+                ContactNumber = "a",
+                Information = "a",
+                PricePerNight = 5,
+                SpotId = 3,
+            };
+            var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
+            mock.Setup(p => p.Add(It.IsAny<Accommodation>())).Returns(accommodation);
+            mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
+            mock.Setup(p => p.GetById(It.IsAny<int>())).Returns(accommodation);
+            var logic = new AccommodationLogic(mock.Object);
+            var result = logic.AddAccommodation(accommodation);
+            var expected = logic.GetById(5);
+            mock.VerifyAll();
+            Assert.IsTrue(result.Equals(expected));
+        }
+
+        [ExpectedException(typeof(NotFoundException))]
+        [TestMethod]
+        public void AddAccommodationNotFoundTest()
+        {
+            int testId = 5;
+            List<AccommodationImage> images = new List<AccommodationImage>();
+            AccommodationImage image = new AccommodationImage()
+            {
+                Image = "image",
+                AccommodationId = testId
+
+            };
+            images.Add(image);
+            Accommodation accommodation = new Accommodation()
+            {
+                Id = testId,
+                Name = "abom",
+                Address = "ag",
+                Images = images,
+                ContactNumber = "a",
+                Information = "a",
+                PricePerNight = 5,
+                SpotId = 3,
+            };
+            var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
+            mock.Setup(p => p.Add(It.IsAny<Accommodation>())).Returns(accommodation);
+            mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
+            mock.Setup(p => p.GetById(It.IsAny<int>())).Returns<Accommodation>(null);
+            var logic = new AccommodationLogic(mock.Object);
+            var result = logic.AddAccommodation(accommodation);
+            var expected = logic.GetById(5);
+            mock.VerifyAll();
+            Assert.IsTrue(result.Equals(expected));
+        }
+
         [ExpectedException(typeof(AlreadyExistsException))]
+        [TestMethod]
         public void AddAccommodationAlreadyExistsTest()
         {
             int testId = 5;
-            Accommodation accommodation = new Accommodation();
-            accommodation.Id = testId;
-            accommodation.Name = "abom";
+            List<AccommodationImage> images = new List<AccommodationImage>();
+            AccommodationImage image = new AccommodationImage()
+            {
+                Image = "image",
+                AccommodationId = testId
+                
+            };
+            images.Add(image);
+            Accommodation accommodation = new Accommodation()
+            {
+                Id = testId,
+                Name = "abom",
+                Address = "ag",
+                Images = images,
+                ContactNumber = "a",
+                Information = "a",
+                PricePerNight = 5,
+                SpotId = 3,
+            };
+            
+            var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
+            mock.Setup(p => p.Add(It.IsAny<Accommodation>())).Returns(accommodation);
+            mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns(accommodation);
+            var logic = new AccommodationLogic(mock.Object);
+            var result = logic.AddAccommodation(accommodation);
+            mock.VerifyAll();
+            Assert.IsTrue(result.Equals(accommodation));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NullInputException))]
+        public void AddAccommodationNullInputTest()
+        {
+            int testId = 5;
+            List<AccommodationImage> images = new List<AccommodationImage>();
+            AccommodationImage image = new AccommodationImage()
+            {
+                Image = "image",
+                AccommodationId = testId
+
+            };
+            images.Add(image);
+            Accommodation accommodation = new Accommodation()
+            {
+                Id = testId,
+                Name = "abom",
+                Address = "ag",
+                Images = images,
+                ContactNumber = "a",
+                Information = "a",
+                PricePerNight = 5,
+                SpotId = 0,
+            };
+
+            var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
+            mock.Setup(p => p.Add(It.IsAny<Accommodation>())).Returns(accommodation);
+            mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns(accommodation);
+            var logic = new AccommodationLogic(mock.Object);
+            var result = logic.AddAccommodation(accommodation);
+            mock.VerifyAll();
+            Assert.IsTrue(result.Equals(accommodation));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NullInputException))]
+        public void AddAccommodationNullInputTest2()
+        {
+            int testId = 5;
+            Accommodation accommodation = new Accommodation()
+            {
+                Id = testId,
+                Name = "abom",
+                Address = "ag",
+                Images = null,
+                ContactNumber = "a",
+                Information = "a",
+                PricePerNight = 5,
+                SpotId = 3,
+            };
+
             var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mock.Setup(p => p.Add(It.IsAny<Accommodation>())).Returns(accommodation);
             mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns(accommodation);

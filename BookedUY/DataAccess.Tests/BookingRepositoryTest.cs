@@ -82,6 +82,22 @@ namespace DataAccess.Tests
         public void TestAddBooking()
         {
             int id = 1;
+            List<AccommodationImage> list = new List<AccommodationImage>();
+            AccommodationImage image = new AccommodationImage()
+            {
+                AccommodationId = id,
+                Image = "a"
+            };
+            list.Add(image);
+            Accommodation accommodation = new Accommodation()
+            {
+                Id = id,
+                Name = "a",
+                Address = "d",
+                ContactNumber = "a",
+                Images = list
+            };
+            this._context.Accommodations.Add(accommodation);
             Booking booking = new Booking()
             {
                 Id = id,

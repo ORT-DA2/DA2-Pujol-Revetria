@@ -19,9 +19,18 @@ namespace WebApi.DTOs
         {
             Id = b.Id;
             AccommodationId = b.AccommodationId;
-            AccommodationName = b.Accommodation.Name;
-            AccommodationAddress = b.Accommodation.Address;
-            AccommodationContact = b.Accommodation.ContactNumber;
+            if (b.Accommodation == null)
+            {
+                AccommodationName = null;
+                AccommodationAddress = null;
+                AccommodationContact = null;
+            }
+            else
+            {
+                AccommodationName = b.Accommodation.Name;
+                AccommodationAddress = b.Accommodation.Address;
+                AccommodationContact = b.Accommodation.ContactNumber;
+            }
             CheckIn = b.CheckIn;
             CheckOut = b.CheckOut;
             Price = b.TotalPrice;

@@ -18,6 +18,7 @@ namespace DataAccess.Repositories
             this.bookedUYContext = context;
             this.bookings = context.Set<Booking>();
             this.tourists = context.Set<Tourist>();
+            this.accommodations = context.Set<Accommodation>();
         }
 
         public IEnumerable<Booking> GetAll()
