@@ -10,6 +10,7 @@ namespace DataAccess.Repositories
     {
         private readonly DbSet<Booking> bookings;
         private readonly DbSet<Tourist> tourists;
+        private readonly DbSet<Accommodation> accommodations;
         private readonly DbContext bookedUYContext;
 
         public BookingRepository(DbContext context)
@@ -30,6 +31,11 @@ namespace DataAccess.Repositories
             if (tourist != null)
             {
                 booking.HeadGuest = tourist;
+            }
+            var accommodation = this.accommodations.Find(booking.AccommodationId);
+            if (accommodation == null)
+            {
+                throw new NotFoundException("Booking Accommodation");
             }
             this.bookings.Add(booking);
             this.bookedUYContext.SaveChanges();
