@@ -1,14 +1,5 @@
-﻿using BusinessLogic;
-using BusinessLogicInterface;
-using DataAccess.Repositories;
-using DataAccessInterface;
-using Domain;
+﻿using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Migrations.Controllers;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace WebApi.Tests
 {

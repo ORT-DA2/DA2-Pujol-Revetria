@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BusinessLogicInterface;
-using Domain;
+﻿using BusinessLogicInterface;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs;
 using WebApi.Filters;
@@ -12,9 +7,9 @@ using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
-    [Route("api/bookingStage")]
+    [Route("api/bookingstages")]
     [ApiController]
-    public class BookingStageController : ControllerBase
+    public class BookingStageController : BookedUYController
     {
         private readonly IBookingStageLogic bookingStageLogic;
 
@@ -22,7 +17,6 @@ namespace WebApi.Controllers
         {
             this.bookingStageLogic = bookingStageLogic;
         }
-
 
         // GET api/<BookingStageController>/5
         [HttpGet("{id}")]

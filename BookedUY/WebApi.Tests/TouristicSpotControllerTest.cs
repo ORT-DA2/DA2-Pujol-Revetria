@@ -2,11 +2,9 @@
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Migrations.Controllers;
 using Moq;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using WebApi.Controllers;
 using WebApi.DTOs;
 
 namespace WebApi.Tests
@@ -25,10 +23,11 @@ namespace WebApi.Tests
             var mock = new Mock<ITouristicSpotLogic>(MockBehavior.Strict);
             mock.Setup(p => p.GetSpotsByRegionAndCategory(It.IsAny<List<int>>(), It.IsAny<int>())).Returns(list);
             var controller = new TouristicSpotController(mock.Object);
-            var result = controller.GetByRegionCategory(-1,null) as OkObjectResult;
+            var result = controller.GetByRegionCategory(-1, null) as OkObjectResult;
             mock.VerifyAll();
             Assert.AreEqual(200, result.StatusCode);
         }
+
         [TestMethod]
         public void TestGetByRegionAndCategory()
         {
@@ -46,6 +45,7 @@ namespace WebApi.Tests
             mock.VerifyAll();
             Assert.AreEqual(200, result.StatusCode);
         }
+
         [TestMethod]
         public void TestCreateTouristicSpot()
         {
@@ -56,7 +56,7 @@ namespace WebApi.Tests
             touristicSpotModel.Description = touristicSpot.Description;
             touristicSpotModel.Name = touristicSpot.Name;
             int[] list = new int[1];
-            list[0]=1;
+            list[0] = 1;
             touristicSpotModel.Categories = list;
             var mock = new Mock<ITouristicSpotLogic>(MockBehavior.Strict);
             mock.Setup(p => p.AddTouristicSpot(It.IsAny<TouristicSpot>())).Returns(touristicSpot);

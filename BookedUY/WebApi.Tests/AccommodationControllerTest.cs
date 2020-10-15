@@ -1,13 +1,10 @@
-﻿using BusinessLogic;
-using BusinessLogicInterface;
+﻿using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Migrations.Controllers;
 using Moq;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using WebApi.Controllers;
 using WebApi.DTOs;
 
 namespace WebApi.Tests
@@ -52,7 +49,7 @@ namespace WebApi.Tests
                 ContactNumber = "a",
                 Information = "a",
                 PricePerNight = 5.0,
-                Images=list
+                Images = list
             };
             var mock = new Mock<IAccommodationLogic>(MockBehavior.Strict);
             mock.Setup(p => p.GetById(It.IsAny<int>())).Returns(accommodation);

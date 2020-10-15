@@ -1,10 +1,8 @@
 ﻿using DataAccessInterface;
 using Domain;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DataAccess.Repositories
 {
@@ -21,7 +19,7 @@ namespace DataAccess.Repositories
 
         public IEnumerable<BookingStage> GetAll()
         {
-            return this.bookingStages.Include(b=>b.Administrator).Include(b=>b.AsociatedBooking);
+            return this.bookingStages.Include(b => b.Administrator).Include(b => b.AsociatedBooking);
         }
 
         public BookingStage Add(BookingStage bookingStage)
@@ -45,7 +43,7 @@ namespace DataAccess.Repositories
 
         public BookingStage GetById(int id)
         {
-            return this.bookingStages.Include(b => b.Administrator).Include(b => b.AsociatedBooking).Where(b=>b.Id==id).SingleOrDefault();
+            return this.bookingStages.Include(b => b.Administrator).Include(b => b.AsociatedBooking).Where(b => b.Id == id).SingleOrDefault();
         }
     }
 }

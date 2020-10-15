@@ -5,7 +5,6 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace BusinessLogic.Tests
 {
@@ -107,7 +106,7 @@ namespace BusinessLogic.Tests
             mock.Setup(p => p.GetById(It.IsAny<int>())).Returns(accommodation);
             mock.Setup(p => p.UpdateCapacity(It.IsAny<int>(), It.IsAny<bool>()));
             var logic = new AccommodationLogic(mock.Object);
-            logic.UpdateCapacity(2,true);
+            logic.UpdateCapacity(2, true);
             mock.VerifyAll();
         }
 

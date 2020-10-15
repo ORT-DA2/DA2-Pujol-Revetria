@@ -6,7 +6,8 @@ namespace DomainTests
     [TestClass]
     public class AccommodationTest
     {
-        Accommodation accommodation;
+        private Accommodation accommodation;
+
         [TestInitialize]
         public void StartUp()
         {
@@ -140,7 +141,6 @@ namespace DomainTests
             accommodation.PricePerNight = test;
             Assert.Fail();
         }
-
 
         [TestMethod]
         public void TestEqualsExpectedTrue()

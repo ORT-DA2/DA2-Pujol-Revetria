@@ -1,15 +1,13 @@
 ﻿using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DomainTests
 {
     [TestClass]
     public class RegionTest
     {
-        Region region;
+        private Region region;
+
         [TestInitialize]
         public void StartUp()
         {
@@ -132,5 +130,4 @@ namespace DomainTests
             Assert.IsFalse(region.Equals(test));
         }
     }
-
 }

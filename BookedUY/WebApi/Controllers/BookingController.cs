@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Threading.Tasks;
-using BusinessLogicInterface;
+﻿using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using WebApi.DTOs;
 
-namespace Migrations.Controllers
+namespace WebApi.Controllers
 {
-    [Route("api/booking")]
+    [Route("api/bookings")]
     public class BookingController : BookedUYController
     {
         private readonly IBookingLogic bookingLogic;
+
         public BookingController(IBookingLogic bookingLogic)
         {
             this.bookingLogic = bookingLogic;
         }
+
         // GET: api/<BookingController>
         [HttpGet]
         public IActionResult Get()
@@ -42,6 +40,7 @@ namespace Migrations.Controllers
         {
             var booking = newBooking.FromModelInToBooking();
             var response = this.bookingLogic.AddBooking(booking);
+            response.Accommodation = new Accommodation();
             return Ok(new BookingModelOut(response));
         }
     }

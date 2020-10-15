@@ -6,7 +6,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DataAccess.Tests
 {
@@ -15,6 +14,7 @@ namespace DataAccess.Tests
     {
         private DbContextOptions<BookedUYContext> _options = new DbContextOptionsBuilder<BookedUYContext>()
                 .UseInMemoryDatabase(databaseName: "BookedUYDB").Options;
+
         private BookedUYContext _context;
 
         [TestInitialize]
@@ -92,7 +92,6 @@ namespace DataAccess.Tests
         [TestMethod]
         public void TestGetByRegion()
         {
-
             TouristicSpot touristicSpot = new TouristicSpot()
             {
                 Id = 4,

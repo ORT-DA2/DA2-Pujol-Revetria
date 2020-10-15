@@ -1,11 +1,8 @@
-﻿using DataAccess.Context;
-using DataAccessInterface;
+﻿using DataAccessInterface;
 using Domain;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DataAccess.Repositories
 {
@@ -13,20 +10,27 @@ namespace DataAccess.Repositories
     {
         private readonly DbSet<Accommodation> accommodations;
         private readonly DbContext bookedUYContext;
+        private readonly DbSet<TouristicSpot> spots;
 
         public AccommodationRepository(DbContext context)
         {
             this.bookedUYContext = context;
             this.accommodations = context.Set<Accommodation>();
+            this.spots = context.Set<TouristicSpot>();
         }
 
         public IEnumerable<Accommodation> GetAll()
         {
-            return this.accommodations.Include(a => a.Spot).Include(a=>a.Images);
+            return this.accommodations.Include(a => a.Spot).Include(a => a.Images);
         }
 
         public Accommodation Add(Accommodation accommodation)
         {
+            var spot = spots.Find(accommodation.SpotId);
+            if (spot == null)
+            {
+                throw new NotFoundException("Accommodation Spot");
+            }
             this.accommodations.Add(accommodation);
             bookedUYContext.SaveChanges();
             return accommodation;
@@ -41,17 +45,17 @@ namespace DataAccess.Repositories
 
         public Accommodation GetById(int id)
         {
-            return this.accommodations.Include(a=>a.Spot).Include(a => a.Images).Where(a=>a.Id==id).SingleOrDefault();
+            return this.accommodations.Include(a => a.Spot).Include(a => a.Images).Where(a => a.Id == id).SingleOrDefault();
         }
 
         public Accommodation GetByName(string name)
         {
-            return this.accommodations.Include(a=>a.Spot).Include(a => a.Images).Where(a => a.Name == name).FirstOrDefault();
+            return this.accommodations.Include(a => a.Spot).Include(a => a.Images).Where(a => a.Name == name).FirstOrDefault();
         }
 
         public IEnumerable<Accommodation> GetAvailableBySpot(int spotId)
         {
-            return this.accommodations.Include(a=>a.Spot).Include(a => a.Images).Where(a => a.SpotId == spotId && a.Full == false);
+            return this.accommodations.Include(a => a.Spot).Include(a => a.Images).Where(a => a.SpotId == spotId && a.Full == false);
         }
 
         public void UpdateCapacity(int accommodationId, bool capacity)

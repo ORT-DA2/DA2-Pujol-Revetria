@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Domain
 {
     public class Accommodation
     {
         public int Id { get; set; }
-        public TouristicSpot Spot{ get; set; }
+        public TouristicSpot Spot { get; set; }
         public int SpotId { get; set; }
         private string _name;
+
         public string Name
         {
             get { return _name; }
@@ -25,7 +24,9 @@ namespace Domain
                 }
             }
         }
+
         private string _address;
+
         public string Address
         {
             get { return _address; }
@@ -41,12 +42,14 @@ namespace Domain
                 }
             }
         }
+
         private string _contactNumber;
+
         public string ContactNumber
         {
-            get 
-            { 
-                return _contactNumber; 
+            get
+            {
+                return _contactNumber;
             }
             set
             {
@@ -60,12 +63,14 @@ namespace Domain
                 }
             }
         }
+
         private string _information;
+
         public string Information
         {
-            get 
-            { 
-                return _information; 
+            get
+            {
+                return _information;
             }
             set
             {
@@ -79,7 +84,9 @@ namespace Domain
                 }
             }
         }
+
         private double _pricePerNight;
+
         public double PricePerNight
         {
             get
@@ -98,9 +105,11 @@ namespace Domain
                 }
             }
         }
+
         public bool Full { get; set; }
-        public List<Booking> Bookings{ get; set;}
+        public List<Booking> Bookings { get; set; }
         public List<AccommodationImage> Images { get; set; }
+
         public override bool Equals(object obj)
         {
             var result = false;

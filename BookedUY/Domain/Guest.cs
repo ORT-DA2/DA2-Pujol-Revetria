@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Domain
+﻿namespace Domain
 {
     public class Guest
     {
         public int Id { get; set; }
         private int _amount;
+
         public int Amount
         {
             get
@@ -26,6 +23,7 @@ namespace Domain
                 }
             }
         }
+
         public double Multiplier { get; set; }
 
         public Booking Booking { get; set; }

@@ -13,6 +13,7 @@ namespace DataAccess.Tests
     {
         private DbContextOptions<BookedUYContext> _options = new DbContextOptionsBuilder<BookedUYContext>()
                 .UseInMemoryDatabase(databaseName: "BookedUYDB").Options;
+
         private BookedUYContext _context;
 
         [TestInitialize]

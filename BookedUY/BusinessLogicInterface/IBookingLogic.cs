@@ -1,5 +1,4 @@
 ﻿using Domain;
-using System;
 using System.Collections.Generic;
 
 namespace BusinessLogicInterface
@@ -9,6 +8,7 @@ namespace BusinessLogicInterface
         Booking AddBooking(Booking booking);
 
         IEnumerable<Booking> GetAll();
+
         Booking GetById(int id);
     }
 }

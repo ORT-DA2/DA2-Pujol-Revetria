@@ -1,7 +1,4 @@
 ﻿using Domain;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace WebApi.DTOs
 {
@@ -9,6 +6,7 @@ namespace WebApi.DTOs
     {
         public string Email { get; set; }
         public string Password { get; set; }
+
         public Administrator FromModelInToAdministrator()
         {
             Administrator admin = new Administrator()

@@ -7,9 +7,6 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SessionInterface;
-using System;
-using System.ComponentModel.Design;
-using System.Text;
 
 namespace Factory
 {
@@ -17,7 +14,6 @@ namespace Factory
     {
         public static void AddMyServices(IServiceCollection services)
         {
-
             services.AddScoped<IRepository<Booking>, BookingRepository>();
             services.AddScoped<IAccommodationRepository, AccommodationRepository>();
             services.AddScoped<IBookingStageRepository, BookingStageRepository>();
@@ -34,6 +30,7 @@ namespace Factory
             services.AddScoped<ITouristicSpotLogic, TouristicSpotLogic>();
             services.AddScoped<ISessionLogic, SessionLogic>();
         }
+
         public static void AddDbContextServices(IServiceCollection services, string connectionString)
         {
             services.AddDbContext<DbContext, BookedUYContext>(options => options.UseSqlServer(connectionString));

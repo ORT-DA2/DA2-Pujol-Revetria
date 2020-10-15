@@ -1,11 +1,8 @@
 ﻿using BusinessLogicInterface;
-using DataAccess.Repositories;
 using DataAccessInterface;
 using Domain;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace BusinessLogic
 {
@@ -22,11 +19,13 @@ namespace BusinessLogic
 
         public BookingStage AddBookingStage(BookingStage stage)
         {
-            Console.WriteLine(stage.AsociatedBookingId);
+            if (stage.AsociatedBookingId == 0) {
+                throw new NullInputException("BookingStage Booking");
+            }
             var booking = this.bookingRepository.GetById(stage.AsociatedBookingId);
             if (booking == null)
             {
-                throw new NotFoundException("Booking");
+                throw new NotFoundException("BookingStage Booking");
             }
             return this.bookingStageRepository.Add(stage);
         }
@@ -36,7 +35,6 @@ namespace BusinessLogic
             var bookingStages = this.bookingStageRepository.GetByBooking(bookingId);
             BookingStage bookingStage = GetCurrentStatus(bookingStages);
             return bookingStage;
-            
         }
 
         private BookingStage GetCurrentStatus(IEnumerable<BookingStage> bookingStages)
@@ -52,7 +50,7 @@ namespace BusinessLogic
             }
             if (bookingStage.Id == -1)
             {
-                throw new APIException("The booking has not been changed by an Administrator",400);
+                throw new APIException("The booking has not been changed by an Administrator", 200);
             }
             return bookingStage;
         }

@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessLogicInterface;
+﻿using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using SessionInterface;
 using WebApi.DTOs;
 using WebApi.Filters;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Migrations.Controllers
+namespace WebApi.Controllers
 {
-    [Route("api/administrator")]
+    [Route("api/administrators")]
     public class AdministratorController : BookedUYController
     {
         private readonly IAdministratorLogic administratorLogic;
@@ -28,9 +21,8 @@ namespace Migrations.Controllers
             this.sessionLogic = session;
         }
 
-
         [HttpGet("login")]
-        public IActionResult Login([FromQuery]string email, [FromQuery] string password)
+        public IActionResult Login([FromQuery] string email, [FromQuery] string password)
         {
             Administrator admin = this.administratorLogic.GetByEmailAndPassword(email, password);
             string token = sessionLogic.GenerateToken(admin);

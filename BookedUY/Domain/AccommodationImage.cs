@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Domain
+﻿namespace Domain
 {
     public class AccommodationImage
     {
         public int Id { get; set; }
         private string _image;
+
         public string Image
         {
             get
@@ -26,7 +23,8 @@ namespace Domain
                 }
             }
         }
-    public int AccommodationId { get; set; }
-    public Accommodation Accommodation { get; set; }
-}
+
+        public int AccommodationId { get; set; }
+        public Accommodation Accommodation { get; set; }
+    }
 }

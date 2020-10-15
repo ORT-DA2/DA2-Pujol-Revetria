@@ -1,15 +1,13 @@
 ﻿using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DomainTests
 {
     [TestClass]
     public class CategoryTest
     {
-        Category category;
+        private Category category;
+
         [TestInitialize]
         public void StartUp()
         {

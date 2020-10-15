@@ -1,7 +1,6 @@
 ﻿using BusinessLogicInterface;
 using DataAccessInterface;
 using Domain;
-using System;
 using System.Collections.Generic;
 
 namespace BusinessLogic
@@ -9,7 +8,7 @@ namespace BusinessLogic
     public class BookingLogic : IBookingLogic
     {
         private readonly IRepository<Booking> bookingRepository;
-        
+
         public BookingLogic(IRepository<Booking> bookingRepository)
         {
             this.bookingRepository = bookingRepository;
@@ -17,10 +16,18 @@ namespace BusinessLogic
 
         public Booking AddBooking(Booking booking)
         {
-              double totalprice = CalculateTotalPrice(booking);
-              booking.TotalPrice = totalprice;
-              var newBooking = this.bookingRepository.Add(booking);
-              return newBooking;
+            if (booking.Guests == null)
+            {
+                throw new NullInputException("Booking Guests");
+            }
+            if (booking.AccommodationId == 0)
+            {
+                throw new NullInputException("Booking Accommodation");
+            }
+            double totalprice = CalculateTotalPrice(booking);
+            booking.TotalPrice = totalprice;
+            var newBooking = this.bookingRepository.Add(booking);
+            return newBooking;
         }
 
         private double CalculateTotalPrice(Booking booking)
@@ -41,7 +48,7 @@ namespace BusinessLogic
         public Booking GetById(int id)
         {
             var booking = this.bookingRepository.GetById(id);
-            if(booking == null)
+            if (booking == null)
             {
                 throw new NotFoundException("Booking");
             }

@@ -1,7 +1,6 @@
 ﻿using Domain;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace WebApi.DTOs
 {
@@ -17,20 +16,24 @@ namespace WebApi.DTOs
 
         public Booking FromModelInToBooking()
         {
+
             Tourist g = new Tourist()
             {
                 Name = GuestName,
                 Email = GuestEmail,
                 LastName = GuestLastName
             };
+            if (Guests == null || Guests.Count<1)
+            {
+                Guests = null;
+            }
             Booking booking = new Booking()
             {
                 AccommodationId = this.AccommodationId,
                 CheckIn = this.CheckIn,
                 CheckOut = this.CheckOut,
                 HeadGuest = g,
-                Guests=Guests
-                
+                Guests = Guests
             };
             return booking;
         }

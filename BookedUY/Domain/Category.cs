@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Domain
 {
@@ -8,6 +6,7 @@ namespace Domain
     {
         public int Id { get; set; }
         private string _name;
+
         public string Name
         {
             get
@@ -26,6 +25,7 @@ namespace Domain
                 }
             }
         }
+
         public List<CategoryTouristicSpot> Spots { get; set; }
 
         public override bool Equals(object obj)

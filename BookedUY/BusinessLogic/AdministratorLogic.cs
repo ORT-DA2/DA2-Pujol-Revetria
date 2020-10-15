@@ -1,9 +1,7 @@
 ﻿using BusinessLogicInterface;
 using DataAccessInterface;
 using Domain;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BusinessLogic
 {
@@ -18,7 +16,7 @@ namespace BusinessLogic
 
         public Administrator AddAdministrator(Administrator administrator)
         {
-            if (this.administratorRepository.GetByEmail(administrator.Email)==null)
+            if (this.administratorRepository.GetByEmail(administrator.Email) == null)
             {
                 var newAdmin = this.administratorRepository.Add(administrator);
                 return newAdmin;
@@ -28,6 +26,10 @@ namespace BusinessLogic
 
         public Administrator GetByEmailAndPassword(string email, string password)
         {
+            if (email == null)
+            {
+                throw new NullInputException("Administrator Email");
+            }
             var admin = this.administratorRepository.GetByEmail(email);
             if (admin.Password == password)
             {

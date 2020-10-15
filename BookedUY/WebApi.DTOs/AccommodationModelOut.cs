@@ -1,7 +1,5 @@
 ﻿using Domain;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace WebApi.DTOs
 {
@@ -14,6 +12,7 @@ namespace WebApi.DTOs
         public string Information { get; set; }
         public double Price { get; set; }
         public List<string> Images { get; set; }
+
         public AccommodationModelOut(Accommodation a)
         {
             Id = a.Id;

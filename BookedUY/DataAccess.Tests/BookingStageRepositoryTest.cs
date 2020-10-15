@@ -6,7 +6,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DataAccess.Tests
 {
@@ -15,6 +14,7 @@ namespace DataAccess.Tests
     {
         private DbContextOptions<BookedUYContext> _options = new DbContextOptionsBuilder<BookedUYContext>()
                 .UseInMemoryDatabase(databaseName: "BookedUYDB").Options;
+
         private BookedUYContext _context;
 
         [TestInitialize]
@@ -51,7 +51,7 @@ namespace DataAccess.Tests
                 {
                     Id=2,
                     Description = "The booking was rejected due to payment issues, please contact your bank",
-                    Administrator = new Administrator(){ 
+                    Administrator = new Administrator(){
                         Email="a@a.com"
                     },
                     AdministratorId = 0,
@@ -81,7 +81,7 @@ namespace DataAccess.Tests
 
             var result = repository.GetAll();
 
-            Assert.IsTrue(result.Count()==0);
+            Assert.IsTrue(result.Count() == 0);
         }
 
         [TestMethod]
@@ -224,7 +224,7 @@ namespace DataAccess.Tests
             List<BookingStage> listToReturn = new List<BookingStage>();
             listToReturn.Add(bookingStage1);
             listToReturn.Add(bookingStage3);
-            Assert.IsTrue(result.Count()==0);
+            Assert.IsTrue(result.Count() == 0);
         }
 
         [TestMethod]

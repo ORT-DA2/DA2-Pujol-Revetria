@@ -2,10 +2,6 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using SessionInterface;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebApi.Filters
 {
@@ -17,8 +13,6 @@ namespace WebApi.Filters
         {
             this.sessions = sessions;
         }
-
-        
 
         public void OnAuthorization(AuthorizationFilterContext context)
         {
@@ -45,4 +39,3 @@ namespace WebApi.Filters
         }
     }
 }
-

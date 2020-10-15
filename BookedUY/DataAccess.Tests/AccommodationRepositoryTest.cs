@@ -6,7 +6,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DataAccess.Tests
 {
@@ -15,6 +14,7 @@ namespace DataAccess.Tests
     {
         private DbContextOptions<BookedUYContext> _options = new DbContextOptionsBuilder<BookedUYContext>()
                 .UseInMemoryDatabase(databaseName: "BookedUYDB").Options;
+
         private BookedUYContext _context;
 
         [TestInitialize]
@@ -149,7 +149,6 @@ namespace DataAccess.Tests
             };
             List<Accommodation> accommodationList = new List<Accommodation>()
             {
-
                 new Accommodation()
                 {
                     Id = 2,
@@ -198,7 +197,6 @@ namespace DataAccess.Tests
             };
             List<Accommodation> accommodationList = new List<Accommodation>()
             {
-
                 new Accommodation()
                 {
                     Id = 2,
@@ -245,7 +243,6 @@ namespace DataAccess.Tests
             };
             List<Accommodation> accommodationList = new List<Accommodation>()
             {
-
                 new Accommodation()
                 {
                     Id = 2,
@@ -292,7 +289,6 @@ namespace DataAccess.Tests
             };
             List<Accommodation> accommodationList = new List<Accommodation>()
             {
-
                 new Accommodation()
                 {
                     Id = 2,
@@ -339,7 +335,6 @@ namespace DataAccess.Tests
             };
             List<Accommodation> accommodationList = new List<Accommodation>()
             {
-
                 new Accommodation()
                 {
                     Id = 2,

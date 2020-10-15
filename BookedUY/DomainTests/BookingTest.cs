@@ -1,15 +1,14 @@
 ﻿using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DomainTests
 {
     [TestClass]
     public class BookingTest
     {
-        Booking booking;
+        private Booking booking;
+
         [TestInitialize]
         public void StartUp()
         {
@@ -78,7 +77,7 @@ namespace DomainTests
         {
             DateTime test = DateTime.Now.AddDays(1).Date;
             booking.CheckOut = test;
-            Assert.AreEqual(booking.CheckOut,test);
+            Assert.AreEqual(booking.CheckOut, test);
         }
 
         [TestMethod]
@@ -135,7 +134,6 @@ namespace DomainTests
             Assert.Fail();
         }
 
-
         [TestMethod]
         public void TestCheckOutAfterCheckIn()
         {
@@ -143,7 +141,7 @@ namespace DomainTests
             DateTime testOut = DateTime.Now.AddDays(8).Date;
             booking.CheckIn = testIn;
             booking.CheckOut = testOut;
-            Assert.IsTrue(booking.CheckIn<booking.CheckOut);
+            Assert.IsTrue(booking.CheckIn < booking.CheckOut);
         }
 
         [TestMethod]

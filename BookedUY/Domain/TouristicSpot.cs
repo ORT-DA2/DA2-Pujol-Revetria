@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿using System.Collections.Generic;
 
 namespace Domain
 {
@@ -9,6 +6,7 @@ namespace Domain
     {
         public int Id { get; set; }
         private string _name;
+
         public string Name
         {
             get { return _name; }
@@ -24,9 +22,11 @@ namespace Domain
                 }
             }
         }
+
         public Region Region { get; set; }
         public int RegionId { get; set; }
         private string _description;
+
         public string Description
         {
             get { return _description; }
@@ -42,13 +42,16 @@ namespace Domain
                 }
             }
         }
+
         public List<CategoryTouristicSpot> Categories { get; set; }
         public List<Accommodation> Accommodations { get; set; }
         public string Image { get; set; }
+
         public bool SpotsEqual()
         {
             return true;
         }
+
         public override bool Equals(object obj)
         {
             var result = false;
@@ -60,4 +63,3 @@ namespace Domain
         }
     }
 }
-

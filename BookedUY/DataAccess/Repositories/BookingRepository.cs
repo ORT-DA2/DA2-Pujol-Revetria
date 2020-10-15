@@ -1,10 +1,7 @@
 ﻿using DataAccessInterface;
 using Domain;
 using Microsoft.EntityFrameworkCore;
-using DataAccess;
-using System;
 using System.Collections.Generic;
-using DataAccess.Context;
 using System.Linq;
 
 namespace DataAccess.Repositories
@@ -13,6 +10,7 @@ namespace DataAccess.Repositories
     {
         private readonly DbSet<Booking> bookings;
         private readonly DbSet<Tourist> tourists;
+        private readonly DbSet<Accommodation> accommodations;
         private readonly DbContext bookedUYContext;
 
         public BookingRepository(DbContext context)
@@ -24,15 +22,20 @@ namespace DataAccess.Repositories
 
         public IEnumerable<Booking> GetAll()
         {
-            return this.bookings.Include(b=>b.Accommodation).Include(b=>b.Guests).Include(b => b.HeadGuest);
+            return this.bookings.Include(b => b.Accommodation).Include(b => b.Guests).Include(b => b.HeadGuest);
         }
 
         public Booking Add(Booking booking)
         {
             var tourist = this.tourists.Where(t => t.Email == booking.HeadGuest.Email).SingleOrDefault<Tourist>();
-            if ( tourist != null)
+            if (tourist != null)
             {
                 booking.HeadGuest = tourist;
+            }
+            var accommodation = this.accommodations.Find(booking.AccommodationId);
+            if (accommodation == null)
+            {
+                throw new NotFoundException("Booking Accommodation");
             }
             this.bookings.Add(booking);
             this.bookedUYContext.SaveChanges();
@@ -41,7 +44,7 @@ namespace DataAccess.Repositories
 
         public Booking GetById(int id)
         {
-            return this.bookings.Include(b => b.Accommodation).Include(b => b.Guests).Include(b=>b.HeadGuest).Where(b => b.Id==id).SingleOrDefault();
+            return this.bookings.Include(b => b.Accommodation).Include(b => b.Guests).Include(b => b.HeadGuest).Where(b => b.Id == id).SingleOrDefault();
         }
 
         public Booking Delete(Booking booking)

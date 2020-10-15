@@ -6,7 +6,8 @@ namespace DomainTests
     [TestClass]
     public class TouristicSpotTest
     {
-        TouristicSpot touristicSpot;
+        private TouristicSpot touristicSpot;
+
         [TestInitialize]
         public void StartUp()
         {

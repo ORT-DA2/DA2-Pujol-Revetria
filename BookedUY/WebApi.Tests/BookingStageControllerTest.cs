@@ -2,9 +2,7 @@
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Migrations.Controllers;
 using Moq;
-using System;
 using System.Collections.Generic;
 using WebApi.Controllers;
 using WebApi.DTOs;
@@ -30,7 +28,7 @@ namespace WebApi.Tests
             mock.VerifyAll();
             Assert.AreEqual(200, result.StatusCode);
         }
-        
+
         [TestMethod]
         public void CreateStage()
         {

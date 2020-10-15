@@ -8,12 +8,12 @@ using System.Linq;
 
 namespace DataAccess.Tests
 {
-
     [TestClass]
     public class CategoryRepositoryTest
     {
         private DbContextOptions<BookedUYContext> _options = new DbContextOptionsBuilder<BookedUYContext>()
                 .UseInMemoryDatabase(databaseName: "BookedUYDB").Options;
+
         private BookedUYContext _context;
 
         [TestInitialize]

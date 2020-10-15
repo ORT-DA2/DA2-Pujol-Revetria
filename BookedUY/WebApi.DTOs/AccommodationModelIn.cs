@@ -1,9 +1,5 @@
 ﻿using Domain;
-using System;
 using System.Collections.Generic;
-using System.IO.Pipes;
-using System.Linq;
-using System.Text;
 
 namespace WebApi.DTOs
 {
@@ -20,12 +16,20 @@ namespace WebApi.DTOs
         public Accommodation FromModelInToAccommodation()
         {
             List<AccommodationImage> images = new List<AccommodationImage>();
-            for (int i = 0; i < Images.Length; i++)
+
+            if (Images == null || Images.Length < 1)
             {
-                images.Add(new AccommodationImage()
+                images = null;
+            }
+            else
+            {
+                for (int i = 0; i < Images.Length; i++)
                 {
-                    Image = Images[i]
-                });
+                    images.Add(new AccommodationImage()
+                    {
+                        Image = Images[i]
+                    });
+                }
             }
             Accommodation accommodation = new Accommodation()
             {
