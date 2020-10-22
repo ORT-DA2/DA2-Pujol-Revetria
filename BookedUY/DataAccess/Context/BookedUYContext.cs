@@ -17,6 +17,7 @@ namespace DataAccess.Context
         public DbSet<Tourist> Tourists { get; set; }
         public DbSet<AccommodationImage> AccommodationImages { get; set; }
         public DbSet<CategoryTouristicSpot> categoryTouristicSpots { get; set; }
+        public DbSet<Review> reviews { get; set; }
 
         public BookedUYContext()
         {
@@ -80,6 +81,12 @@ namespace DataAccess.Context
             modelBuilder.Entity<CategoryTouristicSpot>().HasKey(t => new { t.CategoryId, t.TouristicSpotId });
             modelBuilder.Entity<CategoryTouristicSpot>().HasOne<Category>(ct => ct.Category).WithMany(c => c.Spots).HasForeignKey(ct => ct.CategoryId);
             modelBuilder.Entity<CategoryTouristicSpot>().HasOne<TouristicSpot>(ct => ct.TouristicSpot).WithMany(t => t.Categories).HasForeignKey(ct => ct.TouristicSpotId);
+
+            modelBuilder.Entity<Review>().HasKey(r=>r.Id);
+            modelBuilder.Entity<Review>().HasAlternateKey(r => r.BookingId);
+            modelBuilder.Entity<Review>().Property(r => r.Score);
+            modelBuilder.Entity<Review>().Property(r => r.Comment);
+            modelBuilder.Entity<Review>().HasOne(r => r.Booking).WithMany(b=>b.Rating).HasForeignKey(r=>r.BookingId);
         }
 
         public BookedUYContext(DbContextOptions options) : base(options)

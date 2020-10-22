@@ -54,6 +54,12 @@ namespace Domain
         { }
     }
 
+    public class InvalidScoreException : APIException
+    {
+        public InvalidScoreException(string entity) : base(String.Format("The {0} entered was invalid", entity), 400)
+        { }
+    }
+
     public class InvalidImageException : APIException
     {
         public InvalidImageException(string entity) : base(String.Format("The {0} entered was negative", entity), 400)
