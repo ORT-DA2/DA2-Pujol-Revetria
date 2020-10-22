@@ -10,6 +10,7 @@ namespace BusinessLogic
         private readonly IRepository<Booking> bookingRepository;
         private readonly IAccommodationRepository accommodationRepository;
         private readonly ITouristRepository touristRepository;
+        private readonly IRepository<Review> repository;
 
         public BookingLogic(IRepository<Booking> bookingRepository, IAccommodationRepository accommodationRepository, ITouristRepository touristRepository)
         {

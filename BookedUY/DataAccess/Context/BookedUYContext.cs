@@ -17,7 +17,7 @@ namespace DataAccess.Context
         public DbSet<Tourist> Tourists { get; set; }
         public DbSet<AccommodationImage> AccommodationImages { get; set; }
         public DbSet<CategoryTouristicSpot> categoryTouristicSpots { get; set; }
-        public DbSet<Review> reviews { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
         public BookedUYContext()
         {

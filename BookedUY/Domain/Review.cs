@@ -41,5 +41,11 @@ namespace Domain
             }
         }
         private string _comment;
+
+        public override bool Equals(object obj)
+        {
+            return obj is Review review &&
+                   Id == review.Id;
+        }
     }
 }
