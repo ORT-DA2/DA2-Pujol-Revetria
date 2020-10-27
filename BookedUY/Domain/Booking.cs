@@ -54,7 +54,7 @@ namespace Domain
         public List<Guest> Guests { get; set; }
         public Tourist HeadGuest { get; set; }
         public int GuestId { get; set; }
-        public List<Review> Rating { get; set; }
+        public Review Rating { get; set; }
         public List<BookingStage> BookingHistory { get; set; }
 
         public override bool Equals(object obj)

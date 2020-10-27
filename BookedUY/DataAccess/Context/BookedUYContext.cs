@@ -31,6 +31,7 @@ namespace DataAccess.Context
             modelBuilder.Entity<Booking>().Property(b => b.TotalPrice).IsRequired();
             modelBuilder.Entity<Booking>().HasOne<Accommodation>(b => b.Accommodation).WithMany(a => a.Bookings).HasForeignKey(b => b.AccommodationId);
             modelBuilder.Entity<Booking>().HasOne<Tourist>(b => b.HeadGuest).WithMany(t => t.Bookings).HasForeignKey(b => b.GuestId);
+            modelBuilder.Entity<Booking>().HasOne(r => r.Rating).WithOne(b => b.Booking).HasForeignKey<Review>(b => b.BookingId);
 
             modelBuilder.Entity<Guest>().HasKey(g => g.Id);
             modelBuilder.Entity<Guest>().Property(g => g.Multiplier);
@@ -86,7 +87,8 @@ namespace DataAccess.Context
             modelBuilder.Entity<Review>().HasAlternateKey(r => r.BookingId);
             modelBuilder.Entity<Review>().Property(r => r.Score);
             modelBuilder.Entity<Review>().Property(r => r.Comment);
-            modelBuilder.Entity<Review>().HasOne(r => r.Booking).WithMany(b=>b.Rating).HasForeignKey(r=>r.BookingId);
+            
+
         }
 
         public BookedUYContext(DbContextOptions options) : base(options)

@@ -387,8 +387,8 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Domain.Review", b =>
                 {
                     b.HasOne("Domain.Booking", "Booking")
-                        .WithMany("Rating")
-                        .HasForeignKey("BookingId")
+                        .WithOne("Rating")
+                        .HasForeignKey("Domain.Review", "BookingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

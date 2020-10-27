@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(BookedUYContext))]
-    [Migration("20200926211654_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20201027123715_FirstMigrations2")]
+    partial class FirstMigrations2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,19 +41,42 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<float>("PricePerNight")
-                        .HasColumnType("real");
+                    b.Property<double>("PricePerNight")
+                        .HasColumnType("float");
 
                     b.Property<int>("SpotId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasAlternateKey("Name");
+
                     b.HasIndex("SpotId");
 
                     b.ToTable("Accommodations");
+                });
+
+            modelBuilder.Entity("Domain.AccommodationImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AccommodationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccommodationId");
+
+                    b.ToTable("AccommodationImages");
                 });
 
             modelBuilder.Entity("Domain.Administrator", b =>
@@ -64,13 +87,16 @@ namespace DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("Email");
 
                     b.ToTable("Administrators");
                 });
@@ -94,8 +120,8 @@ namespace DataAccess.Migrations
                     b.Property<int>("GuestId")
                         .HasColumnType("int");
 
-                    b.Property<float>("TotalPrice")
-                        .HasColumnType("real");
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -148,9 +174,12 @@ namespace DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("Name");
 
                     b.ToTable("Categories");
                 });
@@ -167,7 +196,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("TouristicSpotId");
 
-                    b.ToTable("CategoryTouristicSpot");
+                    b.ToTable("categoryTouristicSpots");
                 });
 
             modelBuilder.Entity("Domain.Guest", b =>
@@ -183,8 +212,8 @@ namespace DataAccess.Migrations
                     b.Property<int>("BookingId")
                         .HasColumnType("int");
 
-                    b.Property<float>("Multiplier")
-                        .HasColumnType("real");
+                    b.Property<double>("Multiplier")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -208,6 +237,29 @@ namespace DataAccess.Migrations
                     b.ToTable("Regions");
                 });
 
+            modelBuilder.Entity("Domain.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BookingId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasAlternateKey("BookingId");
+
+                    b.ToTable("Reviews");
+                });
+
             modelBuilder.Entity("Domain.Tourist", b =>
                 {
                     b.Property<int>("Id")
@@ -216,7 +268,8 @@ namespace DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
@@ -226,7 +279,9 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tourist");
+                    b.HasAlternateKey("Email");
+
+                    b.ToTable("Tourists");
                 });
 
             modelBuilder.Entity("Domain.TouristicSpot", b =>
@@ -239,13 +294,20 @@ namespace DataAccess.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Image")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("RegionId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("Name");
 
                     b.HasIndex("RegionId");
 
@@ -257,6 +319,15 @@ namespace DataAccess.Migrations
                     b.HasOne("Domain.TouristicSpot", "Spot")
                         .WithMany("Accommodations")
                         .HasForeignKey("SpotId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.AccommodationImage", b =>
+                {
+                    b.HasOne("Domain.Accommodation", "Accommodation")
+                        .WithMany("Images")
+                        .HasForeignKey("AccommodationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -311,6 +382,15 @@ namespace DataAccess.Migrations
                     b.HasOne("Domain.Booking", "Booking")
                         .WithMany("Guests")
                         .HasForeignKey("BookingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Review", b =>
+                {
+                    b.HasOne("Domain.Booking", "Booking")
+                        .WithOne("Rating")
+                        .HasForeignKey("Domain.Review", "BookingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

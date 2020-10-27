@@ -9,12 +9,48 @@ namespace BusinessLogic
     {
         private readonly IAccommodationRepository accommodationRepository;
         private readonly ITouristicSpotRepository spotRepository;
+        private readonly IReviewRepository reviewRepository;
+        private readonly IRepository<Booking> bookingRepository;
 
-
-        public AccommodationLogic(IAccommodationRepository accommodationRepository, ITouristicSpotRepository spotRepository)
+        public AccommodationLogic(IAccommodationRepository accommodationRepository, ITouristicSpotRepository spotRepository, IReviewRepository reviewRepository, IRepository<Booking> bookingRepository)
         {
             this.accommodationRepository = accommodationRepository;
             this.spotRepository = spotRepository;
+            this.reviewRepository = reviewRepository;
+            this.bookingRepository = bookingRepository;
+        }
+
+        public (double,IEnumerable<Review>) GetReviewsByAccommodation(int id)
+        {
+            var reviews = this.reviewRepository.GetByAccommodation(id);
+            var avgScore = CalculateAverageScore(reviews);
+            return (avgScore, reviews);
+        }
+
+        private double CalculateAverageScore(IEnumerable<Review> reviews)
+        {
+            int accum = 0;
+            int count = 0;
+            foreach (var item in reviews)
+            {
+                accum += item.Score;
+                count++;
+            }
+            if (count == 0)
+            {
+                return 0;
+            }
+            return accum / count;
+        }
+
+        public Review AddReview(Review review)
+        {
+            var booking = this.bookingRepository.GetById(review.BookingId);
+            if (booking == null)
+            {
+                throw new NotFoundException("Review Booking");
+            }
+            return this.reviewRepository.Add(review);
         }
 
         public Accommodation AddAccommodation(Accommodation accommodation)

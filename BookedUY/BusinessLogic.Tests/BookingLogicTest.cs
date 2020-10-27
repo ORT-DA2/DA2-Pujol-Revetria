@@ -63,6 +63,8 @@ namespace BusinessLogic.Tests
             Assert.IsTrue(result.Equals(booking));
         }
 
+        
+
         [ExpectedException(typeof(NullInputException))]
         [TestMethod]
         public void AddBookingsNullInputTest()

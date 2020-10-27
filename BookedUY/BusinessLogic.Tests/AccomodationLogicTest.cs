@@ -12,6 +12,84 @@ namespace BusinessLogic.Tests
     public class AccommodationLogicTest
     {
         [TestMethod]
+        public void GetReviewsByAccommodationTest()
+        {
+            int testId = 1;
+            Accommodation accommodation = new Accommodation();
+            accommodation.Id = testId;
+            accommodation.Name = "abz";
+            accommodation.SpotId = 1;
+            List<Accommodation> accommodations = new List<Accommodation>();
+            Review review1 = new Review()
+            {
+                Id = 2,
+                Comment = "Prueba123",
+                Score = 1
+            };
+            Review review2 = new Review()
+            {
+                Id = 3,
+                Comment = "Prueba123",
+                Score = 1
+            };
+            List<Review> reviews = new List<Review>();
+            reviews.Add(review1);
+            reviews.Add(review2);
+            accommodations.Add(accommodation);
+            var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
+            var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            var mock3 = new Mock<IReviewRepository>(MockBehavior.Strict);
+            var mock4 = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            mock3.Setup(p => p.GetByAccommodation(It.IsAny<int>())).Returns(reviews);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object, mock3.Object, mock4.Object);
+            var result = logic.GetReviewsByAccommodation(1);
+            mock.VerifyAll();
+            Assert.IsTrue(reviews.SequenceEqual(result.Item2));
+        }
+
+        [TestMethod]
+        public void AddReviewTest()
+        {
+            int testId = 5;
+            
+            Accommodation accom = new Accommodation()
+            {
+                Id = 1,
+                Name = "a"
+            };
+            Booking booking = new Booking()
+            {
+                Id = 1,
+                AccommodationId = 1,
+                HeadGuest = new Tourist()
+                {
+                    Id=1,
+                    Email="a@a.com",
+                    Name= "a",
+                    LastName = "a"
+                }
+            };
+            Review review = new Review()
+            {
+                Id = testId,
+                BookingId = 1,
+                Comment = "test",
+                Score = 1,
+            };
+            var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
+            var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            var mock3 = new Mock<IReviewRepository>(MockBehavior.Strict);
+            var mock4 = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            mock3.Setup(p => p.Add(It.IsAny<Review>())).Returns(review);
+            mock4.Setup(a => a.GetById(It.IsAny<int>())).Returns(booking);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object, mock3.Object, mock4.Object);
+            var result = logic.AddReview(review);
+            mock.VerifyAll();
+            mock2.VerifyAll();
+            Assert.IsTrue(result.Equals(review));
+        }
+
+        [TestMethod]
         public void AddAccommodationTest()
         {
             int testId = 5;
@@ -43,8 +121,10 @@ namespace BusinessLogic.Tests
             mock.Setup(p => p.Add(It.IsAny<Accommodation>())).Returns(accommodation);
             mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
             var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            var mock3 = new Mock<IReviewRepository>(MockBehavior.Strict);
+            var mock4 = new Mock<IRepository<Booking>>(MockBehavior.Strict);
             mock2.Setup(p => p.GetById(It.IsAny<int>())).Returns(spot);
-            var logic = new AccommodationLogic(mock.Object, mock2.Object);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object,mock3.Object, mock4.Object);
             var result = logic.AddAccommodation(accommodation);
             mock.VerifyAll();
             mock2.VerifyAll();
@@ -84,8 +164,10 @@ namespace BusinessLogic.Tests
             mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
             mock.Setup(p => p.GetById(It.IsAny<int>())).Returns(accommodation);
             var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            var mock3 = new Mock<IReviewRepository>(MockBehavior.Strict);
             mock2.Setup(p => p.GetById(It.IsAny<int>())).Returns(spot);
-            var logic = new AccommodationLogic(mock.Object, mock2.Object);
+            var mock4 = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object, mock3.Object, mock4.Object);
             var result = logic.AddAccommodation(accommodation);
             var expected = logic.GetById(5);
             mock.VerifyAll();
@@ -128,7 +210,9 @@ namespace BusinessLogic.Tests
             mock.Setup(p => p.GetById(It.IsAny<int>())).Returns<Accommodation>(null);
             var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
             mock2.Setup(p => p.GetById(It.IsAny<int>())).Returns(spot);
-            var logic = new AccommodationLogic(mock.Object, mock2.Object);
+            var mock3 = new Mock<IReviewRepository>(MockBehavior.Strict);
+            var mock4 = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object, mock3.Object, mock4.Object);
             var result = logic.AddAccommodation(accommodation);
             var expected = logic.GetById(5);
             mock.VerifyAll();
@@ -171,7 +255,9 @@ namespace BusinessLogic.Tests
             mock.Setup(p => p.GetById(It.IsAny<int>())).Returns(accommodation);
             var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
             mock2.Setup(p => p.GetById(It.IsAny<int>())).Returns<TouristicSpot>(null);
-            var logic = new AccommodationLogic(mock.Object, mock2.Object);
+            var mock3 = new Mock<IReviewRepository>(MockBehavior.Strict);
+            var mock4 = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object, mock3.Object, mock4.Object);
             var result = logic.AddAccommodation(accommodation);
             var expected = logic.GetById(5);
             mock.VerifyAll();
@@ -213,7 +299,9 @@ namespace BusinessLogic.Tests
             mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns(accommodation);
             var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
             mock2.Setup(p => p.GetById(It.IsAny<int>())).Returns(spot);
-            var logic = new AccommodationLogic(mock.Object, mock2.Object);
+            var mock3 = new Mock<IReviewRepository>(MockBehavior.Strict);
+            var mock4 = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object, mock3.Object, mock4.Object);
             var result = logic.AddAccommodation(accommodation);
             mock.VerifyAll();
             mock2.VerifyAll();
@@ -254,7 +342,9 @@ namespace BusinessLogic.Tests
             mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns(accommodation);
             var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
             mock2.Setup(p => p.GetById(It.IsAny<int>())).Returns(spot);
-            var logic = new AccommodationLogic(mock.Object, mock2.Object);
+            var mock3 = new Mock<IReviewRepository>(MockBehavior.Strict);
+            var mock4 = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object, mock3.Object, mock4.Object);
             var result = logic.AddAccommodation(accommodation);
             mock.VerifyAll();
             mock2.VerifyAll();
@@ -288,7 +378,9 @@ namespace BusinessLogic.Tests
             mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns(accommodation);
             var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
             mock2.Setup(p => p.GetById(It.IsAny<int>())).Returns(spot);
-            var logic = new AccommodationLogic(mock.Object, mock2.Object);
+            var mock3 = new Mock<IReviewRepository>(MockBehavior.Strict);
+            var mock4 = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object, mock3.Object, mock4.Object);
             var result = logic.AddAccommodation(accommodation);
             mock.VerifyAll();
             mock2.VerifyAll();
@@ -306,7 +398,9 @@ namespace BusinessLogic.Tests
             mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns(accommodation);
             mock.Setup(p => p.Delete(It.IsAny<Accommodation>())).Returns(accommodation);
             var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
-            var logic = new AccommodationLogic(mock.Object, mock2.Object);
+            var mock3 = new Mock<IReviewRepository>(MockBehavior.Strict);
+            var mock4 = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object, mock3.Object, mock4.Object);
             var result = logic.DeleteAccommodation(accommodation);
             mock.VerifyAll();
             Assert.AreEqual(result, accommodation);
@@ -324,7 +418,10 @@ namespace BusinessLogic.Tests
             mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
             mock.Setup(p => p.Delete(It.IsAny<Accommodation>())).Returns(accommodation);
             var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
-            var logic = new AccommodationLogic(mock.Object, mock2.Object);
+            var mock3 = new Mock<IReviewRepository>(MockBehavior.Strict);
+            var mock4 = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object, mock3.Object, mock4.Object);
+
             logic.DeleteAccommodation(accommodation);
             mock.VerifyAll();
         }
@@ -342,7 +439,9 @@ namespace BusinessLogic.Tests
             var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mock.Setup(p => p.GetAvailableBySpot(It.IsAny<int>())).Returns(accommodations);
             var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
-            var logic = new AccommodationLogic(mock.Object, mock2.Object);
+            var mock3 = new Mock<IReviewRepository>(MockBehavior.Strict);
+            var mock4 = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object, mock3.Object, mock4.Object);
             var result = logic.GetAvailableAccommodationBySpot(1);
             mock.VerifyAll();
             Assert.IsTrue(accommodations.SequenceEqual(result));
@@ -360,7 +459,9 @@ namespace BusinessLogic.Tests
             mock.Setup(p => p.GetById(It.IsAny<int>())).Returns(accommodation);
             mock.Setup(p => p.UpdateCapacity(It.IsAny<int>(), It.IsAny<bool>()));
             var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
-            var logic = new AccommodationLogic(mock.Object, mock2.Object);
+            var mock3 = new Mock<IReviewRepository>(MockBehavior.Strict);
+            var mock4 = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object, mock3.Object, mock4.Object);
             logic.UpdateCapacity(2, true);
             mock.VerifyAll();
         }
@@ -377,7 +478,9 @@ namespace BusinessLogic.Tests
             mock.Setup(p => p.GetById(It.IsAny<int>())).Returns(accommodation);
             mock.Setup(p => p.UpdateCapacity(It.IsAny<int>(), It.IsAny<bool>()));
             var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
-            var logic = new AccommodationLogic(mock.Object, mock2.Object);
+            var mock3 = new Mock<IReviewRepository>(MockBehavior.Strict);
+            var mock4 = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object, mock3.Object, mock4.Object);
             logic.UpdateCapacity(2, false);
             mock.VerifyAll();
         }
@@ -395,8 +498,72 @@ namespace BusinessLogic.Tests
             mock.Setup(p => p.GetById(It.IsAny<int>())).Returns<Accommodation>(null);
             mock.Setup(p => p.UpdateCapacity(It.IsAny<int>(), It.IsAny<bool>()));
             var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
-            var logic = new AccommodationLogic(mock.Object, mock2.Object);
+            var mock3 = new Mock<IReviewRepository>(MockBehavior.Strict);
+            var mock4 = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object, mock3.Object, mock4.Object);
             logic.UpdateCapacity(2, false);
+            mock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void AddReviewTestOk()
+        {
+            int testId = 2;
+            Accommodation accommodation = new Accommodation();
+            accommodation.Id = testId;
+            accommodation.Name = "abz";
+            accommodation.SpotId = 1;
+            Booking booking = new Booking()
+            {
+                Id = 2
+            };
+            Review review = new Review()
+            {
+                Id = 1
+            };
+            var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
+            var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            var mock3 = new Mock<IReviewRepository>(MockBehavior.Strict);
+            var mock4 = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            mock4.Setup(p => p.GetById(It.IsAny<int>())).Returns(booking);
+            mock3.Setup(p => p.Add(It.IsAny<Review>())).Returns(review);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object, mock3.Object, mock4.Object);
+            logic.AddReview(review);
+            mock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void GetReviewsByAccommodation()
+        {
+            int testId = 1;
+            Accommodation accommodation = new Accommodation();
+            accommodation.Id = testId;
+            accommodation.Name = "abz";
+            accommodation.SpotId = 1;
+            Booking booking = new Booking()
+            {
+                Id = 2
+            };
+            Review review = new Review()
+            {
+                Id = 1
+            };
+            Review review2 = new Review()
+            {
+                Id = 2
+            };
+            List<Review> revs = new List<Review>()
+            {
+                review,
+                review2
+            };
+            var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
+            var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            var mock3 = new Mock<IReviewRepository>(MockBehavior.Strict);
+            var mock4 = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            mock3.Setup(p => p.GetByAccommodation(It.IsAny<int>())).Returns(revs);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object, mock3.Object, mock4.Object);
+            logic.GetReviewsByAccommodation(1);
             mock.VerifyAll();
         }
     }

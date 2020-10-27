@@ -8,7 +8,7 @@ using System.Text;
 
 namespace DataAccess.Repositories
 {
-    public class ReviewRepository : IRepository<Review>
+    public class ReviewRepository : IReviewRepository
     {
         private readonly DbSet<Review> reviews;
         private readonly DbContext bookedUYContext;
@@ -21,7 +21,7 @@ namespace DataAccess.Repositories
 
         public IEnumerable<Review> GetAll()
         {
-            return this.reviews.Include(b => b.Booking);
+            return this.reviews.Include(r=>r.Booking).Include(r=>r.Booking.HeadGuest);
         }
 
         public Review Add(Review review)
@@ -33,7 +33,7 @@ namespace DataAccess.Repositories
 
         public Review GetById(int id)
         {
-            return this.reviews.Include(r => r.Booking).Where(r => r.Id == id).SingleOrDefault();
+            return this.reviews.Where(r => r.Id == id).SingleOrDefault();
         }
 
         public Review Delete(Review review)
@@ -41,6 +41,11 @@ namespace DataAccess.Repositories
             this.reviews.Remove(review);
             this.bookedUYContext.SaveChanges();
             return review;
+        }
+
+        public IEnumerable<Review> GetByAccommodation(int id)
+        {
+            return this.reviews.Include(r=>r.Booking).Include(r => r.Booking.HeadGuest).Where(r => r.Booking.AccommodationId == id);
         }
     }
 }

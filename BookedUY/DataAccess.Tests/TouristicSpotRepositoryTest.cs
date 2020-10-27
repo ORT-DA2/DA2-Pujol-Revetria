@@ -335,7 +335,6 @@ namespace DataAccess.Tests
         [TestMethod]
         public void TestGetByNameNull()
         {
-            int id = 1;
             TouristicSpot spot = new TouristicSpot()
             {
                 Id = 1,
@@ -375,7 +374,6 @@ namespace DataAccess.Tests
         [TestMethod]
         public void TestGetByName()
         {
-            int id = 1;
             TouristicSpot spot = new TouristicSpot()
             {
                 Id = 1,

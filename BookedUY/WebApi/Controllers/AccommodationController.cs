@@ -1,6 +1,7 @@
 ﻿using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 using WebApi.DTOs;
 using WebApi.Filters;
@@ -21,7 +22,7 @@ namespace WebApi.Controllers
         public IActionResult GetAccommodationsInSpot(int spot)
         {
             var accommodations = from r in this.accommodationLogic.GetAvailableAccommodationBySpot(spot)
-                                 select new AccommodationModelOut(r);
+                                 select new AccommodationModelOut(r,this.accommodationLogic.GetReviewsByAccommodation(r.Id));
             return Ok(accommodations);
         }
 
@@ -30,8 +31,16 @@ namespace WebApi.Controllers
         public IActionResult Get(int id)
         {
             Accommodation a = this.accommodationLogic.GetById(id);
-            var ret = new AccommodationModelOut(a);
+            var ret = new AccommodationModelOut(a, this.accommodationLogic.GetReviewsByAccommodation(id));
             return Ok(ret);
+        }
+
+        [HttpPost("review")]
+        public IActionResult CreateReview(ReviewModelIn newAccommodation)
+        {
+            var rev = newAccommodation.ToReview();
+            var response = this.accommodationLogic.AddReview(rev);
+            return Ok(new ReviewModelOut(response));
         }
 
         // POST api/<AcomodationController>
@@ -41,7 +50,7 @@ namespace WebApi.Controllers
         {
             var accom = newAccommodation.FromModelInToAccommodation();
             var response = this.accommodationLogic.AddAccommodation(accom);
-            return Ok(new AccommodationModelOut(response));
+            return Ok(new AccommodationModelOut(response,(0,new List<Review>())));
         }
 
         // PUT api/<AcomodationController>/5

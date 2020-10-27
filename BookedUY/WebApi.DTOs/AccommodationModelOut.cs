@@ -1,5 +1,6 @@
 ﻿using Domain;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WebApi.DTOs
 {
@@ -12,8 +13,10 @@ namespace WebApi.DTOs
         public string Information { get; set; }
         public double Price { get; set; }
         public List<string> Images { get; set; }
+        public IEnumerable<ReviewModelOut> Reviews { get; set; }
+        public double Score { get; set; }
 
-        public AccommodationModelOut(Accommodation a)
+        public AccommodationModelOut(Accommodation a, (double, IEnumerable<Review>) reviews)
         {
             Id = a.Id;
             Name = a.Name;
@@ -22,6 +25,8 @@ namespace WebApi.DTOs
             Information = a.Information;
             Price = a.PricePerNight;
             Images = ImagesToStrings(a.Images);
+            Score = reviews.Item1;
+            Reviews = from r in reviews.Item2 select new ReviewModelOut(r);
         }
 
         private List<string> ImagesToStrings(List<AccommodationImage> images)
@@ -33,5 +38,14 @@ namespace WebApi.DTOs
             }
             return imagesString;
         }
+
+        //public List<AccommodationModelOut> ToOutList(IEnumerable<AccommodationModelOut> list)
+        //{
+        //    List<AccommodationModelOut> outList = new List<AccommodationModelOut>();
+        //    foreach (var item in list)
+        //    {
+
+        //    }
+        //}
     }
 }

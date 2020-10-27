@@ -51,8 +51,10 @@ namespace WebApi.Tests
                 PricePerNight = 5.0,
                 Images = list
             };
+
             var mock = new Mock<IAccommodationLogic>(MockBehavior.Strict);
             mock.Setup(p => p.GetById(It.IsAny<int>())).Returns(accommodation);
+            mock.Setup(p => p.GetReviewsByAccommodation(It.IsAny<int>())).Returns((0,new List<Review>()));
             var controller = new AccommodationController(mock.Object);
             var result = controller.Get(5) as OkObjectResult;
             mock.VerifyAll();
@@ -62,7 +64,6 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestCreateAccommodationOK()
         {
-            int testId = 5;
             Accommodation accommodation = new Accommodation()
             {
                 Name = "abm",
@@ -72,7 +73,8 @@ namespace WebApi.Tests
                 Information = "a",
                 PricePerNight = 5.0,
                 Id = 1,
-                Images = new List<AccommodationImage>()
+                Images = new List<AccommodationImage>(),
+                Full = false
             };
             string[] image = new string[1];
             image[0] = "h";

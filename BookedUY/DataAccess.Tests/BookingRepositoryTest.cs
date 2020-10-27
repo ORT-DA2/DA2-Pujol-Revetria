@@ -181,7 +181,6 @@ namespace DataAccess.Tests
         [TestMethod]
         public void TestDelete()
         {
-            int testId = 1;
             Booking testBooking = new Booking()
             {
                 Id = 1,

@@ -14,5 +14,10 @@ namespace BusinessLogicInterface
         void UpdateCapacity(int accommodationId, bool capacity);
 
         Accommodation GetById(int id);
+
+        (double, IEnumerable<Review>) GetReviewsByAccommodation(int id);
+
+        Review AddReview(Review review);
+
     }
 }

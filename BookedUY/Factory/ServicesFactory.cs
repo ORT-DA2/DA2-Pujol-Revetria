@@ -21,6 +21,7 @@ namespace Factory
             services.AddScoped<IRepository<Region>, RegionRepository>();
             services.AddScoped<ITouristRepository, TouristRepository>();
             services.AddScoped<ITouristicSpotRepository, TouristicSpotRepository>();
+            services.AddScoped<IReviewRepository, ReviewRepository>();
             services.AddScoped<IAdministratorRepository, AdministratorRepository>();
             services.AddScoped<IBookingLogic, BookingLogic>();
             services.AddScoped<IBookingStageLogic, BookingStageLogic>();
