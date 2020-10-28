@@ -1,6 +1,7 @@
 ﻿using BusinessLogicInterface;
 using DataAccessInterface;
 using Domain;
+using System;
 using System.Collections.Generic;
 
 namespace BusinessLogic
@@ -68,6 +69,11 @@ namespace BusinessLogic
                 throw new NotFoundException("Booking");
             }
             return booking;
+        }
+
+        public List<(string, int)> GetReport(int touristicSpotId, DateTime start, DateTime end)
+        {
+            throw new NotImplementedException();
         }
     }
 }
