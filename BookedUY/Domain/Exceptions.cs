@@ -72,4 +72,11 @@ namespace Domain
         {
         }
     }
+    public class FailedReportException : APIException
+    {
+        public FailedReportException() : base(String.Format("The report failed because there were no bookings between the dates selected in the Touristic Spot selected."), 404)
+        {
+        }
+    }
+    
 }

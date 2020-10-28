@@ -1,12 +1,13 @@
 ﻿using DataAccessInterface;
 using Domain;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace DataAccess.Repositories
 {
-    public class BookingRepository : IRepository<Booking>
+    public class BookingRepository : IBookingRepository
     {
         private readonly DbSet<Booking> bookings;
         private readonly DbContext bookedUYContext;
@@ -39,6 +40,11 @@ namespace DataAccess.Repositories
             this.bookings.Remove(booking);
             this.bookedUYContext.SaveChanges();
             return booking;
+        }
+
+        public List<(string, int)> GetReport(int touristicSpotId, DateTime start, DateTime end)
+        {
+            throw new NotImplementedException();
         }
     }
 }

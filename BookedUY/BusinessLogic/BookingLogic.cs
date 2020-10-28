@@ -8,15 +8,17 @@ namespace BusinessLogic
 {
     public class BookingLogic : IBookingLogic
     {
-        private readonly IRepository<Booking> bookingRepository;
+        private readonly IBookingRepository bookingRepository;
         private readonly IAccommodationRepository accommodationRepository;
         private readonly ITouristRepository touristRepository;
+        private readonly ITouristicSpotRepository touristicSpotRepository;
 
-        public BookingLogic(IRepository<Booking> bookingRepository, IAccommodationRepository accommodationRepository, ITouristRepository touristRepository)
+        public BookingLogic(IBookingRepository bookingRepository, IAccommodationRepository accommodationRepository, ITouristRepository touristRepository, ITouristicSpotRepository touristicSpotRepository)
         {
             this.bookingRepository = bookingRepository;
             this.accommodationRepository = accommodationRepository;
             this.touristRepository = touristRepository;
+            this.touristicSpotRepository = touristicSpotRepository;
         }
 
         public Booking AddBooking(Booking booking)
@@ -71,9 +73,19 @@ namespace BusinessLogic
             return booking;
         }
 
-        public List<(string, int)> GetReport(int touristicSpotId, DateTime start, DateTime end)
+        public List<(string, int)> GetReport(string touristicSpotName, DateTime start, DateTime end)
         {
-            throw new NotImplementedException();
+            var touristicSpot = this.touristicSpotRepository.GetByName(touristicSpotName);
+            if(touristicSpot == null)
+            {
+                throw new NotFoundException("Touristic Spot");
+            }
+            var ret = bookingRepository.GetReport(touristicSpot.Id, start, end);
+            if(ret == null)
+            {
+                throw new FailedReportException();
+            }
+            return ret;
         }
     }
 }

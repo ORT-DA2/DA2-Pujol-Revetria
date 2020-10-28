@@ -2,6 +2,7 @@ using DataAccessInterface;
 using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,11 +15,12 @@ namespace BusinessLogic.Tests
         public void GetAllBookingsTest()
         {
             List<Booking> bookings = new List<Booking>();
-            var mock = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            var mock = new Mock<IBookingRepository>(MockBehavior.Strict);
             mock.Setup(p => p.GetAll()).Returns(bookings);
             var mock2 = new Mock<ITouristRepository>(MockBehavior.Strict);
             var mock3 = new Mock<IAccommodationRepository>(MockBehavior.Strict);
-            var logic = new BookingLogic(mock.Object, mock3.Object, mock2.Object);
+            var mock4 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            var logic = new BookingLogic(mock.Object, mock3.Object, mock2.Object, mock4.Object);
             var result = logic.GetAll();
             mock.VerifyAll();
             Assert.IsTrue(result.SequenceEqual(bookings));
@@ -41,7 +43,8 @@ namespace BusinessLogic.Tests
                 Guests = guests,
                 AccommodationId = 3
             };
-            Tourist tourist = new Tourist() { 
+            Tourist tourist = new Tourist()
+            {
                 Email = "a@a.com",
                 Id = 4
             };
@@ -51,19 +54,20 @@ namespace BusinessLogic.Tests
                 Id = 7,
                 Name = "a"
             };
-            var mock = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            var mock = new Mock<IBookingRepository>(MockBehavior.Strict);
             mock.Setup(p => p.Add(It.IsAny<Booking>())).Returns(booking);
             var mock2 = new Mock<ITouristRepository>(MockBehavior.Strict);
             mock2.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns(tourist);
             var mock3 = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mock3.Setup(p => p.GetById(It.IsAny<int>())).Returns(accommodation);
-            var logic = new BookingLogic(mock.Object, mock3.Object, mock2.Object);
+            var mock4 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            var logic = new BookingLogic(mock.Object, mock3.Object, mock2.Object, mock4.Object);
             var result = logic.AddBooking(booking);
             mock.VerifyAll();
             Assert.IsTrue(result.Equals(booking));
         }
 
-        
+
 
         [ExpectedException(typeof(NullInputException))]
         [TestMethod]
@@ -86,13 +90,14 @@ namespace BusinessLogic.Tests
                 Id = 7,
                 Name = "a"
             };
-            var mock = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            var mock = new Mock<IBookingRepository>(MockBehavior.Strict);
             mock.Setup(p => p.Add(It.IsAny<Booking>())).Returns(booking);
             var mock2 = new Mock<ITouristRepository>(MockBehavior.Strict);
             mock2.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns(tourist);
             var mock3 = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mock3.Setup(p => p.GetById(It.IsAny<int>())).Returns(accommodation);
-            var logic = new BookingLogic(mock.Object, mock3.Object, mock2.Object);
+            var mock4 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            var logic = new BookingLogic(mock.Object, mock3.Object, mock2.Object, mock4.Object);
             var result = logic.AddBooking(booking);
             mock.VerifyAll();
             Assert.IsTrue(result.Equals(booking));
@@ -119,13 +124,14 @@ namespace BusinessLogic.Tests
                 Id = 7,
                 Name = "a"
             };
-            var mock = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            var mock = new Mock<IBookingRepository>(MockBehavior.Strict);
             mock.Setup(p => p.Add(It.IsAny<Booking>())).Returns(booking);
             var mock2 = new Mock<ITouristRepository>(MockBehavior.Strict);
             mock2.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns(tourist);
             var mock3 = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mock3.Setup(p => p.GetById(It.IsAny<int>())).Returns(accommodation);
-            var logic = new BookingLogic(mock.Object, mock3.Object, mock2.Object);
+            var mock4 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            var logic = new BookingLogic(mock.Object, mock3.Object, mock2.Object, mock4.Object);
             var result = logic.AddBooking(booking);
             mock.VerifyAll();
             Assert.IsTrue(result.Equals(booking));
@@ -158,13 +164,14 @@ namespace BusinessLogic.Tests
                 Id = 7,
                 Name = "a"
             };
-            var mock = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            var mock = new Mock<IBookingRepository>(MockBehavior.Strict);
             mock.Setup(p => p.Add(It.IsAny<Booking>())).Returns(booking);
             var mock2 = new Mock<ITouristRepository>(MockBehavior.Strict);
             mock2.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns(tourist);
             var mock3 = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mock3.Setup(p => p.GetById(It.IsAny<int>())).Returns(accommodation);
-            var logic = new BookingLogic(mock.Object, mock3.Object, mock2.Object);
+            var mock4 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            var logic = new BookingLogic(mock.Object, mock3.Object, mock2.Object, mock4.Object);
             var result = logic.AddBooking(booking);
             mock.VerifyAll();
             Assert.IsTrue(result.Equals(booking));
@@ -197,16 +204,42 @@ namespace BusinessLogic.Tests
                 Id = 7,
                 Name = "a"
             };
-            var mock = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            var mock = new Mock<IBookingRepository>(MockBehavior.Strict);
             mock.Setup(p => p.Add(It.IsAny<Booking>())).Returns(booking);
             var mock2 = new Mock<ITouristRepository>(MockBehavior.Strict);
             mock2.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns(tourist);
             var mock3 = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mock3.Setup(p => p.GetById(It.IsAny<int>())).Returns<Accommodation>(null);
-            var logic = new BookingLogic(mock.Object, mock3.Object, mock2.Object);
+            var mock4 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            var logic = new BookingLogic(mock.Object, mock3.Object, mock2.Object, mock4.Object);
             var result = logic.AddBooking(booking);
             mock.VerifyAll();
             Assert.IsTrue(result.Equals(booking));
+        }
+        [TestMethod]
+        public void GetReportTest()
+        {
+            string touristicSpotName = "a";
+            DateTime start = new DateTime(2020, 01, 20);
+            DateTime end = new DateTime(2020, 02, 20);
+            (string, int) stringInt = ("a", 1);
+            List<(string, int)> list = new List<(string, int)>();
+            list.Add(stringInt);
+            TouristicSpot touristicSpot = new TouristicSpot()
+            {
+                Id=4,
+                Name = "a"
+            };
+            var mock = new Mock<IBookingRepository>(MockBehavior.Strict);
+            var mock2 = new Mock<IAccommodationRepository>(MockBehavior.Strict);
+            var mock3 = new Mock<ITouristRepository>(MockBehavior.Strict);
+            var mock4 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            mock.Setup(p => p.GetReport(It.IsAny<int>(), It.IsAny<DateTime>(), It.IsAny<DateTime>())).Returns(list);
+            mock4.Setup(p => p.GetByName(It.IsAny<string>())).Returns(touristicSpot);
+            var controller = new BookingLogic(mock.Object, mock2.Object, mock3.Object, mock4.Object);
+            var result = controller.GetReport(touristicSpotName, start, end);
+            mock.VerifyAll();
+            Assert.AreEqual(result, list);
         }
     }
 }

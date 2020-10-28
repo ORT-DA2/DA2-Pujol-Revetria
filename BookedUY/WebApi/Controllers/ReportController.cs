@@ -15,9 +15,9 @@ namespace WebApi.Controllers
         }
         // GET api/<ReportController>/5
         [HttpGet]
-        public IActionResult GetReport([FromQuery] int touristicSpotId,[FromQuery] DateTime start,[FromQuery] DateTime end)
+        public IActionResult GetReport([FromQuery] string touristicSpotName,[FromQuery] DateTime start,[FromQuery] DateTime end)
         {
-            List<(string, int)> report = bookingLogic.GetReport(touristicSpotId, start, end); 
+            List<(string, int)> report = bookingLogic.GetReport(touristicSpotName, start, end); 
             return Ok(report);
         }
     }
