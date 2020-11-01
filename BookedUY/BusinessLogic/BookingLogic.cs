@@ -44,7 +44,7 @@ namespace BusinessLogic
                 booking.HeadGuest = tourist;
             }
             double totalprice = CalculateTotalPrice(booking);
-            booking.TotalPrice = totalprice;
+            booking.TotalPrice = totalprice*accommodation.PricePerNight;
             var newBooking = this.bookingRepository.Add(booking);
             return newBooking;
         }
@@ -54,7 +54,16 @@ namespace BusinessLogic
             double total = 0;
             foreach (Guest guest in booking.Guests)
             {
-                total += guest.Amount * guest.Multiplier;
+                if (guest.Multiplier == 0.70)
+                {
+                    int amount = guest.Amount;
+                    int aux = amount - (amount / 2);
+                    total += ((amount / 2) * guest.Multiplier) + aux;
+                }
+                else
+                {
+                    total += guest.Amount * guest.Multiplier;
+                }
             }
             return total;
         }
