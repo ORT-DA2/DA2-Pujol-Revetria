@@ -10,9 +10,9 @@ namespace BusinessLogic
         private readonly IAccommodationRepository accommodationRepository;
         private readonly ITouristicSpotRepository spotRepository;
         private readonly IReviewRepository reviewRepository;
-        private readonly IRepository<Booking> bookingRepository;
+        private readonly IBookingRepository bookingRepository;
 
-        public AccommodationLogic(IAccommodationRepository accommodationRepository, ITouristicSpotRepository spotRepository, IReviewRepository reviewRepository, IRepository<Booking> bookingRepository)
+        public AccommodationLogic(IAccommodationRepository accommodationRepository, ITouristicSpotRepository spotRepository, IReviewRepository reviewRepository, IBookingRepository bookingRepository)
         {
             this.accommodationRepository = accommodationRepository;
             this.spotRepository = spotRepository;

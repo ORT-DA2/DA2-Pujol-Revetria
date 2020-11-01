@@ -216,30 +216,44 @@ namespace BusinessLogic.Tests
             mock.VerifyAll();
             Assert.IsTrue(result.Equals(booking));
         }
+
         [TestMethod]
         public void GetReportTest()
         {
             string touristicSpotName = "a";
             DateTime start = new DateTime(2020, 01, 20);
             DateTime end = new DateTime(2020, 02, 20);
-            (string, int) stringInt = ("a", 1);
-            List<(string, int)> list = new List<(string, int)>();
-            list.Add(stringInt);
+            ReportTuple reportTuple = new ReportTuple()
+            {
+                Id=1,
+                Count=1
+            };
+            ReportTupleReturn reportTuplerReturn = new ReportTupleReturn { AccommodationName = "a", Count = 1 };
             TouristicSpot touristicSpot = new TouristicSpot()
             {
                 Id=4,
                 Name = "a"
             };
+            Accommodation acco = new Accommodation()
+            {
+                Id = 1,
+                Name = "a"
+            };
+            IList<ReportTuple> list = new List<ReportTuple>();
+            list.Add(reportTuple);
+            List<ReportTupleReturn> listReturn = new List<ReportTupleReturn>();
+            listReturn.Add(reportTuplerReturn);
             var mock = new Mock<IBookingRepository>(MockBehavior.Strict);
             var mock2 = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             var mock3 = new Mock<ITouristRepository>(MockBehavior.Strict);
             var mock4 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
             mock.Setup(p => p.GetReport(It.IsAny<int>(), It.IsAny<DateTime>(), It.IsAny<DateTime>())).Returns(list);
             mock4.Setup(p => p.GetByName(It.IsAny<string>())).Returns(touristicSpot);
+            mock2.Setup(p => p.GetById(It.IsAny<int>())).Returns(acco);
             var controller = new BookingLogic(mock.Object, mock2.Object, mock3.Object, mock4.Object);
             var result = controller.GetReport(touristicSpotName, start, end);
             mock.VerifyAll();
-            Assert.AreEqual(result, list);
+            Assert.AreEqual(result[0].AccommodationName, listReturn[0].AccommodationName);
         }
     }
 }

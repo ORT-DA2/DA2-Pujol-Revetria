@@ -42,9 +42,27 @@ namespace DataAccess.Repositories
             return booking;
         }
 
-        public List<(string, int)> GetReport(int touristicSpotId, DateTime start, DateTime end)
+        public IList<ReportTuple> GetReport(int touristicSpotId, DateTime start, DateTime end)
         {
-            throw new NotImplementedException();
+            return this.bookings.Include(b => b.Accommodation).Include(b => b.BookingHistory).
+                Where(b => b.Accommodation.SpotId == touristicSpotId
+                /*&& b.BookingHistory.Count!=0 
+                && b.BookingHistory.Last().Status != Status.Rejected
+                && b.BookingHistory.Last().Status != Status.Expired)
+                && ((b.CheckIn >= start && b.CheckOut <= start) || (b.CheckIn >= end && b.CheckOut <= end))*/)
+                
+                .GroupBy(b => b.Accommodation.Id).Select(b => new ReportTuple(){ Id = b.Key, Count = b.Count() })
+                .OrderByDescending(b=>b.Count).ThenBy(b=>b.Id).ToList();
+
+
+            /*var aux = this.bookings.Include(b => b.Accommodation).Include(b => b.BookingHistory)
+                .Where(b => b.Accommodation.SpotId == touristicSpotId
+                && b.BookingHistory.Last().Status != Status.Expired
+                && b.BookingHistory.Last().Status != Status.Rejected
+                && ((b.CheckIn >= start && b.CheckOut <= start) || (b.CheckIn >= end && b.CheckOut <= end)));
+            return aux.Select<string, int>(b => (b.Key, b.Count));
+            return aux.GroupBy(b => b.Accommodation.Name).Select<string, int>(b => (b.Key, b.Count);*/
+
         }
     }
 }

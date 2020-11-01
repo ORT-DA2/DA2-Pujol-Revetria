@@ -14,7 +14,7 @@ namespace Factory
     {
         public static void AddMyServices(IServiceCollection services)
         {
-            services.AddScoped<IRepository<Booking>, BookingRepository>();
+            services.AddScoped<IBookingRepository, BookingRepository>();
             services.AddScoped<IAccommodationRepository, AccommodationRepository>();
             services.AddScoped<IBookingStageRepository, BookingStageRepository>();
             services.AddScoped<IRepository<Category>, CategoryRepository>();

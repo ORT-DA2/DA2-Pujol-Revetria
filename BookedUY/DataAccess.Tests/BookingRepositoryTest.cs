@@ -219,5 +219,75 @@ namespace DataAccess.Tests
 
             Assert.IsNull(_context.Bookings.Find(1));
         }
+
+        [TestMethod]
+        public void TestGetReport()
+        {
+            int testId = 1;
+            Booking testBooking = new Booking()
+            {
+                Id = testId,
+                Accommodation = new Accommodation()
+                {
+                    Name = "a",
+                    SpotId = 1
+                },
+                AccommodationId = 1,
+                BookingHistory = new List<BookingStage>(),
+                CheckIn = new DateTime(2020,12,14),
+                CheckOut = new DateTime(2020,12,15),
+                GuestId = 2,
+                Guests = new List<Guest>(),
+                HeadGuest = new Tourist()
+                {
+                    Email = "a@a.com"
+                },
+                TotalPrice = 35
+            };
+            List<Booking> bookingsList = new List<Booking>()
+            {
+                new Booking()
+                {
+                    Id=2,
+                    Accommodation = new Accommodation()
+                    {
+                        Name="b",
+                        SpotId = 1
+                    },
+                    AccommodationId = 1,
+                    BookingHistory = new List<BookingStage>(),
+                    CheckIn = new DateTime(2020,12,14),
+                    CheckOut = new DateTime(2020,12,15),
+                    GuestId = 6,
+                    Guests = new List<Guest>(),
+                    HeadGuest = new Tourist()
+                    {
+                        Email = "b@b.com"
+                    },
+                    TotalPrice = 142
+                },
+            };
+            bookingsList.Add(testBooking);
+            bookingsList.ForEach(r => _context.Add(r));
+            _context.SaveChanges();
+            var repository = new BookingRepository(_context);
+            DateTime start = new DateTime(2020, 12, 12);
+            DateTime end = new DateTime(2020, 12, 24);
+            var result = repository.GetReport(1,start,end);
+            List<ReportTuple> expected = new List<ReportTuple>();
+            ReportTuple reportTuple = new ReportTuple()
+            {
+                Id = 1,
+                Count = 1
+            };
+            ReportTuple reportTuple2 = new ReportTuple()
+            {
+                Id = 2,
+                Count = 1
+            };
+            expected.Add(reportTuple);
+            expected.Add(reportTuple2);
+            Assert.IsTrue(expected.SequenceEqual(result));
+        }
     }
 }

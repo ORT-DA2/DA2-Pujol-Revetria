@@ -9,10 +9,10 @@ namespace BusinessLogic
     public class BookingStageLogic : IBookingStageLogic
     {
         private readonly IBookingStageRepository bookingStageRepository;
-        private readonly IRepository<Booking> bookingRepository;
+        private readonly IBookingRepository bookingRepository;
         private readonly IAdministratorRepository administratorRepository;
 
-        public BookingStageLogic(IBookingStageRepository bookingStageRepository, IRepository<Booking> bookingRepository, IAdministratorRepository administratorRepository)
+        public BookingStageLogic(IBookingStageRepository bookingStageRepository, IBookingRepository bookingRepository, IAdministratorRepository administratorRepository)
         {
             this.bookingStageRepository = bookingStageRepository;
             this.bookingRepository = bookingRepository;

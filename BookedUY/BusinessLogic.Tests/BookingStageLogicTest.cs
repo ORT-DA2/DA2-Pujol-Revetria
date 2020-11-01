@@ -27,7 +27,7 @@ namespace BusinessLogic.Tests
             bookingStage.AdministratorId = 4;
             var mock = new Mock<IBookingStageRepository>(MockBehavior.Strict);
             mock.Setup(p => p.Add(It.IsAny<BookingStage>())).Returns(bookingStage);
-            var mock2 = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            var mock2 = new Mock<IBookingRepository>(MockBehavior.Strict);
             mock2.Setup(u => u.GetById(It.IsAny<int>())).Returns(booking);
             var mock3 = new Mock<IAdministratorRepository>(MockBehavior.Strict);
             mock3.Setup(u => u.GetById(It.IsAny<int>())).Returns(admin);
@@ -58,7 +58,7 @@ namespace BusinessLogic.Tests
             bookingStage.AdministratorId = 4;
             var mock = new Mock<IBookingStageRepository>(MockBehavior.Strict);
             mock.Setup(p => p.Add(It.IsAny<BookingStage>())).Returns(bookingStage);
-            var mock2 = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            var mock2 = new Mock<IBookingRepository>(MockBehavior.Strict);
             mock2.Setup(u => u.GetById(It.IsAny<int>())).Returns<Booking>(null);
             var mock3 = new Mock<IAdministratorRepository>(MockBehavior.Strict);
             mock3.Setup(u => u.GetById(It.IsAny<int>())).Returns(admin);
@@ -90,7 +90,7 @@ namespace BusinessLogic.Tests
             bookingStage.AdministratorId = 4;
             var mock = new Mock<IBookingStageRepository>(MockBehavior.Strict);
             mock.Setup(p => p.GetByBooking(It.IsAny<int>())).Returns(bookingStages);
-            var mock2 = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            var mock2 = new Mock<IBookingRepository>(MockBehavior.Strict);
             var mock3 = new Mock<IAdministratorRepository>(MockBehavior.Strict);
             mock3.Setup(u => u.GetById(It.IsAny<int>())).Returns(admin);
             var logic = new BookingStageLogic(mock.Object, mock2.Object, mock3.Object);
@@ -120,7 +120,7 @@ namespace BusinessLogic.Tests
             bookingStage.AdministratorId = 4;
             var mock = new Mock<IBookingStageRepository>(MockBehavior.Strict);
             mock.Setup(p => p.Add(It.IsAny<BookingStage>())).Returns(bookingStage);
-            var mock2 = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            var mock2 = new Mock<IBookingRepository>(MockBehavior.Strict);
             mock2.Setup(u => u.GetById(It.IsAny<int>())).Returns<Booking>(null);
             var mock3 = new Mock<IAdministratorRepository>(MockBehavior.Strict);
             mock3.Setup(u => u.GetById(It.IsAny<int>())).Returns(admin);
@@ -151,7 +151,7 @@ namespace BusinessLogic.Tests
             bookingStage.AdministratorId = 4;
             var mock = new Mock<IBookingStageRepository>(MockBehavior.Strict);
             mock.Setup(p => p.Add(It.IsAny<BookingStage>())).Returns(bookingStage);
-            var mock2 = new Mock<IRepository<Booking>>(MockBehavior.Strict);
+            var mock2 = new Mock<IBookingRepository>(MockBehavior.Strict);
             mock2.Setup(u => u.GetById(It.IsAny<int>())).Returns(booking);
             var mock3 = new Mock<IAdministratorRepository>(MockBehavior.Strict);
             mock3.Setup(u => u.GetById(It.IsAny<int>())).Returns<Administrator>(null);

@@ -3,6 +3,7 @@ using DataAccessInterface;
 using Domain;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessLogic
 {
@@ -73,7 +74,7 @@ namespace BusinessLogic
             return booking;
         }
 
-        public List<(string, int)> GetReport(string touristicSpotName, DateTime start, DateTime end)
+        public List<ReportTupleReturn> GetReport(string touristicSpotName, DateTime start, DateTime end)
         {
             var touristicSpot = this.touristicSpotRepository.GetByName(touristicSpotName);
             if(touristicSpot == null)
@@ -81,11 +82,21 @@ namespace BusinessLogic
                 throw new NotFoundException("Touristic Spot");
             }
             var ret = bookingRepository.GetReport(touristicSpot.Id, start, end);
-            if(ret == null)
+            if(ret == null || ret.Count() == 0)
             {
                 throw new FailedReportException();
             }
-            return ret;
+            var listOfTuple = new List<ReportTupleReturn>();
+            for (int i = 0; i < ret.Count(); i++)
+            {
+                ReportTupleReturn reportTupleReturn = new ReportTupleReturn()
+                {
+                    AccommodationName = accommodationRepository.GetById(ret.ElementAt(i).Id).Name,
+                    Count = ret.ElementAt(i).Count
+                };
+                listOfTuple.Add(reportTupleReturn);
+            }
+            return listOfTuple;
         }
     }
 }

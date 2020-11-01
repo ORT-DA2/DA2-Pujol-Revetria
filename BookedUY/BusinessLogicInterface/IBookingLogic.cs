@@ -11,6 +11,6 @@ namespace BusinessLogicInterface
         IEnumerable<Booking> GetAll();
 
         Booking GetById(int id);
-        List<(string, int)> GetReport(string touristicSpotName, DateTime start, DateTime end);
+        List<ReportTupleReturn> GetReport(string touristicSpotName, DateTime start, DateTime end);
     }
 }

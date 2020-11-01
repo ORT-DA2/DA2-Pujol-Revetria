@@ -1,4 +1,5 @@
 ﻿using BusinessLogicInterface;
+using Domain;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult GetReport([FromQuery] string touristicSpotName,[FromQuery] DateTime start,[FromQuery] DateTime end)
         {
-            List<(string, int)> report = bookingLogic.GetReport(touristicSpotName, start, end); 
+            List<ReportTupleReturn> report = bookingLogic.GetReport(touristicSpotName, start, end); 
             return Ok(report);
         }
     }
