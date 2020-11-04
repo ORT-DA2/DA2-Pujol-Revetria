@@ -63,6 +63,12 @@ namespace BusinessLogic.Tests
             var mock4 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
             var logic = new BookingLogic(mock.Object, mock3.Object, mock2.Object, mock4.Object);
             var result = logic.AddBooking(booking);
+            BookingStage bookingStage = new BookingStage()
+            {
+                AdministratorId = 1,
+                Status = Status.Received
+            };
+            booking.BookingHistory.Add(bookingStage);
             mock.VerifyAll();
             Assert.IsTrue(result.Equals(booking));
         }

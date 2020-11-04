@@ -4,7 +4,7 @@ namespace Domain
 {
     public enum Status
     {
-        Created, PaymentPending, Accepted, Rejected, Expired
+        Created, PaymentPending, Accepted, Rejected, Expired, Received
     }
 
     public class StatusMethods

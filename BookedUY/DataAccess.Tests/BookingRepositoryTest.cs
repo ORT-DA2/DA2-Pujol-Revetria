@@ -244,30 +244,47 @@ namespace DataAccess.Tests
                 },
                 TotalPrice = 35
             };
-            List<Booking> bookingsList = new List<Booking>()
+            BookingStage bookingStage1 = new BookingStage()
             {
-                new Booking()
-                {
-                    Id=2,
-                    Accommodation = new Accommodation()
-                    {
-                        Name="b",
-                        SpotId = 1
-                    },
-                    AccommodationId = 1,
-                    BookingHistory = new List<BookingStage>(),
-                    CheckIn = new DateTime(2020,12,14),
-                    CheckOut = new DateTime(2020,12,15),
-                    GuestId = 6,
-                    Guests = new List<Guest>(),
-                    HeadGuest = new Tourist()
-                    {
-                        Email = "b@b.com"
-                    },
-                    TotalPrice = 142
-                },
+                AdministratorId = 1,
+                AsociatedBookingId = 1,
+                Description = "A",
+                EntryDate = new DateTime(2020, 12, 22),
+                Status = Status.Received,
             };
+            testBooking.BookingHistory.Add(bookingStage1);
+            Booking booking = new Booking()
+            {
+                Id = 2,
+                Accommodation = new Accommodation()
+                {
+                    Name = "b",
+                    SpotId = 1
+                },
+                AccommodationId = 1,
+                BookingHistory = new List<BookingStage>(),
+                CheckIn = new DateTime(2020, 12, 14),
+                CheckOut = new DateTime(2020, 12, 15),
+                GuestId = 6,
+                Guests = new List<Guest>(),
+                HeadGuest = new Tourist()
+                {
+                    Email = "b@b.com"
+                },
+                TotalPrice = 142
+            };
+            BookingStage bookingStage2 = new BookingStage()
+            {
+                AdministratorId = 1,
+                AsociatedBookingId = 2,
+                Description = "A",
+                EntryDate = new DateTime(2020, 12, 22),
+                Status = Status.Received,
+            };
+            booking.BookingHistory.Add(bookingStage2);
+            List<Booking> bookingsList = new List<Booking>();
             bookingsList.Add(testBooking);
+            bookingsList.Add(booking);
             bookingsList.ForEach(r => _context.Add(r));
             _context.SaveChanges();
             var repository = new BookingRepository(_context);

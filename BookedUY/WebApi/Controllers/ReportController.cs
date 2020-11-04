@@ -14,7 +14,6 @@ namespace WebApi.Controllers
         {
             this.bookingLogic = bookingLogic;
         }
-        // GET api/<ReportController>/5
         [HttpGet]
         public IActionResult GetReport([FromQuery] string touristicSpotName,[FromQuery] DateTime start,[FromQuery] DateTime end)
         {

@@ -45,6 +45,14 @@ namespace BusinessLogic
             }
             double totalprice = CalculateTotalPrice(booking);
             booking.TotalPrice = totalprice*accommodation.PricePerNight;
+            booking.BookingHistory = new List<BookingStage>();
+            BookingStage bookingStage = new BookingStage()
+            {
+                AdministratorId = 1,
+                Status = Status.Received,
+                Description = "Received"
+            };
+            booking.BookingHistory.Add(bookingStage);
             var newBooking = this.bookingRepository.Add(booking);
             return newBooking;
         }

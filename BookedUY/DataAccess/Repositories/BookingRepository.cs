@@ -46,11 +46,9 @@ namespace DataAccess.Repositories
         {
             return this.bookings.Include(b => b.Accommodation).Include(b => b.BookingHistory).
                 Where(b => b.Accommodation.SpotId == touristicSpotId
-                /*&& b.BookingHistory.Count!=0 
-                && b.BookingHistory.Last().Status != Status.Rejected
-                && b.BookingHistory.Last().Status != Status.Expired)
-                && ((b.CheckIn >= start && b.CheckOut <= start) || (b.CheckIn >= end && b.CheckOut <= end))*/)
-                
+                && b.BookingHistory.OrderByDescending(c => c.EntryDate).FirstOrDefault().Status != Status.Rejected
+                && b.BookingHistory.OrderByDescending(c => c.EntryDate).FirstOrDefault().Status != Status.Expired
+                && ((b.CheckIn >= start && b.CheckIn <= end) || (b.CheckOut <= end && b.CheckOut >= start) || (b.CheckIn<=start && b.CheckOut>=end)))
                 .GroupBy(b => b.Accommodation.Id).Select(b => new ReportTuple(){ Id = b.Key, Count = b.Count() })
                 .OrderByDescending(b=>b.Count).ThenBy(b=>b.Id).ToList();
 
@@ -61,7 +59,11 @@ namespace DataAccess.Repositories
                 && b.BookingHistory.Last().Status != Status.Rejected
                 && ((b.CheckIn >= start && b.CheckOut <= start) || (b.CheckIn >= end && b.CheckOut <= end)));
             return aux.Select<string, int>(b => (b.Key, b.Count));
-            return aux.GroupBy(b => b.Accommodation.Name).Select<string, int>(b => (b.Key, b.Count);*/
+            return aux.GroupBy(b => b.Accommodation.Name).Select<string, int>(b => (b.Key, b.Count);
+            
+
+            Skip(b.BookingHistory.Count).First()
+             */
 
         }
     }
