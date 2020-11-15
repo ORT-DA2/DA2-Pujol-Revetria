@@ -1,0 +1,105 @@
+<div class="container">
+  <div class = "card bg-light mb-3">
+    <div class = "card-body" *ngIf="!renderError">
+      <img class="card-img-top" alt="{{accommodation.name}}">
+      <h3 class="card-title">{{accommodation.name}}</h3>
+      <p class="card-text">{{accommodation.address}}</p>
+      <p class="card-text">{{accommodation.information}}</p>
+      <p class="card-text">USD {{accommodation.price}}</p>
+      <p class="card-text">{{accommodation.contactNumber}}</p>
+      <ng-container *ngFor = "let score of toArrayScore()" class="card">
+        <svg *ngIf="score==1" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+        </svg>
+        <svg *ngIf="score==0.5" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-half" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M5.354 5.119L7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.55.55 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.519.519 0 0 1-.146.05c-.341.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.171-.403.59.59 0 0 1 .084-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027c.08 0 .16.018.232.056l3.686 1.894-.694-3.957a.564.564 0 0 1 .163-.505l2.906-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.002 2.223 8 2.226v9.8z"/>
+        </svg>
+        <svg *ngIf="score==0" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+        </svg>
+      </ng-container>
+    </div>
+    <div class="alert alert-danger" *ngIf="renderError">
+      <h1>An Error Ocurred</h1>
+      <p>{{renderError}}</p>
+      <button class="btn btn-danger" (click) = "getAccommodation()">Okay</button>
+    </div>
+    <hr>
+    <div class="container">
+    <form (ngSubmit) = "onSubmit(f)" #f="ngForm" class="form">
+      <div class="form-row">
+        <div class="form-row">
+          <div class="col">
+            <label>Enter dates:</label>
+            <mat-form-field appearance="block">
+              <mat-date-range-input [formGroup]="range" [rangePicker]="picker" >
+                <input matStartDate formControlName="start" [min]="minDate" placeholder="Start date" disabled>
+                <input matEndDate formControlName="end" [min]="minDate" placeholder="End date" disabled>
+              </mat-date-range-input>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle >
+              <mat-date-range-picker #picker disabled="false" ></mat-date-range-picker>
+              <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+              <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Infant:</label>
+            <input type="number" ngModel name="infantAmount" class="form-control" value="0" min="0" max="50"/>
+          </div>
+          <div class="col">
+            <label>Child:</label>
+            <input type="number" ngModel name="childAmount" class="form-control" value="0" min="0" max="50"/>
+          </div>
+          <div class="col">
+            <label>Adult:</label>
+            <input type="number" ngModel name="adultAmount" class="form-control" value="0" min="0" max="50"/>
+          </div>
+          <div class="col">
+            <label>Elderly:</label>
+            <input type="number" ngModel name="elderlyAmount" class="form-control" value="0" min="0" max="50"/>
+          </div>
+        </div>
+        <span class="alert alert-danger" role="alert" *ngIf ="!validDate&&range.touched">Please enter a valid date</span>
+        </div>
+        <div class="form-row">
+          <span class="alert alert-danger" role="alert" *ngIf ="!guestsValid">Please enter at least one guest</span>
+        </div>
+      <div class="form-row">
+        <div class="col-md-3 mb-2">
+          <label for="firstname" >First name</label>
+          <input type="text" #name="ngModel" class="form-control" ngModel name="name" id="firstname" placeholder="First name" value="Mark"  required>
+        </div>
+        <div class="col-md-3 mb-2">
+          <label for="lastname" class="form-label">Last name</label>
+          <input type="text" #lastname="ngModel" ngModel name="lastname" class="form-control" id="lastname" placeholder="Last name" value="Otto"  required>
+        </div>
+        <div class="col-md-6 mb-2">
+        <label for="email" class="form-label">Email</label>
+        <input type="text" #email="ngModel"  class="form-control" id="email" ngModel name="email" placeholder="Email" email required>
+
+          <div class="col-md-3 mb-2">
+            <span class="alert alert-danger" role="alert" *ngIf ="!name.valid&&name.touched">Please enter your name</span>
+          </div>
+          <div class="col-md-3 mb-2">
+            <span class="alert alert-danger" role="alert" *ngIf ="!lastname.valid&&lastname.touched">Please enter your Last Name</span>
+          </div>
+          <div class="col-md-6 mb-2">
+          <span class="alert alert-danger" role="alert" *ngIf ="!email.valid&&email.touched">Please enter your email</span>
+        </div>
+        </div>
+      </div>
+      <button class="btn btn-primary" type="submit" [disabled] = "!f.valid&&validDate&&guestsValid">Book</button>
+    </form>
+    <span class="alert alert-danger" role="alert" *ngIf ="formError">{{formError.error}}</span>
+  </div>
+  <div class="alert alert-success" *ngIf="bookingCode">
+    <h1>Booking Created</h1>
+    <p>Your Booking Code: {{bookingCode}}</p>
+  </div>
+</div>
+<hr>
+<ng-container *ngFor = "let rev of accommodation.reviews">
+  <app-review [review]="rev"></app-review>
+</ng-container>
+</div>
+

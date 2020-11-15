@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+      <div class="col-12">
+        <div class="grid" *ngIf="!renderError">
+          <ng-container *ngFor="let accommodationEl of accommodations">
+            <app-accomodation [accommodation]="accommodationEl"></app-accomodation>
+          </ng-container>
+      </div>
+      <div class="alert alert-danger" *ngIf="renderError">
+        <h1>An Error Ocurred</h1>
+        <p>{{renderError}}</p>
+        <button class="btn btn-danger" (click) = "getAccommodations()">Okay</button>
+      </div>
+    </div>
+  </div>
+</div>

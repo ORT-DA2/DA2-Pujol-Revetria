@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.header {
+  position: fixed;
+  height: 10%;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+
+

@@ -1,0 +1,12 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <div class="fadeIn first">
+      <h2>Login</h2>
+    </div>
+    <form>
+      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" #username>
+      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password" #password>
+      <input type="submit" class="fadeIn fourth" value="Log In" (click)="login(username,password)">
+    </form>
+  </div>
+</div>
