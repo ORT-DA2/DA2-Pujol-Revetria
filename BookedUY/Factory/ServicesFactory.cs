@@ -30,6 +30,7 @@ namespace Factory
             services.AddScoped<IRegionLogic, RegionLogic>();
             services.AddScoped<ITouristicSpotLogic, TouristicSpotLogic>();
             services.AddScoped<ISessionLogic, SessionLogic>();
+            services.AddScoped<IImporterLogic, ImporterLogic>();
         }
 
         public static void AddDbContextServices(IServiceCollection services, string connectionString)
