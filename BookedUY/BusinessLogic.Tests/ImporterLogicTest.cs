@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using ImportInterface;
 using BusinessLogicInterface;
+using WebApi.DTOs;
 
 namespace BusinessLogic.Tests
 {
@@ -111,6 +112,9 @@ namespace BusinessLogic.Tests
                 PricePerNight = 1
             };
 
+            AccommodationModelOut accommodationModelOut = new AccommodationModelOut(accommodation, (0, new List<Review>()));
+
+
             var mockAccommodation = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mockAccommodation.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
             mockAccommodation.Setup(p => p.Add(It.IsAny<Accommodation>())).Returns(accommodation);
@@ -129,7 +133,7 @@ namespace BusinessLogic.Tests
             mockTouristicSpot.VerifyAll();
             mockRegion.VerifyAll();
 
-            Assert.AreEqual(accommodation, result);
+            Assert.AreEqual(accommodationModelOut, result);
         }
 
         [TestMethod]
@@ -191,6 +195,8 @@ namespace BusinessLogic.Tests
                 PricePerNight = 1
             };
 
+            AccommodationModelOut accommodationModelOut = new AccommodationModelOut(accommodation, (0, new List<Review>()));
+
             var mockAccommodation = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mockAccommodation.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
             mockAccommodation.Setup(p => p.Add(It.IsAny<Accommodation>())).Returns(accommodation);
@@ -208,7 +214,7 @@ namespace BusinessLogic.Tests
             mockTouristicSpot.VerifyAll();
             mockRegion.VerifyAll();
 
-            Assert.AreEqual(accommodation, result);
+            Assert.AreEqual(accommodationModelOut, result);
         }
 
         [ExpectedException(typeof(NotFoundException))]

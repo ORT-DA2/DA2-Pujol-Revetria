@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using WebApi.Controllers;
+using WebApi.DTOs;
 
 namespace WebApi.Tests
 {
@@ -103,8 +104,10 @@ namespace WebApi.Tests
                 PricePerNight = 1
             };
 
+            AccommodationModelOut accommodationModelOut = new AccommodationModelOut(accommodation, (0,new List<Review>()));
+
             var mockImporter = new Mock<IImporterLogic>(MockBehavior.Strict);
-            mockImporter.Setup(p => p.Import(It.IsAny<ImporterModel>())).Returns(accommodation);
+            mockImporter.Setup(p => p.Import(It.IsAny<ImporterModel>())).Returns(accommodationModelOut);
             var controller = new ImportController(mockImporter.Object);
             controller.Post(importerModel);
 

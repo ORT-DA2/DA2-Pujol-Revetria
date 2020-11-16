@@ -39,6 +39,16 @@ namespace WebApi.DTOs
             return imagesString;
         }
 
+        public override bool Equals(object obj)
+        {
+            var result = false;
+            if (obj is AccommodationModelOut accommodationModelOut)
+            {
+                result = this.Name == accommodationModelOut.Name && this.Id == accommodationModelOut.Id;
+            }
+            return result;
+        }
+
         //public List<AccommodationModelOut> ToOutList(IEnumerable<AccommodationModelOut> list)
         //{
         //    List<AccommodationModelOut> outList = new List<AccommodationModelOut>();
