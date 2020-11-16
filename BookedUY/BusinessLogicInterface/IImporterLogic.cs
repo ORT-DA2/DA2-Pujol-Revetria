@@ -3,6 +3,7 @@ using ImportInterface;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using WebApi.DTOs;
 
 namespace BusinessLogicInterface
 {
@@ -10,6 +11,6 @@ namespace BusinessLogicInterface
     {
         List<string> GetNames();
         List<TypeParameter> GetParameters(string name);
-        Accommodation Import(ImporterModel import);
+        AccommodationModelOut Import(ImporterModel import);
     }
 }

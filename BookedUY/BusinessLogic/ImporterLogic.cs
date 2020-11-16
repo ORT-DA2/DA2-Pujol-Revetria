@@ -3,12 +3,14 @@ using DataAccessInterface;
 using Domain;
 using ImportInterface;
 using ImportInterface.Parse;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using WebApi.DTOs;
 
 namespace BusinessLogic
 {
@@ -28,7 +30,13 @@ namespace BusinessLogic
         public List<string> GetNames()
         {
             List<string> names = new List<string>();
-            string configurationPath = "C:/Users/seraf/Desktop/Facultad/S6/DA2/DA2-Pujol-Revetria/BookedUY/ImportInterface/bin/Debug/DLLs";
+            string directoryDll = Directory.GetCurrentDirectory();
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+            .SetBasePath(directoryDll)
+            .AddJsonFile("appsettings.json")
+            .Build();
+            var connectionString = configuration.GetSection(@"Path").GetChildren().FirstOrDefault().Value;
+            string configurationPath = connectionString;
 
             var directory = new DirectoryInfo(configurationPath);
             FileInfo[] files = directory.GetFiles("*.dll");
@@ -50,7 +58,7 @@ namespace BusinessLogic
             return names;
         }
 
-        public Accommodation Import(ImporterModel import)
+        public AccommodationModelOut Import(ImporterModel import)
         {
             var implementation = ObtainImplementation(import.Name);
             var parse = implementation.Import(import.Parameters);
@@ -107,7 +115,7 @@ namespace BusinessLogic
                     Image = accommodationImage.Image
                 });
             }
-            return this.accommodationRepository.Add(new Accommodation()
+            Accommodation accommodation = this.accommodationRepository.Add(new Accommodation()
             {
                 Address = parse.Address,
                 ContactNumber = parse.ContactNumber,
@@ -117,7 +125,8 @@ namespace BusinessLogic
                 PricePerNight = parse.PricePerNight,
                 Images = accommodationImages,
                 Spot = touristicSpot
-            });  
+            });
+            return new AccommodationModelOut(accommodation, (0, new List<Review>()));  
         }
 
         public List<TypeParameter> GetParameters(string name)
@@ -128,7 +137,13 @@ namespace BusinessLogic
         private IImport ObtainImplementation(string name)
         {
             List<string> names = new List<string>();
-            string configurationPath = "C:/Users/seraf/Desktop/Facultad/S6/DA2/DA2-Pujol-Revetria/BookedUY/ImportInterface/bin/Debug/DLLs";
+            string directoryDll = Directory.GetCurrentDirectory();
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+            .SetBasePath(directoryDll)
+            .AddJsonFile("appsettings.json")
+            .Build();
+            var connectionString = configuration.GetSection(@"Path").GetChildren().FirstOrDefault().Value;
+            string configurationPath = connectionString;//No Hardcoded, relative path
 
             var directory = new DirectoryInfo(configurationPath);
             FileInfo[] files = directory.GetFiles("*.dll");

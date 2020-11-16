@@ -14,6 +14,7 @@
     <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
     <ProjectReference Include="..\SessionInterface\SessionInterface.csproj" />
     <ProjectReference Include="..\ImportInterface\ImportInterface.csproj" />
+    <ProjectReference Include="..\WebApi.DTOs\WebApi.DTOs.csproj" />
   </ItemGroup>
 
 </Project>

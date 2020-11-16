@@ -27,8 +27,7 @@ namespace WebApi.Controllers
         [HttpPost] 
         public IActionResult Post([FromBody] ImporterModel import) 
         {
-            this.importLogic.Import(import);
-            return Ok();
+            return Ok(this.importLogic.Import(import));
         }
     }
 }
