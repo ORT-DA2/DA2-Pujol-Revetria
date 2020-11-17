@@ -2,6 +2,7 @@
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using SessionInterface;
+using System.Linq;
 using WebApi.DTOs;
 using WebApi.Filters;
 
@@ -26,7 +27,15 @@ namespace WebApi.Controllers
         {
             Administrator admin = this.administratorLogic.GetByEmailAndPassword(email, password);
             string token = sessionLogic.GenerateToken(admin);
-            return Ok(token);
+            return Ok(new TokenModelOut(token));
+        }
+
+        [HttpGet()]
+        public IActionResult Get()
+        {
+            var administrators = from administrator in this.administratorLogic.GetAll()
+                                 select new AdministratorModelOut(administrator.Email);
+            return Ok(administrators);
         }
 
         // DELETE api/<AdministratorController>/5

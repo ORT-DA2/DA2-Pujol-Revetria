@@ -1,10 +1,11 @@
-﻿using DataAccessInterface;
+﻿using BusinessLogicInterface;
+using DataAccessInterface;
 using Domain;
 using System.Collections.Generic;
 
 namespace BusinessLogic
 {
-    public class CategoryLogic
+    public class CategoryLogic : ICategoryLogic
     {
         private readonly IRepository<Category> categoryRepository;
 
