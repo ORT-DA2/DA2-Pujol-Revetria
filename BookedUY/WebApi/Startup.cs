@@ -1,6 +1,7 @@
 using Factory;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,26 +26,23 @@ namespace Migrations
             ServicesFactory.AddDbContextServices(services, this.Configuration.GetConnectionString("BookedUYDB"));
             ServicesFactory.AddMyServices(services);
             services.AddScoped<AuthorizationFilter>();
-
-            //var key = Encoding.ASCII.GetBytes(Configuration["SecretKey"]);
-            //services.AddAuthentication(x =>
-            //{
-            //    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //}).AddJwtBearer(x =>
-            //{
-            //    x.RequireHttpsMetadata = false;
-            //    x.SaveToken = true;
-            //    x.TokenValidationParameters = new TokenValidationParameters
-            //    {
-            //        ValidateIssuerSigningKey = true,
-            //        IssuerSigningKey = new SymmetricSecurityKey(key),
-            //        ValidateIssuer = false,
-            //        ValidateAudience = false
-            //    };
-            //});
-
-            //services.AddMvc();
+            services.AddCors(
+                options =>
+                {
+                    options.AddPolicy(
+            "CorsPolicy",
+            builder => builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+                );
+                }
+            );
+            services.AddHttpsRedirection(options =>
+            {
+                options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
+                options.HttpsPort = 5001;
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -62,9 +60,14 @@ namespace Migrations
 
             app.UseAuthorization();
 
-            //app.UseMvc();
+            app.UseCors("CorsPolicy"); if (env.IsDevelopment()) { app.UseDeveloperExceptionPage(); }
+            app.UseHttpsRedirection();
+            app.UseRouting();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        
 
-            app.UseEndpoints(endpoints =>
+        app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });

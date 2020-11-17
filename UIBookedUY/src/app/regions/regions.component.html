@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="alert alert-danger" *ngIf="renderError">
+    <h1>An Error Ocurred</h1>
+    <p>{{renderError}}</p>
+    <button class="btn btn-danger" (click) = "getRegions()">Okay</button>
+  </div>
+  <div class="grid" *ngIf="!renderError">
+    <ng-container *ngFor="let regionEl of Regions">
+      <app-region [region]="regionEl"></app-region>
+    </ng-container>
+  </div>
+</div>

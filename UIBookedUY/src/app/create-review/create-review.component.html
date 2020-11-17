@@ -1,0 +1,41 @@
+<div class="container">
+  <form (ngSubmit) = "onSubmit(f)" #f="ngForm" class="form">
+    <label for="lastname" class="form-label">Insert Your Booking Code:</label>
+  <input type="number" #bookingcode="ngModel" ngModel name="bookingcode" class="form-control" id="bookingcode" placeholder="Booking Code" value="Booking Code"  required>
+  <button class="btn btn-primary" type="submit" [disabled] = "!f.valid" >Book</button>
+  </form>
+  <hr *ngIf ="booking">
+  <span class="alert alert-danger" role="alert" *ngIf ="bookingNotFound">{{bookingNotFound.error}}</span>
+    <div class = "card bg-light mb-3" *ngIf="booking">
+      <div class = "card-body">
+        <h3 class="card-title">{{booking.accommodationName}}</h3>
+        <p class="card-title">{{booking.accommodationAddress}}</p>
+        <p class="card-text">{{booking.accommodationContact}}</p>
+        <p class="card-text">{{booking.checkIn}}-{{booking.checkOut}}</p>
+        <p class="card-text">USD {{booking.price}}</p>
+        <p class="card-text">{{booking.guestEmail}}</p>
+    </div>
+  </div>
+  <hr *ngIf ="booking">
+  <form (ngSubmit) = "submitReview(newReview)" #newReview="ngForm" class="form" *ngIf ="booking">
+    <label for="lastname" class="form-label">Type your comment:</label>
+  <textarea rows="3" type="text" #comment="ngModel" ngModel name="comment" class="form-control" id="comment" placeholder="Your Comment" value="Your Comment"  required></textarea>
+  <div class="form-row">
+    <div class="rating">
+      <input type="radio" id="star5" name="rating" value="5" #five="ngModel" ngModel/><label for="star5"></label>
+      <input type="radio" id="star4" name="rating" value="4" #four="ngModel" ngModel/><label for="star4"></label>
+      <input type="radio" id="star3" name="rating" value="3" #three="ngModel" ngModel/><label for="star3"></label>
+      <input type="radio" id="star2" name="rating" value="2" #two="ngModel" ngModel/><label for="star2"></label>
+      <input type="radio" id="star1" name="rating" value="1" #one="ngModel" ngModel/><label for="star1"></label>
+    </div>
+  </div>
+  <button class="btn btn-primary" type="submit" [disabled] = "!newReview.valid" >Create Review</button>
+  </form>
+  <div class="alert alert-danger" *ngIf="reviewError">
+    <h1>An Error Has Ocurred</h1>
+    <p>{{reviewError.error}}</p>
+  </div>
+  <div class="alert alert-success" *ngIf="reviewResponse">
+    <h1>Review Created Successfully</h1>
+  </div>
+</div>
