@@ -1,0 +1,61 @@
+<div class="container">
+  <h1>Create a Touristic</h1>
+  <div class="alert alert-danger" *ngIf="renderError">
+    <h1>An Error Ocurred</h1>
+    <p>{{renderError}}</p>
+    <button class="btn btn-danger" (click) = "refresh()">Okay</button>
+  </div>
+  <div *ngIf="!renderError">
+    <form class="form-group" (ngSubmit) = "submitSpot(spotForm)" #spotForm="ngForm" name="spotForm">
+      <div class="form-row">
+        <h2 for="nameSpot">Spot's Name</h2>
+        <input type="text" class="form-control" id="nameSpot" name="nameSpot" #nameSpot="ngModel" ngModel  placeholder="Enter Spot's name">
+      </div>
+      <div class="form-row">
+        <h2 for="descSpot">Description</h2>
+        <textarea rows="3" type="text" #desc="ngModel" ngModel name="desc" class="form-control" id="desc" placeholder="Enter the spot's description"  required></textarea>
+      </div>
+      <hr>
+     <div class="form-row">
+      <div class="col-4">
+        <h2>Choose the region:</h2>
+        <div class="form-check" *ngFor="let regionEl of Regions" >
+          <div class="row-radio">
+            <input class="form-check-input" type="radio" id="regionsSelect" ngModel name="regionsSelect" [value] = "regionEl.id">
+          <label class="form-check-label" for="regionsSelect">{{regionEl.name}}</label>
+          </div>
+        </div>
+      </div>
+        <div class="col-4">
+          <h2>Choose the categories:</h2>
+          <div class="grid">
+            <mat-selection-list #categories ngModel name="categoriesSelect" #categoriesSelect = "ngModel">
+              <mat-list-option *ngFor="let categoryEl of Categories" [value] = "categoryEl.id">
+                {{categoryEl.name}}
+              </mat-list-option>
+            </mat-selection-list>
+          </div>
+        </div>
+     </div>
+     <hr>
+     <div class="form-row">
+       <div class="col-2">
+        <input type="file" style="display: none" #fileInput accept="image/*" (change)="onChangeFileInput()" />
+      <button mat-raised-button  (click)="onClickFileInputButton()">
+        <mat-icon>attach_file</mat-icon>
+        Choose an image
+      </button>
+       </div>
+       <div class="col-8">
+        <p class="file-name" *ngIf="!file; else fileName"></p>
+      <ng-template #fileName>
+        <input readonly value="{{ file?.name }}" class="form-control-plaintext">
+        <img src = "{{image64}}" alt="Your selected image" class="rounded">
+      </ng-template>
+       </div>
+     </div>
+     <hr>
+        <button type="submit" class="btn btn-primary">Create Spot</button>
+    </form>
+  </div>
+</div>

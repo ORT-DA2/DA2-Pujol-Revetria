@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {Accommodation} from "../models/accommodation.model";
 import { ActivatedRoute } from '@angular/router';
+import { APIService } from '../api.service';
+import { Category } from '../models/category.model';
 
 @Component({
   selector: 'app-accomodations',
@@ -15,7 +17,7 @@ export class AccomodationsComponent implements OnInit {
   public spotId : number
 
 
-  constructor(private http : HttpClient, private route : ActivatedRoute ) { }
+  constructor(private api : APIService, private route : ActivatedRoute ) { }
 
   ngOnInit(): void {
     this.spotId = this.route.snapshot.params['id'];
@@ -23,7 +25,7 @@ export class AccomodationsComponent implements OnInit {
   }
 
   public getAccommodations(){
-    this.http.get<Accommodation[]>("https://localhost:5001/api/accommodations/spot/"+this.spotId).subscribe(response=>{
+    this.api.fetchAccommodationsBySpot(this.spotId).subscribe(response=>{
       this.accommodations = response;
       this.renderError = null;
     },error=>{

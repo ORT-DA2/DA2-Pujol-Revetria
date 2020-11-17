@@ -20,6 +20,9 @@ import { AccomodationComponent } from './accomodations/element/accomodation/acco
 import { BookingComponent } from './booking/booking.component';
 import { ReviewComponent } from './booking/review/review.component';
 import { CreateReviewComponent } from './create-review/create-review.component';
+import { RatingModule } from 'ng-starrating';
+import { CreateSpotComponent } from './create-spot/create-spot.component';
+import { AdmAccomodationsComponent } from './adm-accomodations/adm-accomodations.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,9 @@ import { CreateReviewComponent } from './create-review/create-review.component';
     AccomodationComponent,
     BookingComponent,
     ReviewComponent,
-    CreateReviewComponent
+    CreateReviewComponent,
+    CreateSpotComponent,
+    AdmAccomodationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +50,7 @@ import { CreateReviewComponent } from './create-review/create-review.component';
     ReactiveFormsModule,
     MaterialModule,
     HttpClientModule,
+    RatingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

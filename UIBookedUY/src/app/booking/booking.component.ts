@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { APIService } from '../api.service';
 import { Accommodation } from '../models/accommodation.model';
 import { Booking } from '../models/booking.model';
 @Component({
@@ -66,7 +67,7 @@ export class BookingComponent implements OnInit {
 
   public accommodation : Accommodation = new Accommodation();
 
-  constructor(private http : HttpClient, private route : ActivatedRoute) {
+  constructor(private api : APIService, private route : ActivatedRoute) {
     this.accommodation.id = this.route.snapshot.params['id'];
     this.getAccommodation();
     const currentYear = new Date().getFullYear();
@@ -102,7 +103,7 @@ export class BookingComponent implements OnInit {
   }
 
   private sendBooking(booking : Booking, form : NgForm){
-    this.http.post<Booking>("https://localhost:5001/api/bookings",booking).subscribe(response=>{
+    this.api.postBooking(booking).subscribe(response=>{
       this.formError = null;
       this.bookingCode = response.id;
       form.resetForm();
@@ -115,7 +116,7 @@ export class BookingComponent implements OnInit {
   }
 
   public getAccommodation(){
-    this.http.get<Accommodation>("https://localhost:5001/api/accommodations/"+this.accommodation.id).subscribe(response=>{
+    this.api.fetchAccommodation(this.accommodation.id).subscribe(response=>{
       this.accommodation = response;
       this.renderError = null;
     },error=>{

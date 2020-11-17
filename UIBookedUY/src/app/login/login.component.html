@@ -1,12 +1,15 @@
-<div class="wrapper fadeInDown">
-  <div id="formContent">
-    <div class="fadeIn first">
-      <h2>Login</h2>
-    </div>
-    <form>
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" #username>
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password" #password>
-      <input type="submit" class="fadeIn fourth" value="Log In" (click)="login(username,password)">
-    </form>
-  </div>
+<div class="col-md-6 login-form-1">
+  <h3>Login for Form 1</h3>
+  <form>
+      <div class="form-group">
+          <input type="text" class="form-control" placeholder="Your Email *" value="" #username/>
+      </div>
+      <div class="form-group">
+          <input type="password" class="form-control" placeholder="Your Password *" value="" #password/>
+      </div>
+      <div class="form-group">
+          <input class="btnSubmit" value="Login" (click)="login(username.value,password.value)"/>
+      </div>
+  </form>
 </div>
+

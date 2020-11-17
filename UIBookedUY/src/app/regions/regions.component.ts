@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { APIService } from '../api.service';
 import { Region } from '../models/region.model';
 
 @Component({
@@ -13,7 +14,7 @@ export class RegionsComponent implements OnInit {
 
   Regions : Region[];
 
-  constructor(private http : HttpClient) { }
+  constructor(private api : APIService) { }
 
   ngOnInit(): void {
     this.getRegions();
@@ -21,7 +22,7 @@ export class RegionsComponent implements OnInit {
 
 
   public getRegions(){
-    this.http.get<Region[]>("https://localhost:5001/api/regions").subscribe(response=>{
+    this.api.fetchRegions().subscribe(response=>{
       this.Regions = response;
     },error=>{
       this.renderError = error.message;

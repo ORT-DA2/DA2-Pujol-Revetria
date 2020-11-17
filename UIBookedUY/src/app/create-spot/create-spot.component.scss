@@ -1,0 +1,14 @@
+.row-radio{
+  margin-bottom: 4%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-height: max-content;
+}
+
+.rounded{
+  max-width: 150px;
+  max-height: 150px;
+}

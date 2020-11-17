@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import { CategoryComponent } from './category/category.component';
 import { ActivatedRoute } from '@angular/router';
+import { APIService } from '../api.service';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class TouristicSpotsComponent implements OnInit {
 
   Categories : Category[] = [{id:1,name:"Playa",checked: false},{id:2,name:"Ciudad",checked: false}]
 
-  constructor(private http : HttpClient, private route : ActivatedRoute) { }
+  constructor(private api : APIService, private route : ActivatedRoute) { }
 
   ngOnInit(): void {
     this.regionId = this.route.snapshot.params['id'];
@@ -53,7 +54,7 @@ export class TouristicSpotsComponent implements OnInit {
   }
 
   public getCategories(){
-      this.http.get<TouristicSpot[]>("https://localhost:5001/api/categories").subscribe(response=>{
+      this.api.fetchCategories().subscribe(response=>{
         //this.Categories = response;
         this.renderErrorCategories = null;
     },error=>{
@@ -62,7 +63,7 @@ export class TouristicSpotsComponent implements OnInit {
   };
 
   public getSpots(categories){
-    this.http.get<TouristicSpot[]>("https://localhost:5001/api/touristicSpots?regionId="+this.regionId+ categories).subscribe(response=>{
+    this.api.fetchSpots(this.regionId,categories).subscribe(response=>{
       this.Spots = response;
       this.renderErrorSpots = null;
   },error=>{
