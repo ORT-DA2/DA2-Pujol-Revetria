@@ -14,17 +14,20 @@ namespace BusinessLogic.Tests
         [TestMethod]
         public void GetRegionsTest()
         {
-            int testId = 5;
             List<Region> regions = new List<Region>();
-            Region region = new Region();
-            region.Id = testId;
-            region.Name = "South";
+            Region region = new Region
+            {
+                Id = 5,
+                Name = "South"
+            };
             regions.Add(region);
-            var mock = new Mock<IRepository<Region>>(MockBehavior.Strict);
-            mock.Setup(p => p.GetAll()).Returns(regions);
-            var logic = new RegionLogic(mock.Object);
+            var mockRegion = new Mock<IRepository<Region>>(MockBehavior.Strict);
+            mockRegion.Setup(p => p.GetAll()).Returns(regions);
+            var logic = new RegionLogic(mockRegion.Object);
+
             var result = logic.GetRegions();
-            mock.VerifyAll();
+
+            mockRegion.VerifyAll();
             Assert.IsTrue(result.SequenceEqual(regions));
         }
 
@@ -32,11 +35,13 @@ namespace BusinessLogic.Tests
         public void GetRegionsNullTest()
         {
             List<Region> regions = new List<Region>();
-            var mock = new Mock<IRepository<Region>>(MockBehavior.Strict);
-            mock.Setup(p => p.GetAll()).Returns(regions);
-            var logic = new RegionLogic(mock.Object);
+            var mockRegion = new Mock<IRepository<Region>>(MockBehavior.Strict);
+            mockRegion.Setup(p => p.GetAll()).Returns(regions);
+            var logic = new RegionLogic(mockRegion.Object);
+
             var result = logic.GetRegions();
-            mock.VerifyAll();
+
+            mockRegion.VerifyAll();
             Assert.IsTrue(result.SequenceEqual(regions));
         }
     }
