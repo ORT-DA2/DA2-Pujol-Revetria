@@ -21,8 +21,8 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var regions = from r in this.regionLogic.GetRegions()
-                          select new RegionModelOut(r);
+            var regions = from region in this.regionLogic.GetRegions()
+                          select new RegionModelOut(region);
             return Ok(regions);
         }
     }

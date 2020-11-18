@@ -20,8 +20,8 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var bookings = from b in this.bookingLogic.GetAll()
-                           select new BookingModelOut(b);
+            var bookings = from booking in this.bookingLogic.GetAll()
+                           select new BookingModelOut(booking);
             return Ok(bookings);
         }
 

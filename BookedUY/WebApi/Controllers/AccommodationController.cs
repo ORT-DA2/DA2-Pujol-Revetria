@@ -21,16 +21,16 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var accommodations = from r in this.accommodationLogic.GetAll()
-                                 select new AccommodationModelOut(r, this.accommodationLogic.GetReviewsByAccommodation(r.Id));
+            var accommodations = from accommodation in this.accommodationLogic.GetAll()
+                                 select new AccommodationModelOut(accommodation, this.accommodationLogic.GetReviewsByAccommodation(accommodation.Id));
             return Ok(accommodations);
         }
 
         [HttpGet("spot/{spot}")]
         public IActionResult GetAccommodationsInSpot(int spot)
         {
-            var accommodations = from r in this.accommodationLogic.GetAvailableAccommodationBySpot(spot)
-                                 select new AccommodationModelOut(r,this.accommodationLogic.GetReviewsByAccommodation(r.Id));
+            var accommodations = from accommodation in this.accommodationLogic.GetAvailableAccommodationBySpot(spot)
+                                 select new AccommodationModelOut(accommodation,this.accommodationLogic.GetReviewsByAccommodation(accommodation.Id));
             return Ok(accommodations);
         }
 
@@ -38,8 +38,8 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            Accommodation a = this.accommodationLogic.GetById(id);
-            var ret = new AccommodationModelOut(a, this.accommodationLogic.GetReviewsByAccommodation(id));
+            Accommodation accommodation = this.accommodationLogic.GetById(id);
+            var ret = new AccommodationModelOut(accommodation, this.accommodationLogic.GetReviewsByAccommodation(id));
             return Ok(ret);
         }
 
