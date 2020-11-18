@@ -137,5 +137,32 @@ namespace WebApi.Tests
             mock.VerifyAll();
             Assert.AreEqual(200, result.StatusCode);
         }
+
+        [TestMethod]
+        public void TestGet()
+        {
+            int testId = 5;
+            Accommodation accommodation = new Accommodation()
+            {
+                Id = testId,
+                Name = "abm",
+                SpotId = 1,
+                Address = "a",
+                ContactNumber = "a",
+                Information = "a",
+                PricePerNight = 5.0,
+                Full = true
+            };
+            List<Accommodation> accommodations = new List<Accommodation>()
+            {
+                accommodation
+            };
+            var mock = new Mock<IAccommodationLogic>(MockBehavior.Strict);
+            mock.Setup(p => p.GetAll()).Returns(accommodations);
+            var controller = new AccommodationController(mock.Object);
+            var result = controller.Get() as OkObjectResult;
+            mock.VerifyAll();
+            Assert.AreEqual(200, result.StatusCode);
+        }
     }
 }

@@ -18,6 +18,14 @@ namespace WebApi.Controllers
             this.accommodationLogic = accommodationLogic;
         }
 
+        [HttpGet]
+        public IActionResult Get()
+        {
+            var accommodations = from r in this.accommodationLogic.GetAll()
+                                 select new AccommodationModelOut(r, this.accommodationLogic.GetReviewsByAccommodation(r.Id));
+            return Ok(accommodations);
+        }
+
         [HttpGet("spot/{spot}")]
         public IActionResult GetAccommodationsInSpot(int spot)
         {

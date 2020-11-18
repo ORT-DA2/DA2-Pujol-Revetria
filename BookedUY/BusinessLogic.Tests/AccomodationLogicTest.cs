@@ -51,7 +51,7 @@ namespace BusinessLogic.Tests
         public void AddReviewTest()
         {
             int testId = 5;
-            
+
             Accommodation accom = new Accommodation()
             {
                 Id = 1,
@@ -63,9 +63,9 @@ namespace BusinessLogic.Tests
                 AccommodationId = 1,
                 HeadGuest = new Tourist()
                 {
-                    Id=1,
-                    Email="a@a.com",
-                    Name= "a",
+                    Id = 1,
+                    Email = "a@a.com",
+                    Name = "a",
                     LastName = "a"
                 }
             };
@@ -124,7 +124,7 @@ namespace BusinessLogic.Tests
             var mock3 = new Mock<IReviewRepository>(MockBehavior.Strict);
             var mock4 = new Mock<IBookingRepository>(MockBehavior.Strict);
             mock2.Setup(p => p.GetById(It.IsAny<int>())).Returns(spot);
-            var logic = new AccommodationLogic(mock.Object, mock2.Object,mock3.Object, mock4.Object);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object, mock3.Object, mock4.Object);
             var result = logic.AddAccommodation(accommodation);
             mock.VerifyAll();
             mock2.VerifyAll();
@@ -275,7 +275,7 @@ namespace BusinessLogic.Tests
             {
                 Image = "image",
                 AccommodationId = testId
-                
+
             };
             images.Add(image);
             Accommodation accommodation = new Accommodation()
@@ -565,6 +565,32 @@ namespace BusinessLogic.Tests
             var logic = new AccommodationLogic(mock.Object, mock2.Object, mock3.Object, mock4.Object);
             logic.GetReviewsByAccommodation(1);
             mock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void GetAllTest()
+        {
+            int testId = 2;
+            Accommodation accommodation = new Accommodation()
+            {
+                Id = testId,
+                Name = "abz",
+                SpotId = 1,
+            };
+
+            List<Accommodation> accommodations = new List<Accommodation>()
+            { 
+                accommodation 
+            };
+            var mock = new Mock<IAccommodationRepository>(MockBehavior.Strict);
+            mock.Setup(p => p.GetAll()).Returns(accommodations);
+            var mock2 = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            var mock3 = new Mock<IReviewRepository>(MockBehavior.Strict);
+            var mock4 = new Mock<IBookingRepository>(MockBehavior.Strict);
+            var logic = new AccommodationLogic(mock.Object, mock2.Object, mock3.Object, mock4.Object);
+            var result = logic.GetAll();
+            mock.VerifyAll();
+            Assert.IsTrue(accommodations.SequenceEqual(result));
         }
     }
 }
