@@ -47,8 +47,8 @@ namespace WebApi.Controllers
         public IActionResult CreateSpot(TouristicSpotModelIn tourisitcSpotModelIn)
         {
             TouristicSpot touristicSpot = tourisitcSpotModelIn.FromModelInToTouristicSpot();
-            var ret = new TouristicSpotModelOut(touristicSpotLogic.AddTouristicSpot(touristicSpot));
-            return Ok(ret);
+            var response = new TouristicSpotModelOut(touristicSpotLogic.AddTouristicSpot(touristicSpot));
+            return Ok(response);
         }
     }
 }

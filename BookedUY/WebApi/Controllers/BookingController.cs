@@ -29,9 +29,9 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var b = this.bookingLogic.GetById(id);
-            var booking = new BookingModelOut(b);
-            return Ok(booking);
+            var booking = this.bookingLogic.GetById(id);
+            var bookingModelOut = new BookingModelOut(booking);
+            return Ok(bookingModelOut);
         }
 
         // POST api/<BookingController>

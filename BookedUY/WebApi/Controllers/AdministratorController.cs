@@ -25,8 +25,8 @@ namespace WebApi.Controllers
         [HttpGet("login")]
         public IActionResult Login([FromQuery] string email, [FromQuery] string password)
         {
-            Administrator admin = this.administratorLogic.GetByEmailAndPassword(email, password);
-            string token = sessionLogic.GenerateToken(admin);
+            Administrator administrator = this.administratorLogic.GetByEmailAndPassword(email, password);
+            string token = sessionLogic.GenerateToken(administrator);
             return Ok(new TokenModelOut(token));
         }
 
@@ -50,8 +50,8 @@ namespace WebApi.Controllers
         [HttpPost]
         public IActionResult CreateAdmin(AdministratorModelIn newAdministrator)
         {
-            var admin = newAdministrator.FromModelInToAdministrator();
-            this.administratorLogic.AddAdministrator(admin);
+            var administrator = newAdministrator.FromModelInToAdministrator();
+            this.administratorLogic.AddAdministrator(administrator);
             return Ok("Administrator Created Successfully");
         }
     }

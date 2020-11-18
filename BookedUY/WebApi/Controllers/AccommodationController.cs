@@ -46,8 +46,8 @@ namespace WebApi.Controllers
         [HttpPost("review")]
         public IActionResult CreateReview(ReviewModelIn newAccommodation)
         {
-            var rev = newAccommodation.ToReview();
-            var response = this.accommodationLogic.AddReview(rev);
+            var review = newAccommodation.ToReview();
+            var response = this.accommodationLogic.AddReview(review);
             return Ok(new ReviewModelOut(response));
         }
 
@@ -56,8 +56,8 @@ namespace WebApi.Controllers
         [HttpPost]
         public IActionResult CreateAccommodation(AccommodationModelIn newAccommodation)
         {
-            var accom = newAccommodation.FromModelInToAccommodation();
-            var response = this.accommodationLogic.AddAccommodation(accom);
+            var accommodation = newAccommodation.FromModelInToAccommodation();
+            var response = this.accommodationLogic.AddAccommodation(accommodation);
             return Ok(new AccommodationModelOut(response,(0,new List<Review>())));
         }
 
@@ -76,8 +76,8 @@ namespace WebApi.Controllers
         public IActionResult Delete(int id)
         {
             var accomToDelete = this.accommodationLogic.GetById(id);
-            var ret = this.accommodationLogic.DeleteAccommodation(accomToDelete);
-            return Ok(ret);
+            var response = this.accommodationLogic.DeleteAccommodation(accomToDelete);
+            return Ok(response);
         }
     }
 }
