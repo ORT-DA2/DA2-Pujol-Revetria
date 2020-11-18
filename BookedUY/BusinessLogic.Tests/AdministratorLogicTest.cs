@@ -13,17 +13,20 @@ namespace BusinessLogic.Tests
         [TestMethod]
         public void AddAdministratorTest()
         {
-            int testId = 5;
-            Administrator administrator = new Administrator();
-            administrator.Id = testId;
-            administrator.Email = "ab@ab.com";
-            administrator.Password = "ab";
-            var mock = new Mock<IAdministratorRepository>(MockBehavior.Strict);
-            mock.Setup(p => p.Add(It.IsAny<Administrator>())).Returns(administrator);
-            mock.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns<Administrator>(null);
-            var logic = new AdministratorLogic(mock.Object);
+            Administrator administrator = new Administrator
+            {
+                Id = 5,
+                Email = "ab@ab.com",
+                Password = "ab"
+            };
+            var mockAdministrator = new Mock<IAdministratorRepository>(MockBehavior.Strict);
+            mockAdministrator.Setup(p => p.Add(It.IsAny<Administrator>())).Returns(administrator);
+            mockAdministrator.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns<Administrator>(null);
+            var logic = new AdministratorLogic(mockAdministrator.Object);
+
             var result = logic.AddAdministrator(administrator);
-            mock.VerifyAll();
+
+            mockAdministrator.VerifyAll();
             Assert.IsTrue(result.Equals(administrator));
         }
 
@@ -31,33 +34,36 @@ namespace BusinessLogic.Tests
         [ExpectedException(typeof(AlreadyExistsException))]
         public void AddAdministratorAlreadyExistsTest()
         {
-            int testId = 5;
-            Administrator administrator = new Administrator();
-            administrator.Id = testId;
-            administrator.Email = "ab@ab.com";
-            administrator.Password = "ab";
-            var mock = new Mock<IAdministratorRepository>(MockBehavior.Strict);
-            mock.Setup(p => p.Add(It.IsAny<Administrator>())).Returns(administrator);
-            mock.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns(administrator);
-            var logic = new AdministratorLogic(mock.Object);
+            Administrator administrator = new Administrator
+            {
+                Id = 5,
+                Email = "ab@ab.com",
+                Password = "ab"
+            };
+            var mockAdministrator = new Mock<IAdministratorRepository>(MockBehavior.Strict);
+            mockAdministrator.Setup(p => p.Add(It.IsAny<Administrator>())).Returns(administrator);
+            mockAdministrator.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns(administrator);
+            var logic = new AdministratorLogic(mockAdministrator.Object);
+
             var result = logic.AddAdministrator(administrator);
-            mock.VerifyAll();
-            Assert.IsTrue(result.Equals(administrator));
         }
 
         [TestMethod]
         public void GetEmailAndPasswordTest()
         {
-            int testId = 9;
-            Administrator administrator = new Administrator();
-            administrator.Id = testId;
-            administrator.Email = "a@a.com";
-            administrator.Password = "a";
-            var mock = new Mock<IAdministratorRepository>(MockBehavior.Strict);
-            mock.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns(administrator);
-            var logic = new AdministratorLogic(mock.Object);
+            Administrator administrator = new Administrator
+            {
+                Id = 9,
+                Email = "a@a.com",
+                Password = "a"
+            };
+            var mockAdministrator = new Mock<IAdministratorRepository>(MockBehavior.Strict);
+            mockAdministrator.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns(administrator);
+            var logic = new AdministratorLogic(mockAdministrator.Object);
+
             var result = logic.GetByEmailAndPassword("a@a.com", "a");
-            mock.VerifyAll();
+
+            mockAdministrator.VerifyAll();
             Assert.IsTrue(result.Equals(administrator));
         }
 
@@ -65,53 +71,59 @@ namespace BusinessLogic.Tests
         [ExpectedException(typeof(NotFoundException))]
         public void GetEmailAndPasswordNotFoundTest()
         {
-            int testId = 9;
-            Administrator administrator = new Administrator();
-            administrator.Id = testId;
-            administrator.Email = "a@a.com";
-            administrator.Password = "ab";
-            var mock = new Mock<IAdministratorRepository>(MockBehavior.Strict);
-            mock.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns(administrator);
-            var logic = new AdministratorLogic(mock.Object);
+            Administrator administrator = new Administrator
+            {
+                Id = 9,
+                Email = "a@a.com",
+                Password = "ab"
+            };
+            var mockAdministrator = new Mock<IAdministratorRepository>(MockBehavior.Strict);
+            mockAdministrator.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns(administrator);
+            var logic = new AdministratorLogic(mockAdministrator.Object);
+
             var result = logic.GetByEmailAndPassword("a@a.com", "a");
-            mock.VerifyAll();
-            Assert.IsTrue(result.Equals(administrator));
         }
 
         [TestMethod]
         public void GetAllTest()
         {
-            int testId = 9;
-            Administrator administrator = new Administrator();
-            administrator.Id = testId;
-            administrator.Email = "a@a.com";
-            administrator.Password = "a";
+            Administrator administrator = new Administrator
+            {
+                Id = 9,
+                Email = "a@a.com",
+                Password = "a"
+            };
             List<Administrator> administrators = new List<Administrator>();
             administrators.Add(administrator);
-            var mock = new Mock<IAdministratorRepository>(MockBehavior.Strict);
-            mock.Setup(p => p.GetAll()).Returns(administrators);
-            var logic = new AdministratorLogic(mock.Object);
+            var mockAdministrator = new Mock<IAdministratorRepository>(MockBehavior.Strict);
+            mockAdministrator.Setup(p => p.GetAll()).Returns(administrators);
+            var logic = new AdministratorLogic(mockAdministrator.Object);
+
             var result = logic.GetAll();
-            mock.VerifyAll();
+
+            mockAdministrator.VerifyAll();
             Assert.IsTrue(administrator.Equals(administrators.FirstOrDefault()));
         }
 
         [TestMethod]
         public void DeleteTest()
         {
-            int testId = 2;
-            Administrator administrator = new Administrator();
-            administrator.Id = testId;
-            administrator.Email = "a@a.com";
-            administrator.Password = "a";
+            Administrator administrator = new Administrator
+            {
+                Id = 2,
+                Email = "a@a.com",
+                Password = "a"
+            };
             List<Administrator> administrators = new List<Administrator>();
             administrators.Add(administrator);
-            var mock = new Mock<IAdministratorRepository>(MockBehavior.Strict);
-            mock.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns(administrator);
-            mock.Setup(p => p.Delete(It.IsAny<Administrator>())).Returns(administrator);
-            var logic = new AdministratorLogic(mock.Object);
+            var mockAdministrator = new Mock<IAdministratorRepository>(MockBehavior.Strict);
+            mockAdministrator.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns(administrator);
+            mockAdministrator.Setup(p => p.Delete(It.IsAny<Administrator>())).Returns(administrator);
+            var logic = new AdministratorLogic(mockAdministrator.Object);
+
             var result = logic.Delete(administrator);
-            mock.VerifyAll();
+
+            mockAdministrator.VerifyAll();
             Assert.AreEqual(result, administrator);
         }
 
@@ -119,52 +131,56 @@ namespace BusinessLogic.Tests
         [ExpectedException(typeof(NotFoundException))]
         public void DeleteExceptionTest()
         {
-            int testId = 3;
-            Administrator administrator = new Administrator();
-            administrator.Id = testId;
-            administrator.Email = "a@a.com";
-            administrator.Password = "a";
+            Administrator administrator = new Administrator
+            {
+                Id = 3,
+                Email = "a@a.com",
+                Password = "a"
+            };
             List<Administrator> administrators = new List<Administrator>();
             administrators.Add(administrator);
-            var mock = new Mock<IAdministratorRepository>(MockBehavior.Strict);
-            mock.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns<Administrator>(null);
-            mock.Setup(p => p.Delete(It.IsAny<Administrator>())).Returns(administrator);
-            var logic = new AdministratorLogic(mock.Object);
+            var mockAdministrator = new Mock<IAdministratorRepository>(MockBehavior.Strict);
+            mockAdministrator.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns<Administrator>(null);
+            mockAdministrator.Setup(p => p.Delete(It.IsAny<Administrator>())).Returns(administrator);
+            var logic = new AdministratorLogic(mockAdministrator.Object);
+
             logic.Delete(administrator);
-            mock.VerifyAll();
         }
 
         [ExpectedException(typeof(NotFoundException))]
         [TestMethod]
         public void GetByIdExceptionTest()
         {
-            int testId = 5;
-            Administrator administrator = new Administrator();
-            administrator.Id = testId;
-            administrator.Email = "ab@ab.com";
-            administrator.Password = "ab";
-            var mock = new Mock<IAdministratorRepository>(MockBehavior.Strict);
-            mock.Setup(p => p.Add(It.IsAny<Administrator>())).Returns(administrator);
-            mock.Setup(p => p.GetById(It.IsAny<int>())).Returns<Administrator>(null);
-            var logic = new AdministratorLogic(mock.Object);
+            Administrator administrator = new Administrator
+            {
+                Id = 5,
+                Email = "ab@ab.com",
+                Password = "ab"
+            };
+            var mockAdministrator = new Mock<IAdministratorRepository>(MockBehavior.Strict);
+            mockAdministrator.Setup(p => p.Add(It.IsAny<Administrator>())).Returns(administrator);
+            mockAdministrator.Setup(p => p.GetById(It.IsAny<int>())).Returns<Administrator>(null);
+            var logic = new AdministratorLogic(mockAdministrator.Object);
+
             var result = logic.GetById(5);
-            mock.VerifyAll();
-            Assert.IsTrue(result.Equals(administrator));
         }
 
         [TestMethod]
         public void GetByIdTest()
         {
-            int testId = 5;
-            Administrator administrator = new Administrator();
-            administrator.Id = testId;
-            administrator.Email = "ab@ab.com";
-            administrator.Password = "ab";
-            var mock = new Mock<IAdministratorRepository>(MockBehavior.Strict);
-            mock.Setup(p => p.GetById(It.IsAny<int>())).Returns(administrator);
-            var logic = new AdministratorLogic(mock.Object);
+            Administrator administrator = new Administrator
+            {
+                Id = 5,
+                Email = "ab@ab.com",
+                Password = "ab"
+            };
+            var mockAdministrator = new Mock<IAdministratorRepository>(MockBehavior.Strict);
+            mockAdministrator.Setup(p => p.GetById(It.IsAny<int>())).Returns(administrator);
+            var logic = new AdministratorLogic(mockAdministrator.Object);
+
             var result = logic.GetById(5);
-            mock.VerifyAll();
+
+            mockAdministrator.VerifyAll();
             Assert.IsTrue(result.Equals(administrator));
         }
     }

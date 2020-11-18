@@ -10,7 +10,7 @@ namespace WebApi.Controllers
     [Route("api/regions")]
     public class RegionController : BookedUYController
     {
-        private IRegionLogic regionLogic;
+        private readonly IRegionLogic regionLogic;
 
         public RegionController(IRegionLogic regionLogic)
         {

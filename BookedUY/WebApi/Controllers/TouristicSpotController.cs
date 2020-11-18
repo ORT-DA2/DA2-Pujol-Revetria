@@ -44,9 +44,9 @@ namespace WebApi.Controllers
         // POST api/<TouristicSpotController>
         [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpPost]
-        public IActionResult CreateSpot(TouristicSpotModelIn tourisitcSpotModelIn)
+        public IActionResult CreateSpot(TouristicSpotModelIn touristicSpotModelIn)
         {
-            TouristicSpot touristicSpot = tourisitcSpotModelIn.FromModelInToTouristicSpot();
+            TouristicSpot touristicSpot = touristicSpotModelIn.FromModelInToTouristicSpot();
             var response = new TouristicSpotModelOut(touristicSpotLogic.AddTouristicSpot(touristicSpot));
             return Ok(response);
         }
