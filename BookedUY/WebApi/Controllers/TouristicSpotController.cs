@@ -24,7 +24,7 @@ namespace WebApi.Controllers
         public IActionResult Get()
         {
             var touristicSpots = from touristicSpot in this.touristicSpotLogic.GetSpotsByRegionAndCategory(null, -1)
-                                 select new TouristicSpotModelOut(touristicSpot);
+            select new TouristicSpotModelOut(touristicSpot);
             return Ok(touristicSpots);
         }
 
@@ -37,7 +37,7 @@ namespace WebApi.Controllers
                 return Get();
             }
             var touristicSpots = from touristicSpot in this.touristicSpotLogic.GetSpotsByRegionAndCategory(categories, regionId)
-                                 select new TouristicSpotModelOut(touristicSpot);
+            select new TouristicSpotModelOut(touristicSpot);
             return Ok(touristicSpots);
         }
 

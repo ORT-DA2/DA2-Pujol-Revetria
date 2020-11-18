@@ -34,7 +34,7 @@ namespace WebApi.Controllers
         public IActionResult Get()
         {
             var administrators = from administrator in this.administratorLogic.GetAll()
-                                 select new AdministratorModelOut(administrator.Email);
+            select new AdministratorModelOut(administrator.Email);
             return Ok(administrators);
         }
 

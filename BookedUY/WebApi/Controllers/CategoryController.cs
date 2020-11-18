@@ -23,7 +23,7 @@ namespace WebApi.Controllers
         public IActionResult Get()
         {
             var categories = from category in this.categoryLogic.GetAll()
-                          select new CategoryModelOut(category);
+            select new CategoryModelOut(category);
             return Ok(categories);
         }
     }

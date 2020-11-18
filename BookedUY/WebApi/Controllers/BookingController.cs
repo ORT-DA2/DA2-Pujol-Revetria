@@ -21,7 +21,7 @@ namespace WebApi.Controllers
         public IActionResult Get()
         {
             var bookings = from booking in this.bookingLogic.GetAll()
-                           select new BookingModelOut(booking);
+            select new BookingModelOut(booking);
             return Ok(bookings);
         }
 

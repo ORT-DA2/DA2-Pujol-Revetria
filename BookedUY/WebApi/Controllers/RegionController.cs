@@ -22,7 +22,7 @@ namespace WebApi.Controllers
         public IActionResult Get()
         {
             var regions = from region in this.regionLogic.GetRegions()
-                          select new RegionModelOut(region);
+            select new RegionModelOut(region);
             return Ok(regions);
         }
     }

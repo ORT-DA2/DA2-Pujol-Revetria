@@ -22,7 +22,7 @@ namespace WebApi.Controllers
         public IActionResult Get()
         {
             var accommodations = from accommodation in this.accommodationLogic.GetAll()
-                                 select new AccommodationModelOut(accommodation, this.accommodationLogic.GetReviewsByAccommodation(accommodation.Id));
+            select new AccommodationModelOut(accommodation, this.accommodationLogic.GetReviewsByAccommodation(accommodation.Id));
             return Ok(accommodations);
         }
 
@@ -30,7 +30,7 @@ namespace WebApi.Controllers
         public IActionResult GetAccommodationsInSpot(int spot)
         {
             var accommodations = from accommodation in this.accommodationLogic.GetAvailableAccommodationBySpot(spot)
-                                 select new AccommodationModelOut(accommodation,this.accommodationLogic.GetReviewsByAccommodation(accommodation.Id));
+            select new AccommodationModelOut(accommodation,this.accommodationLogic.GetReviewsByAccommodation(accommodation.Id));
             return Ok(accommodations);
         }
 
@@ -39,8 +39,8 @@ namespace WebApi.Controllers
         public IActionResult Get(int id)
         {
             Accommodation accommodation = this.accommodationLogic.GetById(id);
-            var ret = new AccommodationModelOut(accommodation, this.accommodationLogic.GetReviewsByAccommodation(id));
-            return Ok(ret);
+            var response = new AccommodationModelOut(accommodation, this.accommodationLogic.GetReviewsByAccommodation(id));
+            return Ok(response);
         }
 
         [HttpPost("review")]
@@ -75,8 +75,8 @@ namespace WebApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var accomToDelete = this.accommodationLogic.GetById(id);
-            var response = this.accommodationLogic.DeleteAccommodation(accomToDelete);
+            var accommodationToDelete = this.accommodationLogic.GetById(id);
+            var response = this.accommodationLogic.DeleteAccommodation(accommodationToDelete);
             return Ok(response);
         }
     }
