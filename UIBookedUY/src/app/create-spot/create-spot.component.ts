@@ -15,23 +15,18 @@ export class CreateSpotComponent implements OnInit {
   constructor(private api: APIService) { }
 
   ngOnInit(): void {
-    this.getRegions();
+    this.refresh();
   }
 
 
   refresh() {
     this.getRegions();
-    //this.getCategories();
+    this.getCategories();
   }
 
   renderError = null;
-  Categories: Category[] = [{ id: 1, name: "Playa", checked: false }
-    , { id: 4, name: "Cerros", checked: false }
-    , { id: 3, name: "Rios", checked: false }
-    , { id: 2, name: "Ciudad", checked: false }
-    , { id: 5, name: "Ciudad", checked: false }
-    , { id: 6, name: "Ciudad", checked: false }
-    , { id: 7, name: "Ciudad", checked: false }]
+
+  Categories: Category[];
   Regions: Region[];
 
   submitSpot(form: NgForm) {
@@ -83,6 +78,17 @@ export class CreateSpotComponent implements OnInit {
   public postSpot(spot) {
     this.api.postSpot(spot).subscribe(response=>{
 
+    },error=>{
+
+    })
+  }
+
+  public getCategories(){
+      this.api.fetchCategories().subscribe(response=>{
+        this.Categories = response;
+        this.renderError = null;
+    },error=>{
+        this.renderError = error.message;
     })
   }
 

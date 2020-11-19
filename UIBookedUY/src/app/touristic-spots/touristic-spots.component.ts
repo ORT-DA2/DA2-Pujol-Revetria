@@ -25,13 +25,14 @@ export class TouristicSpotsComponent implements OnInit {
   renderErrorCategories = null;
   renderErrorSpots = null;
 
-  Categories : Category[] = [{id:1,name:"Playa",checked: false},{id:2,name:"Ciudad",checked: false}]
+  Categories : Category[];
 
   constructor(private api : APIService, private route : ActivatedRoute) { }
 
   ngOnInit(): void {
     this.regionId = this.route.snapshot.params['id'];
     this.getSpots("");
+    this.getCategories();
   }
 
   public searchByCategories(){
@@ -55,7 +56,7 @@ export class TouristicSpotsComponent implements OnInit {
 
   public getCategories(){
       this.api.fetchCategories().subscribe(response=>{
-        //this.Categories = response;
+        this.Categories = response;
         this.renderErrorCategories = null;
     },error=>{
         this.renderErrorCategories = error.message;

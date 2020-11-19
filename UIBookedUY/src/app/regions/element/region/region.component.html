@@ -1,6 +1,6 @@
 
-  <div class = "card bg-light mb-3">
-    <div class = "card-body">
-      <h3 routerLink="/tourisitcSpots/{{region.id}}" class="card-title">{{region.name}}</h3>
-    </div>
-  </div>
+<button type="button" class="btn btn-default" routerLink="/tourisitcSpots/{{region.id}}">
+  <h2>{{region.name}}</h2>
+  <img [src]="getImage(region.id)" [alt]="region.name">
+</button>
+

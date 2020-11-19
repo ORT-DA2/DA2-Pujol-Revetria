@@ -25,6 +25,11 @@ export class AccomodationComponent implements OnInit {
     return scoreArr;
   }
 
+  slides = [{'image': 'https://turismo.gub.uy/images/region-noreste-map.png'},
+            {'image': 'https://turismo.gub.uy/images/region-este-map.png'},
+            {'image': 'https://turismo.gub.uy/images/region-centro-map.png'}];
+
+
 
 
   constructor() { }

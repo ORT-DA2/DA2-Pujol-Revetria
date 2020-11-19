@@ -9,6 +9,10 @@ import { SubmittedReview } from './models/submitedreview.model';
 import { SubmittedSpot } from './models/submittedSpot.model';
 import { TouristicSpot } from './models/touristicSpot.model';
 
+class Token{
+  token : string
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +22,7 @@ export class APIService {
   constructor(private http : HttpClient) { }
 
   tryLogin(email, password){
-    return this.http.get(this.url+"administrators/login?email="+email+"&password="+password);
+    return this.http.get<Token>(this.url+"administrators/login?email="+email+"&password="+password);
   }
 
   fetchRegions(){
@@ -51,6 +55,10 @@ export class APIService {
 
   fetchAccommodation(accommodationId){
     return this.http.get<Accommodation>(this.url + "accommodations/"+ accommodationId);
+  }
+
+  fetchAllSpots(){
+    return this.http.get<TouristicSpot[]>(this.url + "touristicspots");
   }
 
   fetchAccommodationsBySpot(spotId){

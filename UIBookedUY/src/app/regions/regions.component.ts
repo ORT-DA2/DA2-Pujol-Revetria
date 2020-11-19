@@ -21,6 +21,7 @@ export class RegionsComponent implements OnInit {
   }
 
 
+
   public getRegions(){
     this.api.fetchRegions().subscribe(response=>{
       this.Regions = response;

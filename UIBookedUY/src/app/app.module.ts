@@ -1,8 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegionsComponent } from './regions/regions.component';
@@ -23,6 +21,12 @@ import { CreateReviewComponent } from './create-review/create-review.component';
 import { RatingModule } from 'ng-starrating';
 import { CreateSpotComponent } from './create-spot/create-spot.component';
 import { AdmAccomodationsComponent } from './adm-accomodations/adm-accomodations.component';
+import { AuthService } from './auth.service';
+import { AudioService } from './audio-service.service';
+import { AuthGuard } from './authguard.service';
+import { CommonModule } from "@angular/common";
+import { MatCarouselModule } from '@ngmodule/material-carousel';
+import { OwlModule } from 'ngx-owl-carousel';
 
 @NgModule({
   declarations: [
@@ -43,6 +47,7 @@ import { AdmAccomodationsComponent } from './adm-accomodations/adm-accomodations
     AdmAccomodationsComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -50,9 +55,10 @@ import { AdmAccomodationsComponent } from './adm-accomodations/adm-accomodations
     ReactiveFormsModule,
     MaterialModule,
     HttpClientModule,
-    RatingModule
+    RatingModule,
+    MatCarouselModule
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard,AudioService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

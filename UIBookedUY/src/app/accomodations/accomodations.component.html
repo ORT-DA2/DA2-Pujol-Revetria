@@ -3,7 +3,9 @@
       <div class="col-12">
         <div class="grid" *ngIf="!renderError">
           <ng-container *ngFor="let accommodationEl of accommodations">
-            <app-accomodation [accommodation]="accommodationEl"></app-accomodation>
+            <mat-card>
+              <app-accomodation [accommodation]="accommodationEl"></app-accomodation>
+            </mat-card>
           </ng-container>
       </div>
       <div class="alert alert-danger" *ngIf="renderError">
