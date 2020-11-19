@@ -106,5 +106,9 @@ namespace BusinessLogic
             }
             return this.accommodationRepository.GetById(id);
         }
+        public IEnumerable<Accommodation> GetAll()
+        {
+            return this.accommodationRepository.GetAll();
+        }
     }
 }

@@ -19,5 +19,7 @@ namespace BusinessLogicInterface
 
         Review AddReview(Review review);
 
+        IEnumerable<Accommodation> GetAll();
+
     }
 }
