@@ -23,87 +23,75 @@ namespace DomainTests
         [TestMethod]
         public void TestNameSet()
         {
-            string test = "test";
-            category.Name = test;
-            Assert.AreEqual(category.Name, test);
+            category.Name = "test";
+            Assert.AreEqual(category.Name, "test");
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestNameSetNull()
         {
-            string test = null;
-            category.Name = test;
-            Assert.Fail();
+            category.Name = null;
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestNameSetEmpty()
         {
-            string test = "";
-            category.Name = test;
-            Assert.Fail();
+            category.Name = "";
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestNameSetSpaces()
         {
-            string test = "   ";
-            category.Name = test;
-            Assert.Fail();
+            category.Name = "   ";
         }
 
         [TestMethod]
         public void TestEqualsExpectedTrue()
         {
-            int testId = 1;
-            string testName = "test";
-            this.category.Id = testId;
-            this.category.Name = testName;
-            Category test = new Category();
-            test.Id = testId;
-            test.Name = testName;
+            this.category.Id = 1;
+            this.category.Name = "test";
+            Category test = new Category
+            {
+                Id = 1,
+                Name = "test"
+            };
             Assert.IsTrue(category.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalse()
         {
-            int testId1 = 1;
-            int testId2 = 2;
-            string testName = "test";
-            this.category.Id = testId1;
-            this.category.Name = testName;
-            Category test = new Category();
-            test.Id = testId2;
-            test.Name = testName;
+            this.category.Id = 1;
+            this.category.Name = "test";
+            Category test = new Category
+            {
+                Id = 2,
+                Name = "test"
+            };
             Assert.IsFalse(category.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalse2()
         {
-            int testId1 = 1;
-            int testId2 = 2;
-            string testName1 = "test1";
-            string testName2 = "test2";
-            this.category.Id = testId1;
-            this.category.Name = testName1;
-            Category test = new Category();
-            test.Id = testId2;
-            test.Name = testName2;
+            this.category.Id = 1;
+            this.category.Name = "test1";
+            Category test = new Category
+            {
+                Id = 2,
+                Name = "test2"
+            };
             Assert.IsFalse(category.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalseNull()
         {
-            int testId1 = 1;
-            string testName1 = "test";
-            this.category.Id = testId1;
-            this.category.Name = testName1;
+            this.category.Id = 1;
+            this.category.Name = "test";
             Category test = null;
             Assert.IsFalse(category.Equals(test));
         }
@@ -111,21 +99,16 @@ namespace DomainTests
         [TestMethod]
         public void TestEqualsExpectedFalseNotType()
         {
-            int testId1 = 1;
-            string testName1 = "test";
-            this.category.Id = testId1;
-            this.category.Name = testName1;
-            string test = "testing";
-            Assert.IsFalse(category.Equals(test));
+            this.category.Id = 1;
+            this.category.Name = "test";
+            Assert.IsFalse(category.Equals("testing"));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalseNotType2()
         {
-            int testId1 = 1;
-            string testName1 = "test";
-            this.category.Id = testId1;
-            this.category.Name = testName1;
+            this.category.Id = 1;
+            this.category.Name = "test";
             Booking test = new Booking();
             Assert.IsFalse(category.Equals(test));
         }

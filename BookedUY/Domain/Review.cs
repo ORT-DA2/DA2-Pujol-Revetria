@@ -47,5 +47,18 @@ namespace Domain
             return obj is Review review &&
                    Id == review.Id;
         }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1444669335;
+            hashCode = hashCode * -1521134295 + Id.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<Booking>.Default.GetHashCode(Booking);
+            hashCode = hashCode * -1521134295 + BookingId.GetHashCode();
+            hashCode = hashCode * -1521134295 + Score.GetHashCode();
+            hashCode = hashCode * -1521134295 + _score.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Comment);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_comment);
+            return hashCode;
+        }
     }
 }

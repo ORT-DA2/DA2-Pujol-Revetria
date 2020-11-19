@@ -118,5 +118,27 @@ namespace Domain
             }
             return result;
         }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 671208328;
+            hashCode = hashCode * -1521134295 + Id.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<TouristicSpot>.Default.GetHashCode(Spot);
+            hashCode = hashCode * -1521134295 + SpotId.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_name);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_address);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Address);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_contactNumber);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ContactNumber);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_information);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Information);
+            hashCode = hashCode * -1521134295 + _pricePerNight.GetHashCode();
+            hashCode = hashCode * -1521134295 + PricePerNight.GetHashCode();
+            hashCode = hashCode * -1521134295 + Full.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<Booking>>.Default.GetHashCode(Bookings);
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<AccommodationImage>>.Default.GetHashCode(Images);
+            return hashCode;
+        }
     }
 }

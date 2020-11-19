@@ -21,20 +21,36 @@ namespace BusinessLogic
 
         public BookingStage AddBookingStage(BookingStage stage)
         {
-            if (stage.AsociatedBookingId == 0) {
-                throw new NullInputException("BookingStage Booking");
-            }
+            CheckBookingStageAsociatedBookingId(stage.AsociatedBookingId);
             var booking = this.bookingRepository.GetById(stage.AsociatedBookingId);
+            CheckBookingStageAsociatedBooking(booking);
+            var administrator = this.administratorRepository.GetById(stage.AdministratorId);
+            CheckBookingStageAdministrator(administrator);
+            return this.bookingStageRepository.Add(stage);
+        }
+
+        private void CheckBookingStageAdministrator(Administrator administrator)
+        {
+            if (administrator == null)
+            {
+                throw new NotFoundException("BookingStage Admin");
+            }
+        }
+
+        private void CheckBookingStageAsociatedBooking(Booking booking)
+        {
             if (booking == null)
             {
                 throw new NotFoundException("BookingStage Booking");
             }
-            var admin = this.administratorRepository.GetById(stage.AdministratorId);
-            if(admin == null)
+        }
+
+        private void CheckBookingStageAsociatedBookingId(int id)
+        {
+            if (id == 0)
             {
-                throw new NotFoundException("BookingStage Admin");
+                throw new NullInputException("BookingStage Booking");
             }
-            return this.bookingStageRepository.Add(stage);
         }
 
         public BookingStage GetCurrentStatusByBooking(int bookingId)

@@ -17,5 +17,13 @@ namespace Domain
             }
             return result;
         }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1540164420;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(AccommodationName);
+            hashCode = hashCode * -1521134295 + Count.GetHashCode();
+            return hashCode;
+        }
     }
 }

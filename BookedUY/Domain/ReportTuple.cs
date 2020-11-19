@@ -18,5 +18,13 @@ namespace Domain
             }
             return result;
         }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1603950996;
+            hashCode = hashCode * -1521134295 + Id.GetHashCode();
+            hashCode = hashCode * -1521134295 + Count.GetHashCode();
+            return hashCode;
+        }
     }
 }

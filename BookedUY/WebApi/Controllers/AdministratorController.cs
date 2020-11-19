@@ -30,11 +30,12 @@ namespace WebApi.Controllers
             return Ok(new TokenModelOut(token));
         }
 
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpGet()]
         public IActionResult Get()
         {
             var administrators = from administrator in this.administratorLogic.GetAll()
-            select new AdministratorModelOut(administrator.Email);
+            select new AdministratorModelOut(administrator.Email, administrator.Id);
             return Ok(administrators);
         }
 

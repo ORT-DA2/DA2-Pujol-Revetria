@@ -18,16 +18,5 @@ namespace BusinessLogic
         {
             return this.regionRepository.GetAll();
         }
-
-        //public Region GetRegion(int id)
-        //{
-        //    var ret =  this.regionRepository.GetById(id);
-        //    if (ret == null)
-        //    {
-        //    }
-        //    else
-        //    {
-        //    }
-        //}
     }
 }

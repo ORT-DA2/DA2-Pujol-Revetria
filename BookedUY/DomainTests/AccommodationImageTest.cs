@@ -23,36 +23,32 @@ namespace DomainTests
         [TestMethod]
         public void TestImageSet()
         {
-            string test = "test";
-            accommodationImage.Image = test;
+            accommodationImage.Image = "test";
             accommodationImage.AccommodationId = 0;
             accommodationImage.Id = 0;
             accommodationImage.Accommodation = new Accommodation();
-            Assert.AreEqual(accommodationImage.Image, test);
+            Assert.AreEqual(accommodationImage.Image, "test");
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestImageSetNull()
         {
-            string test = null;
-            accommodationImage.Image = test;
+            accommodationImage.Image = null;
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestImageSetEmpty()
         {
-            string test = "";
-            accommodationImage.Image = test;
+            accommodationImage.Image = "";
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestAddressSetSpaces()
         {
-            string test = "   ";
-            accommodationImage.Image = test;
+            accommodationImage.Image = "   ";
         }
     }
 }

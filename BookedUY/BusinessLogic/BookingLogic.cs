@@ -22,29 +22,20 @@ namespace BusinessLogic
             this.touristicSpotRepository = touristicSpotRepository;
         }
 
+        
+
         public Booking AddBooking(Booking booking)
         {
-            if (booking.Guests == null)
-            {
-                throw new NullInputException("Booking Guests");
-            }
-            if (booking.AccommodationId == 0)
-            {
-                throw new NullInputException("Booking Accommodation");
-            }
-            
+            CheckBookingGuests(booking);
+            CheckBookingAccommodation(booking);
             var accommodation = this.accommodationRepository.GetById(booking.AccommodationId);
-            if (accommodation == null)
-            {
-                throw new NotFoundException("Booking Accommodation");
-            }
             var tourist = this.touristRepository.GetByEmail(booking.HeadGuest.Email);
             if (tourist != null)
             {
                 booking.HeadGuest = tourist;
             }
             double totalprice = CalculateTotalPrice(booking);
-            booking.TotalPrice = totalprice*accommodation.PricePerNight;
+            booking.TotalPrice = totalprice * accommodation.PricePerNight;
             booking.BookingHistory = new List<BookingStage>();
             BookingStage bookingStage = new BookingStage()
             {
@@ -84,22 +75,16 @@ namespace BusinessLogic
         public Booking GetById(int id)
         {
             var booking = this.bookingRepository.GetById(id);
-            if (booking == null)
-            {
-                throw new NotFoundException("Booking");
-            }
+            CheckBooking(booking);
             return booking;
         }
 
         public List<ReportTupleReturn> GetReport(string touristicSpotName, DateTime start, DateTime end)
         {
             var touristicSpot = this.touristicSpotRepository.GetByName(touristicSpotName);
-            if(touristicSpot == null)
-            {
-                throw new NotFoundException("Touristic Spot");
-            }
+            CheckBookingTouristicSpot(touristicSpot);
             var ret = bookingRepository.GetReport(touristicSpot.Id, start, end);
-            if(ret == null || ret.Count() == 0)
+            if (ret == null || ret.Count() == 0)
             {
                 throw new FailedReportException();
             }
@@ -114,6 +99,43 @@ namespace BusinessLogic
                 listOfTuple.Add(reportTupleReturn);
             }
             return listOfTuple;
+        }
+
+        private void CheckBookingGuests(Booking booking)
+        {
+            if (booking.Guests == null)
+            {
+                throw new NullInputException("Booking Guests");
+            }
+        }
+
+        private void CheckBookingAccommodation(Booking booking)
+        {
+            if (booking.AccommodationId == 0)
+            {
+                throw new NullInputException("Booking Accommodation");
+            }
+            var accommodation = this.accommodationRepository.GetById(booking.AccommodationId);
+            if (accommodation == null)
+            {
+                throw new NotFoundException("Booking Accommodation");
+            }
+        }
+
+        private void CheckBooking(Booking booking)
+        {
+            if (booking == null)
+            {
+                throw new NotFoundException("Booking");
+            }
+        }
+
+        private void CheckBookingTouristicSpot(TouristicSpot touristicSpot)
+        {
+            if (touristicSpot == null)
+            {
+                throw new NotFoundException("Touristic Spot");
+            }
         }
     }
 }

@@ -31,6 +31,10 @@ namespace Domain
 
         private DateTime _checkOut;
 
+        public Booking()
+        {
+        }
+
         public DateTime CheckOut
         {
             get
@@ -65,6 +69,25 @@ namespace Domain
                 result = this.Id == booking.Id;
             }
             return result;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -521319978;
+            hashCode = hashCode * -1521134295 + Id.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<Accommodation>.Default.GetHashCode(Accommodation);
+            hashCode = hashCode * -1521134295 + AccommodationId.GetHashCode();
+            hashCode = hashCode * -1521134295 + _checkIn.GetHashCode();
+            hashCode = hashCode * -1521134295 + CheckIn.GetHashCode();
+            hashCode = hashCode * -1521134295 + _checkOut.GetHashCode();
+            hashCode = hashCode * -1521134295 + CheckOut.GetHashCode();
+            hashCode = hashCode * -1521134295 + TotalPrice.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<Guest>>.Default.GetHashCode(Guests);
+            hashCode = hashCode * -1521134295 + EqualityComparer<Tourist>.Default.GetHashCode(HeadGuest);
+            hashCode = hashCode * -1521134295 + GuestId.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<Review>.Default.GetHashCode(Rating);
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<BookingStage>>.Default.GetHashCode(BookingHistory);
+            return hashCode;
         }
     }
 }
