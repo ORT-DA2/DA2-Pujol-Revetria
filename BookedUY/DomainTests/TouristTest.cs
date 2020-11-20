@@ -24,6 +24,7 @@ namespace DomainTests
         public void TestNameSet()
         {
             tourist.Name = "text";
+
             Assert.AreEqual(tourist.Name, "text");
         }
 
@@ -44,6 +45,7 @@ namespace DomainTests
         public void TestLastNameSet()
         {
             tourist.LastName = "text";
+
             Assert.AreEqual(tourist.LastName, "text");
         }
 
@@ -65,6 +67,7 @@ namespace DomainTests
         public void TestEmailSet()
         {
             tourist.Email = "facundo@gmail.com";
+
             Assert.AreEqual(tourist.Email, "facundo@gmail.com");
         }
 
@@ -72,6 +75,7 @@ namespace DomainTests
         public void TestEmailSet2()
         {
             tourist.Email = "test.test@com";
+
             Assert.AreEqual(tourist.Email, "test.test@com");
         }
 
@@ -126,6 +130,7 @@ namespace DomainTests
                 Id = 1,
                 Email = "facundo@gmail.com"
             };
+
             Assert.IsTrue(tourist.Equals(test));
         }
 
@@ -139,6 +144,7 @@ namespace DomainTests
                 Id = 2,
                 Email = "facundo@gmail.com"
             };
+
             Assert.IsFalse(tourist.Equals(test));
         }
 
@@ -152,6 +158,7 @@ namespace DomainTests
                 Id = 2,
                 Email = "javier@gmail.com"
             };
+
             Assert.IsFalse(tourist.Equals(test));
         }
 
@@ -161,6 +168,7 @@ namespace DomainTests
             tourist.Id = 1;
             tourist.Email = "facundo@gmail.com";
             Tourist test = null;
+
             Assert.IsFalse(tourist.Equals(test));
         }
 
@@ -169,6 +177,7 @@ namespace DomainTests
         {
             tourist.Id = 1;
             tourist.Email = "facundo@gmail.com";
+
             Assert.IsFalse(tourist.Equals("testing"));
         }
 
@@ -178,6 +187,7 @@ namespace DomainTests
             tourist.Id = 1;
             tourist.Email = "facundo@gmail.com";
             Booking test = new Booking();
+
             Assert.IsFalse(tourist.Equals(test));
         }
     }

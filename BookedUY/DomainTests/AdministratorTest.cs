@@ -24,6 +24,7 @@ namespace DomainTests
         public void TestEmailSet()
         {
             administrator.Email = "facundo@gmail.com";
+
             Assert.AreEqual(administrator.Email, "facundo@gmail.com");
         }
 
@@ -31,6 +32,7 @@ namespace DomainTests
         public void TestEmailSet2()
         {
             administrator.Email = "test.test@com";
+
             Assert.AreEqual(administrator.Email, "test.test@com");
         }
 
@@ -80,6 +82,7 @@ namespace DomainTests
         public void TestPasswordSet()
         {
             administrator.Password = "test";
+
             Assert.AreEqual(administrator.Password, "test");
         }
 
@@ -114,6 +117,7 @@ namespace DomainTests
                 Id = 1,
                 Email = "facundo@gmail.com"
             };
+
             Assert.IsTrue(administrator.Equals(test));
         }
 
@@ -127,6 +131,7 @@ namespace DomainTests
                 Id = 2,
                 Email = "facundo@gmail.com"
             };
+
             Assert.IsFalse(administrator.Equals(test));
         }
 
@@ -140,6 +145,7 @@ namespace DomainTests
                 Id = 2,
                 Email = "javier@gmail.com"
             };
+
             Assert.IsFalse(administrator.Equals(test));
         }
 
@@ -149,6 +155,7 @@ namespace DomainTests
             this.administrator.Id = 1;
             this.administrator.Email = "facundo@gmail.com";
             Administrator test = null;
+
             Assert.IsFalse(administrator.Equals(test));
         }
 
@@ -157,6 +164,7 @@ namespace DomainTests
         {
             this.administrator.Id = 1;
             this.administrator.Email = "facundo@gmail.com";
+
             Assert.IsFalse(administrator.Equals("testing"));
         }
 
@@ -166,6 +174,7 @@ namespace DomainTests
             this.administrator.Id = 1;
             this.administrator.Email = "facundo@gmail.com";
             Booking test = new Booking();
+
             Assert.IsFalse(administrator.Equals(test));
         }
     }

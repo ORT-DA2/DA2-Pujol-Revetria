@@ -24,6 +24,7 @@ namespace DomainTests
         public void TestNameSet()
         {
             touristicSpot.Name = "test";
+
             Assert.AreEqual(touristicSpot.Name, "test");
         }
 
@@ -45,6 +46,7 @@ namespace DomainTests
         public void TestDescriptionSet()
         {
             touristicSpot.Description = "text";
+
             Assert.AreEqual(touristicSpot.Description, "text");
         }
 
@@ -66,6 +68,7 @@ namespace DomainTests
         public void TestEquals()
         {
             TouristicSpot aux = touristicSpot;
+
             Assert.IsTrue(touristicSpot.Equals(aux));
         }
 
@@ -82,6 +85,7 @@ namespace DomainTests
             {
                 Name = "test"
             };
+
             Assert.IsFalse(touristicSpot.Equals(aux));
         }
     }

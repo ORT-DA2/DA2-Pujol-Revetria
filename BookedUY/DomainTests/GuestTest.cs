@@ -24,6 +24,7 @@ namespace DomainTests
         public void TestAmountSet()
         {
             guest.Amount = 1;
+
             Assert.AreEqual(guest.Amount, 1);
         }
 
@@ -42,6 +43,7 @@ namespace DomainTests
             {
                 Id = 1
             };
+
             Assert.IsTrue(guest.Equals(test));
         }
 
@@ -53,6 +55,7 @@ namespace DomainTests
             {
                 Id = 2
             };
+
             Assert.IsFalse(guest.Equals(test));
         }
 
@@ -64,6 +67,7 @@ namespace DomainTests
             {
                 Id = 2
             };
+
             Assert.IsFalse(guest.Equals(test));
         }
 
@@ -72,6 +76,7 @@ namespace DomainTests
         {
             this.guest.Id = 1;
             Guest test = null;
+
             Assert.IsFalse(guest.Equals(test));
         }
 
@@ -79,6 +84,7 @@ namespace DomainTests
         public void TestEqualsExpectedFalseNotType()
         {
             this.guest.Id = 1;
+
             Assert.IsFalse(guest.Equals("testing"));
         }
 
@@ -87,6 +93,7 @@ namespace DomainTests
         {
             this.guest.Id = 1;
             Booking test = new Booking();
+
             Assert.IsFalse(guest.Equals(test));
         }
     }

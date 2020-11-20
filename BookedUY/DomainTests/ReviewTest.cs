@@ -27,6 +27,7 @@ namespace DomainTests
         public void TestScoreSet()
         {
             review.Score = 1;
+
             Assert.AreEqual(review.Score, 1);
         }
 
@@ -34,6 +35,7 @@ namespace DomainTests
         public void TestScoreSet1()
         {
             review.Score = 3;
+
             Assert.AreEqual(review.Score, 3);
         }
 
@@ -61,6 +63,7 @@ namespace DomainTests
         public void TestCommentSet()
         {
             review.Comment = "test";
+
             Assert.AreEqual(review.Comment, "test");
         }
 
@@ -93,6 +96,7 @@ namespace DomainTests
             {
                 Id = 1
             };
+
             Assert.IsTrue(review.Equals(test));
         }
 
@@ -104,6 +108,7 @@ namespace DomainTests
             {
                 Id = 2
             };
+
             Assert.IsFalse(review.Equals(test));
         }
 
@@ -112,6 +117,7 @@ namespace DomainTests
         {
             this.review.Id = 1;
             Review test = null;
+
             Assert.IsFalse(review.Equals(test));
         }
 
@@ -119,6 +125,7 @@ namespace DomainTests
         public void TestEqualsExpectedFalseNotType()
         {
             this.review.Id = 1;
+
             Assert.IsFalse(review.Equals("testing"));
         }
 
@@ -127,6 +134,7 @@ namespace DomainTests
         {
             this.review.Id = 1;
             Review test = new Review();
+
             Assert.IsFalse(review.Equals(test));
         }
     }

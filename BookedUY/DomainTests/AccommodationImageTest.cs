@@ -27,6 +27,7 @@ namespace DomainTests
             accommodationImage.AccommodationId = 0;
             accommodationImage.Id = 0;
             accommodationImage.Accommodation = new Accommodation();
+
             Assert.AreEqual(accommodationImage.Image, "test");
         }
 

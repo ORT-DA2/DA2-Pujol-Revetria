@@ -31,6 +31,7 @@ namespace DomainTests
             {
                 AccommodationName = "a"
             };
+
             Assert.IsTrue(reportTupleReturn.Equals(test));
         }
 
@@ -42,6 +43,7 @@ namespace DomainTests
             {
                 AccommodationName = "b"
             };
+
             Assert.IsFalse(reportTupleReturn.Equals(test));
         }
 
@@ -53,6 +55,7 @@ namespace DomainTests
             {
                 AccommodationName = "b"
             };
+
             Assert.IsFalse(reportTupleReturn.Equals(test));
         }
 
@@ -61,6 +64,7 @@ namespace DomainTests
         {
             this.reportTupleReturn.AccommodationName = "a";
             ReportTupleReturn test = null;
+
             Assert.IsFalse(reportTupleReturn.Equals(test));
         }
 
@@ -68,6 +72,7 @@ namespace DomainTests
         public void TestEqualsExpectedFalseNotType()
         {
             this.reportTupleReturn.AccommodationName = "a";
+
             Assert.IsFalse(reportTupleReturn.Equals("testing"));
         }
 
@@ -76,6 +81,7 @@ namespace DomainTests
         {
             this.reportTupleReturn.AccommodationName = "a";
             Booking test = new Booking();
+
             Assert.IsFalse(reportTupleReturn.Equals(test));
         }
     }

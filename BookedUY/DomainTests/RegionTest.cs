@@ -24,6 +24,7 @@ namespace DomainTests
         public void TestNameSet()
         {
             region.Name = "test";
+
             Assert.AreEqual(region.Name, "test");
         }
 
@@ -58,6 +59,7 @@ namespace DomainTests
                 Id = 1,
                 Name = "test"
             };
+
             Assert.IsTrue(region.Equals(test));
         }
 
@@ -71,6 +73,7 @@ namespace DomainTests
                 Id = 2,
                 Name = "test"
             };
+
             Assert.IsFalse(region.Equals(test));
         }
 
@@ -84,6 +87,7 @@ namespace DomainTests
                 Id = 2,
                 Name = "test2"
             };
+
             Assert.IsFalse(region.Equals(test));
         }
 
@@ -93,6 +97,7 @@ namespace DomainTests
             this.region.Id = 1;
             this.region.Name = "test";
             Region test = null;
+
             Assert.IsFalse(region.Equals(test));
         }
 
@@ -101,6 +106,7 @@ namespace DomainTests
         {
             this.region.Id = 1;
             this.region.Name = "test";
+
             Assert.IsFalse(region.Equals("testing"));
         }
 
@@ -110,6 +116,7 @@ namespace DomainTests
             this.region.Id = 1;
             this.region.Name = "test";
             Booking test = new Booking();
+
             Assert.IsFalse(region.Equals(test));
         }
     }

@@ -25,6 +25,7 @@ namespace DomainTests
         public void TestCheckIn()
         {
             booking.CheckIn = DateTime.Now.AddDays(1).Date;
+
             Assert.AreEqual(booking.CheckIn, DateTime.Now.AddDays(1).Date);
         }
 
@@ -32,6 +33,7 @@ namespace DomainTests
         public void TestCheckIn2()
         {
             booking.CheckIn = DateTime.Now.AddDays(300).Date;
+
             Assert.AreEqual(booking.CheckIn, DateTime.Now.AddDays(300).Date);
         }
 
@@ -39,6 +41,7 @@ namespace DomainTests
         public void TestCheckIn3()
         {
             booking.CheckIn = DateTime.Now.Date;
+
             Assert.AreEqual(booking.CheckIn, DateTime.Now.Date);
         }
 
@@ -67,6 +70,7 @@ namespace DomainTests
         public void TestCheckOut()
         {
             booking.CheckOut = DateTime.Now.AddDays(1).Date;
+
             Assert.AreEqual(booking.CheckOut, DateTime.Now.AddDays(1).Date);
         }
 
@@ -74,6 +78,7 @@ namespace DomainTests
         public void TestCheckOut2()
         {
             booking.CheckOut = DateTime.Now.AddDays(300).Date;
+
             Assert.AreEqual(booking.CheckOut, DateTime.Now.AddDays(300).Date);
         }
 
@@ -81,6 +86,7 @@ namespace DomainTests
         public void TestCheckOut3()
         {
             booking.CheckOut = DateTime.Now.Date;
+
             Assert.AreEqual(booking.CheckOut, DateTime.Now.Date);
         }
 
@@ -118,6 +124,7 @@ namespace DomainTests
         {
             booking.CheckIn = DateTime.Now.AddDays(2).Date;
             booking.CheckOut = DateTime.Now.AddDays(8).Date;
+
             Assert.IsTrue(booking.CheckIn < booking.CheckOut);
         }
 
@@ -137,6 +144,7 @@ namespace DomainTests
             {
                 Id = 1
             };
+
             Assert.IsTrue(booking.Equals(test));
         }
 
@@ -148,6 +156,7 @@ namespace DomainTests
             {
                 Id = 2
             };
+
             Assert.IsFalse(booking.Equals(test));
         }
 
@@ -156,6 +165,7 @@ namespace DomainTests
         {
             this.booking.Id = 1;
             Booking test = null;
+
             Assert.IsFalse(booking.Equals(test));
         }
 
@@ -163,6 +173,7 @@ namespace DomainTests
         public void TestEqualsExpectedFalseNotType()
         {
             this.booking.Id = 1;
+
             Assert.IsFalse(booking.Equals("testing"));
         }
 
@@ -171,6 +182,7 @@ namespace DomainTests
         {
             this.booking.Id = 1;
             Booking test = new Booking();
+
             Assert.IsFalse(booking.Equals(test));
         }
     }

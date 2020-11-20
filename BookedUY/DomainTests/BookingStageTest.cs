@@ -24,6 +24,7 @@ namespace DomainTests
         public void TestDescriptionSet()
         {
             bookingStage.Description = "test test@ test123";
+
             Assert.AreEqual(bookingStage.Description, "test test@ test123");
         }
 
@@ -56,6 +57,7 @@ namespace DomainTests
             {
                 Id = 1
             };
+
             Assert.IsTrue(bookingStage.Equals(test));
         }
 
@@ -67,6 +69,7 @@ namespace DomainTests
             {
                 Id = 2
             };
+
             Assert.IsFalse(bookingStage.Equals(test));
         }
 
@@ -78,6 +81,7 @@ namespace DomainTests
             {
                 Id = 2
             };
+
             Assert.IsFalse(bookingStage.Equals(test));
         }
 
@@ -86,6 +90,7 @@ namespace DomainTests
         {
             this.bookingStage.Id = 1;
             BookingStage test = null;
+
             Assert.IsFalse(bookingStage.Equals(test));
         }
 
@@ -93,6 +98,7 @@ namespace DomainTests
         public void TestEqualsExpectedFalseNotType()
         {
             this.bookingStage.Id = 1;
+
             Assert.IsFalse(bookingStage.Equals("testing"));
         }
 
@@ -101,6 +107,7 @@ namespace DomainTests
         {
             this.bookingStage.Id = 1;
             Booking test = new Booking();
+
             Assert.IsFalse(bookingStage.Equals(test));
         }
     }

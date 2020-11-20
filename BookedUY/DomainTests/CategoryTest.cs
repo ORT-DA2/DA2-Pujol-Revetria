@@ -24,6 +24,7 @@ namespace DomainTests
         public void TestNameSet()
         {
             category.Name = "test";
+
             Assert.AreEqual(category.Name, "test");
         }
 
@@ -58,6 +59,7 @@ namespace DomainTests
                 Id = 1,
                 Name = "test"
             };
+
             Assert.IsTrue(category.Equals(test));
         }
 
@@ -71,6 +73,7 @@ namespace DomainTests
                 Id = 2,
                 Name = "test"
             };
+
             Assert.IsFalse(category.Equals(test));
         }
 
@@ -84,6 +87,7 @@ namespace DomainTests
                 Id = 2,
                 Name = "test2"
             };
+
             Assert.IsFalse(category.Equals(test));
         }
 
@@ -93,6 +97,7 @@ namespace DomainTests
             this.category.Id = 1;
             this.category.Name = "test";
             Category test = null;
+
             Assert.IsFalse(category.Equals(test));
         }
 
@@ -101,6 +106,7 @@ namespace DomainTests
         {
             this.category.Id = 1;
             this.category.Name = "test";
+
             Assert.IsFalse(category.Equals("testing"));
         }
 
@@ -110,6 +116,7 @@ namespace DomainTests
             this.category.Id = 1;
             this.category.Name = "test";
             Booking test = new Booking();
+
             Assert.IsFalse(category.Equals(test));
         }
     }

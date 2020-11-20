@@ -24,6 +24,7 @@ namespace DomainTests
         public void TestAddressSet()
         {
             accommodation.Address = "test";
+
             Assert.AreEqual(accommodation.Address, "test");
         }
 
@@ -52,6 +53,7 @@ namespace DomainTests
         public void TestNameSet()
         {
             accommodation.Name = "test";
+
             Assert.AreEqual(accommodation.Name, "test");
         }
 
@@ -80,6 +82,7 @@ namespace DomainTests
         public void TestInformationSet()
         {
             accommodation.Information = "test";
+
             Assert.AreEqual(accommodation.Information, "test");
         }
 
@@ -108,6 +111,7 @@ namespace DomainTests
         public void TestPriceSet()
         {
             accommodation.PricePerNight = 1.55;
+
             Assert.AreEqual(accommodation.PricePerNight, 1.55);
         }
 
@@ -128,6 +132,7 @@ namespace DomainTests
                 Id = 1,
                 Name = "test"
             };
+
             Assert.IsTrue(accommodation.Equals(test));
         }
 
@@ -141,6 +146,7 @@ namespace DomainTests
                 Id = 2,
                 Name = "test"
             };
+
             Assert.IsFalse(accommodation.Equals(test));
         }
 
@@ -154,6 +160,7 @@ namespace DomainTests
                 Id = 2,
                 Name = "test2"
             };
+
             Assert.IsFalse(accommodation.Equals(test));
         }
 
@@ -163,6 +170,7 @@ namespace DomainTests
             this.accommodation.Id = 1;
             this.accommodation.Name = "test1";
             Accommodation test = null;
+
             Assert.IsFalse(accommodation.Equals(test));
         }
 
@@ -171,6 +179,7 @@ namespace DomainTests
         {
             this.accommodation.Id = 1;
             this.accommodation.Name = "test1";
+
             Assert.IsFalse(accommodation.Equals("Testing"));
         }
 
@@ -180,6 +189,7 @@ namespace DomainTests
             this.accommodation.Id = 1;
             this.accommodation.Name = "test1";
             Booking test = new Booking();
+
             Assert.IsFalse(accommodation.Equals(test));
         }
     }

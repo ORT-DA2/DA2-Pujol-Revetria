@@ -32,6 +32,7 @@ namespace DomainTests
                 Id = 1,
                 Count = 1
             };
+
             Assert.IsTrue(reportTuple.Equals(test));
         }
 
@@ -45,6 +46,7 @@ namespace DomainTests
                 Id = 2,
                 Count = 2
             };
+
             Assert.IsFalse(reportTuple.Equals(test));
         }
 
@@ -58,6 +60,7 @@ namespace DomainTests
                 Id = 2,
                 Count = 2
             };
+
             Assert.IsFalse(reportTuple.Equals(test));
         }
 
@@ -67,6 +70,7 @@ namespace DomainTests
             this.reportTuple.Id = 1;
             this.reportTuple.Count = 1;
             ReportTuple test = null;
+
             Assert.IsFalse(reportTuple.Equals(test));
         }
 
@@ -75,6 +79,7 @@ namespace DomainTests
         {
             this.reportTuple.Id = 1;
             this.reportTuple.Count = 1;
+
             Assert.IsFalse(reportTuple.Equals("testing"));
         }
 
@@ -84,6 +89,7 @@ namespace DomainTests
             this.reportTuple.Id = 1;
             this.reportTuple.Count = 1;
             Booking test = new Booking();
+
             Assert.IsFalse(reportTuple.Equals(test));
         }
     }
