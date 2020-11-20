@@ -26,106 +26,91 @@ namespace DomainTests
         [TestMethod]
         public void TestScoreSet()
         {
-            int test = 1;
-            review.Score = test;
-            Assert.AreEqual(review.Score, test);
+            review.Score = 1;
+            Assert.AreEqual(review.Score, 1);
         }
 
         [TestMethod]
         public void TestScoreSet1()
         {
-            int test = 3;
-            review.Score = test;
-            Assert.AreEqual(review.Score, test);
+            review.Score = 3;
+            Assert.AreEqual(review.Score, 3);
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidScoreException))]
         public void TestScoreSetNegative()
         {
-            int test = -1;
-            review.Score = test;
-            Assert.Fail();
+            review.Score = -1;
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidScoreException))]
         public void TestScoreSetPlus5()
         {
-            int test = 6;
-            review.Score = test;
-            Assert.Fail();
+            review.Score = 9;
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidScoreException))]
         public void TestScoreSetZero()
         {
-            int test = 0;
-            review.Score = test;
-            Assert.Fail();
+            review.Score = 0;
         }
         [TestMethod]
         public void TestCommentSet()
         {
-            string test = "test";
-            review.Comment = test;
-            Assert.AreEqual(review.Comment, test);
+            review.Comment = "test";
+            Assert.AreEqual(review.Comment, "test");
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestCommentSetNull()
         {
-            string test = null;
-            review.Comment = test;
-            Assert.Fail();
+            review.Comment = null;
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestCommentSetEmpty()
         {
-            string test = "";
-            review.Comment = test;
-            Assert.Fail();
+            review.Comment = "";
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestCommentSetSpaces()
         {
-            string test = "   ";
-            review.Comment = test;
-            Assert.Fail();
+            review.Comment = "   ";
         }
 
         [TestMethod]
         public void TestEqualsExpectedTrue()
         {
-            int testId = 1;
-            this.review.Id = testId;
-            Review test = new Review();
-            test.Id = testId;
+            this.review.Id = 1;
+            Review test = new Review
+            {
+                Id = 1
+            };
             Assert.IsTrue(review.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalse()
         {
-            int testId1 = 1;
-            int testId2 = 2;
-            this.review.Id = testId1;
-            Review test = new Review();
-            test.Id = testId2;
+            this.review.Id = 1;
+            Review test = new Review
+            {
+                Id = 2
+            };
             Assert.IsFalse(review.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalseNull()
         {
-            int testId1 = 1;
-            this.review.Id = testId1;
+            this.review.Id = 1;
             Review test = null;
             Assert.IsFalse(review.Equals(test));
         }
@@ -133,17 +118,14 @@ namespace DomainTests
         [TestMethod]
         public void TestEqualsExpectedFalseNotType()
         {
-            int testId1 = 1;
-            this.review.Id = testId1;
-            string test = "testing";
-            Assert.IsFalse(review.Equals(test));
+            this.review.Id = 1;
+            Assert.IsFalse(review.Equals("testing"));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalseNotType2()
         {
-            int testId1 = 1;
-            this.review.Id = testId1;
+            this.review.Id = 1;
             Review test = new Review();
             Assert.IsFalse(review.Equals(test));
         }

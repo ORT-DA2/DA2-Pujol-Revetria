@@ -23,87 +23,75 @@ namespace DomainTests
         [TestMethod]
         public void TestNameSet()
         {
-            string test = "test";
-            region.Name = test;
-            Assert.AreEqual(region.Name, test);
+            region.Name = "test";
+            Assert.AreEqual(region.Name, "test");
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestNameSetNull()
         {
-            string test = null;
-            region.Name = test;
-            Assert.Fail();
+            region.Name = null;
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestNameSetEmpty()
         {
-            string test = "";
-            region.Name = test;
-            Assert.Fail();
+            region.Name = "";
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestNameSetSpaces()
         {
-            string test = "   ";
-            region.Name = test;
-            Assert.Fail();
+            region.Name = "   ";
         }
 
         [TestMethod]
         public void TestEqualsExpectedTrue()
         {
-            int testId = 1;
-            string testName = "test";
-            this.region.Id = testId;
-            this.region.Name = testName;
-            Region test = new Region();
-            test.Id = testId;
-            test.Name = testName;
+            this.region.Id = 1;
+            this.region.Name = "test";
+            Region test = new Region
+            {
+                Id = 1,
+                Name = "test"
+            };
             Assert.IsTrue(region.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalse()
         {
-            int testId1 = 1;
-            int testId2 = 2;
-            string testName = "test";
-            this.region.Id = testId1;
-            this.region.Name = testName;
-            Region test = new Region();
-            test.Id = testId2;
-            test.Name = testName;
+            this.region.Id = 1;
+            this.region.Name = "test";
+            Region test = new Region
+            {
+                Id = 2,
+                Name = "test"
+            };
             Assert.IsFalse(region.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalse2()
         {
-            int testId1 = 1;
-            int testId2 = 2;
-            string testName1 = "test1";
-            string testName2 = "test2";
-            this.region.Id = testId1;
-            this.region.Name = testName1;
-            Region test = new Region();
-            test.Id = testId2;
-            test.Name = testName2;
+            this.region.Id = 1;
+            this.region.Name = "test1";
+            Region test = new Region
+            {
+                Id = 2,
+                Name = "test2"
+            };
             Assert.IsFalse(region.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalseNull()
         {
-            int testId1 = 1;
-            string testName1 = "test";
-            this.region.Id = testId1;
-            this.region.Name = testName1;
+            this.region.Id = 1;
+            this.region.Name = "test";
             Region test = null;
             Assert.IsFalse(region.Equals(test));
         }
@@ -111,21 +99,16 @@ namespace DomainTests
         [TestMethod]
         public void TestEqualsExpectedFalseNotType()
         {
-            int testId1 = 1;
-            string testName1 = "test";
-            this.region.Id = testId1;
-            this.region.Name = testName1;
-            string test = "testing";
-            Assert.IsFalse(region.Equals(test));
+            this.region.Id = 1;
+            this.region.Name = "test";
+            Assert.IsFalse(region.Equals("testing"));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalseNotType2()
         {
-            int testId1 = 1;
-            string testName1 = "test";
-            this.region.Id = testId1;
-            this.region.Name = testName1;
+            this.region.Id = 1;
+            this.region.Name = "test";
             Booking test = new Booking();
             Assert.IsFalse(region.Equals(test));
         }

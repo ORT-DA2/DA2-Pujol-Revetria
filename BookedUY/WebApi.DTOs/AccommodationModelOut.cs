@@ -15,6 +15,7 @@ namespace WebApi.DTOs
         public List<string> Images { get; set; }
         public IEnumerable<ReviewModelOut> Reviews { get; set; }
         public double Score { get; set; }
+        public bool Full { get; set; }
 
         public AccommodationModelOut(Accommodation a, (double, IEnumerable<Review>) reviews)
         {
@@ -27,6 +28,7 @@ namespace WebApi.DTOs
             Images = ImagesToStrings(a.Images);
             Score = reviews.Item1;
             Reviews = from r in reviews.Item2 select new ReviewModelOut(r);
+            Full = a.Full;
         }
 
         private List<string> ImagesToStrings(List<AccommodationImage> images)
@@ -48,14 +50,5 @@ namespace WebApi.DTOs
             }
             return result;
         }
-
-        //public List<AccommodationModelOut> ToOutList(IEnumerable<AccommodationModelOut> list)
-        //{
-        //    List<AccommodationModelOut> outList = new List<AccommodationModelOut>();
-        //    foreach (var item in list)
-        //    {
-
-        //    }
-        //}
     }
 }
