@@ -21,11 +21,10 @@ namespace WebApi.Tests
             {
                 "Test"
             };
-
             var mockImporter = new Mock<IImporterLogic>(MockBehavior.Strict);
             mockImporter.Setup(p => p.GetNames()).Returns(names);
-
             var controller = new ImportController(mockImporter.Object);
+
             controller.Get();
 
             mockImporter.VerifyAll();
@@ -50,8 +49,8 @@ namespace WebApi.Tests
 
             var mockImporter = new Mock<IImporterLogic>(MockBehavior.Strict);
             mockImporter.Setup(p => p.GetParameters(It.IsAny<string>())).Returns(listParameters);
-
             var controller = new ImportController(mockImporter.Object);
+
             controller.GetParameters("Test");
 
             mockImporter.VerifyAll();
@@ -64,7 +63,6 @@ namespace WebApi.Tests
             {
                 "Test"
             };
-
             List<TypeParameter> listParameters = new List<TypeParameter>()
             {
                 new TypeParameter()
@@ -73,7 +71,6 @@ namespace WebApi.Tests
                     Type = "string"
                 }
             };
-
             ImporterModel importerModel = new ImporterModel()
             {
                 Name = "Test",
@@ -86,7 +83,6 @@ namespace WebApi.Tests
                     }
                 }
             };
-
             Accommodation accommodation = new Accommodation()
             {
                 Name = "Accommodation name",
@@ -103,12 +99,11 @@ namespace WebApi.Tests
                 Information = "Accommodation information",
                 PricePerNight = 1
             };
-
-            AccommodationModelOut accommodationModelOut = new AccommodationModelOut(accommodation, (0,new List<Review>()));
-
+            AccommodationModelOut accommodationModelOut = new AccommodationModelOut(accommodation, (0, new List<Review>()));
             var mockImporter = new Mock<IImporterLogic>(MockBehavior.Strict);
             mockImporter.Setup(p => p.Import(It.IsAny<ImporterModel>())).Returns(accommodationModelOut);
             var controller = new ImportController(mockImporter.Object);
+
             controller.Post(importerModel);
 
             mockImporter.VerifyAll();

@@ -46,7 +46,6 @@ namespace DataAccess.Tests
                     Spots = null
                 },
             };
-
             categoriesToReturn.ForEach(r => _context.Add(r));
             _context.SaveChanges();
             var repository = new CategoryRepository(_context);
@@ -66,6 +65,7 @@ namespace DataAccess.Tests
                 Spots = null
             };
             var repository = new CategoryRepository(_context);
+
             repository.Add(category);
 
             Assert.AreEqual(_context.Find<Category>(category.Id), category);
@@ -80,7 +80,6 @@ namespace DataAccess.Tests
                 Name = "Playa",
                 Spots = null
             };
-
             _context.Add(category);
             _context.SaveChanges();
             var repository = new CategoryRepository(_context);
@@ -99,12 +98,13 @@ namespace DataAccess.Tests
                 Name = "Playa",
                 Spots = null
             };
-
             _context.Add(category);
             _context.SaveChanges();
             var repository = new CategoryRepository(_context);
 
-            Assert.AreEqual(_context.Find<Category>(category.Id), category);
+            var result = repository.GetById(category.Id);
+
+            Assert.AreEqual(result, category);
         }
 
         [TestMethod]
@@ -116,12 +116,13 @@ namespace DataAccess.Tests
                 Name = "Playa",
                 Spots = null
             };
-
             _context.Add(category);
             _context.SaveChanges();
             var repository = new CategoryRepository(_context);
 
-            Assert.IsNull(_context.Find<Category>(2));
+            var result = repository.GetById(2);
+
+            Assert.IsNull(result);
         }
 
         [TestMethod]
@@ -133,11 +134,12 @@ namespace DataAccess.Tests
                 Name = "Playa",
                 Spots = null
             };
-
             _context.Add(category);
             _context.SaveChanges();
             var repository = new CategoryRepository(_context);
+
             var result = repository.GetByName("a");
+
             Assert.IsNull(result);
         }
 
@@ -150,11 +152,12 @@ namespace DataAccess.Tests
                 Name = "Playa",
                 Spots = null
             };
-
             _context.Add(category);
             _context.SaveChanges();
             var repository = new CategoryRepository(_context);
+
             var result = repository.GetByName("Playa");
+
             Assert.AreEqual(result, category);
         }
     }

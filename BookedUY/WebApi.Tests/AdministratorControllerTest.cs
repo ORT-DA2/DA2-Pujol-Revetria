@@ -26,7 +26,9 @@ namespace WebApi.Tests
             //mockAdministrator.Setup(p => p.GetByEmailAndPassword(It.IsAny<string>(), It.IsAny<string>())).Returns(admin);
             //var mockSession = new Mock<SessionLogic>(MockBehavior.Strict);
             //var controller = new AdministratorController(mockAdministrator.Object, mockSession.Object);
+
             //var result = controller.Login("admin", "123") as OkObjectResult;
+
             //mockAdministrator.VerifyAll();
             //Assert.AreEqual(200, result.StatusCode);
         }
@@ -47,7 +49,9 @@ namespace WebApi.Tests
             //mockAdministrator.Setup(p => p.GetAll()).Returns(expected);
             //var mockSession = new Mock<SessionLogic>(MockBehavior.Strict);
             //var controller = new AdministratorController(mockAdministrator.Object, mockSession.Object);
+
             //var result = controller.Get() as OkObjectResult;
+
             //mockAdministrator.VerifyAll();
             //Assert.AreEqual(200, result.StatusCode);
         }

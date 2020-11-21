@@ -51,39 +51,39 @@ namespace DataAccess.Tests
                     Bookings=null,
                 },
             };
-
             touristsToReturn.ForEach(s => _context.Add(s));
             _context.SaveChanges();
             var repository = new TouristRepository(_context);
+
             var result = repository.GetAll();
+
             Assert.IsTrue(touristsToReturn.SequenceEqual(result));
         }
 
         [TestMethod]
         public void TestAddTourist()
         {
-            int id = 3;
             Tourist tourist = new Tourist()
             {
-                Id = id,
+                Id = 3,
                 Name = "Pepe",
                 LastName = "Lopez",
                 Email = "pepelopez@gmail.com",
                 Bookings = null,
             };
             var repository = new TouristRepository(_context);
+
             repository.Add(tourist);
 
-            Assert.AreEqual(_context.Find<Tourist>(id), tourist);
+            Assert.AreEqual(_context.Find<Tourist>(3), tourist);
         }
 
         [TestMethod]
         public void TestGetByIdTourist()
         {
-            int testId = 1;
             Tourist testTourist = new Tourist()
             {
-                Id = testId,
+                Id = 1,
                 Name = "Pepe",
                 LastName = "Lopez",
                 Email = "pepelopez@gmail.com",
@@ -105,7 +105,7 @@ namespace DataAccess.Tests
             _context.SaveChanges();
             var repository = new TouristRepository(_context);
 
-            var result = repository.GetById(testId);
+            var result = repository.GetById(1);
 
             Assert.AreEqual(testTourist, result);
         }
@@ -113,10 +113,9 @@ namespace DataAccess.Tests
         [TestMethod]
         public void DeleteTouristsTest()
         {
-            int id = 1;
             Tourist tourist = new Tourist()
             {
-                Id = id,
+                Id = 1,
                 Name = "Pedro",
                 LastName = "Korea",
                 Email = "pedroKora@gmail.com",
@@ -128,16 +127,15 @@ namespace DataAccess.Tests
 
             repository.Delete(tourist);
 
-            Assert.IsNull(_context.Find<Tourist>(id));
+            Assert.IsNull(_context.Find<Tourist>(1));
         }
 
         [TestMethod]
         public void TestGetByEmailNull()
         {
-            int testId = 1;
             Tourist testTourist = new Tourist()
             {
-                Id = testId,
+                Id = 1,
                 Name = "Pepe",
                 LastName = "Lopez",
                 Email = "pepelopez@gmail.com",
@@ -158,17 +156,18 @@ namespace DataAccess.Tests
             touristList.ForEach(s => _context.Add(s));
             _context.SaveChanges();
             var repository = new TouristRepository(_context);
+
             var result = repository.GetByEmail("Hil");
+
             Assert.IsNull(result);
         }
 
         [TestMethod]
         public void TestGetByEmail()
         {
-            int testId = 1;
             Tourist testTourist = new Tourist()
             {
-                Id = testId,
+                Id = 1,
                 Name = "Pepe",
                 LastName = "Lopez",
                 Email = "pepelopez@gmail.com",
@@ -189,7 +188,9 @@ namespace DataAccess.Tests
             touristList.ForEach(s => _context.Add(s));
             _context.SaveChanges();
             var repository = new TouristRepository(_context);
+
             var result = repository.GetByEmail("pepelopez@gmail.com");
+
             Assert.IsTrue(testTourist.Equals(result));
         }
     }

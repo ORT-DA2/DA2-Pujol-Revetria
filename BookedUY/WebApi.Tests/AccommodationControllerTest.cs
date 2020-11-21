@@ -15,49 +15,57 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestGetAccommodationsInSpotOK()
         {
-            int testId = 5;
-            Accommodation accommodation = new Accommodation();
-            accommodation.Id = testId;
-            accommodation.Name = "abm";
-            accommodation.SpotId = 1;
-            accommodation.Address = "a";
-            accommodation.ContactNumber = "a";
-            accommodation.Information = "a";
-            accommodation.PricePerNight = 5.0;
-            List<Accommodation> list = new List<Accommodation>();
-            list.Add(accommodation);
-            var mock = new Mock<IAccommodationLogic>(MockBehavior.Strict);
-            mock.Setup(p => p.GetAvailableAccommodationBySpot(It.IsAny<int>())).Returns(list);
-            var controller = new AccommodationController(mock.Object);
+            Accommodation accommodation = new Accommodation
+            {
+                Id = 5,
+                Name = "abm",
+                SpotId = 1,
+                Address = "a",
+                ContactNumber = "a",
+                Information = "a",
+                PricePerNight = 5.0
+            };
+            List<Accommodation> listAccommodations = new List<Accommodation>
+            {
+                accommodation
+            };
+            var mockAccommodation = new Mock<IAccommodationLogic>(MockBehavior.Strict);
+            mockAccommodation.Setup(p => p.GetAvailableAccommodationBySpot(It.IsAny<int>())).Returns(listAccommodations);
+            var controller = new AccommodationController(mockAccommodation.Object);
+
             var result = controller.GetAccommodationsInSpot(1) as OkObjectResult;
-            mock.VerifyAll();
+
+            mockAccommodation.VerifyAll();
             Assert.AreEqual(200, result.StatusCode);
         }
 
         [TestMethod]
         public void TestGetAccommodationsByIdOK()
         {
-            int testId = 5;
-            List<AccommodationImage> list = new List<AccommodationImage>();
-            list.Add(new AccommodationImage() { Image = "h" });
+            List<AccommodationImage> listAccommodations = new List<AccommodationImage>
+            {
+                new AccommodationImage() { Image = "h" }
+            };
             Accommodation accommodation = new Accommodation()
             {
-                Id = testId,
+                Id = 5,
                 Name = "abm",
                 SpotId = 1,
                 Address = "a",
                 ContactNumber = "a",
                 Information = "a",
                 PricePerNight = 5.0,
-                Images = list
+                Images = listAccommodations
             };
 
-            var mock = new Mock<IAccommodationLogic>(MockBehavior.Strict);
-            mock.Setup(p => p.GetById(It.IsAny<int>())).Returns(accommodation);
-            mock.Setup(p => p.GetReviewsByAccommodation(It.IsAny<int>())).Returns((0,new List<Review>()));
-            var controller = new AccommodationController(mock.Object);
+            var mockAccommodation = new Mock<IAccommodationLogic>(MockBehavior.Strict);
+            mockAccommodation.Setup(p => p.GetById(It.IsAny<int>())).Returns(accommodation);
+            mockAccommodation.Setup(p => p.GetReviewsByAccommodation(It.IsAny<int>())).Returns((0,new List<Review>()));
+            var controller = new AccommodationController(mockAccommodation.Object);
+
             var result = controller.Get(5) as OkObjectResult;
-            mock.VerifyAll();
+
+            mockAccommodation.VerifyAll();
             Assert.AreEqual(200, result.StatusCode);
         }
 
@@ -88,63 +96,70 @@ namespace WebApi.Tests
                 SpotId = accommodation.SpotId,
                 Images = image
             };
-            var mock = new Mock<IAccommodationLogic>(MockBehavior.Strict);
-            mock.Setup(p => p.AddAccommodation(It.IsAny<Accommodation>())).Returns(accommodation);
-            var controller = new AccommodationController(mock.Object);
+            var mockAccommodation = new Mock<IAccommodationLogic>(MockBehavior.Strict);
+            mockAccommodation.Setup(p => p.AddAccommodation(It.IsAny<Accommodation>())).Returns(accommodation);
+            var controller = new AccommodationController(mockAccommodation.Object);
+
             var result = controller.CreateAccommodation(accommodationModel) as OkObjectResult;
-            mock.VerifyAll();
+
+            mockAccommodation.VerifyAll();
             Assert.AreEqual(200, result.StatusCode);
         }
 
         [TestMethod]
         public void TestUpdateCapaityOK()
         {
-            int testId = 5;
-            Accommodation accommodation = new Accommodation();
-            accommodation.Id = testId;
-            accommodation.Name = "abm";
-            accommodation.SpotId = 1;
-            accommodation.Address = "a";
-            accommodation.ContactNumber = "a";
-            accommodation.Information = "a";
-            accommodation.PricePerNight = 5.0;
-            accommodation.Full = true;
-            var mock = new Mock<IAccommodationLogic>(MockBehavior.Strict);
-            mock.Setup(p => p.UpdateCapacity(It.IsAny<int>(), It.IsAny<bool>()));
-            var controller = new AccommodationController(mock.Object);
+            Accommodation accommodation = new Accommodation
+            {
+                Id = 5,
+                Name = "abm",
+                SpotId = 1,
+                Address = "a",
+                ContactNumber = "a",
+                Information = "a",
+                PricePerNight = 5.0,
+                Full = true
+            };
+            var mockAccommodation = new Mock<IAccommodationLogic>(MockBehavior.Strict);
+            mockAccommodation.Setup(p => p.UpdateCapacity(It.IsAny<int>(), It.IsAny<bool>()));
+            var controller = new AccommodationController(mockAccommodation.Object);
+
             controller.UpdateCapacity(5, false);
-            mock.VerifyAll();
+
+            mockAccommodation.VerifyAll();
         }
 
         [TestMethod]
         public void TestDelete()
         {
-            int testId = 5;
-            Accommodation accommodation = new Accommodation();
-            accommodation.Id = testId;
-            accommodation.Name = "abm";
-            accommodation.SpotId = 1;
-            accommodation.Address = "a";
-            accommodation.ContactNumber = "a";
-            accommodation.Information = "a";
-            accommodation.PricePerNight = 5.0;
-            accommodation.Full = true;
-            var mock = new Mock<IAccommodationLogic>(MockBehavior.Strict);
-            mock.Setup(p => p.DeleteAccommodation(It.IsAny<Accommodation>())).Returns(accommodation);
-            mock.Setup(p => p.GetById(It.IsAny<int>())).Returns(accommodation);
-            var controller = new AccommodationController(mock.Object);
+            Accommodation accommodation = new Accommodation
+            {
+                Id = 5,
+                Name = "abm",
+                SpotId = 1,
+                Address = "a",
+                ContactNumber = "a",
+                Information = "a",
+                PricePerNight = 5.0,
+                Full = true
+            };
+            var mockAccommodation = new Mock<IAccommodationLogic>(MockBehavior.Strict);
+            mockAccommodation.Setup(p => p.DeleteAccommodation(It.IsAny<Accommodation>())).Returns(accommodation);
+            mockAccommodation.Setup(p => p.GetById(It.IsAny<int>())).Returns(accommodation);
+            var controller = new AccommodationController(mockAccommodation.Object);
+
             var result = controller.Delete(5) as OkObjectResult;
-            mock.VerifyAll();
+
+            mockAccommodation.VerifyAll();
             Assert.AreEqual(200, result.StatusCode);
         }
 
         [TestMethod]
         public void TestGet()
         {
-            int testId = 5;
             Accommodation accommodation = new Accommodation()
             {
-                Id = testId,
+                Id = 5,
                 Name = "abm",
                 SpotId = 1,
                 Address = "a",
@@ -157,11 +172,13 @@ namespace WebApi.Tests
             {
                 accommodation
             };
-            var mock = new Mock<IAccommodationLogic>(MockBehavior.Strict);
-            mock.Setup(p => p.GetAll()).Returns(accommodations);
-            var controller = new AccommodationController(mock.Object);
+            var mockAccommodation = new Mock<IAccommodationLogic>(MockBehavior.Strict);
+            mockAccommodation.Setup(p => p.GetAll()).Returns(accommodations);
+            var controller = new AccommodationController(mockAccommodation.Object);
+
             var result = controller.Get() as OkObjectResult;
-            mock.VerifyAll();
+
+            mockAccommodation.VerifyAll();
             Assert.AreEqual(200, result.StatusCode);
         }
     }

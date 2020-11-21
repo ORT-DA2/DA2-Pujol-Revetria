@@ -33,9 +33,11 @@ namespace BusinessLogic.Tests
                 Comment = "Prueba123",
                 Score = 1
             };
-            List<Review> reviews = new List<Review>();
-            reviews.Add(review1);
-            reviews.Add(review2);
+            List<Review> reviews = new List<Review>
+            {
+                review1,
+                review2
+            };
             accommodations.Add(accommodation);
             var mockAccommodation = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             var mockTouristicSpot = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);

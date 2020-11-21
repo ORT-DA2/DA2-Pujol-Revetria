@@ -180,9 +180,11 @@ namespace BusinessLogic.Tests
         [TestMethod]
         public void GetSpotsByCategoryAndRegionTest()
         {
-            TouristicSpot touristicSpot = new TouristicSpot();
-            touristicSpot.Id = 5;
-            touristicSpot.Name = "abom";
+            TouristicSpot touristicSpot = new TouristicSpot
+            {
+                Id = 5,
+                Name = "abom"
+            };
             List<TouristicSpot> touristicSpots = new List<TouristicSpot>();
             List<int> categories = new List<int>();
             categories.Add(1);

@@ -48,6 +48,7 @@ namespace BusinessLogic
 
         public IEnumerable<TouristicSpot> GetSpotsByRegionAndCategory(List<int> category, int region)
         {
+            var touristicsSpots = new List<TouristicSpot>();
             if ((category == null || category.Count == 0) && region == -1)
             {
                 return this.touristicSpotRepository.GetAll();

@@ -87,15 +87,15 @@ namespace DataAccess.Tests
             reviewsToReturn.ForEach(r => _context.Add(r));
             _context.SaveChanges();
             var repository = new ReviewRepository(_context);
+
             var result = repository.GetAll();
-            Console.WriteLine(result.Count());
+
             Assert.IsTrue(reviewsToReturn.SequenceEqual(result));
         }
 
         [TestMethod]
         public void TestAddReview()
         {
-            int id = 1;
             Booking booking = new Booking()
             {
                 Id = 1,
@@ -118,23 +118,24 @@ namespace DataAccess.Tests
             this._context.Bookings.Add(booking);
             Review review = new Review()
             {
-                Id = id,
+                Id = 1,
                 BookingId = 1,
                 Comment = "Bueni",
                 Score = 5
             };
             var repository = new ReviewRepository(_context);
+
             repository.Add(review);
-            Assert.AreEqual(_context.Find<Review>(id), review);
+
+            Assert.AreEqual(_context.Find<Review>(1), review);
         }
 
         [TestMethod]
         public void TestGetByIdReview()
         {
-            int testId = 1;
             Review testReview = new Review()
             {
-                Id = testId,
+                Id = 1,
                 Comment = "Bueni",
                 Score = 5
             };
@@ -152,7 +153,7 @@ namespace DataAccess.Tests
             _context.SaveChanges();
             var repository = new ReviewRepository(_context);
 
-            var result = repository.GetById(testId);
+            var result = repository.GetById(1);
 
             Assert.AreEqual(testReview, result);
         }
@@ -203,13 +204,11 @@ namespace DataAccess.Tests
                 Score = 4,
                 BookingId = 2
             };
-
             List<Review> reviews = new List<Review>()
             {
                 review1,
                 review2
             };
-
             _context.Add(
                 new Accommodation()
                 {
@@ -279,7 +278,9 @@ namespace DataAccess.Tests
             reviews.ForEach(r => _context.Add(r));
             _context.SaveChanges();
             var repository = new ReviewRepository(_context);
+
             var result = repository.GetByAccommodation(1);
+
             Assert.IsTrue(reviews.SequenceEqual(result));
         }
     }

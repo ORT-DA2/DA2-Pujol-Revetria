@@ -12,7 +12,6 @@ namespace BusinessLogic.Tests
         [TestMethod]
         public void AddBookingStageTest()
         {
-
             Booking booking = new Booking
             {
                 Id = 7

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Domain
 {
@@ -118,7 +119,7 @@ namespace Domain
             }
             return result;
         }
-
+        [ExcludeFromCodeCoverage]
         public override int GetHashCode()
         {
             int hashCode = 671208328;

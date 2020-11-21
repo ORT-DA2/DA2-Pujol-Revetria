@@ -20,7 +20,6 @@ namespace WebApi.Tests
                 Name = "Test name",
                 Id = 1
             };
-
             List<Category> expected = new List<Category>()
             {
                 category
@@ -28,7 +27,9 @@ namespace WebApi.Tests
             var mock = new Mock<ICategoryLogic>(MockBehavior.Strict);
             mock.Setup(p => p.GetAll()).Returns(expected);
             var controller = new CategoryController(mock.Object);
+
             var result = controller.Get() as OkObjectResult;
+
             mock.VerifyAll();
             Assert.AreEqual(200, result.StatusCode);
         }

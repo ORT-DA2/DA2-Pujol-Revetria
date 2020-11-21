@@ -46,7 +46,6 @@ namespace DataAccess.Tests
                     Spots = null
                 },
             };
-
             regionsToReturn.ForEach(r => _context.Add(r));
             _context.SaveChanges();
             var repository = new RegionRepository(_context);
@@ -66,9 +65,10 @@ namespace DataAccess.Tests
                 Spots = null
             };
             var repository = new RegionRepository(_context);
+
             repository.Add(region);
 
-            Assert.AreEqual(_context.Find<Region>(region.Id), region);
+            Assert.AreEqual(repository.GetById(region.Id), region);
         }
 
         [TestMethod]
@@ -87,7 +87,7 @@ namespace DataAccess.Tests
 
             repository.Delete(region);
 
-            Assert.IsNull(_context.Find<Region>(region.Id));
+            Assert.IsNull(repository.GetById(region.Id));
         }
 
         [TestMethod]
@@ -99,12 +99,13 @@ namespace DataAccess.Tests
                 Name = "Region Pajaros Pintados",
                 Spots = null
             };
-
             _context.Add(region);
             _context.SaveChanges();
             var repository = new RegionRepository(_context);
 
-            Assert.AreEqual(_context.Find<Region>(region.Id), region);
+            var result = repository.GetById(region.Id);
+
+            Assert.AreEqual(result, region);
         }
 
         [TestMethod]
@@ -121,7 +122,9 @@ namespace DataAccess.Tests
             _context.SaveChanges();
             var repository = new RegionRepository(_context);
 
-            Assert.IsNull(_context.Find<Region>(2));
+            var result = repository.GetById(2);
+
+            Assert.IsNull(result);
         }
     }
 }
