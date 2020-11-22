@@ -61,13 +61,12 @@ namespace DataAccess.Tests
                     Status = new Status(),
                 },
             };
-
             bookingStagesToReturn.ForEach(r => _context.Add(r));
             _context.SaveChanges();
             var repository = new BookingStageRepository(_context);
 
             var result = repository.GetAll();
-            Console.WriteLine(result.Count());
+
             Assert.IsTrue(bookingStagesToReturn.SequenceEqual(result));
         }
 
@@ -87,10 +86,9 @@ namespace DataAccess.Tests
         [TestMethod]
         public void TestAddBookingStage()
         {
-            int id = 3;
             BookingStage bookingStage = new BookingStage()
             {
-                Id = id,
+                Id = 3,
                 Description = "Tayment",
                 Administrator = null,
                 AdministratorId = 0,
@@ -99,10 +97,11 @@ namespace DataAccess.Tests
                 EntryDate = DateTime.Now,
                 Status = new Status(),
             };
-
             var repository = new BookingStageRepository(_context);
+
             repository.Add(bookingStage);
-            Assert.AreEqual(_context.Find<BookingStage>(id), bookingStage);
+
+            Assert.AreEqual(_context.Find<BookingStage>(3), bookingStage);
         }
 
         [TestMethod]
@@ -136,7 +135,6 @@ namespace DataAccess.Tests
                 EntryDate = DateTime.Now,
                 Status = new Status(),
             };
-
             List<BookingStage> bookingStages = new List<BookingStage>()
             {
                 bookingStage1,
@@ -155,14 +153,17 @@ namespace DataAccess.Tests
                     Status = new Status(),
                 },
             };
-
+            List<BookingStage> listToReturn = new List<BookingStage>
+            {
+                bookingStage1,
+                bookingStage3
+            };
             bookingStages.ForEach(r => _context.Add(r));
             _context.SaveChanges();
             var repository = new BookingStageRepository(_context);
+
             var result = repository.GetByBooking(1);
-            List<BookingStage> listToReturn = new List<BookingStage>();
-            listToReturn.Add(bookingStage1);
-            listToReturn.Add(bookingStage3);
+
             Assert.IsTrue(listToReturn.SequenceEqual(result));
         }
 
@@ -197,7 +198,6 @@ namespace DataAccess.Tests
                 EntryDate = DateTime.Now,
                 Status = new Status(),
             };
-
             List<BookingStage> bookingStages = new List<BookingStage>()
             {
                 bookingStage1,
@@ -216,24 +216,26 @@ namespace DataAccess.Tests
                     Status = new Status(),
                 },
             };
-
+            List<BookingStage> listToReturn = new List<BookingStage>
+            {
+                bookingStage1,
+                bookingStage3
+            };
             bookingStages.ForEach(r => _context.Add(r));
             _context.SaveChanges();
             var repository = new BookingStageRepository(_context);
+
             var result = repository.GetByBooking(3);
-            List<BookingStage> listToReturn = new List<BookingStage>();
-            listToReturn.Add(bookingStage1);
-            listToReturn.Add(bookingStage3);
+            
             Assert.IsTrue(result.Count() == 0);
         }
 
         [TestMethod]
         public void DeleteBookingStageTest()
         {
-            int id = 1;
             BookingStage bookingStage = new BookingStage()
             {
-                Id = id,
+                Id = 1,
                 Description = "The booking was rejected due to payment issues, please contact your bank",
                 Administrator = new Administrator()
                 {
@@ -251,16 +253,15 @@ namespace DataAccess.Tests
 
             repository.Delete(bookingStage);
 
-            Assert.IsNull(_context.Find<BookingStage>(id));
+            Assert.IsNull(_context.Find<BookingStage>(1));
         }
 
         [TestMethod]
         public void TestGetByIdBookingStage()
         {
-            int testId = 1;
             BookingStage testBookingStage = new BookingStage()
             {
-                Id = testId,
+                Id = 1,
                 Description = "The booking was rejected due to payment issues, please contact your bank",
                 Administrator = new Administrator()
                 {
@@ -276,7 +277,7 @@ namespace DataAccess.Tests
             _context.SaveChanges();
             var repository = new BookingStageRepository(_context);
 
-            var result = repository.GetById(testId);
+            var result = repository.GetById(1);
 
             Assert.AreEqual(testBookingStage, result);
         }

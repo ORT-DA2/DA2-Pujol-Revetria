@@ -15,38 +15,50 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestGetBookingStatus()
         {
-            BookingStage bookingStage = new BookingStage();
-            bookingStage.Description = "a";
-            bookingStage.Status = Status.Accepted;
+            BookingStage bookingStage = new BookingStage
+            {
+                Description = "a",
+                Status = Status.Accepted
+            };
             BookingStageModelOut bookingStageModel = new BookingStageModelOut(bookingStage);
-            List<BookingStageModelOut> list = new List<BookingStageModelOut>();
-            list.Add(bookingStageModel);
-            var mock = new Mock<IBookingStageLogic>(MockBehavior.Strict);
-            mock.Setup(p => p.GetCurrentStatusByBooking(It.IsAny<int>())).Returns(bookingStage);
-            var controller = new BookingStageController(mock.Object);
+            List<BookingStageModelOut> listBookingStageModelOut = new List<BookingStageModelOut>
+            {
+                bookingStageModel
+            };
+            var mockBookingStage = new Mock<IBookingStageLogic>(MockBehavior.Strict);
+            mockBookingStage.Setup(p => p.GetCurrentStatusByBooking(It.IsAny<int>())).Returns(bookingStage);
+            var controller = new BookingStageController(mockBookingStage.Object);
+
             var result = controller.GetBookingStatus(1) as OkObjectResult;
-            mock.VerifyAll();
+
+            mockBookingStage.VerifyAll();
             Assert.AreEqual(200, result.StatusCode);
         }
 
         [TestMethod]
         public void CreateStage()
         {
-            BookingStage bookingStage = new BookingStage();
-            bookingStage.Description = "a";
-            bookingStage.Status = Status.Accepted;
-            bookingStage.AsociatedBookingId = 1;
-            bookingStage.AdministratorId = 1;
-            BookingStageModelIn bookingStageModel = new BookingStageModelIn();
-            bookingStageModel.Description = bookingStage.Description;
-            bookingStageModel.Status = bookingStage.Status.ToString();
-            bookingStageModel.BookingId = bookingStage.AsociatedBookingId;
-            bookingStageModel.AdminId = bookingStage.AdministratorId;
-            var mock = new Mock<IBookingStageLogic>(MockBehavior.Strict);
-            mock.Setup(p => p.AddBookingStage(It.IsAny<BookingStage>())).Returns(bookingStage);
-            var controller = new BookingStageController(mock.Object);
+            BookingStage bookingStage = new BookingStage
+            {
+                Description = "a",
+                Status = Status.Accepted,
+                AsociatedBookingId = 1,
+                AdministratorId = 1
+            };
+            BookingStageModelIn bookingStageModel = new BookingStageModelIn
+            {
+                Description = bookingStage.Description,
+                Status = bookingStage.Status.ToString(),
+                BookingId = bookingStage.AsociatedBookingId,
+                AdminId = bookingStage.AdministratorId
+            };
+            var mockBookingStage = new Mock<IBookingStageLogic>(MockBehavior.Strict);
+            mockBookingStage.Setup(p => p.AddBookingStage(It.IsAny<BookingStage>())).Returns(bookingStage);
+            var controller = new BookingStageController(mockBookingStage.Object);
+
             var result = controller.NewStage(bookingStageModel) as OkObjectResult;
-            mock.VerifyAll();
+
+            mockBookingStage.VerifyAll();
             Assert.AreEqual(200, result.StatusCode);
         }
     }

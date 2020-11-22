@@ -36,7 +36,7 @@ namespace DataAccess.Tests
             {
                 new Booking()
                 {
-                    Id=1,
+                    Id = 1,
                     Accommodation = new Accommodation(){
                         Name="b"
                     },
@@ -74,24 +74,23 @@ namespace DataAccess.Tests
             var repository = new BookingRepository(_context);
 
             var result = repository.GetAll();
-            Console.WriteLine(result.Count());
+
             Assert.IsTrue(bookingsToReturn.SequenceEqual(result));
         }
 
         [TestMethod]
         public void TestAddBooking()
         {
-            int id = 1;
             List<AccommodationImage> list = new List<AccommodationImage>();
             AccommodationImage image = new AccommodationImage()
             {
-                AccommodationId = id,
+                AccommodationId = 1,
                 Image = "a"
             };
             list.Add(image);
             Accommodation accommodation = new Accommodation()
             {
-                Id = id,
+                Id = 1,
                 Name = "a",
                 Address = "d",
                 ContactNumber = "a",
@@ -100,7 +99,7 @@ namespace DataAccess.Tests
             this._context.Accommodations.Add(accommodation);
             Booking booking = new Booking()
             {
-                Id = id,
+                Id = 1,
                 Accommodation = null,
                 AccommodationId = 1,
                 BookingHistory = null,
@@ -111,22 +110,23 @@ namespace DataAccess.Tests
                 HeadGuest = null,
                 TotalPrice = 142
             };
-            Tourist tourist = new Tourist() { 
-                Email="a@a.com",
-                LastName="a",
-                Name="a"
+            Tourist tourist = new Tourist()
+            {
+                Email = "a@a.com",
+                LastName = "a",
+                Name = "a"
             };
             booking.HeadGuest = tourist;
-            Console.WriteLine(booking.Id);
             var repository = new BookingRepository(_context);
+
             repository.Add(booking);
-            Assert.AreEqual(_context.Find<Booking>(id), booking);
+
+            Assert.AreEqual(_context.Find<Booking>(1), booking);
         }
 
         [TestMethod]
         public void TestGetByIdBooking()
         {
-            int testId = 1;
             Booking testBooking = new Booking()
             {
                 Id = 1,
@@ -173,7 +173,7 @@ namespace DataAccess.Tests
             _context.SaveChanges();
             var repository = new BookingRepository(_context);
 
-            var result = repository.GetById(testId);
+            var result = repository.GetById(1);
 
             Assert.AreEqual(testBooking, result);
         }
@@ -223,10 +223,9 @@ namespace DataAccess.Tests
         [TestMethod]
         public void TestGetReport()
         {
-            int testId = 1;
             Booking testBooking = new Booking()
             {
-                Id = testId,
+                Id = 1,
                 Accommodation = new Accommodation()
                 {
                     Name = "a",
@@ -234,8 +233,8 @@ namespace DataAccess.Tests
                 },
                 AccommodationId = 1,
                 BookingHistory = new List<BookingStage>(),
-                CheckIn = new DateTime(2020,12,14),
-                CheckOut = new DateTime(2020,12,15),
+                CheckIn = new DateTime(2020, 12, 14),
+                CheckOut = new DateTime(2020, 12, 15),
                 GuestId = 2,
                 Guests = new List<Guest>(),
                 HeadGuest = new Tourist()
@@ -244,7 +243,7 @@ namespace DataAccess.Tests
                 },
                 TotalPrice = 35
             };
-            BookingStage bookingStage1 = new BookingStage()
+            BookingStage bookingStageForBooking1 = new BookingStage()
             {
                 AdministratorId = 1,
                 AsociatedBookingId = 1,
@@ -252,7 +251,7 @@ namespace DataAccess.Tests
                 EntryDate = new DateTime(2020, 12, 22),
                 Status = Status.Received,
             };
-            testBooking.BookingHistory.Add(bookingStage1);
+            testBooking.BookingHistory.Add(bookingStageForBooking1);
             Booking booking = new Booking()
             {
                 Id = 2,
@@ -273,7 +272,7 @@ namespace DataAccess.Tests
                 },
                 TotalPrice = 142
             };
-            BookingStage bookingStage2 = new BookingStage()
+            BookingStage bookingStageForBooking2 = new BookingStage()
             {
                 AdministratorId = 1,
                 AsociatedBookingId = 2,
@@ -281,29 +280,33 @@ namespace DataAccess.Tests
                 EntryDate = new DateTime(2020, 12, 22),
                 Status = Status.Received,
             };
-            booking.BookingHistory.Add(bookingStage2);
-            List<Booking> bookingsList = new List<Booking>();
-            bookingsList.Add(testBooking);
-            bookingsList.Add(booking);
+            booking.BookingHistory.Add(bookingStageForBooking2);
+            List<Booking> bookingsList = new List<Booking>
+            {
+                testBooking,
+                booking
+            };
+            List<ReportTuple> expected = new List<ReportTuple>()
+            {
+                new ReportTuple()
+                {
+                    Id = 1,
+                    Count = 1
+                },
+                new ReportTuple()
+                {
+                    Id = 2,
+                    Count = 1
+                }
+            };
             bookingsList.ForEach(r => _context.Add(r));
             _context.SaveChanges();
             var repository = new BookingRepository(_context);
             DateTime start = new DateTime(2020, 12, 12);
             DateTime end = new DateTime(2020, 12, 24);
-            var result = repository.GetReport(1,start,end);
-            List<ReportTuple> expected = new List<ReportTuple>();
-            ReportTuple reportTuple = new ReportTuple()
-            {
-                Id = 1,
-                Count = 1
-            };
-            ReportTuple reportTuple2 = new ReportTuple()
-            {
-                Id = 2,
-                Count = 1
-            };
-            expected.Add(reportTuple);
-            expected.Add(reportTuple2);
+
+            var result = repository.GetReport(1, start, end);
+
             Assert.IsTrue(expected.SequenceEqual(result));
         }
     }

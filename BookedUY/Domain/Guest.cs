@@ -1,4 +1,7 @@
-﻿namespace Domain
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+
+namespace Domain
 {
     public class Guest
     {
@@ -37,6 +40,18 @@
                 result = this.Id == guest.Id;
             }
             return result;
+        }
+        [ExcludeFromCodeCoverage]
+        public override int GetHashCode()
+        {
+            int hashCode = -1488041194;
+            hashCode = hashCode * -1521134295 + Id.GetHashCode();
+            hashCode = hashCode * -1521134295 + _amount.GetHashCode();
+            hashCode = hashCode * -1521134295 + Amount.GetHashCode();
+            hashCode = hashCode * -1521134295 + Multiplier.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<Booking>.Default.GetHashCode(Booking);
+            hashCode = hashCode * -1521134295 + BookingId.GetHashCode();
+            return hashCode;
         }
     }
 }

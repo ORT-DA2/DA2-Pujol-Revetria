@@ -23,94 +23,91 @@ namespace DomainTests
         [TestMethod]
         public void TestDescriptionSet()
         {
-            string test = "test test@ test123";
-            bookingStage.Description = test;
-            Assert.AreEqual(bookingStage.Description, test);
+            bookingStage.Description = "test test@ test123";
+
+            Assert.AreEqual(bookingStage.Description, "test test@ test123");
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestDescriptionSetNull()
         {
-            string test = null;
-            bookingStage.Description = test;
-            Assert.Fail();
+            bookingStage.Description = null;
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestDescriptionSetSpaces()
         {
-            string test = "    ";
-            bookingStage.Description = test;
-            Assert.Fail();
+            bookingStage.Description = "    ";
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestDescriptionSetEmpty()
         {
-            string test = "";
-            bookingStage.Description = test;
-            Assert.Fail();
+            bookingStage.Description = "";
         }
 
         [TestMethod]
         public void TestEqualsExpectedTrue()
         {
-            int testId = 1;
-            this.bookingStage.Id = testId;
-            BookingStage test = new BookingStage();
-            test.Id = testId;
+            this.bookingStage.Id = 1;
+            BookingStage test = new BookingStage
+            {
+                Id = 1
+            };
+
             Assert.IsTrue(bookingStage.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalse()
         {
-            int testId1 = 1;
-            int testId2 = 2;
-            this.bookingStage.Id = testId1;
-            BookingStage test = new BookingStage();
-            test.Id = testId2;
+            this.bookingStage.Id = 1;
+            BookingStage test = new BookingStage
+            {
+                Id = 2
+            };
+
             Assert.IsFalse(bookingStage.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalse2()
         {
-            int testId1 = 1;
-            int testId2 = 2;
-            this.bookingStage.Id = testId1;
-            BookingStage test = new BookingStage();
-            test.Id = testId2;
+            this.bookingStage.Id = 1;
+            BookingStage test = new BookingStage
+            {
+                Id = 2
+            };
+
             Assert.IsFalse(bookingStage.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalseNull()
         {
-            int testId1 = 1;
-            this.bookingStage.Id = testId1;
+            this.bookingStage.Id = 1;
             BookingStage test = null;
+
             Assert.IsFalse(bookingStage.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalseNotType()
         {
-            int testId1 = 1;
-            this.bookingStage.Id = testId1;
-            string test = "testing";
-            Assert.IsFalse(bookingStage.Equals(test));
+            this.bookingStage.Id = 1;
+
+            Assert.IsFalse(bookingStage.Equals("testing"));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalseNotType2()
         {
-            int testId1 = 1;
-            this.bookingStage.Id = testId1;
+            this.bookingStage.Id = 1;
             Booking test = new Booking();
+
             Assert.IsFalse(bookingStage.Equals(test));
         }
     }

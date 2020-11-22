@@ -26,19 +26,35 @@ namespace BusinessLogic
 
         public Administrator GetByEmailAndPassword(string email, string password)
         {
+            CheckEmail(email);
+            var administrator = this.administratorRepository.GetByEmail(email);
+            CheckAdministratorNull(administrator);
+            CheckAdministrator(administrator, password);
+            return administrator;            
+        }
+
+        private void CheckEmail(string email)
+        {
             if (email == null)
             {
                 throw new NullInputException("Administrator Email");
             }
-            var admin = this.administratorRepository.GetByEmail(email);
-            if (admin == null) {
+            
+        }
+
+        private void CheckAdministratorNull(Administrator administrator)
+        {
+            if (administrator == null)
+            {
                 throw new NotFoundException("Administrator");
             }
-            if (admin.Password == password)
+        }
+        private void CheckAdministrator(Administrator administrator, string password)
+        {
+            if (administrator.Password != password)
             {
-                return admin;
+                throw new NotFoundException("Administrator");
             }
-            throw new NotFoundException("Administrator");
         }
 
         public IEnumerable<Administrator> GetAll()
@@ -48,20 +64,15 @@ namespace BusinessLogic
 
         public Administrator Delete(Administrator administrator)
         {
-            if (this.administratorRepository.GetByEmail(administrator.Email) == null)
-            {
-                throw new NotFoundException("Administrator");
-            }
+            var administratorCheck = this.administratorRepository.GetByEmail(administrator.Email);
+            CheckAdministratorNull(administratorCheck);
             return this.administratorRepository.Delete(administrator);
         }
 
         public Administrator GetById(int id)
         {
             var administrator = this.administratorRepository.GetById(id);
-            if (administrator == null)
-            {
-                throw new NotFoundException("Administrator");
-            }
+            CheckAdministratorNull(administrator);
             return administrator;
         }
     }

@@ -23,195 +23,171 @@ namespace DomainTests
         [TestMethod]
         public void TestNameSet()
         {
-            string output = "text";
-            tourist.Name = output;
-            Assert.AreEqual(tourist.Name, output);
+            tourist.Name = "text";
+
+            Assert.AreEqual(tourist.Name, "text");
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestNameSet2()
         {
-            string output = " ";
-            tourist.Name = output;
-            Assert.Fail();
+            tourist.Name = " ";
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestNameSet3()
         {
-            string output = "";
-            tourist.Name = output;
-            Assert.Fail();
+            tourist.Name = "";
         }
 
         public void TestLastNameSet()
         {
-            string output = "text";
-            tourist.LastName = output;
-            Assert.AreEqual(tourist.LastName, output);
+            tourist.LastName = "text";
+
+            Assert.AreEqual(tourist.LastName, "text");
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestLastNameSet2()
         {
-            string output = " ";
-            tourist.LastName = output;
-            Assert.Fail();
+            tourist.LastName = " ";
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestLastNameSet3()
         {
-            string output = "";
-            tourist.LastName = output;
-            Assert.Fail();
+            tourist.LastName = "";
         }
 
         [TestMethod]
         public void TestEmailSet()
         {
-            string test = "facundo@gmail.com";
-            tourist.Email = test;
-            Assert.AreEqual(tourist.Email, test);
+            tourist.Email = "facundo@gmail.com";
+
+            Assert.AreEqual(tourist.Email, "facundo@gmail.com");
         }
 
         [TestMethod]
         public void TestEmailSet2()
         {
-            string test = "test.test@com";
-            tourist.Email = test;
-            Assert.AreEqual(tourist.Email, test);
+            tourist.Email = "test.test@com";
+
+            Assert.AreEqual(tourist.Email, "test.test@com");
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestEmailSetNull()
         {
-            string test = null;
-            tourist.Email = test;
-            Assert.Fail();
+            tourist.Email = null;
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestEmailSetEmpty()
         {
-            string test = "";
-            tourist.Email = test;
-            Assert.Fail();
+            tourist.Email = "";
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestEmailSetSpaces()
         {
-            string test = "   ";
-            tourist.Email = test;
-            Assert.Fail();
+            tourist.Email = "   ";
         }
 
         [TestMethod]
         [ExpectedException(typeof(EmailException))]
         public void TestEmailSetFail()
         {
-            string test = "test";
-            tourist.Email = test;
-            Assert.Fail();
+            tourist.Email = "test";
         }
 
         [TestMethod]
         [ExpectedException(typeof(EmailException))]
         public void TestEmailSetFail2()
         {
-            string test = "test@@@abc";
-            tourist.Email = test;
-            Assert.Fail();
+            tourist.Email = "test@@@abc";
         }
 
         [TestMethod]
         [ExpectedException(typeof(EmailException))]
         public void TestEmailSetFail3()
         {
-            string test = "test.test@.com";
-            tourist.Email = test;
-            Assert.Fail();
+            tourist.Email = "test.test@.com";
         }
 
         public void TestEqualsExpectedTrue()
         {
-            int testId = 1;
-            string testEmail = "facundo@gmail.com";
-            tourist.Id = testId;
-            tourist.Email = testEmail;
-            Tourist test = new Tourist();
-            test.Id = testId;
-            test.Email = testEmail;
+            tourist.Id = 1;
+            tourist.Email = "facundo@gmail.com";
+            Tourist test = new Tourist
+            {
+                Id = 1,
+                Email = "facundo@gmail.com"
+            };
+
             Assert.IsTrue(tourist.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalse()
         {
-            int testId1 = 1;
-            int testId2 = 2;
-            string testEmail = "facundo@gmail.com";
-            tourist.Id = testId1;
-            tourist.Email = testEmail;
-            Tourist test = new Tourist();
-            test.Id = testId2;
-            test.Email = testEmail;
+            tourist.Id = 1;
+            tourist.Email = "facundo@gmail.com";
+            Tourist test = new Tourist
+            {
+                Id = 2,
+                Email = "facundo@gmail.com"
+            };
+
             Assert.IsFalse(tourist.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalse2()
         {
-            int testId1 = 1;
-            int testId2 = 2;
-            string testEmail1 = "facundo@gmail.com";
-            string testEmail2 = "javier@gmail.com";
-            tourist.Id = testId1;
-            tourist.Email = testEmail1;
-            Tourist test = new Tourist();
-            test.Id = testId2;
-            test.Email = testEmail2;
+            tourist.Id = 1;
+            tourist.Email = "facundo@gmail.com";
+            Tourist test = new Tourist
+            {
+                Id = 2,
+                Email = "javier@gmail.com"
+            };
+
             Assert.IsFalse(tourist.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalseNull()
         {
-            int testId1 = 1;
-            string testEmail1 = "facundo@gmail.com";
-            tourist.Id = testId1;
-            tourist.Email = testEmail1;
+            tourist.Id = 1;
+            tourist.Email = "facundo@gmail.com";
             Tourist test = null;
+
             Assert.IsFalse(tourist.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalseNotType()
         {
-            int testId1 = 1;
-            string testEmail1 = "facundo@gmail.com";
-            tourist.Id = testId1;
-            tourist.Email = testEmail1;
-            string test = "testing";
-            Assert.IsFalse(tourist.Equals(test));
+            tourist.Id = 1;
+            tourist.Email = "facundo@gmail.com";
+
+            Assert.IsFalse(tourist.Equals("testing"));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalseNotType2()
         {
-            int testId1 = 1;
-            string testEmail1 = "facundo@gmail.com";
-            tourist.Id = testId1;
-            tourist.Email = testEmail1;
+            tourist.Id = 1;
+            tourist.Email = "facundo@gmail.com";
             Booking test = new Booking();
+
             Assert.IsFalse(tourist.Equals(test));
         }
     }

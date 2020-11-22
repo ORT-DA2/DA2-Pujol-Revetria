@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Domain
 {
@@ -17,6 +18,14 @@ namespace Domain
                 result = this.Id == reportTuple.Id;
             }
             return result;
+        }
+        [ExcludeFromCodeCoverage]
+        public override int GetHashCode()
+        {
+            int hashCode = 1603950996;
+            hashCode = hashCode * -1521134295 + Id.GetHashCode();
+            hashCode = hashCode * -1521134295 + Count.GetHashCode();
+            return hashCode;
         }
     }
 }

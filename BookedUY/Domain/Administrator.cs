@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Domain
 {
@@ -7,7 +8,28 @@ namespace Domain
     {
         public int Id { get; set; }
         private string _email;
-
+        
+        private void CheckEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                throw new NullInputException("Admin Email");
+            }
+            bool isEmail;
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                isEmail = addr.Address == email;
+            }
+            catch (Exception)
+            {
+                isEmail = false;
+            }
+            if (!isEmail)
+            {
+                throw new EmailException("Admin Email");
+            }
+        }
         public string Email
         {
             get
@@ -16,28 +38,8 @@ namespace Domain
             }
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new NullInputException("Admin Email");
-                }
-                bool isEmail;
-                try
-                {
-                    var addr = new System.Net.Mail.MailAddress(value);
-                    isEmail = addr.Address == value;
-                }
-                catch (Exception)
-                {
-                    isEmail = false;
-                }
-                if (!isEmail)
-                {
-                    throw new EmailException("Admin Email");
-                }
-                else
-                {
-                    _email = value.Trim();
-                }
+                CheckEmail(value);
+                _email = value.Trim();
             }
         }
 
@@ -72,6 +74,18 @@ namespace Domain
                 result = this.Id == administrator.Id && this.Email == administrator.Email;
             }
             return result;
+        }
+        [ExcludeFromCodeCoverage]
+        public override int GetHashCode()
+        {
+            int hashCode = -569678601;
+            hashCode = hashCode * -1521134295 + Id.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_email);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Email);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_password);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Password);
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<BookingStage>>.Default.GetHashCode(Entries);
+            return hashCode;
         }
     }
 }

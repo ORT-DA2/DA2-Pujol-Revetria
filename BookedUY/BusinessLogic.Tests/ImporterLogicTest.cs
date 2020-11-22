@@ -22,14 +22,15 @@ namespace BusinessLogic.Tests
             {
                 "Test"
             };
-
             var mockAccommodation = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             var mockTouristicSpot = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
             var mockRegion = new Mock<IRepository<Region>>(MockBehavior.Strict);
             var mockCategory = new Mock<IRepository<Category>>(MockBehavior.Strict);
             var logic = new ImporterLogic(mockAccommodation.Object, mockTouristicSpot.Object, mockRegion.Object, mockCategory.Object);
 
-            Assert.IsTrue(expected.SequenceEqual(logic.GetNames()));
+            var result = logic.GetNames();
+
+            Assert.IsTrue(expected.SequenceEqual(result));
         }
 
         [TestMethod]
@@ -43,13 +44,14 @@ namespace BusinessLogic.Tests
                     Type = "string"
                 }
             };
-
             var mockAccommodation = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             var mockTouristicSpot = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
             var mockRegion = new Mock<IRepository<Region>>(MockBehavior.Strict);
             var mockCategory = new Mock<IRepository<Category>>(MockBehavior.Strict);
             var logic = new ImporterLogic(mockAccommodation.Object, mockTouristicSpot.Object, mockRegion.Object, mockCategory.Object);
+
             var result = logic.GetParameters("Test");
+
             Assert.IsTrue(expected.SequenceEqual(result));
         }
 
@@ -68,19 +70,16 @@ namespace BusinessLogic.Tests
                     }
                 }
             };
-
             Region region = new Region()
             {
                 Id = 1,
                 Name = "Region name"
             };
-
             Category category = new Category()
             {
                 Id = 1,
                 Name = "Category name"
             };
-
             TouristicSpot touristicSpot = new TouristicSpot()
             {
                 Name = "TouristicSpot name",
@@ -94,7 +93,6 @@ namespace BusinessLogic.Tests
                     }
                 }
             };
-
             Accommodation accommodation = new Accommodation()
             {
                 Name = "Accommodation name",
@@ -111,10 +109,7 @@ namespace BusinessLogic.Tests
                 Information = "Accommodation information",
                 PricePerNight = 1
             };
-
             AccommodationModelOut accommodationModelOut = new AccommodationModelOut(accommodation, (0, new List<Review>()));
-
-
             var mockAccommodation = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mockAccommodation.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
             mockAccommodation.Setup(p => p.Add(It.IsAny<Accommodation>())).Returns(accommodation);
@@ -126,13 +121,13 @@ namespace BusinessLogic.Tests
             var mockCategory = new Mock<IRepository<Category>>(MockBehavior.Strict);
             mockCategory.Setup(p => p.GetById(It.IsAny<int>())).Returns(category);
             var logic = new ImporterLogic(mockAccommodation.Object, mockTouristicSpot.Object, mockRegion.Object, mockCategory.Object);
+
             var result = logic.Import(importerModel);
 
             mockAccommodation.VerifyAll();
             mockCategory.VerifyAll();
             mockTouristicSpot.VerifyAll();
             mockRegion.VerifyAll();
-
             Assert.AreEqual(accommodationModelOut, result);
         }
 
@@ -151,7 +146,6 @@ namespace BusinessLogic.Tests
                     }
                 }
             };
-
             Region region = new Region()
             {
                 Id = 1,
@@ -163,7 +157,6 @@ namespace BusinessLogic.Tests
                 Id = 1,
                 Name = "Category name"
             };
-
             TouristicSpot touristicSpot = new TouristicSpot()
             {
                 Name = "TouristicSpot name",
@@ -177,7 +170,6 @@ namespace BusinessLogic.Tests
                     }
                 }
             };
-
             Accommodation accommodation = new Accommodation()
             {
                 Name = "Accommodation name",
@@ -194,9 +186,7 @@ namespace BusinessLogic.Tests
                 Information = "Accommodation information",
                 PricePerNight = 1
             };
-
             AccommodationModelOut accommodationModelOut = new AccommodationModelOut(accommodation, (0, new List<Review>()));
-
             var mockAccommodation = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mockAccommodation.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
             mockAccommodation.Setup(p => p.Add(It.IsAny<Accommodation>())).Returns(accommodation);
@@ -207,13 +197,13 @@ namespace BusinessLogic.Tests
             var mockCategory = new Mock<IRepository<Category>>(MockBehavior.Strict);
             mockCategory.Setup(p => p.GetById(It.IsAny<int>())).Returns(category);
             var logic = new ImporterLogic(mockAccommodation.Object, mockTouristicSpot.Object, mockRegion.Object, mockCategory.Object);
+
             var result = logic.Import(importerModel);
 
             mockAccommodation.VerifyAll();
             mockCategory.VerifyAll();
             mockTouristicSpot.VerifyAll();
             mockRegion.VerifyAll();
-
             Assert.AreEqual(accommodationModelOut, result);
         }
 
@@ -233,16 +223,14 @@ namespace BusinessLogic.Tests
                     }
                 }
             };
-
             var mockAccommodation = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             var mockTouristicSpot = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
             var mockRegion = new Mock<IRepository<Region>>(MockBehavior.Strict);
             mockRegion.Setup(p => p.GetById(It.IsAny<int>())).Returns<Region>(null);
             var mockCategory = new Mock<IRepository<Category>>(MockBehavior.Strict);
             var logic = new ImporterLogic(mockAccommodation.Object, mockTouristicSpot.Object, mockRegion.Object, mockCategory.Object);
-            var result = logic.Import(importerModel);
 
-            mockRegion.VerifyAll();
+            var result = logic.Import(importerModel);
         }
 
         [ExpectedException(typeof(NotFoundException))]
@@ -261,13 +249,11 @@ namespace BusinessLogic.Tests
                     }
                 }
             };
-
             Region region = new Region()
             {
                 Id = 1,
                 Name = "Region name"
             };
-
             var mockAccommodation = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             var mockTouristicSpot = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
             var mockRegion = new Mock<IRepository<Region>>(MockBehavior.Strict);
@@ -275,10 +261,8 @@ namespace BusinessLogic.Tests
             var mockCategory = new Mock<IRepository<Category>>(MockBehavior.Strict);
             mockCategory.Setup(p => p.GetById(It.IsAny<int>())).Returns<Category>(null);
             var logic = new ImporterLogic(mockAccommodation.Object, mockTouristicSpot.Object, mockRegion.Object, mockCategory.Object);
-            var result = logic.Import(importerModel);
 
-            mockRegion.VerifyAll();
-            mockCategory.VerifyAll();
+            var result = logic.Import(importerModel);
         }
 
         [ExpectedException(typeof(AlreadyExistsException))]
@@ -297,19 +281,16 @@ namespace BusinessLogic.Tests
                     }
                 }
             };
-
             Region region = new Region()
             {
                 Id = 1,
                 Name = "Region name"
             };
-
             Category category = new Category()
             {
                 Id = 1,
                 Name = "Category name"
             };
-
             Accommodation accommodation = new Accommodation()
             {
                 Name = "Accommodation name",
@@ -326,7 +307,6 @@ namespace BusinessLogic.Tests
                 Information = "Accommodation information",
                 PricePerNight = 1
             };
-
             var mockAccommodation = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mockAccommodation.Setup(p => p.GetByName(It.IsAny<string>())).Returns(accommodation);
             var mockTouristicSpot = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
@@ -335,11 +315,8 @@ namespace BusinessLogic.Tests
             var mockCategory = new Mock<IRepository<Category>>(MockBehavior.Strict);
             mockCategory.Setup(p => p.GetById(It.IsAny<int>())).Returns(category);
             var logic = new ImporterLogic(mockAccommodation.Object, mockTouristicSpot.Object, mockRegion.Object, mockCategory.Object);
-            var result = logic.Import(importerModel);
 
-            mockAccommodation.VerifyAll();
-            mockRegion.VerifyAll();
-            mockCategory.VerifyAll();
+            var result = logic.Import(importerModel);
         }
     }
 }

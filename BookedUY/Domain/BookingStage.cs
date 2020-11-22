@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Domain
 {
@@ -42,6 +44,21 @@ namespace Domain
                 result = this.Id == bookingStage.Id;
             }
             return result;
+        }
+        [ExcludeFromCodeCoverage]
+        public override int GetHashCode()
+        {
+            int hashCode = -1349910579;
+            hashCode = hashCode * -1521134295 + Id.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<Administrator>.Default.GetHashCode(Administrator);
+            hashCode = hashCode * -1521134295 + AdministratorId.GetHashCode();
+            hashCode = hashCode * -1521134295 + Status.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_description);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Description);
+            hashCode = hashCode * -1521134295 + EntryDate.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<Booking>.Default.GetHashCode(AsociatedBooking);
+            hashCode = hashCode * -1521134295 + AsociatedBookingId.GetHashCode();
+            return hashCode;
         }
     }
 }

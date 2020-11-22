@@ -55,24 +55,43 @@ namespace BusinessLogic
 
         public Accommodation AddAccommodation(Accommodation accommodation)
         {
+            CheckSpotId(accommodation);
+            CheckAccommodationImages(accommodation);
+            CheckAccommodationName(accommodation);
+            CheckAccommodationId(accommodation);
+            var newAccom = this.accommodationRepository.Add(accommodation);
+            return newAccom;
+        }
+        private void CheckSpotId(Accommodation accommodation)
+        {
             if (accommodation.SpotId == 0)
             {
                 throw new NullInputException("Accommodation Spot");
             }
+        }
+
+        private void CheckAccommodationImages(Accommodation accommodation)
+        {
             if (accommodation.Images == null)
             {
                 throw new NullInputException("Accommodation Images");
             }
+        }
+
+        private void CheckAccommodationName(Accommodation accommodation)
+        {
             if (this.accommodationRepository.GetByName(accommodation.Name) != null)
             {
                 throw new AlreadyExistsException("Accommodation");
             }
-            if (this.spotRepository.GetById(accommodation.SpotId)==null)
+        }
+
+        private void CheckAccommodationId(Accommodation accommodation)
+        {
+            if (this.spotRepository.GetById(accommodation.SpotId) == null)
             {
                 throw new NotFoundException("Accommodation Spot");
             }
-            var newAccom = this.accommodationRepository.Add(accommodation);
-            return newAccom;
         }
 
         public Accommodation DeleteAccommodation(Accommodation accommodation)

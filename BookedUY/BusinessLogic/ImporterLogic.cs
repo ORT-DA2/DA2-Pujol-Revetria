@@ -58,29 +58,49 @@ namespace BusinessLogic
             return names;
         }
 
-        public AccommodationModelOut Import(ImporterModel import)
+        private void CheckTouristicSpot(TouristicSpotParse touristicSpotParse)
         {
-            var implementation = ObtainImplementation(import.Name);
-            var parse = implementation.Import(import.Parameters);
-            if(parse.TouristicSpot == null)
+            if (touristicSpotParse == null)
             {
                 throw new NullInputException("Touristic Spot");
             }
-            if (regionRepository.GetById(parse.TouristicSpot.RegionId) == null )
+        }
+
+        private void CheckRegion(int id)
+        {
+            if (regionRepository.GetById(id) == null )
             {
                 throw new NotFoundException("Region");
             }
-            foreach (int categoryId in parse.TouristicSpot.Categories)
+        }
+
+        private void CheckCategories(List<int> categories)
+        {
+            foreach (int categoryId in categories)
             {
-                if(categoryRepository.GetById(categoryId) == null)
+                if (categoryRepository.GetById(categoryId) == null)
                 {
                     throw new NotFoundException("Category");
                 }
             }
-            if (accommodationRepository.GetByName(parse.Name)!= null)
+        }
+
+        private void CheckAccommodation(string name)
+        {
+            if (accommodationRepository.GetByName(name) != null)
             {
                 throw new AlreadyExistsException("Accommodation name");
             }
+        }
+
+        public AccommodationModelOut Import(ImporterModel import)
+        {
+            var implementation = ObtainImplementation(import.Name);
+            var parse = implementation.Import(import.Parameters);
+            CheckTouristicSpot(parse.TouristicSpot);
+            CheckRegion(parse.TouristicSpot.RegionId);
+            CheckCategories(parse.TouristicSpot.Categories);
+            CheckAccommodation(parse.Name);
             var touristicSpot = touristicSpotRepository.GetByName(parse.TouristicSpot.Name);
             if (touristicSpot == null)
             {
@@ -93,7 +113,6 @@ namespace BusinessLogic
                     });
 
                 }
-
                 touristicSpot = new TouristicSpot()
                 {
                     Categories = categoryTouristicSpots,
@@ -154,7 +173,7 @@ namespace BusinessLogic
 
                 if (loadedImplementation == null)
                 {
-                    throw new NotFoundException("no importer");
+                    throw new NotFoundException("Importer");
                 }
                 else
                 {
@@ -165,11 +184,11 @@ namespace BusinessLogic
                     }
                     else
                     {
-                        throw new NotFoundException($"no importer, {name}");
+                        throw new NotFoundException($"Importer with name {name}");
                     }
                 }
             }
-            throw new NotFoundException("no dll");
+            throw new NotFoundException("dll");
         }
     }
 }

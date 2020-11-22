@@ -14,17 +14,20 @@ namespace BusinessLogic.Tests
         [TestMethod]
         public void GetAllTest()
         {
-            int testId = 5;
             List<Category> categories = new List<Category>();
-            Category category = new Category();
-            category.Id = testId;
-            category.Name = "Beach";
+            Category category = new Category
+            {
+                Id = 5,
+                Name = "Beach"
+            };
             categories.Add(category);
-            var mock = new Mock<IRepository<Category>>(MockBehavior.Strict);
-            mock.Setup(p => p.GetAll()).Returns(categories);
-            var logic = new CategoryLogic(mock.Object);
+            var mockCategory = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            mockCategory.Setup(p => p.GetAll()).Returns(categories);
+            var logic = new CategoryLogic(mockCategory.Object);
+
             var result = logic.GetAll();
-            mock.VerifyAll();
+
+            mockCategory.VerifyAll();
             Assert.IsTrue(result.SequenceEqual(categories));
         }
 
@@ -32,11 +35,13 @@ namespace BusinessLogic.Tests
         public void GetAllNullTest()
         {
             List<Category> categories = new List<Category>();
-            var mock = new Mock<IRepository<Category>>(MockBehavior.Strict);
-            mock.Setup(p => p.GetAll()).Returns(categories);
-            var logic = new CategoryLogic(mock.Object);
+            var mockCategory = new Mock<IRepository<Category>>(MockBehavior.Strict);
+            mockCategory.Setup(p => p.GetAll()).Returns(categories);
+            var logic = new CategoryLogic(mockCategory.Object);
+
             var result = logic.GetAll();
-            mock.VerifyAll();
+
+            mockCategory.VerifyAll();
             Assert.IsTrue(result.SequenceEqual(categories));
         }
     }

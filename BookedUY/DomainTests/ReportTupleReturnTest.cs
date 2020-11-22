@@ -26,59 +26,62 @@ namespace DomainTests
         [TestMethod]
         public void TestEqualsExpectedTrue()
         {
-            string testName = "a";
-            this.reportTupleReturn.AccommodationName = testName;
-            ReportTupleReturn test = new ReportTupleReturn();
-            test.AccommodationName = testName;
+            this.reportTupleReturn.AccommodationName = "a";
+            ReportTupleReturn test = new ReportTupleReturn
+            {
+                AccommodationName = "a"
+            };
+
             Assert.IsTrue(reportTupleReturn.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalse()
         {
-            string testName = "a";
-            string testName2 = "b";
-            this.reportTupleReturn.AccommodationName = testName;
-            ReportTupleReturn test = new ReportTupleReturn();
-            test.AccommodationName = testName2;
+            this.reportTupleReturn.AccommodationName = "a";
+            ReportTupleReturn test = new ReportTupleReturn
+            {
+                AccommodationName = "b"
+            };
+
             Assert.IsFalse(reportTupleReturn.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalse2()
         {
-            string testName = "a";
-            string testName2 = "b";
-            this.reportTupleReturn.AccommodationName = testName;
-            ReportTupleReturn test = new ReportTupleReturn();
-            test.AccommodationName = testName2;
+            this.reportTupleReturn.AccommodationName = "a";
+            ReportTupleReturn test = new ReportTupleReturn
+            {
+                AccommodationName = "b"
+            };
+
             Assert.IsFalse(reportTupleReturn.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalseNull()
         {
-            string testName = "a";
-            this.reportTupleReturn.AccommodationName = testName;
+            this.reportTupleReturn.AccommodationName = "a";
             ReportTupleReturn test = null;
+
             Assert.IsFalse(reportTupleReturn.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalseNotType()
         {
-            string testName = "a";
-            this.reportTupleReturn.AccommodationName = testName;
-            string test = "testing";
-            Assert.IsFalse(reportTupleReturn.Equals(test));
+            this.reportTupleReturn.AccommodationName = "a";
+
+            Assert.IsFalse(reportTupleReturn.Equals("testing"));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalseNotType2()
         {
-            string testName = "a";
-            this.reportTupleReturn.AccommodationName = testName;
+            this.reportTupleReturn.AccommodationName = "a";
             Booking test = new Booking();
+
             Assert.IsFalse(reportTupleReturn.Equals(test));
         }
     }

@@ -59,21 +59,21 @@ namespace DataAccess.Tests
                     Categories=null,
                 },
             };
-
             spotsToReturn.ForEach(s => _context.Add(s));
             _context.SaveChanges();
             var repository = new TouristicSpotRepository(_context);
+
             var result = repository.GetAll();
+
             Assert.IsTrue(spotsToReturn.SequenceEqual(result));
         }
 
         [TestMethod]
         public void TestAddSpot()
         {
-            int id = 1;
             TouristicSpot spot = new TouristicSpot()
             {
-                Id = id,
+                Id = 1,
                 Name = "Colonia del Sacramento",
                 Accommodations = null,
                 Description = "Es conocida por su Barrio Histórico con calles de" +
@@ -84,9 +84,10 @@ namespace DataAccess.Tests
                 Categories = null,
             };
             var repository = new TouristicSpotRepository(_context);
+
             repository.Add(spot);
 
-            Assert.AreEqual(_context.Find<TouristicSpot>(id), spot);
+            Assert.AreEqual(_context.Find<TouristicSpot>(1), spot);
         }
 
         [TestMethod]
@@ -119,56 +120,59 @@ namespace DataAccess.Tests
                     Categories=new List<CategoryTouristicSpot>(),
                 },touristicSpot,
             };
-
+            List<TouristicSpot> listToReturn = new List<TouristicSpot>
+            {
+                touristicSpot
+            };
             spotsToReturn.ForEach(s => _context.Add(s));
             _context.SaveChanges();
             var repository = new TouristicSpotRepository(_context);
             var result = repository.GetByRegion(1);
-            List<TouristicSpot> list = new List<TouristicSpot>();
-            list.Add(touristicSpot);
-            Assert.IsTrue(list.SequenceEqual(result));
+
+            Assert.IsTrue(listToReturn.SequenceEqual(result));
         }
 
         [TestMethod]
         public void TestGetByCategory()
         {
-            List<int> list1 = new List<int>();
-            list1.Add(1);
-            list1.Add(3);
-
-            List<CategoryTouristicSpot> listCat1 = new List<CategoryTouristicSpot>();
-            List<CategoryTouristicSpot> listCat2 = new List<CategoryTouristicSpot>();
-            List<CategoryTouristicSpot> listCat3 = new List<CategoryTouristicSpot>();
-            CategoryTouristicSpot cat1 = new CategoryTouristicSpot()
+            List<int> listOfCategoriesToSearch = new List<int>
+            {
+                1,
+                3
+            };
+            CategoryTouristicSpot category1TouristicSpot4 = new CategoryTouristicSpot()
             {
                 CategoryId = 1,
                 TouristicSpotId = 4
             };
-            CategoryTouristicSpot cat2 = new CategoryTouristicSpot()
+            CategoryTouristicSpot category2TouristicSpot1 = new CategoryTouristicSpot()
             {
                 CategoryId = 2,
                 TouristicSpotId = 1
             };
-            CategoryTouristicSpot cat3 = new CategoryTouristicSpot()
+            CategoryTouristicSpot category3TouristicSpot4 = new CategoryTouristicSpot()
             {
                 CategoryId = 3,
                 TouristicSpotId = 4
             };
-            listCat1.Add(cat1);
-            listCat1.Add(cat3);
-            listCat2.Add(cat2);
-
+            List<CategoryTouristicSpot> listOfCategoiresOfTouristicSpot4 = new List<CategoryTouristicSpot>
+            {
+                category1TouristicSpot4,
+                category3TouristicSpot4
+            };
+            List<CategoryTouristicSpot> listOfCategoriesOfTouristicSpot1 = new List<CategoryTouristicSpot>
+            {
+                category2TouristicSpot1
+            };
             TouristicSpot touristicSpot = new TouristicSpot()
             {
                 Id = 4,
                 Name = "Colonia del Sacramento",
                 Accommodations = new List<Accommodation>(),
-                Description = "Es conocida por su Barrio Histórico con calles de" +
-                " adoquines rodeadas de edificios que datan de la" +
-                " época en que era un asentamiento portugués.",
+                Description = "Es conocida por su Barrio Histórico con calles de",
                 Region = new Region(),
                 RegionId = 0,
-                Categories = listCat1,
+                Categories = listOfCategoiresOfTouristicSpot4,
             };
             List<TouristicSpot> spots = new List<TouristicSpot>()
             {
@@ -177,54 +181,66 @@ namespace DataAccess.Tests
                     Id=1,
                     Name="Villa Serrana",
                     Accommodations=new List<Accommodation>(),
-                    Description="Villa Serrana es un poblado ubicado en el departamento de Lavalleja de Uruguay," +
-                    " a 25 kilómetros al noreste de la capital departamental," +
-                    " Minas, entre los valles de los arroyos Penitente y Marmarajá.",
+                    Description="Villa Serrana es un poblado ubicado en el departamento de Lavalleja de Uruguay,",
                     Region=new Region(),
                     RegionId=0,
-                    Categories=listCat2,
+                    Categories=listOfCategoriesOfTouristicSpot1,
                 },touristicSpot,
             };
-
+            List<TouristicSpot> listToReturn = new List<TouristicSpot>
+            {
+                touristicSpot
+            };
             spots.ForEach(s => _context.Add(s));
             _context.SaveChanges();
             var repository = new TouristicSpotRepository(_context);
-            var result = repository.GetByCategory(list1);
-            List<TouristicSpot> listToReturn = new List<TouristicSpot>();
-            listToReturn.Add(touristicSpot);
+
+            var result = repository.GetByCategory(listOfCategoriesToSearch);
+            
             Assert.IsTrue(listToReturn.SequenceEqual(result));
         }
 
         [TestMethod]
         public void TestGetByCategoryAndByRegion()
         {
-            List<int> list1 = new List<int>();
-            list1.Add(1);
-            list1.Add(3);
-
-            List<CategoryTouristicSpot> listCat1 = new List<CategoryTouristicSpot>();
-            List<CategoryTouristicSpot> listCat2 = new List<CategoryTouristicSpot>();
-            CategoryTouristicSpot cat1 = new CategoryTouristicSpot();
-            cat1.CategoryId = 1;
-            CategoryTouristicSpot cat2 = new CategoryTouristicSpot();
-            cat2.CategoryId = 2;
-            CategoryTouristicSpot cat3 = new CategoryTouristicSpot();
-            cat3.CategoryId = 3;
-            listCat1.Add(cat1);
-            listCat1.Add(cat3);
-            listCat2.Add(cat2);
-
+            List<int> listOfCategoriesToSearch = new List<int>
+            {
+                1,
+                3
+            };
+            CategoryTouristicSpot category1TouristicSpot4 = new CategoryTouristicSpot()
+            {
+                CategoryId = 1,
+                TouristicSpotId = 4
+            };
+            CategoryTouristicSpot category2TouristicSpot1 = new CategoryTouristicSpot()
+            {
+                CategoryId = 2,
+                TouristicSpotId = 1
+            };
+            CategoryTouristicSpot category3TouristicSpot4 = new CategoryTouristicSpot()
+            {
+                CategoryId = 3,
+                TouristicSpotId = 4
+            };
+            List<CategoryTouristicSpot> listOfCategoiresOfTouristicSpot4 = new List<CategoryTouristicSpot>
+            {
+                category1TouristicSpot4,
+                category3TouristicSpot4
+            };
+            List<CategoryTouristicSpot> listOfCategoriesOfTouristicSpot1 = new List<CategoryTouristicSpot>
+            {
+                category2TouristicSpot1
+            };
             TouristicSpot touristicSpotToReturn = new TouristicSpot()
             {
                 Id = 4,
                 Name = "Colonia del Sacramento",
                 Accommodations = new List<Accommodation>(),
-                Description = "Es conocida por su Barrio Histórico con calles de" +
-                " adoquines rodeadas de edificios que datan de la" +
-                " época en que era un asentamiento portugués.",
+                Description = "Es conocida por su Barrio Histórico con calles de",
                 Region = new Region() { Id = 2 },
                 RegionId = 2,
-                Categories = listCat1,
+                Categories = listOfCategoiresOfTouristicSpot4,
             };
             List<TouristicSpot> spots = new List<TouristicSpot>()
             {
@@ -233,14 +249,12 @@ namespace DataAccess.Tests
                     Id=1,
                     Name="Villa Serrana",
                     Accommodations=new List<Accommodation>(),
-                    Description="Villa Serrana es un poblado ubicado en el departamento de Lavalleja de Uruguay," +
-                    " a 25 kilómetros al noreste de la capital departamental," +
-                    " Minas, entre los valles de los arroyos Penitente y Marmarajá.",
+                    Description="Villa Serrana es un poblado ubicado en el departamento de Lavalleja de Uruguay,",
                     Region=new Region(),
                     RegionId=1,
-                    Categories=listCat1,
-                },touristicSpotToReturn,
-
+                    Categories=listOfCategoriesOfTouristicSpot1,
+                },
+                touristicSpotToReturn,
                 new TouristicSpot()
                 {
                     Id=3,
@@ -250,86 +264,78 @@ namespace DataAccess.Tests
                     " a 25 kilómetros",
                     Region=touristicSpotToReturn.Region,
                     RegionId=2,
-                    Categories=listCat2,
+                    Categories=listOfCategoriesOfTouristicSpot1,
                 },
             };
-
+            List<TouristicSpot> listToReturn = new List<TouristicSpot>
+            {
+                touristicSpotToReturn
+            };
             spots.ForEach(s => _context.Add(s));
             _context.SaveChanges();
             var repository = new TouristicSpotRepository(_context);
-            var result = repository.GetByCategoryAndRegion(list1, 2);
-            List<TouristicSpot> listToReturn = new List<TouristicSpot>();
-            listToReturn.Add(touristicSpotToReturn);
-            Console.WriteLine(touristicSpotToReturn.RegionId);
+
+            var result = repository.GetByCategoryAndRegion(listOfCategoriesToSearch, 2);
+
             Assert.IsTrue(listToReturn.SequenceEqual(result));
         }
 
         [TestMethod]
         public void TestGetByID()
         {
-            TouristicSpot spotToReturn = new TouristicSpot()
+            TouristicSpot touristicSpotToReturn = new TouristicSpot()
             {
                 Id = 1,
                 Name = "Villa Serrana",
                 Accommodations = new List<Accommodation>(),
-                Description = "Villa Serrana es un poblado ubicado en el departamento de Lavalleja de Uruguay," +
-                " a 25 kilómetros al noreste de la capital departamental," +
-                " Minas, entre los valles de los arroyos Penitente y Marmarajá.",
+                Description = "Villa Serrana es un poblado ubicado en el departamento de Lavalleja de Uruguay,",
                 Region = null,
                 RegionId = 2,
                 Categories = null,
             };
-            List<TouristicSpot> spots = new List<TouristicSpot>()
+            List<TouristicSpot> touristicSpots = new List<TouristicSpot>()
             {
-                spotToReturn,
+                touristicSpotToReturn,
                 new TouristicSpot()
                 {
                     Id=2,
                     Name="Colonia del Sacramento",
                     Accommodations=new List<Accommodation>(),
-                    Description="Es conocida por su Barrio Histórico con calles de" +
-                    " adoquines rodeadas de edificios que datan de la" +
-                    " época en que era un asentamiento portugués.",
+                    Description="Es conocida por su Barrio Histórico con calles de",
                     Region=null,
                     RegionId=1,
                     Categories=null,
                 },
             };
-
-            spots.ForEach(s => _context.Add(s));
+            touristicSpots.ForEach(s => _context.Add(s));
             _context.SaveChanges();
             var repository = new TouristicSpotRepository(_context);
+
             var result = repository.GetById(1);
-            Assert.IsTrue(spotToReturn.Equals(result));
+
+            Assert.IsTrue(touristicSpotToReturn.Equals(result));
         }
 
         [TestMethod]
         public void TestDelete()
         {
-            TouristicSpot spot = new TouristicSpot()
+            TouristicSpot touristicSpot = new TouristicSpot()
             {
                 Id = 1,
                 Name = "Villa Serrana",
                 Accommodations = null,
-                Description = "Villa Serrana es un poblado ubicado en el departamento de Lavalleja de Uruguay," +
-                " a 25 kilómetros al noreste de la capital departamental," +
-                " Minas, entre los valles de los arroyos Penitente y Marmarajá.",
+                Description = "Villa Serrana es un poblado ubicado en el departamento de Lavalleja de Uruguay,",
                 Region = null,
                 RegionId = 2,
                 Categories = null,
             };
-            List<TouristicSpot> spots = new List<TouristicSpot>()
-            {
-                spot,
-            };
-
-            _context.Add(spot);
+            _context.Add(touristicSpot);
             _context.SaveChanges();
             var repository = new TouristicSpotRepository(_context);
 
-            repository.Delete(spot);
+            repository.Delete(touristicSpot);
 
-            Assert.IsNull(_context.Find<TouristicSpot>(spot.Id));
+            Assert.IsNull(_context.Find<TouristicSpot>(touristicSpot.Id));
         }
 
         [TestMethod]
@@ -340,9 +346,7 @@ namespace DataAccess.Tests
                 Id = 1,
                 Name = "Villa Serrana",
                 Accommodations = null,
-                Description = "Villa Serrana es un poblado ubicado en el departamento de Lavalleja de Uruguay," +
-                            " a 25 kilómetros al noreste de la capital departamental," +
-                            " Minas, entre los valles de los arroyos Penitente y Marmarajá.",
+                Description = "Villa Serrana es un poblado ubicado en el departamento de Lavalleja de Uruguay,",
                 Region = null,
                 RegionId = 2,
                 Categories = null,
@@ -355,19 +359,18 @@ namespace DataAccess.Tests
                     Id=2,
                     Name="Colonia del Sacramento",
                     Accommodations=null,
-                    Description="Es conocida por su Barrio Histórico con calles de" +
-                    " adoquines rodeadas de edificios que datan de la" +
-                    " época en que era un asentamiento portugués.",
+                    Description="Es conocida por su Barrio Histórico con calles de",
                     Region=null,
                     RegionId=1,
                     Categories=null,
                 },
             };
-
             spots.ForEach(s => _context.Add(s));
             _context.SaveChanges();
             var repository = new TouristicSpotRepository(_context);
+
             var result = repository.GetByName("Via");
+
             Assert.IsNull(result);
         }
 
@@ -379,9 +382,7 @@ namespace DataAccess.Tests
                 Id = 1,
                 Name = "Villa Serrana",
                 Accommodations = null,
-                Description = "Villa Serrana es un poblado ubicado en el departamento de Lavalleja de Uruguay," +
-                            " a 25 kilómetros al noreste de la capital departamental," +
-                            " Minas, entre los valles de los arroyos Penitente y Marmarajá.",
+                Description = "Villa Serrana es un poblado ubicado en el departamento de Lavalleja de Uruguay,",
                 Region = null,
                 RegionId = 2,
                 Categories = null,
@@ -394,9 +395,7 @@ namespace DataAccess.Tests
                     Id=2,
                     Name="Colonia del Sacramento",
                     Accommodations=null,
-                    Description="Es conocida por su Barrio Histórico con calles de" +
-                    " adoquines rodeadas de edificios que datan de la" +
-                    " época en que era un asentamiento portugués.",
+                    Description="Es conocida por su Barrio Histórico con calles de",
                     Region=null,
                     RegionId=1,
                     Categories=null,
@@ -406,7 +405,9 @@ namespace DataAccess.Tests
             spots.ForEach(s => _context.Add(s));
             _context.SaveChanges();
             var repository = new TouristicSpotRepository(_context);
+
             var result = repository.GetByName("Villa Serrana");
+
             Assert.IsTrue(spot.Equals(result));
         }
     }

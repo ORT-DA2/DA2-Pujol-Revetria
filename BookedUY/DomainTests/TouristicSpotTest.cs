@@ -23,74 +23,69 @@ namespace DomainTests
         [TestMethod]
         public void TestNameSet()
         {
-            string output = "test";
-            touristicSpot.Name = output;
-            Assert.AreEqual(touristicSpot.Name, output);
+            touristicSpot.Name = "test";
+
+            Assert.AreEqual(touristicSpot.Name, "test");
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestNameSet2()
         {
-            string output = " ";
-            touristicSpot.Name = output;
-            Assert.Fail();
+            touristicSpot.Name = " ";
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestNameSet3()
         {
-            string output = "";
-            touristicSpot.Name = output;
-            Assert.Fail();
+            touristicSpot.Name = "";
         }
 
         [TestMethod]
         public void TestDescriptionSet()
         {
-            string output = "text";
-            touristicSpot.Description = output;
-            Assert.AreEqual(touristicSpot.Description, output);
+            touristicSpot.Description = "text";
+
+            Assert.AreEqual(touristicSpot.Description, "text");
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestDescriptionSet2()
         {
-            string output = " ";
-            touristicSpot.Description = output;
-            Assert.Fail();
+            touristicSpot.Description = " ";
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullInputException))]
         public void TestDescriptionSet3()
         {
-            string output = "";
-            touristicSpot.Description = output;
-            Assert.Fail();
+            touristicSpot.Description = "";
         }
 
         [TestMethod]
         public void TestEquals()
         {
             TouristicSpot aux = touristicSpot;
+
             Assert.IsTrue(touristicSpot.Equals(aux));
         }
 
         [TestMethod]
         public void TestEquals2()
         {
-            string output = " ";
-            Assert.IsFalse(touristicSpot.Equals(output));
+            Assert.IsFalse(touristicSpot.Equals(" "));
         }
 
         [TestMethod]
         public void TestEquals3()
         {
-            TouristicSpot aux = new TouristicSpot();
-            aux.Name = "test";
+            TouristicSpot aux = new TouristicSpot
+            {
+                Name = "test"
+            };
+
             Assert.IsFalse(touristicSpot.Equals(aux));
         }
     }

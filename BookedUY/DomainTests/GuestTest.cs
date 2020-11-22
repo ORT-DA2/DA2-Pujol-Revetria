@@ -23,76 +23,77 @@ namespace DomainTests
         [TestMethod]
         public void TestAmountSet()
         {
-            int test = 1;
-            guest.Amount = test;
-            Assert.AreEqual(guest.Amount, test);
+            guest.Amount = 1;
+
+            Assert.AreEqual(guest.Amount, 1);
         }
 
         [TestMethod]
         [ExpectedException(typeof(NegativeAmountException))]
         public void TestAmountSetNegative()
         {
-            int test = -1;
-            guest.Amount = test;
-            Assert.Fail();
+            guest.Amount = -1;
         }
 
         [TestMethod]
         public void TestEqualsExpectedTrue()
         {
-            int testId = 1;
-            this.guest.Id = testId;
-            Guest test = new Guest();
-            test.Id = testId;
+            this.guest.Id = 1;
+            Guest test = new Guest
+            {
+                Id = 1
+            };
+
             Assert.IsTrue(guest.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalse()
         {
-            int testId1 = 1;
-            int testId2 = 2;
-            this.guest.Id = testId1;
-            Guest test = new Guest();
-            test.Id = testId2;
+            this.guest.Id = 1;
+            Guest test = new Guest
+            {
+                Id = 2
+            };
+
             Assert.IsFalse(guest.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalse2()
         {
-            int testId1 = 1;
-            int testId2 = 2;
-            this.guest.Id = testId1;
-            Guest test = new Guest();
-            test.Id = testId2;
+            this.guest.Id = 1;
+            Guest test = new Guest
+            {
+                Id = 2
+            };
+
             Assert.IsFalse(guest.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalseNull()
         {
-            int testId1 = 1;
-            this.guest.Id = testId1;
+            this.guest.Id = 1;
             Guest test = null;
+
             Assert.IsFalse(guest.Equals(test));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalseNotType()
         {
-            int testId1 = 1;
-            this.guest.Id = testId1;
-            string test = "testing";
-            Assert.IsFalse(guest.Equals(test));
+            this.guest.Id = 1;
+
+            Assert.IsFalse(guest.Equals("testing"));
         }
 
         [TestMethod]
         public void TestEqualsExpectedFalseNotType2()
         {
-            int testId1 = 1;
-            this.guest.Id = testId1;
+            this.guest.Id = 1;
             Booking test = new Booking();
+
             Assert.IsFalse(guest.Equals(test));
         }
     }

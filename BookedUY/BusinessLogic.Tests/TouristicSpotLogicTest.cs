@@ -12,7 +12,6 @@ namespace BusinessLogic.Tests
         [TestMethod]
         public void AddAccommodationTest()
         {
-            int testId = 5;
             List<CategoryTouristicSpot> categories = new List<CategoryTouristicSpot>();
             CategoryTouristicSpot category = new CategoryTouristicSpot()
             {
@@ -22,17 +21,19 @@ namespace BusinessLogic.Tests
             categories.Add(category);
             TouristicSpot touristicSpot = new TouristicSpot()
             {
-                Id = testId,
+                Id = 5,
                 Name = "abm",
                 RegionId = 3,
                 Categories = categories
             };
-            var mock = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
-            mock.Setup(p => p.Add(It.IsAny<TouristicSpot>())).Returns(touristicSpot);
-            mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
-            var logic = new TouristicSpotLogic(mock.Object);
+            var mockTouristicSpot = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            mockTouristicSpot.Setup(p => p.Add(It.IsAny<TouristicSpot>())).Returns(touristicSpot);
+            mockTouristicSpot.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
+            var logic = new TouristicSpotLogic(mockTouristicSpot.Object);
+
             var result = logic.AddTouristicSpot(touristicSpot);
-            mock.VerifyAll();
+
+            mockTouristicSpot.VerifyAll();
             Assert.IsTrue(result.Equals(touristicSpot));
         }
 
@@ -40,7 +41,6 @@ namespace BusinessLogic.Tests
         [ExpectedException(typeof(AlreadyExistsException))]
         public void AddTouristicSpotAlreadyExistsTest()
         {
-            int testId = 5;
             List<CategoryTouristicSpot> categories = new List<CategoryTouristicSpot>();
             CategoryTouristicSpot category = new CategoryTouristicSpot()
             {
@@ -50,17 +50,19 @@ namespace BusinessLogic.Tests
             categories.Add(category);
             TouristicSpot touristicSpot = new TouristicSpot()
             {
-                Id = testId,
+                Id = 5,
                 Name = "abm",
                 RegionId = 3,
                 Categories = categories
             };
-            var mock = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
-            mock.Setup(p => p.Add(It.IsAny<TouristicSpot>())).Returns(touristicSpot);
-            mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns(touristicSpot);
-            var logic = new TouristicSpotLogic(mock.Object);
+            var mockTouristicSpot = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            mockTouristicSpot.Setup(p => p.Add(It.IsAny<TouristicSpot>())).Returns(touristicSpot);
+            mockTouristicSpot.Setup(p => p.GetByName(It.IsAny<string>())).Returns(touristicSpot);
+            var logic = new TouristicSpotLogic(mockTouristicSpot.Object);
+
             var result = logic.AddTouristicSpot(touristicSpot);
-            mock.VerifyAll();
+
+            mockTouristicSpot.VerifyAll();
             Assert.IsTrue(result.Equals(touristicSpot));
         }
 
@@ -68,7 +70,6 @@ namespace BusinessLogic.Tests
         [TestMethod]
         public void AddAccommodationNullInputTest()
         {
-            int testId = 5;
             List<CategoryTouristicSpot> categories = new List<CategoryTouristicSpot>();
             CategoryTouristicSpot category = new CategoryTouristicSpot()
             {
@@ -78,25 +79,23 @@ namespace BusinessLogic.Tests
             categories.Add(category);
             TouristicSpot touristicSpot = new TouristicSpot()
             {
-                Id = testId,
+                Id = 5,
                 Name = "abm",
                 RegionId = 0,
                 Categories = categories
             };
-            var mock = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
-            mock.Setup(p => p.Add(It.IsAny<TouristicSpot>())).Returns(touristicSpot);
-            mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
-            var logic = new TouristicSpotLogic(mock.Object);
+            var mockTouristicSpot = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            mockTouristicSpot.Setup(p => p.Add(It.IsAny<TouristicSpot>())).Returns(touristicSpot);
+            mockTouristicSpot.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
+            var logic = new TouristicSpotLogic(mockTouristicSpot.Object);
+
             var result = logic.AddTouristicSpot(touristicSpot);
-            mock.VerifyAll();
-            Assert.IsTrue(result.Equals(touristicSpot));
         }
 
         [ExpectedException(typeof(NullInputException))]
         [TestMethod]
         public void AddAccommodationNullInput2Test()
         {
-            int testId = 5;
             List<CategoryTouristicSpot> categories = new List<CategoryTouristicSpot>();
             CategoryTouristicSpot category = new CategoryTouristicSpot()
             {
@@ -106,87 +105,96 @@ namespace BusinessLogic.Tests
             categories.Add(category);
             TouristicSpot touristicSpot = new TouristicSpot()
             {
-                Id = testId,
+                Id = 5,
                 Name = "abm",
                 RegionId = 5,
                 Categories = null
             };
-            var mock = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
-            mock.Setup(p => p.Add(It.IsAny<TouristicSpot>())).Returns(touristicSpot);
-            mock.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
-            var logic = new TouristicSpotLogic(mock.Object);
+            var mockTouristicSpot = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            mockTouristicSpot.Setup(p => p.Add(It.IsAny<TouristicSpot>())).Returns(touristicSpot);
+            mockTouristicSpot.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
+            var logic = new TouristicSpotLogic(mockTouristicSpot.Object);
+
             var result = logic.AddTouristicSpot(touristicSpot);
-            mock.VerifyAll();
-            Assert.IsTrue(result.Equals(touristicSpot));
         }
 
         [TestMethod]
         public void GetSpotsByCategoryAndRegionGetAllTest()
         {
-            int testId = 5;
-            TouristicSpot touristicSpot = new TouristicSpot();
-            touristicSpot.Id = testId;
-            touristicSpot.Name = "abom";
+            TouristicSpot touristicSpot = new TouristicSpot
+            {
+                Id = 5,
+                Name = "abom"
+            };
             List<TouristicSpot> touristicSpots = new List<TouristicSpot>();
             List<int> categories = new List<int>();
-            var mock = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
-            mock.Setup(p => p.GetAll()).Returns(touristicSpots);
-            var logic = new TouristicSpotLogic(mock.Object);
+            var mockTouristicSpot = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            mockTouristicSpot.Setup(p => p.GetAll()).Returns(touristicSpots);
+            var logic = new TouristicSpotLogic(mockTouristicSpot.Object);
+
             var result = logic.GetSpotsByRegionAndCategory(categories, -1);
-            mock.VerifyAll();
+
+            mockTouristicSpot.VerifyAll();
             Assert.IsTrue(result.Equals(touristicSpots));
         }
 
         [TestMethod]
         public void GetSpotsByCategoryAndRegionGetByRegionTest()
         {
-            int testId = 5;
-            TouristicSpot touristicSpot = new TouristicSpot();
-            touristicSpot.Id = testId;
-            touristicSpot.Name = "abom";
+            TouristicSpot touristicSpot = new TouristicSpot
+            {
+                Id = 5,
+                Name = "abom"
+            };
             List<TouristicSpot> touristicSpots = new List<TouristicSpot>();
             List<int> categories = new List<int>();
-            var mock = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
-            mock.Setup(p => p.GetByRegion(It.IsAny<int>())).Returns(touristicSpots);
-            var logic = new TouristicSpotLogic(mock.Object);
+            var mockTouristicSpot = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            mockTouristicSpot.Setup(p => p.GetByRegion(It.IsAny<int>())).Returns(touristicSpots);
+            var logic = new TouristicSpotLogic(mockTouristicSpot.Object);
+
             var result = logic.GetSpotsByRegionAndCategory(categories, 0);
-            mock.VerifyAll();
+
+            mockTouristicSpot.VerifyAll();
             Assert.IsTrue(result.Equals(touristicSpots));
         }
 
         [TestMethod]
         public void GetSpotsByCategoryAndRegionGetByCategoryTest()
         {
-            int testId = 5;
             TouristicSpot touristicSpot = new TouristicSpot();
-            touristicSpot.Id = testId;
+            touristicSpot.Id = 5;
             touristicSpot.Name = "abom";
             List<TouristicSpot> touristicSpots = new List<TouristicSpot>();
             List<int> categories = new List<int>();
             categories.Add(1);
-            var mock = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
-            mock.Setup(p => p.GetByCategory(It.IsAny<List<int>>())).Returns(touristicSpots);
-            var logic = new TouristicSpotLogic(mock.Object);
+            var mockTouristicSpot = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            mockTouristicSpot.Setup(p => p.GetByCategory(It.IsAny<List<int>>())).Returns(touristicSpots);
+            var logic = new TouristicSpotLogic(mockTouristicSpot.Object);
+
             var result = logic.GetSpotsByRegionAndCategory(categories, -1);
-            mock.VerifyAll();
+
+            mockTouristicSpot.VerifyAll();
             Assert.IsTrue(result.Equals(touristicSpots));
         }
 
         [TestMethod]
         public void GetSpotsByCategoryAndRegionTest()
         {
-            int testId = 5;
-            TouristicSpot touristicSpot = new TouristicSpot();
-            touristicSpot.Id = testId;
-            touristicSpot.Name = "abom";
+            TouristicSpot touristicSpot = new TouristicSpot
+            {
+                Id = 5,
+                Name = "abom"
+            };
             List<TouristicSpot> touristicSpots = new List<TouristicSpot>();
             List<int> categories = new List<int>();
             categories.Add(1);
-            var mock = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
-            mock.Setup(p => p.GetByCategoryAndRegion(It.IsAny<List<int>>(), It.IsAny<int>())).Returns(touristicSpots);
-            var logic = new TouristicSpotLogic(mock.Object);
+            var mockTouristicSpot = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
+            mockTouristicSpot.Setup(p => p.GetByCategoryAndRegion(It.IsAny<List<int>>(), It.IsAny<int>())).Returns(touristicSpots);
+            var logic = new TouristicSpotLogic(mockTouristicSpot.Object);
+
             var result = logic.GetSpotsByRegionAndCategory(categories, 0);
-            mock.VerifyAll();
+
+            mockTouristicSpot.VerifyAll();
             Assert.IsTrue(result.Equals(touristicSpots));
         }
     }

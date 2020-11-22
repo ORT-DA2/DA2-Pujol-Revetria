@@ -20,8 +20,8 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var bookings = from b in this.bookingLogic.GetAll()
-                           select new BookingModelOut(b);
+            var bookings = from booking in this.bookingLogic.GetAll()
+            select new BookingModelOut(booking);
             return Ok(bookings);
         }
 
@@ -29,9 +29,9 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var b = this.bookingLogic.GetById(id);
-            var booking = new BookingModelOut(b);
-            return Ok(booking);
+            var booking = this.bookingLogic.GetById(id);
+            var bookingModelOut = new BookingModelOut(booking);
+            return Ok(bookingModelOut);
         }
 
         // POST api/<BookingController>

@@ -13,7 +13,7 @@ namespace DataAccess.Tests
     public class AccommodationRepositoryTest
     {
         private DbContextOptions<BookedUYContext> _options = new DbContextOptionsBuilder<BookedUYContext>()
-                .UseInMemoryDatabase(databaseName: "BookedUYDB").Options;
+        .UseInMemoryDatabase(databaseName: "BookedUYDB").Options;
 
         private BookedUYContext _context;
 
@@ -68,14 +68,15 @@ namespace DataAccess.Tests
             accommodationsToReturn.ForEach(a => _context.Add(a));
             _context.SaveChanges();
             var repository = new AccommodationRepository(_context);
+
             var result = repository.GetAll();
+
             Assert.IsTrue(accommodationsToReturn.SequenceEqual(result));
         }
 
         [TestMethod]
         public void TestAddAccommodation()
         {
-            int testId = 5;
             List<CategoryTouristicSpot> categories = new List<CategoryTouristicSpot>();
             CategoryTouristicSpot category = new CategoryTouristicSpot()
             {
@@ -87,13 +88,12 @@ namespace DataAccess.Tests
             {
                 Name = "h",
                 Categories = categories,
-                RegionId = testId
+                RegionId = 5
             };
             this._context.TouristicSpots.Add(spot);
-            int id = 3;
             Accommodation accommodation = new Accommodation()
             {
-                Id = id,
+                Id = 3,
                 Address = "Test",
                 Bookings = null,
                 ContactNumber = "09934566",
@@ -105,18 +105,18 @@ namespace DataAccess.Tests
                 SpotId = 1
             };
             var repository = new AccommodationRepository(_context);
+
             repository.Add(accommodation);
 
-            Assert.AreEqual(_context.Find<Accommodation>(id), accommodation);
+            Assert.AreEqual(_context.Find<Accommodation>(3), accommodation);
         }
 
         [TestMethod]
         public void DeleteAccommodationsTest()
         {
-            int id = 1;
             Accommodation accommodation = new Accommodation()
             {
-                Id = id,
+                Id = 1,
                 Address = "Test1",
                 Bookings = null,
                 ContactNumber = "0993456611",
@@ -136,16 +136,15 @@ namespace DataAccess.Tests
 
             repository.Delete(accommodation);
 
-            Assert.IsNull(_context.Find<Accommodation>(id));
+            Assert.IsNull(_context.Find<Accommodation>(1));
         }
 
         [TestMethod]
         public void TestGetByIdAccomodation()
         {
-            int testId = 1;
             Accommodation testAccommodation = new Accommodation()
             {
-                Id = testId,
+                Id = 1,
                 Address = "Test1",
                 Bookings = null,
                 ContactNumber = "0993456611",
@@ -182,7 +181,7 @@ namespace DataAccess.Tests
             _context.SaveChanges();
             var repository = new AccommodationRepository(_context);
 
-            var result = repository.GetById(testId);
+            var result = repository.GetById(1);
 
             Assert.AreEqual(testAccommodation, result);
         }
@@ -190,10 +189,9 @@ namespace DataAccess.Tests
         [TestMethod]
         public void TestGetByNameNull()
         {
-            int testId = 1;
             Accommodation testAccommodation = new Accommodation()
             {
-                Id = testId,
+                Id = 1,
                 Address = "Test1",
                 Bookings = null,
                 ContactNumber = "0993456611",
@@ -229,17 +227,18 @@ namespace DataAccess.Tests
             accommodationList.ForEach(s => _context.Add(s));
             _context.SaveChanges();
             var repository = new AccommodationRepository(_context);
+
             var result = repository.GetByName("Hil");
+
             Assert.IsNull(result);
         }
 
         [TestMethod]
         public void TestGetByName()
         {
-            int testId = 1;
             Accommodation testAccommodation = new Accommodation()
             {
-                Id = testId,
+                Id = 1,
                 Address = "Test1",
                 Bookings = null,
                 ContactNumber = "0993456611",
@@ -271,21 +270,21 @@ namespace DataAccess.Tests
                     SpotId = 1
                 },testAccommodation,
             };
-
             accommodationList.ForEach(s => _context.Add(s));
             _context.SaveChanges();
             var repository = new AccommodationRepository(_context);
+
             var result = repository.GetByName("Hilton");
+
             Assert.IsTrue(testAccommodation.Equals(result));
         }
 
         [TestMethod]
         public void TestGetAvailableBySpot()
         {
-            int testId = 1;
             Accommodation testAccommodation = new Accommodation()
             {
-                Id = testId,
+                Id = 1,
                 Address = "Test1",
                 Bookings = null,
                 ContactNumber = "0993456611",
@@ -317,21 +316,21 @@ namespace DataAccess.Tests
                     SpotId = 1
                 },testAccommodation,
             };
-
             accommodationList.ForEach(s => _context.Add(s));
             _context.SaveChanges();
             var repository = new AccommodationRepository(_context);
+
             var result = repository.GetAvailableBySpot(2);
+
             Assert.IsTrue(testAccommodation.Equals(result.FirstOrDefault()));
         }
 
         [TestMethod]
         public void TestGetAvailableBySpotNull()
         {
-            int testId = 1;
             Accommodation testAccommodation = new Accommodation()
             {
-                Id = testId,
+                Id = 1,
                 Address = "Test1",
                 Bookings = null,
                 ContactNumber = "0993456611",
@@ -363,21 +362,21 @@ namespace DataAccess.Tests
                     SpotId = 1
                 },testAccommodation,
             };
-
             accommodationList.ForEach(s => _context.Add(s));
             _context.SaveChanges();
             var repository = new AccommodationRepository(_context);
+
             var result = repository.GetAvailableBySpot(3);
+
             Assert.IsNull(result.FirstOrDefault());
         }
 
         [TestMethod]
         public void TestUpdateCapacityTrue()
         {
-            int testId = 1;
             Accommodation testAccommodation = new Accommodation()
             {
-                Id = testId,
+                Id = 1,
                 Address = "Test1",
                 Bookings = null,
                 ContactNumber = "0993456611",
@@ -395,21 +394,21 @@ namespace DataAccess.Tests
             {
                 testAccommodation,
             };
-
             accommodationList.ForEach(s => _context.Add(s));
             _context.SaveChanges();
             var repository = new AccommodationRepository(_context);
+
             repository.UpdateCapacity(1, true);
+
             Assert.IsTrue(_context.Accommodations.Find(1).Full);
         }
 
         [TestMethod]
         public void TestUpdateCapacityFalse()
         {
-            int testId = 1;
             Accommodation testAccommodation = new Accommodation()
             {
-                Id = testId,
+                Id = 1,
                 Address = "Test1",
                 Bookings = null,
                 ContactNumber = "0993456611",
@@ -427,11 +426,12 @@ namespace DataAccess.Tests
             {
                 testAccommodation,
             };
-
             accommodationList.ForEach(s => _context.Add(s));
             _context.SaveChanges();
             var repository = new AccommodationRepository(_context);
+
             repository.UpdateCapacity(1, false);
+
             Assert.IsFalse(_context.Accommodations.Find(1).Full);
         }
     }

@@ -21,16 +21,16 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var accommodations = from r in this.accommodationLogic.GetAll()
-                                 select new AccommodationModelOut(r, this.accommodationLogic.GetReviewsByAccommodation(r.Id));
+            var accommodations = from accommodation in this.accommodationLogic.GetAll()
+            select new AccommodationModelOut(accommodation, this.accommodationLogic.GetReviewsByAccommodation(accommodation.Id));
             return Ok(accommodations);
         }
 
         [HttpGet("spot/{spot}")]
         public IActionResult GetAccommodationsInSpot(int spot)
         {
-            var accommodations = from r in this.accommodationLogic.GetAvailableAccommodationBySpot(spot)
-                                 select new AccommodationModelOut(r,this.accommodationLogic.GetReviewsByAccommodation(r.Id));
+            var accommodations = from accommodation in this.accommodationLogic.GetAvailableAccommodationBySpot(spot)
+            select new AccommodationModelOut(accommodation,this.accommodationLogic.GetReviewsByAccommodation(accommodation.Id));
             return Ok(accommodations);
         }
 
@@ -38,16 +38,16 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            Accommodation a = this.accommodationLogic.GetById(id);
-            var ret = new AccommodationModelOut(a, this.accommodationLogic.GetReviewsByAccommodation(id));
-            return Ok(ret);
+            Accommodation accommodation = this.accommodationLogic.GetById(id);
+            var response = new AccommodationModelOut(accommodation, this.accommodationLogic.GetReviewsByAccommodation(id));
+            return Ok(response);
         }
 
         [HttpPost("review")]
         public IActionResult CreateReview(ReviewModelIn newAccommodation)
         {
-            var rev = newAccommodation.ToReview();
-            var response = this.accommodationLogic.AddReview(rev);
+            var review = newAccommodation.ToReview();
+            var response = this.accommodationLogic.AddReview(review);
             return Ok(new ReviewModelOut(response));
         }
 
@@ -56,8 +56,8 @@ namespace WebApi.Controllers
         [HttpPost]
         public IActionResult CreateAccommodation(AccommodationModelIn newAccommodation)
         {
-            var accom = newAccommodation.FromModelInToAccommodation();
-            var response = this.accommodationLogic.AddAccommodation(accom);
+            var accommodation = newAccommodation.FromModelInToAccommodation();
+            var response = this.accommodationLogic.AddAccommodation(accommodation);
             return Ok(new AccommodationModelOut(response,(0,new List<Review>())));
         }
 
@@ -75,9 +75,9 @@ namespace WebApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var accomToDelete = this.accommodationLogic.GetById(id);
-            var ret = this.accommodationLogic.DeleteAccommodation(accomToDelete);
-            return Ok(ret);
+            var accommodationToDelete = this.accommodationLogic.GetById(id);
+            var response = this.accommodationLogic.DeleteAccommodation(accommodationToDelete);
+            return Ok(response);
         }
     }
 }
