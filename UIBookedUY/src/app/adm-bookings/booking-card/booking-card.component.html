@@ -1,0 +1,23 @@
+<mat-card>
+  <div class="col-sm">
+    <mat-card-header>
+      <mat-card-title class="text-center">Booking Code: {{booking.id}}</mat-card-title>
+      <mat-card-subtitle class="text-center">{{booking.guestEmail}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="text-center">{{getCheckInOut()}}</p>
+      <p class="text-center">{{booking.accommodationName}} - {{booking.accommodationAddress}}</p>
+      <p class="text-center">{{booking.price}} USD</p>
+    </mat-card-content>
+    <mat-card-content *ngIf="stage">
+      <h2 >{{stage.status}} - {{stage.description}}</h2>
+    </mat-card-content>
+    <mat-card-content *ngIf="stringNoStage">
+      <p class="text-center">{{stringNoStage}}</p>
+    </mat-card-content>
+        <button class="btn btn-info btn-block" mat-button (click)="openBookingStage()"><span class="material-icons">
+          edit
+        </span></button>
+  </div>
+
+  </mat-card>

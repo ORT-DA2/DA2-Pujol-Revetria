@@ -13,17 +13,14 @@ import { SubmittedReview } from '../models/submitedreview.model';
 })
 export class CreateReviewComponent implements OnInit {
 
-  constructor(private api : APIService) {
+  constructor(private api : APIService) { }
 
-   }
-
-  booking : BookingConsult;
+  booking : BookingConsult = null;
   bookingNotFound = null;
   reviewResponse = null;
   reviewError = null;
 
   ngOnInit(): void {
-
   }
 
   public submitReview(form){
@@ -32,7 +29,6 @@ export class CreateReviewComponent implements OnInit {
       Comment : form.value.comment,
       Score : Number(form.value.rating=="" ? 0:form.value.rating),
     }
-    console.log(review);
     this.createReview(review, form);
   }
 

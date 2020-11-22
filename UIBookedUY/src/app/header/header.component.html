@@ -4,8 +4,10 @@
     <span class="nav-link" (click)="playAudio()" routerLink="/create-review" >Create Review</span>
     <span class="nav-link" (click)="playAudio()" routerLink="/create-spot" *ngIf="isAdmin">Touristic Spots</span>
     <span class="nav-link" (click)="playAudio()" routerLink="/adm-accommodation" *ngIf="isAdmin">Accommodations</span>
-    <span class="nav-link" (click)="playAudio()" *ngIf="isAdmin">Bookings</span>
-    <span class="nav-link"  (click)="playAudio()" *ngIf="isAdmin">Administrators</span>
+    <span class="nav-link" (click)="playAudio()" routerLink="/adm-bookings" *ngIf="isAdmin">Bookings</span>
+    <span class="nav-link"  (click)="playAudio()" routerLink="/adm-administrators" *ngIf="isAdmin">Administrators</span>
+    <span class="nav-link"  (click)="playAudio()" routerLink="/report" *ngIf="isAdmin">Report</span>
+    <span class="nav-link"  (click)="playAudio()" routerLink="/import" *ngIf="isAdmin">Import</span>
     <span id="login" class="nav-link" (click)="playAudio()" *ngIf="!isAdmin" routerLink="/login">LogIn</span>
     <span id="logout" class="nav-link" (click)="playAudio()" *ngIf="isAdmin" (click)="logOut()">LogOut</span>
 </mat-toolbar>

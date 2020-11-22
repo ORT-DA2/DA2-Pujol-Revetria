@@ -1,0 +1,15 @@
+<mat-card>
+  <div class="col-sm">
+    <mat-card-header><mat-card-title>{{accommdoation.name}}</mat-card-title></mat-card-header>
+    <mat-card-content>
+      <p>{{accommdoation.address}}</p>
+      <p>{{accommdoation.contactNumber}}</p>
+      <p>{{accommdoation.information}}</p>
+    </mat-card-content>
+        <mat-slide-toggle (change)="changeFull(full.checked)" checked="false" #full>Full</mat-slide-toggle>
+        <button mat-button (click)="deleteAccommdoation()"><span class="material-icons">
+          delete
+          </span></button>
+  </div>
+
+  </mat-card>

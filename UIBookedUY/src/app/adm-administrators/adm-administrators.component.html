@@ -1,0 +1,30 @@
+<div class="container">
+  <form (ngSubmit) = "onSubmit(f)" #f="ngForm" class="form">
+      <label for="email" class="form-label">Insert Email:</label>
+      <input type="text" #email="ngModel" ngModel name="email" class="form-control" id="email" placeholder="Email" required>
+      <label for="email" class="form-label">Insert Password:</label>
+      <input type="password" #password="ngModel" ngModel name="password" class="form-control" id="password" required>
+      <button class="btn btn-primary" type="submit" [disabled] = "!f.valid" >Create Admin</button>
+    </form>
+    <div class="alert alert-danger" *ngIf="createError">
+      <h1>An Error Ocurred</h1>
+      <p>{{createError}}</p>
+      <button class="btn btn-danger" (click) = "changeCreateError()">Okay</button>
+    </div>
+</div>
+<div class="alert alert-danger" *ngIf="renderError">
+  <h1>An Error Ocurred</h1>
+  <p>{{renderError}}</p>
+  <button class="btn btn-danger" (click) = "getAdmins()">Okay</button>
+</div>
+<div class="container" *ngIf="!renderError">
+  <mat-grid-list>
+
+  </mat-grid-list>
+  <mat-card *ngFor="let adminEl of administrators">
+    <div class="row">
+      <app-admin-card [admin] = "adminEl"></app-admin-card>
+    </div>
+  </mat-card>
+</div>
+

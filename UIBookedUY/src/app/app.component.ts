@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnDestroy } from '@angular/core';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'UIBookedUY';
+
+
+  constructor(private auth: AuthService){}
+
+  @HostListener('window:unload', [ '$event' ])
+  unloadHandler(event) {
+    this.auth.logOut();
+
+  }
 
   playAudio(){
     let audio = new Audio();

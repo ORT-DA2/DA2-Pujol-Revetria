@@ -1,4 +1,12 @@
 <div class="container">
+  <mat-grid-list [cols]="5" *ngIf="!renderError">
+    <div *ngFor="let accom of accommodations" class="col">
+      <mat-grid-tile>
+        <app-accommodation-card [accommdoation]=accom (deleteEvent)="childDeleted($event)"></app-accommodation-card>
+      </mat-grid-tile>
+    </div>
+  </mat-grid-list>
+  <hr>
   <h1>Create an Accommodation</h1>
   <div class="alert alert-danger" *ngIf="renderError">
     <h1>An Error Ocurred</h1>
@@ -6,48 +14,59 @@
     <button class="btn btn-danger">Okay</button>
   </div>
   <div *ngIf="!renderError">
-    <form class="form-group" (ngSubmit)="submitAccommodation(accommodationForm)" #accommodationForm="ngForm"
-      name="accommodationForm">
+    <form class="form-group" #accommodationForm="ngForm" name="accommodationForm">
       <div class="form-group row">
         <label class="col-2 col-form-label" for="nameAccommodation">Name:</label>
         <div class="col-10">
           <input type="text" class="form-control" id="nameAccommodation" name="nameAccommodation"
-            #nameAccommodation="ngModel" ngModel placeholder="Enter Accommodation's name">
+            #nameAccommodation="ngModel" ngModel placeholder="Enter Accommodation's name" required>
+          <span class="alert alert-danger" role="alert"
+            *ngIf="!nameAccommodation.valid&&nameAccommodation.touched">Please enter a name</span>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-2 col-form-label" for="addressAccommodation">Address:</label>
         <div class="col-10">
           <input type="text" class="form-control" id="addressAccommodation" name="addressAccommodation"
-            #addressAccommodation="ngModel" ngModel placeholder="Enter Accommodation's address">
+            #addressAccommodation="ngModel" ngModel placeholder="Enter Accommodation's address" required>
+          <span class="alert alert-danger" role="alert"
+            *ngIf="!addressAccommodation.valid&&addressAccommodation.touched">Please enter an address</span>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-2 col-form-label" for="contactSpot">Contact Information:</label>
         <div class="col-10">
-          <input type="text" class="form-control" id="contactSpot" name="contactSpot" #contactSpot="ngModel" ngModel
-            placeholder="Enter Accommodation's contact information">
+          <input type="text" class="form-control" id="contactAccommodation" name="contactAccommodation"
+            #contactAccommodation="ngModel" ngModel placeholder="Enter Accommodation's contact information" required>
+          <span class="alert alert-danger" role="alert"
+            *ngIf="!contactAccommodation.valid&&contactAccommodation.touched">Please enter a contact number</span>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-2 col-form-label" for="example-number-input" class="col-2 col-form-label">Location:</label>
         <div class="col-10">
-          <select class="custom-select" id="inputGroupSelect01">
+          <select class="custom-select" id="spotId" #spotId="ngModel" ngModel name="spotId" required>
             <option *ngFor="let spotEl of Spots" [value]="spotEl.id">{{spotEl.name}}</option>
           </select>
+          <span class="alert alert-danger" role="alert" *ngIf="!spotId.valid&&spotId.touched">Select a spot</span>
         </div>
       </div>
       <div class="form-group row">
         <label step=".1" class="col-2 col-form-label" for="example-number-input"
           class="col-2 col-form-label">Price(USD):</label>
         <div class="col-10">
-          <input class="form-control" type="number" value="0" id="example-number-input">
+          <input class="form-control" type="number" value="0" id="price" #price="ngModel" ngModel name="price" min="0"
+            required>
+          <span class="alert alert-danger" role="alert" *ngIf="!price.valid&&price.touched">Please enter the
+            price</span>
         </div>
       </div>
       <div class="form-group row">
-        <label for="lastname" class="form-label">Information:</label>
-        <textarea rows="3" type="text" #information="ngModel" ngModel name="information"
-         class="form-control" id="information" placeholder="Enter Accommodation information"  required></textarea>
+        <label for="information" class="form-label">Information:</label>
+        <textarea rows="3" type="text" #information="ngModel" ngModel name="information" class="form-control"
+          id="information" placeholder="Enter Accommodation information" required></textarea>
+        <span class="alert alert-danger" role="alert" *ngIf="!information.valid&&information.touched">Please enter the
+          information</span>
       </div>
       <div class="form-row">
         <div class="col-2">
@@ -61,18 +80,22 @@
           <div class="row">
             <ng-container *ngFor="let nameImg of imagesNames">
               <p>{{nameImg.name}}</p>
-              <button type="button" [id] = "nameImg.index" (click)="deleteImage(nameImg.index)" class="btn btn-danger"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-              </svg></button>
+              <button type="button" [id]="nameImg.index" (click)="deleteImage(nameImg.index)"
+                class="btn btn-danger"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash"
+                  fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                  <path fill-rule="evenodd"
+                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                </svg></button>
             </ng-container>
           </div>
           <p class="file-name" *ngIf="!file; else fileName"></p>
           <ng-template #fileName>
             <input readonly value="{{ file?.name }}" class="form-control-plaintext">
             <img src="{{image64}}" alt="Your selected image" class="rounded">
-            <button type="button" class="btn btn-success"(click) = "storeImage()"><svg width="1em" height="1em" viewBox="0 0 16 16"
-                class="bi bi-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <button type="button" class="btn btn-success" (click)="storeImage()"><svg width="1em" height="1em"
+                viewBox="0 0 16 16" class="bi bi-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
                   d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z" />
               </svg>
@@ -81,6 +104,16 @@
 
         </div>
       </div>
+      <div class="alert alert-danger" role="alert" *ngIf="images.length<1&&fileInputTouched">Please enter an image</div>
+      <hr>
+      <div class="alert alert-danger" *ngIf="creationError">
+        <h1>An Error Ocurred</h1>
+        <p>{{creationError}}</p>
+        <button class="btn btn-danger" (click)="creationError=null">Okay</button>
+      </div>
+      <button class="btn btn-primary" [disabled]="!accommodationForm.valid"
+        (click)="submitAccommodation(accommodationForm)" type="submit">Create Review</button>
     </form>
+
   </div>
 </div>

@@ -14,7 +14,6 @@ export class HeaderComponent implements OnInit {
 
   isAdmin: boolean = false;
 
-  eventEmitter = new EventEmitter<boolean>();
 
   constructor(private authService : AuthService, private route : Router,private audio : AudioService) { }
 

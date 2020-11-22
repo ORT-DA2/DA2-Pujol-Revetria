@@ -27,6 +27,16 @@ import { AuthGuard } from './authguard.service';
 import { CommonModule } from "@angular/common";
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { OwlModule } from 'ngx-owl-carousel';
+import { AdmAdministratorsComponent } from './adm-administrators/adm-administrators.component';
+import { AdmBookingsComponent } from './adm-bookings/adm-bookings.component';
+import { AccommodationCardComponent } from './adm-accomodations/accommodation-card/accommodation-card.component';
+import { BookingCardComponent } from './adm-bookings/booking-card/booking-card.component';
+import { BookingStageCreationComponent } from './adm-bookings/booking-stage-creation/booking-stage-creation.component';
+import { BookingCurrentStatusComponent } from './create-review/booking-current-status/booking-current-status.component';
+import { ReportComponent } from './report/report.component';
+import { ModalUnAuthorizedComponent } from './modal-unauthorized/modal-unauthorized.component';
+import { AdminCardComponent } from './adm-administrators/admin-card/admin-card.component';
+import { ImportAccommodationComponent } from './import-accommodation/import-accommodation.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +55,16 @@ import { OwlModule } from 'ngx-owl-carousel';
     CreateReviewComponent,
     CreateSpotComponent,
     AdmAccomodationsComponent,
+    AdmAdministratorsComponent,
+    AdmBookingsComponent,
+    AccommodationCardComponent,
+    BookingCardComponent,
+    BookingStageCreationComponent,
+    BookingCurrentStatusComponent,
+    ReportComponent,
+    ModalUnAuthorizedComponent,
+    AdminCardComponent,
+    ImportAccommodationComponent,
   ],
   imports: [
     CommonModule,

@@ -1,7 +1,9 @@
+import { FocusKeyManager } from '@angular/cdk/a11y';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { APIService } from '../api.service';
 import { Accommodation } from '../models/accommodation.model';
+import { SubmittedAccommodation } from '../models/submittedAccommodation.model';
 import { TouristicSpot } from '../models/touristicSpot.model';
 
 @Component({
@@ -12,7 +14,12 @@ import { TouristicSpot } from '../models/touristicSpot.model';
 export class AdmAccomodationsComponent implements OnInit {
 
   public renderError = null;
-  public accommodations : Accommodation[];
+  public creationError = null;
+
+  public deletedId : number;
+
+  public accommodations : Accommodation[] = [];
+
   public Spots : TouristicSpot[];
 
   constructor(private api : APIService) { }
@@ -22,7 +29,14 @@ export class AdmAccomodationsComponent implements OnInit {
 
   file: File | null = null;
 
+  fileInputTouched : boolean = false
+
   image64;
+
+  childDeleted(event){
+    let index =this.accommodations.findIndex(accom=>accom.id==event);
+    this.accommodations.splice(index,1);
+  }
 
   onClickFileInputButton(): void {
     this.fileInput.nativeElement.click();
@@ -32,6 +46,7 @@ export class AdmAccomodationsComponent implements OnInit {
     const files: { [key: string]: File } = this.fileInput.nativeElement.files;
     this.file = files[0];
     this.getBase64Image();
+    this.fileInputTouched = true;
   }
 
   public getBase64Image() {
@@ -68,12 +83,41 @@ export class AdmAccomodationsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.getAccommodations();
+    this.getAccommodations();
     this.getSpots();
+    console.log(this.images.length)
   }
 
   submitAccommodation(form : NgForm){
+    if(this.images.length<1){
+      this.fileInputTouched = true;
+    }else{
+    let newAccommodation : SubmittedAccommodation = {
+      Address: form.value.addressAccommodation,
+      Contact: form.value.contactAccommodation,
+      Information: form.value.information,
+      Name: form.value.nameAccommodation,
+      SpotId: parseInt(form.value.spotId),
+      images: this.images,
+      price: form.value.price
+    }
+    this.postAccommodation(newAccommodation, form);
+  }
 
+  }
+
+  postAccommodation(newAccommodation: SubmittedAccommodation, form : NgForm) {
+    this.api.postAccommodation(newAccommodation).subscribe(response=>{
+      form.resetForm();
+      this.getAccommodations();
+      this.images = [];
+      this.imagesNames = [];
+      this.countImages = 0;
+      this.creationError = null;
+      this.fileInputTouched = false;
+    },error=>{
+      this.creationError = error.error
+    });
   }
 
   public getSpots(){
@@ -83,6 +127,7 @@ export class AdmAccomodationsComponent implements OnInit {
     },error=>{
       this.renderError = error.message;
     })
+
   }
 
   public getAccommodations(){
@@ -91,6 +136,6 @@ export class AdmAccomodationsComponent implements OnInit {
       this.renderError = null;
     },error=>{
       this.renderError = error.message;
-    })
+    });
   }
 }

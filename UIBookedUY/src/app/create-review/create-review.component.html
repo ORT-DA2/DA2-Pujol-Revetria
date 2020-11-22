@@ -2,8 +2,10 @@
   <form (ngSubmit) = "onSubmit(f)" #f="ngForm" class="form">
     <label for="lastname" class="form-label">Insert Your Booking Code:</label>
   <input type="number" #bookingcode="ngModel" ngModel name="bookingcode" class="form-control" id="bookingcode" placeholder="Booking Code" value="Booking Code"  required>
-  <button class="btn btn-primary" type="submit" [disabled] = "!f.valid" >Book</button>
+  <button class="btn btn-primary" type="submit" [disabled] = "!f.valid" >Check Status</button>
   </form>
+  <hr *ngIf ="booking">
+  <app-booking-current-status *ngIf="booking" [booking] = booking.id ></app-booking-current-status>
   <hr *ngIf ="booking">
   <span class="alert alert-danger" role="alert" *ngIf ="bookingNotFound">{{bookingNotFound.error}}</span>
     <div class = "card bg-light mb-3" *ngIf="booking">

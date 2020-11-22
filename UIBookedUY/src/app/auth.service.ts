@@ -7,7 +7,7 @@ import { APIService } from './api.service';
   providedIn: 'root'
 })
 export class AuthService{
-    constructor(private api : APIService) {
+    constructor() {
     }
 
     eventEmi = new EventEmitter<boolean>();

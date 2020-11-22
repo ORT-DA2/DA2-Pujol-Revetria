@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-sm">
+    <label hidden [id]="admin.id" #adminId></label>
+    <mat-card-header><h3>{{admin.email}}</h3></mat-card-header>
+  </div>
+  <div class="col-sm">
+    <button mat-raised-button color="warn" (click)="deleteAdmin(adminId)"><span class="material-icons">
+      delete
+      </span></button>
+  </div>
+  <div class="alert alert-danger" *ngIf="deleteError">
+    <h1>An Error Ocurred</h1>
+    <p>{{deleteError}}</p>
+    <button class="btn btn-danger" (click) = "changeDeleteErrror()">Okay</button>
+  </div>
+</div>
+

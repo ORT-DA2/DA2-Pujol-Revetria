@@ -1,0 +1,33 @@
+<div class="container">
+  <h1>Report</h1>
+  <form (ngSubmit)="askReport(f)" #f="ngForm" class="form">
+    <select class="custom-select" id="spot" #spot="ngModel" ngModel name="spot" required>
+      <option *ngFor="let spotEl of spots" [value]="spotEl.name">{{spotEl.name}}</option>
+    </select>
+    <label>Enter dates: &nbsp;</label>
+    <mat-form-field appearance="block">
+      <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+        <input matStartDate formControlName="start" placeholder="Start date" disabled>
+        <input matEndDate formControlName="end" placeholder="End date" disabled>
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker disabled="false"></mat-date-range-picker>
+      <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+      <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+    </mat-form-field>
+    <div class="form-row">
+      <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Ask Report</button>
+    </div>
+  </form>
+  <hr *ngIf="reports.length>0">
+  <h2 *ngIf="reports.length>0">Result:</h2>
+  <div *ngFor="let report of reports">
+      <p>{{report.accommodationName}} => {{report.count}}</p>
+  </div>
+  <hr *ngIf="fetchError">
+  <div class="alert alert-danger" *ngIf="fetchError">
+    <h1>An Error Ocurred</h1>
+    <p>{{fetchError}}</p>
+    <button class="btn btn-danger" (click) = "fetchError = null">Okay</button>
+  </div>
+</div>
