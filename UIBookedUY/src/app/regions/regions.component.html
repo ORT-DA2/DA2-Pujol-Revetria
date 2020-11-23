@@ -1,10 +1,11 @@
-<div class="container-fluid">
+<div class="container-fluid bg-primary text-white">
 <div class="alert alert-danger" *ngIf="renderError">
   <h1>An Error Ocurred</h1>
   <p>{{renderError}}</p>
   <button class="btn btn-danger" (click) = "getRegions()">Okay</button>
 </div>
-  <mat-grid-list [cols]="5" *ngIf="!renderError">
+<mat-spinner *ngIf="isFetching"></mat-spinner>
+  <mat-grid-list [cols]="5" rowHeight="1:2" *ngIf="!renderError&&!isFetching">
     <div *ngFor="let regionEl of Regions" class="col">
       <mat-grid-tile>
         <app-region [region]="regionEl"></app-region>

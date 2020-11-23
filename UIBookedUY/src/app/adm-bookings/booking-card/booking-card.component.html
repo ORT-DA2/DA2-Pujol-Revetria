@@ -1,16 +1,13 @@
 <mat-card>
   <div class="col-sm">
-    <mat-card-header>
       <mat-card-title class="text-center">Booking Code: {{booking.id}}</mat-card-title>
       <mat-card-subtitle class="text-center">{{booking.guestEmail}}</mat-card-subtitle>
-    </mat-card-header>
     <mat-card-content>
-      <p class="text-center">{{getCheckInOut()}}</p>
+      <h4 class="text-center">{{getCheckInOut()}}</h4>
       <p class="text-center">{{booking.accommodationName}} - {{booking.accommodationAddress}}</p>
-      <p class="text-center">{{booking.price}} USD</p>
     </mat-card-content>
     <mat-card-content *ngIf="stage">
-      <h2 >{{stage.status}} - {{stage.description}}</h2>
+      <h3 class="text-center">{{stage.status}} - {{stage.description}}</h3>
     </mat-card-content>
     <mat-card-content *ngIf="stringNoStage">
       <p class="text-center">{{stringNoStage}}</p>

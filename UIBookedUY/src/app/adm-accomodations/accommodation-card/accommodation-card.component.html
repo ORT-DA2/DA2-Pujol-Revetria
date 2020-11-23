@@ -6,10 +6,9 @@
       <p>{{accommdoation.contactNumber}}</p>
       <p>{{accommdoation.information}}</p>
     </mat-card-content>
-        <mat-slide-toggle (change)="changeFull(full.checked)" checked="false" #full>Full</mat-slide-toggle>
+        <mat-slide-toggle (change)="changeFull(full.checked)" [checked]="accommdoation.full" #full>Full</mat-slide-toggle>
         <button mat-button (click)="deleteAccommdoation()"><span class="material-icons">
           delete
           </span></button>
   </div>
-
   </mat-card>

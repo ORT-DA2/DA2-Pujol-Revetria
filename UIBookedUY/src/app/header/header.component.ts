@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AudioService } from '../audio-service.service';
 import { AuthService } from '../auth.service';
 import { AuthGuard } from '../authguard.service';
+import {Howl, Howler} from 'howler';
 
 @Component({
   selector: 'app-header',
@@ -13,12 +14,13 @@ import { AuthGuard } from '../authguard.service';
 export class HeaderComponent implements OnInit {
 
   isAdmin: boolean = false;
+  audioPLaying = false;
 
-
-  constructor(private authService : AuthService, private route : Router,private audio : AudioService) { }
+  constructor(private authService : AuthService, private route : Router,private audio : AudioService) {
+  }
 
   ngOnInit(): void {
-    if(localStorage.getItem('token')){
+    if(this.authService.getToken()){
       this.isAdmin = true;
     }else{
       this.isAdmin = false;
@@ -28,16 +30,18 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  printEvent(){
-    console.log(this.isAdmin);
-  }
-
   public logOut(){
     this.authService.logOut();
     this.route.navigate(['/']);
   }
 
+  muteAudio(){
+    this.audio.mute();
+    this.audioPLaying = false;
+  }
+
   playAudio(){
     this.audio.playAudio()
+    this.audioPLaying = true;
   }
 }

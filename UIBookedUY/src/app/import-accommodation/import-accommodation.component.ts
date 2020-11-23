@@ -10,6 +10,8 @@ export class ImportAccommodationComponent implements OnInit {
 
   constructor(private api : APIService) { }
 
+  isFetching = false;
+
   importNames;
 
   ngOnInit(): void {
@@ -17,11 +19,13 @@ export class ImportAccommodationComponent implements OnInit {
   }
 
   getImportNames(){
+    this.isFetching = true;
     this.api.fetchImportNames().subscribe(response=>{
       this.importNames = response;
       console.log(response);
+      this.isFetching = false;
     },error=>{
-
+      this.isFetching = false;
     })
   }
 

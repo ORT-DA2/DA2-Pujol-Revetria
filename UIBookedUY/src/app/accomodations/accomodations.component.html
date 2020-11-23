@@ -1,10 +1,11 @@
 <div class="container">
+  <mat-spinner *ngIf="isFetching"></mat-spinner>
   <div class="row">
       <div class="col-12">
-        <div class="grid" *ngIf="!renderError">
+        <div class="grid" *ngIf="!renderError&&!isFetching">
           <ng-container *ngFor="let accommodationEl of accommodations">
             <mat-card>
-              <app-accomodation [accommodation]="accommodationEl"></app-accomodation>
+              <app-accomodation [slides]="imagesToSlides(accommodationEl.images)" [accommodation]="accommodationEl"></app-accomodation>
             </mat-card>
           </ng-container>
       </div>

@@ -1,5 +1,6 @@
 <div class="container">
-  <mat-grid-list [cols]="5" *ngIf="!renderError">
+  <mat-spinner *ngIf="isFetching"></mat-spinner>
+  <mat-grid-list [cols]="5" *ngIf="!renderError&&!isFetching">
     <div *ngFor="let accom of accommodations" class="col">
       <mat-grid-tile>
         <app-accommodation-card [accommdoation]=accom (deleteEvent)="childDeleted($event)"></app-accommodation-card>
@@ -11,7 +12,7 @@
   <div class="alert alert-danger" *ngIf="renderError">
     <h1>An Error Ocurred</h1>
     <p>{{renderError}}</p>
-    <button class="btn btn-danger">Okay</button>
+    <button class="btn btn-danger" (click)="getSpots(); getAccommodations()">Okay</button>
   </div>
   <div *ngIf="!renderError">
     <form class="form-group" #accommodationForm="ngForm" name="accommodationForm">

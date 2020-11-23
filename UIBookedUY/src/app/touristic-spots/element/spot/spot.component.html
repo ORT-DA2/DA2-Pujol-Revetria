@@ -1,9 +1,9 @@
-<div class = "card bg-light mb-3">
-  <a routerLink="/accommodations/{{Spot.id}}">
+<div class = "card">
+  <button mat-raised-button routerLink="/accommodations/{{Spot.id}}">
     <div class = "card-body">
       <img class="card-img-top" src="{{Spot.image}}" alt="{{Spot.description}}">
       <h3 class="card-title">{{Spot.name}}</h3>
       <p class="card-text">{{Spot.description}}</p>
     </div>
-  </a>
+  </button>
 </div>

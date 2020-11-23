@@ -11,7 +11,7 @@ import { Region } from '../models/region.model';
 export class RegionsComponent implements OnInit {
 
   renderError = null;
-
+  isFetching = false;
   Regions : Region[];
 
   constructor(private api : APIService) { }
@@ -23,10 +23,13 @@ export class RegionsComponent implements OnInit {
 
 
   public getRegions(){
+    this.isFetching = true;
     this.api.fetchRegions().subscribe(response=>{
       this.Regions = response;
+      this.isFetching = false;
     },error=>{
       this.renderError = error.message;
+      this.isFetching = false;
     })
   }
 

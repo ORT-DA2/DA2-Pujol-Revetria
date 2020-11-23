@@ -14,7 +14,9 @@ export class AccomodationsComponent implements OnInit {
 
   public renderError = null;
   public accommodations : Accommodation[];
-  public spotId : number
+  public spotId : number;
+  isFetching = false;
+
 
 
   constructor(private api : APIService, private route : ActivatedRoute ) { }
@@ -24,11 +26,23 @@ export class AccomodationsComponent implements OnInit {
     this.getAccommodations();
   }
 
+  imagesToSlides(images : string[]){
+    let slides = [];
+    images.forEach(img=>{
+      slides.push({'image':img});
+    })
+    return slides;
+  }
+
   public getAccommodations(){
+    this.isFetching = true;
+
     this.api.fetchAccommodationsBySpot(this.spotId).subscribe(response=>{
       this.accommodations = response;
       this.renderError = null;
+      this.isFetching = false;
     },error=>{
+      this.isFetching = false;
       this.renderError = error.message;
     })
   }

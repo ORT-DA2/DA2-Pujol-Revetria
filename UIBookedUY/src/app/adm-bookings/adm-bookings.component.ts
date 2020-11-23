@@ -14,16 +14,24 @@ export class AdmBookingsComponent implements OnInit {
 
   bookings : BookingConsult[] = []
   renderError = null;
+  isFetching = false;
+
 
   ngOnInit(): void {
     this.getAllBookings();
   }
 
   getAllBookings(){
+    this.isFetching = true;
+
     this.api.fetchAllBookings().subscribe(response=>{
       this.bookings = response;
       this.renderError = null;
+      this.isFetching = false;
+
     },error=>{
+      this.isFetching = false;
+
       this.renderError = error.error;
     })
   }

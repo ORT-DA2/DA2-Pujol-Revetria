@@ -18,9 +18,6 @@
   <button class="btn btn-danger" (click) = "getAdmins()">Okay</button>
 </div>
 <div class="container" *ngIf="!renderError">
-  <mat-grid-list>
-
-  </mat-grid-list>
   <mat-card *ngFor="let adminEl of administrators">
     <div class="row">
       <app-admin-card [admin] = "adminEl"></app-admin-card>

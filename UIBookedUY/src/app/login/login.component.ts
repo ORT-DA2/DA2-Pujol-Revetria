@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { APIService } from '../api.service';
 import { AuthService } from '../auth.service';
@@ -16,24 +16,29 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  adminNotFound = null;
+  loginError = null;
+
   onClick(username: string, password : string): void {
     this.login(username,password);
   }
 
   public login(username: string, password:string){
-    //let login = this.authservice.login(username,password);
     this.api.tryLogin(username,password).subscribe(response=>{
       localStorage.setItem('token',response.token);
       this.authservice.login();
+      this.adminNotFound = null;
+      this.loginError = null;
       this.route.navigate(['/']);
     }, error=>{
+      if(error.status = 404){
+        this.adminNotFound = error.error;
+        this.loginError = null;
+      }else{
+        this.loginError = error.error;
+        this.adminNotFound = null;
+      }
       this.authservice.logOut();
     })
-    /*if(login){
-      console.log(login);
-      this.eventClicked.emit(true);
-    }else{
-      this.eventClicked.emit(false);
-    }*/
   }
 }

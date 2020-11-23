@@ -21,6 +21,8 @@ export class AdmAccomodationsComponent implements OnInit {
   public accommodations : Accommodation[] = [];
 
   public Spots : TouristicSpot[];
+  isFetching = false;
+
 
   constructor(private api : APIService) { }
 
@@ -131,11 +133,15 @@ export class AdmAccomodationsComponent implements OnInit {
   }
 
   public getAccommodations(){
+    this.isFetching = true;
+
     this.api.fetchAllAccommodations().subscribe(response=>{
       this.accommodations = response;
       this.renderError = null;
+      this.isFetching = false;
     },error=>{
       this.renderError = error.message;
+      this.isFetching = false;
     });
   }
 }

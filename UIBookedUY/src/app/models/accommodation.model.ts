@@ -8,6 +8,7 @@ export class Accommodation{
   public information : string;
   public price : number;
   public score : number;
+  public full : boolean;
   public images : string[];
   public reviews : Review[];
 }

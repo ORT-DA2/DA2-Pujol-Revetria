@@ -31,12 +31,13 @@ export class CreateSpotComponent implements OnInit {
 
   submitSpot(form: NgForm) {
     if(this.file && this.file.type.match('image.*')){
+      console.log(form.value);
       let newSpot :SubmittedSpot = {
         categories: form.value.categoriesSelect,
         description: form.value.desc,
         image: this.image64,
         name: form.value.nameSpot,
-        regionId: form.value.regionSelect,
+        regionId: form.value.regionsSelect,
       }
       this.postSpot(newSpot);
     }

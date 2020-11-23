@@ -1,5 +1,7 @@
 <div class="container-fluid p-3 my-3 bg-primary text-white">
-  <mat-grid-list [cols]="4" *ngIf="!renderError">
+  <mat-spinner *ngIf="isFetching"></mat-spinner>
+
+  <mat-grid-list [cols]="4" *ngIf="!renderError&&!isFetching">
     <div *ngFor="let book of bookings" class="col" color="black">
       <mat-grid-tile>
         <app-booking-card [booking]=book ></app-booking-card>

@@ -24,6 +24,8 @@ export class TouristicSpotsComponent implements OnInit {
   Spots : TouristicSpot[];
   renderErrorCategories = null;
   renderErrorSpots = null;
+  isFetching = false;
+
 
   Categories : Category[];
 
@@ -64,11 +66,14 @@ export class TouristicSpotsComponent implements OnInit {
   };
 
   public getSpots(categories){
+    this.isFetching = true;
     this.api.fetchSpots(this.regionId,categories).subscribe(response=>{
       this.Spots = response;
       this.renderErrorSpots = null;
+      this.isFetching = false;
   },error=>{
       this.renderErrorSpots = error.message;
+      this.isFetching = false;
   });
 }
 }

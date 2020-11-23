@@ -1,8 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="col-2" *ngIf="!renderErrorCategories">
+      <h2>Categories</h2>
       <div *ngFor="let catEl of Categories" >
-        <input type="checkbox" [(ngModel)]="catEl.checked" (change)="searchByCategories()">{{catEl.name}}
+        <mat-checkbox type="checkbox" [(ngModel)]="catEl.checked" (change)="searchByCategories()">{{catEl.name}}</mat-checkbox>
       </div>
       <div class="alert alert-danger" *ngIf="renderErrorCategories">
         <h1>An Error Ocurred</h1>

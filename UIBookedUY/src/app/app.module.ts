@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegionsComponent } from './regions/regions.component';
@@ -78,7 +78,7 @@ import { ImportAccommodationComponent } from './import-accommodation/import-acco
     RatingModule,
     MatCarouselModule
   ],
-  providers: [AuthService, AuthGuard,AudioService],
+  providers: [AuthService, AuthGuard, AudioService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

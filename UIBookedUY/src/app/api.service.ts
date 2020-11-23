@@ -16,6 +16,8 @@ import { TouristicSpot } from './models/touristicSpot.model';
 import { SubmittedAccommodation } from './models/submittedAccommodation.model';
 import { BookingStage } from './models/bookingstage.model';
 import { Report } from './models/report.model';
+import { ModalUnAuthorizedComponent } from './modal-unauthorized/modal-unauthorized.component';
+import { MatDialog } from '@angular/material/dialog';
 
 class Token{
   token : string
@@ -27,8 +29,17 @@ class Token{
 export class APIService {
 
 
+
+
   url = "https://localhost:5001/api/";
-  constructor(private http : HttpClient, private auth : AuthService) { }
+  constructor(private http : HttpClient, private auth : AuthService, public dialog: MatDialog) { }
+
+  openDialog(errorMsg): void {
+    const dialogRef = this.dialog.open(ModalUnAuthorizedComponent, {
+      width: '250px',
+      data: {error: errorMsg}
+    });
+  }
 
   fetchBookingStatus(id: number) {
     return this.http.get<BookingStage>(this.url + "bookingstages/" + id).pipe(
@@ -72,7 +83,11 @@ export class APIService {
   }
 
   postSpot(spot : SubmittedSpot){
-    return this.http.post(this.url + "touristicspots",spot);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: this.auth.getToken()
+      })}
+    return this.http.post(this.url + "touristicspots",spot,httpOptions);
   }
 
   postStage(stage : BookingStage){
@@ -80,7 +95,12 @@ export class APIService {
       headers: new HttpHeaders({
         Authorization: this.auth.getToken()
       })}
-    return this.http.post(this.url + "bookingstages",stage,httpOptions);
+    return this.http.post(this.url + "bookingstages",stage,httpOptions).pipe(catchError(error=>{
+      if(error.status==403 || error.status==401){
+        this.openDialog(error.error);
+      }
+      return error;
+    }));
   }
 
   postAdmin(admin : SubmittedAdmin){
@@ -88,7 +108,12 @@ export class APIService {
       headers: new HttpHeaders({
         Authorization: this.auth.getToken()
       })}
-    return this.http.post(this.url + "administrators",admin,httpOptions);
+    return this.http.post(this.url + "administrators",admin,httpOptions).pipe(catchError(error=>{
+      if(error.status==403 || error.status==401){
+        this.openDialog(error.error);
+      }
+      return error;
+    }));
   }
 
   postBooking(booking){
@@ -141,7 +166,12 @@ export class APIService {
       headers: new HttpHeaders({
         Authorization: this.auth.getToken()
       })}
-    return this.http.get<Admin[]>(this.url + "administrators",httpOptions);
+    return this.http.get<Admin[]>(this.url + "administrators",httpOptions).pipe(catchError(error=>{
+      if(error.status==403 || error.status==401){
+        this.openDialog(error.error);
+      }
+      return error;
+    }));
   }
 
   deleteAdmin(id: number){
@@ -149,7 +179,12 @@ export class APIService {
       headers: new HttpHeaders({
         Authorization: this.auth.getToken()
       })}
-    return this.http.delete(this.url + "administrators/" + id,httpOptions);
+    return this.http.delete(this.url + "administrators/" + id,httpOptions).pipe(catchError(error=>{
+      if(error.status==403 || error.status==401){
+        this.openDialog(error.error);
+      }
+      return error;
+    }));
   }
 
   deleteAccommodation(id: number){
@@ -157,7 +192,12 @@ export class APIService {
       headers: new HttpHeaders({
         Authorization: this.auth.getToken()
       })}
-    return this.http.delete(this.url + "accommodations/" + id,httpOptions);
+    return this.http.delete(this.url + "accommodations/" + id,httpOptions).pipe(catchError(error=>{
+      if(error.status==403 || error.status==401){
+        this.openDialog(error.error);
+      }
+      return error;
+    }));
   }
 
   updateAccommodationStatus(id : number,status : boolean){
@@ -165,7 +205,12 @@ export class APIService {
       headers: new HttpHeaders({
         Authorization: this.auth.getToken()
       })}
-    return this.http.put(this.url + "accommodations/" + id,status,httpOptions);
+    return this.http.put(this.url + "accommodations/" + id,status,httpOptions).pipe(catchError(error=>{
+      if(error.status==403 || error.status==401){
+        this.openDialog(error.error);
+      }
+      return error;
+    }));
   }
 
 }

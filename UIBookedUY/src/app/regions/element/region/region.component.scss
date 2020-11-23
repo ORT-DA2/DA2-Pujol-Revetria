@@ -1,3 +1,27 @@
 button{
   height: 100%;
+  transition-property: transform, background-color;
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
+  -webkit-transition-property: transform;
+  -webkit-transition-duration: 0.5s;
+  -webkit-transition-timing-function: linear;
+  -ms-transition-property: transform;
+  -ms-transition-duration: 0.5s;
+  -ms-transition-timing-function: linear;
+}
+
+h1 { color:whitesmoke; font-size: 36px; font-family: 'Signika', sans-serif; padding-bottom: 10px; }
+
+button:hover{
+  background-color: lightcyan;
+  h1 {color: black;}
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+
+.imag{
+
 }

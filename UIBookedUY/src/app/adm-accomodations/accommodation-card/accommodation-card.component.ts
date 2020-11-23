@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { APIService } from 'src/app/api.service';
+import { ModalUnAuthorizedComponent } from 'src/app/modal-unauthorized/modal-unauthorized.component';
 import { Accommodation } from 'src/app/models/accommodation.model';
 
 @Component({
@@ -9,7 +11,7 @@ import { Accommodation } from 'src/app/models/accommodation.model';
 })
 export class AccommodationCardComponent implements OnInit {
 
-  constructor(private api : APIService) { }
+  constructor(private api : APIService, public dialog: MatDialog) { }
 
   @Input() accommdoation : Accommodation;
 
@@ -18,11 +20,17 @@ export class AccommodationCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  openDialog(errorMsg): void {
+    const dialogRef = this.dialog.open(ModalUnAuthorizedComponent, {
+      width: '250px',
+      data: {error: errorMsg}
+    });
+  }
+
   changeFull(status : boolean){
     this.api.updateAccommodationStatus(this.accommdoation.id,status).subscribe(response=>{
 
     },error=>{
-
     })
   }
 
@@ -30,7 +38,6 @@ export class AccommodationCardComponent implements OnInit {
    this.api.deleteAccommodation(this.accommdoation.id).subscribe(response=>{
     this.deleteEvent.emit(this.accommdoation.id);
    },error=>{
-
    });
   }
 
