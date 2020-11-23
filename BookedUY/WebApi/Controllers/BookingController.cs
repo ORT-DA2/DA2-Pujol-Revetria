@@ -3,6 +3,7 @@ using Domain;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using WebApi.DTOs;
+using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
@@ -17,6 +18,7 @@ namespace WebApi.Controllers
         }
 
         // GET: api/<BookingController>
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpGet]
         public IActionResult Get()
         {

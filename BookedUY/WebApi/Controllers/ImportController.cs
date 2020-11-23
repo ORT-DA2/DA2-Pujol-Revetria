@@ -18,7 +18,7 @@ namespace WebApi.Controllers
             return Ok(this.importLogic.GetNames());
         }
 
-        [HttpGet("/{{name}}")]
+        [HttpGet("{name}")]
         public IActionResult GetParameters([FromRoute]string name)
         {
             return Ok(this.importLogic.GetParameters(name));

@@ -96,7 +96,15 @@ namespace BusinessLogic
         public AccommodationModelOut Import(ImporterModel import)
         {
             var implementation = ObtainImplementation(import.Name);
-            var parse = implementation.Import(import.Parameters);
+            var parse = new AccommodationParse();
+            try
+            {
+                parse = implementation.Import(import.Parameters);
+            }
+            catch
+            {
+                throw new ImportParseException();
+            }
             CheckTouristicSpot(parse.TouristicSpot);
             CheckRegion(parse.TouristicSpot.RegionId);
             CheckCategories(parse.TouristicSpot.Categories);
