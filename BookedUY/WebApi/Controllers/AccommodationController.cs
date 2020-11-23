@@ -17,7 +17,7 @@ namespace WebApi.Controllers
         {
             this.accommodationLogic = accommodationLogic;
         }
-
+        [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpGet]
         public IActionResult Get()
         {
@@ -64,9 +64,9 @@ namespace WebApi.Controllers
         // PUT api/<AcomodationController>/5
         [ServiceFilter(typeof(AuthorizationFilter))]
         [HttpPut("{id}")]
-        public IActionResult UpdateCapacity(int id, [FromBody] bool status)
+        public IActionResult UpdateCapacity(int id, [FromBody] StatusModelIn statusModelIn)
         {
-            this.accommodationLogic.UpdateCapacity(id, status);
+            this.accommodationLogic.UpdateCapacity(id, statusModelIn.Status);
             return Ok("Accommodation Updated");
         }
 

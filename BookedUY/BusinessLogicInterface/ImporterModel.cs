@@ -9,6 +9,5 @@ namespace BusinessLogicInterface
     {
         public string Name { get; set; }
         public List<ValueParameter> Parameters { get; set; }
-        //
     }
 }

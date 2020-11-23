@@ -18,6 +18,12 @@ namespace Domain
         { }
     }
 
+    public class ImportParseException : APIException
+    {
+        public ImportParseException() : base("The file selected could not be parsed, please read the documentation to keep with the format.", 400)
+        { }
+    }
+
     public class AlreadyExistsException : APIException
     {
         public AlreadyExistsException(string entity) : base(String.Format("The {0} Already Exists", entity), 400)

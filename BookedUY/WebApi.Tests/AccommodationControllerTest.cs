@@ -124,7 +124,7 @@ namespace WebApi.Tests
             mockAccommodation.Setup(p => p.UpdateCapacity(It.IsAny<int>(), It.IsAny<bool>()));
             var controller = new AccommodationController(mockAccommodation.Object);
 
-            controller.UpdateCapacity(5, false);
+            controller.UpdateCapacity(5, new StatusModelIn() { Status = false }) ;
 
             mockAccommodation.VerifyAll();
         }
