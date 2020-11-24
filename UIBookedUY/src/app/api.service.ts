@@ -18,6 +18,8 @@ import { BookingStage } from './models/bookingstage.model';
 import { Report } from './models/report.model';
 import { ModalUnAuthorizedComponent } from './modal-unauthorized/modal-unauthorized.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ImportParameter } from './models/importparameters.model';
+import { ImporterSubmitted } from './models/impoertersubmitted.model';
 
 class Token{
   token : string
@@ -60,6 +62,14 @@ export class APIService {
         Authorization: this.auth.getToken()
       })}
     return this.http.post(this.url + "accommodations",newAccommodation,httpOptions);
+  }
+
+  postImporter(imp: ImporterSubmitted) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: this.auth.getToken()
+      })}
+    return this.http.post(this.url + "importers",imp,httpOptions);
   }
 
   tryLogin(email, password){
@@ -125,7 +135,11 @@ export class APIService {
   }
 
   fetchAllBookings(){
-    return this.http.get<BookingConsult[]>(this.url + "bookings");
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: this.auth.getToken()
+      })}
+    return this.http.get<BookingConsult[]>(this.url + "bookings",httpOptions);
   }
 
   fetchAccommodation(accommodationId){
@@ -133,7 +147,11 @@ export class APIService {
   }
 
   fetchAllSpots(){
-    return this.http.get<TouristicSpot[]>(this.url + "touristicspots");
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: this.auth.getToken()
+      })}
+    return this.http.get<TouristicSpot[]>(this.url + "touristicspots",httpOptions);
   }
 
   fetchAccommodationsBySpot(spotId: number){
@@ -141,15 +159,35 @@ export class APIService {
   }
 
   fetchReport(spotName: string, startDate : string, endDate : string){
-    return this.http.get<Report[]>(this.url + "reports?touristicSpotName="+spotName +"&start="+ startDate +"&end="+ endDate);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: this.auth.getToken()
+      })}
+    return this.http.get<Report[]>(this.url + "reports?touristicSpotName="+spotName +"&start="+ startDate +"&end="+ endDate,httpOptions);
   }
 
   fetchImportNames(){
-    return this.http.get(this.url + "importers");
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: this.auth.getToken()
+      })}
+    return this.http.get<string[]>(this.url + "importers",httpOptions);
+  }
+
+  fetchParameters(nameImporter : string){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: this.auth.getToken()
+      })}
+    return this.http.get<ImportParameter[]>(this.url + "importers/" + nameImporter,httpOptions);
   }
 
   fetchAllAccommodations(){
-    return this.http.get(this.url + "accommodations").pipe(
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: this.auth.getToken()
+      })}
+    return this.http.get(this.url + "accommodations",httpOptions).pipe(
       map(data=>{
         const accoms : Accommodation[] = [];
         for(const key in data){
@@ -205,7 +243,7 @@ export class APIService {
       headers: new HttpHeaders({
         Authorization: this.auth.getToken()
       })}
-    return this.http.put(this.url + "accommodations/" + id,status,httpOptions).pipe(catchError(error=>{
+    return this.http.put(this.url + "accommodations/" + id,{"status":status},httpOptions).pipe(catchError(error=>{
       if(error.status==403 || error.status==401){
         this.openDialog(error.error);
       }

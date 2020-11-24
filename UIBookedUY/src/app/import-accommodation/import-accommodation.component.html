@@ -1,1 +1,33 @@
-<p>{{importNames}}</p>
+<div class="container">
+  <form (ngSubmit) = "onSubmit(importerForm)" #importerForm="ngForm" class="form">
+    <select class="custom-select" id="importNamesSelect"  name="importNamesSelect"
+     ngModel (change) = "getParameters(importNamesSelect.value)"  #importNamesSelect required>
+      <option *ngFor="let name of importNames" [value]="name">{{name}}</option>
+    </select>
+    <hr *ngIf="paramters.length>0">
+    <div class="alert alert-danger" *ngIf="fetchError">
+      <h1>An Error Ocurred</h1>
+      <p>{{fetchError}}</p>
+      <button class="btn btn-danger" (click)="fetchError=null">Okay</button>
+    </div>
+    <div *ngFor="let parameter of paramters">
+      <div *ngIf="isString(parameter.type)"> {{parameter.name}}
+        <input class="form-control" [name] = "parameter.name" ngModel type="text" required>
+      </div>
+      <div *ngIf="isNumber(parameter.type)"> {{parameter.name}}
+        <input class="form-control" [name] = "parameter.name" ngModel type="text" required>
+      </div>
+      <div *ngIf="isBoolean(parameter.type)"> {{parameter.name}}
+        <input class="form-control" type="checkbox" [name] = "parameter.name" ngModel required>
+      </div>
+    </div>
+    <hr *ngIf="paramters.length>0">
+    <button class="btn btn-primary" type="submit" [disabled] = "!importerForm.valid" >Create Admin</button>
+  </form>
+  <div class="alert alert-danger" *ngIf="importError">
+    <h1>An Error Ocurred</h1>
+    <p>{{importError}}</p>
+    <button class="btn btn-danger" (click)="importError=null">Okay</button>
+  </div>
+</div>
+
