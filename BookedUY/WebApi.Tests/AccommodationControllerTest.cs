@@ -181,5 +181,39 @@ namespace WebApi.Tests
             mockAccommodation.VerifyAll();
             Assert.AreEqual(200, result.StatusCode);
         }
+
+        [TestMethod]
+        public void TestAddReview()
+        {
+            Booking booking = new Booking()
+            {
+                HeadGuest = new Tourist
+                {
+                    Name = "a",
+                    LastName = "b"
+                }
+            };
+            Review review = new Review()
+            {
+                BookingId = 1,
+                Comment = "ppp",
+                Score = 4,
+                Booking = booking
+            };
+            ReviewModelIn reviewModelIn = new ReviewModelIn()
+            {
+                BookingId = review.BookingId,
+                Comment = review.Comment,
+                Score = review.Score
+            };
+            var mockAccommodation = new Mock<IAccommodationLogic>(MockBehavior.Strict);
+            mockAccommodation.Setup(p => p.AddReview(It.IsAny<Review>())).Returns(review);
+            var controller = new AccommodationController(mockAccommodation.Object);
+
+            var result = controller.CreateReview(reviewModelIn) as OkObjectResult;
+
+            mockAccommodation.VerifyAll();
+            Assert.AreEqual(200, result.StatusCode);
+        }
     }
 }
