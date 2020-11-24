@@ -24,6 +24,12 @@ namespace Domain
         { }
     }
 
+    public class NoImplementationException : APIException
+    {
+        public NoImplementationException() : base("There's no valid implementation in the DLL folder", 400)
+        { }
+    }
+
     public class AlreadyExistsException : APIException
     {
         public AlreadyExistsException(string entity) : base(String.Format("The {0} Already Exists", entity), 400)

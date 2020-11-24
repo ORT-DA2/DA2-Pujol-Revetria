@@ -45,15 +45,15 @@ namespace BusinessLogic
                 Assembly assemblyLoaded = Assembly.LoadFile(file.FullName);
                 var loadedImplementation = assemblyLoaded.GetTypes().Where(t => typeof(IImport).IsAssignableFrom(t) && t.IsClass).FirstOrDefault();
 
-                if (loadedImplementation == null)
-                {
-                    Console.WriteLine("Nadie implementa la interfaz: {0} en el assembly: {1}", nameof(IImport), file.FullName);
-                }
-                else
+                if (loadedImplementation != null)
                 {
                     var implementation = Activator.CreateInstance(loadedImplementation) as IImport;
                     names.Add(implementation.GetName());
                 }
+            }
+            if (names.Count == 0)
+            {
+                throw new NoImplementationException(); 
             }
             return names;
         }
@@ -190,11 +190,11 @@ namespace BusinessLogic
                     {
                         return implementation;
                     }
-                    else
-                    {
-                        throw new NotFoundException($"Importer with name {name}");
-                    }
                 }
+            }
+            if (files.Count() > 0)
+            {
+                throw new NotFoundException($"Importer with name {name}");
             }
             throw new NotFoundException("dll");
         }
