@@ -43,6 +43,7 @@ export class APIService {
     });
   }
 
+
   fetchBookingStatus(id: number) {
     return this.http.get<BookingStage>(this.url + "bookingstages/" + id).pipe(
       map(data=>{
@@ -61,7 +62,12 @@ export class APIService {
       headers: new HttpHeaders({
         Authorization: this.auth.getToken()
       })}
-    return this.http.post(this.url + "accommodations",newAccommodation,httpOptions);
+    return this.http.post(this.url + "accommodations",newAccommodation,httpOptions).pipe(catchError(error=>{
+      if(error.status==403 || error.status==401){
+        this.openDialog(error.error);
+      }
+      throw error;
+    }));
   }
 
   postImporter(imp: ImporterSubmitted) {
@@ -97,7 +103,12 @@ export class APIService {
       headers: new HttpHeaders({
         Authorization: this.auth.getToken()
       })}
-    return this.http.post(this.url + "touristicspots",spot,httpOptions);
+    return this.http.post(this.url + "touristicspots",spot,httpOptions).pipe(catchError(error=>{
+      if(error.status==403 || error.status==401){
+        this.openDialog(error.error);
+      }
+      throw error;
+    }));
   }
 
   postStage(stage : BookingStage){
@@ -109,7 +120,7 @@ export class APIService {
       if(error.status==403 || error.status==401){
         this.openDialog(error.error);
       }
-      return error;
+      throw error;
     }));
   }
 
@@ -122,7 +133,7 @@ export class APIService {
       if(error.status==403 || error.status==401){
         this.openDialog(error.error);
       }
-      return error;
+      throw error;
     }));
   }
 
@@ -139,7 +150,12 @@ export class APIService {
       headers: new HttpHeaders({
         Authorization: this.auth.getToken()
       })}
-    return this.http.get<BookingConsult[]>(this.url + "bookings",httpOptions);
+    return this.http.get<BookingConsult[]>(this.url + "bookings",httpOptions).pipe(catchError(error=>{
+      if(error.status==403 || error.status==401){
+        this.openDialog(error.error);
+      }
+      throw error;
+    }));
   }
 
   fetchAccommodation(accommodationId){
@@ -151,7 +167,12 @@ export class APIService {
       headers: new HttpHeaders({
         Authorization: this.auth.getToken()
       })}
-    return this.http.get<TouristicSpot[]>(this.url + "touristicspots",httpOptions);
+    return this.http.get<TouristicSpot[]>(this.url + "touristicspots",httpOptions).pipe(catchError(error=>{
+      if(error.status==403 || error.status==401){
+        this.openDialog(error.error);
+      }
+      throw error;
+    }));
   }
 
   fetchAccommodationsBySpot(spotId: number){
@@ -163,7 +184,12 @@ export class APIService {
       headers: new HttpHeaders({
         Authorization: this.auth.getToken()
       })}
-    return this.http.get<Report[]>(this.url + "reports?touristicSpotName="+spotName +"&start="+ startDate +"&end="+ endDate,httpOptions);
+    return this.http.get<Report[]>(this.url + "reports?touristicSpotName="+spotName +"&start="+ startDate +"&end="+ endDate,httpOptions).pipe(catchError(error=>{
+      if(error.status==403 || error.status==401){
+        this.openDialog(error.error);
+      }
+      throw error;
+    }));
   }
 
   fetchImportNames(){
@@ -171,7 +197,12 @@ export class APIService {
       headers: new HttpHeaders({
         Authorization: this.auth.getToken()
       })}
-    return this.http.get<string[]>(this.url + "importers",httpOptions);
+    return this.http.get<string[]>(this.url + "importers",httpOptions).pipe(catchError(error=>{
+      if(error.status==403 || error.status==401){
+        this.openDialog(error.error);
+      }
+      throw error;
+    }));
   }
 
   fetchParameters(nameImporter : string){
@@ -179,7 +210,12 @@ export class APIService {
       headers: new HttpHeaders({
         Authorization: this.auth.getToken()
       })}
-    return this.http.get<ImportParameter[]>(this.url + "importers/" + nameImporter,httpOptions);
+    return this.http.get<ImportParameter[]>(this.url + "importers/" + nameImporter,httpOptions).pipe(catchError(error=>{
+      if(error.status==403 || error.status==401){
+        this.openDialog(error.error);
+      }
+      throw error;
+    }));
   }
 
   fetchAllAccommodations(){
@@ -196,6 +232,11 @@ export class APIService {
           }
         }
         return accoms;
+    }),catchError(error=>{
+      if(error.status==403 || error.status==401){
+        this.openDialog(error.error);
+      }
+      throw error;
     }));
   }
 
@@ -208,7 +249,7 @@ export class APIService {
       if(error.status==403 || error.status==401){
         this.openDialog(error.error);
       }
-      return error;
+      throw error;
     }));
   }
 
@@ -221,7 +262,7 @@ export class APIService {
       if(error.status==403 || error.status==401){
         this.openDialog(error.error);
       }
-      return error;
+      throw error;
     }));
   }
 
@@ -234,7 +275,7 @@ export class APIService {
       if(error.status==403 || error.status==401){
         this.openDialog(error.error);
       }
-      return error;
+      throw error;
     }));
   }
 
@@ -247,7 +288,7 @@ export class APIService {
       if(error.status==403 || error.status==401){
         this.openDialog(error.error);
       }
-      return error;
+      throw error;
     }));
   }
 

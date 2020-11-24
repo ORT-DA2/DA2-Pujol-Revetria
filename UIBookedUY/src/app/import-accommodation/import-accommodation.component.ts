@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { format } from 'path';
 import { APIService } from '../api.service';
 import { ImporterSubmitted, ParameterOut } from '../models/impoertersubmitted.model';
 import { ImportParameter } from '../models/importparameters.model';
