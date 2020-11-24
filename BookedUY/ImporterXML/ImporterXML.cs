@@ -1,18 +1,16 @@
 ﻿using ImportInterface;
 using ImportInterface.Parse;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Xml;
 
-namespace JSONImporter
+namespace ImporterXML
 {
-    public class ImporterJSON : IImport
+    public class ImporterXML : IImport
     {
         public string GetName()
         {
-            return "JSON";
+            return "XML";
         }
 
         public List<TypeParameter> GetParameters()
@@ -28,10 +26,15 @@ namespace JSONImporter
         }
 
         public AccommodationParse Import(List<ValueParameter> parameters)
-        {   
+        {
             string path = parameters[0].Value;
-            AccommodationParse accommodationParse = JsonConvert.DeserializeObject<AccommodationParse>(File.ReadAllText(@path));
+            var accommodationParse = new AccommodationParse();
+            var xmlReader = XmlReader.Create(path);
+            var serializer = new System.Xml.Serialization.XmlSerializer(typeof(AccommodationParse));
+            accommodationParse = (AccommodationParse)serializer.Deserialize(xmlReader);
+            xmlReader.Close();
             return accommodationParse;
         }
     }
 }
+

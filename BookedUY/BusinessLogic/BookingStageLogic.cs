@@ -3,6 +3,7 @@ using DataAccessInterface;
 using Domain;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessLogic
 {
@@ -62,20 +63,7 @@ namespace BusinessLogic
 
         private BookingStage GetCurrentStatus(IEnumerable<BookingStage> bookingStages)
         {
-            BookingStage bookingStage = new BookingStage();
-            bookingStage.Id = -1;
-            foreach (BookingStage bs in bookingStages)
-            {
-                if (bs.Id > bookingStage.Id)
-                {
-                    bookingStage = bs;
-                }
-            }
-            if (bookingStage.Id == -1)
-            {
-                throw new APIException("The booking has not been changed by an Administrator", 200);
-            }
-            return bookingStage;
+            return bookingStages.OrderByDescending(b => b.Id).First();
         }
     }
 }
