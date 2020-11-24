@@ -66,7 +66,7 @@ namespace DataAccess.Tests
             };
             var repository = new CategoryRepository(_context);
 
-            repository.Add(category);
+            repository.AddAndSave(category);
 
             Assert.AreEqual(_context.Find<Category>(category.Id), category);
         }

@@ -112,10 +112,10 @@ namespace BusinessLogic.Tests
             AccommodationModelOut accommodationModelOut = new AccommodationModelOut(accommodation, (0, new List<Review>()));
             var mockAccommodation = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mockAccommodation.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
-            mockAccommodation.Setup(p => p.Add(It.IsAny<Accommodation>())).Returns(accommodation);
+            mockAccommodation.Setup(p => p.AddAndSave(It.IsAny<Accommodation>())).Returns(accommodation);
             var mockTouristicSpot = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
             mockTouristicSpot.SetupSequence(p => p.GetByName(It.IsAny<string>())).Returns((TouristicSpot)null).Returns(touristicSpot);
-            mockTouristicSpot.Setup(p => p.Add(It.IsAny<TouristicSpot>())).Returns(touristicSpot);
+            mockTouristicSpot.Setup(p => p.AddAndSave(It.IsAny<TouristicSpot>())).Returns(touristicSpot);
             var mockRegion = new Mock<IRepository<Region>>(MockBehavior.Strict);
             mockRegion.Setup(p => p.GetById(It.IsAny<int>())).Returns(region);
             var mockCategory = new Mock<IRepository<Category>>(MockBehavior.Strict);
@@ -189,7 +189,7 @@ namespace BusinessLogic.Tests
             AccommodationModelOut accommodationModelOut = new AccommodationModelOut(accommodation, (0, new List<Review>()));
             var mockAccommodation = new Mock<IAccommodationRepository>(MockBehavior.Strict);
             mockAccommodation.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
-            mockAccommodation.Setup(p => p.Add(It.IsAny<Accommodation>())).Returns(accommodation);
+            mockAccommodation.Setup(p => p.AddAndSave(It.IsAny<Accommodation>())).Returns(accommodation);
             var mockTouristicSpot = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
             mockTouristicSpot.Setup(p => p.GetByName(It.IsAny<string>())).Returns(touristicSpot);
             var mockRegion = new Mock<IRepository<Region>>(MockBehavior.Strict);

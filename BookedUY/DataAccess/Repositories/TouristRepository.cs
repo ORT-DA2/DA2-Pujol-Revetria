@@ -17,7 +17,7 @@ namespace DataAccess.Repositories
             this.tourists = bookUYContext.Set<Tourist>();
         }
 
-        public Tourist Add(Tourist obj)
+        public Tourist AddAndSave(Tourist obj)
         {
             this.tourists.Add(obj);
             this.bookUYContext.SaveChanges();

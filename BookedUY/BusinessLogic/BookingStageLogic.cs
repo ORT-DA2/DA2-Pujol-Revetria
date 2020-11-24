@@ -27,7 +27,7 @@ namespace BusinessLogic
             CheckBookingStageAsociatedBooking(booking);
             var administrator = this.administratorRepository.GetById(stage.AdministratorId);
             CheckBookingStageAdministrator(administrator);
-            return this.bookingStageRepository.Add(stage);
+            return this.bookingStageRepository.AddAndSave(stage);
         }
 
         private void CheckBookingStageAdministrator(Administrator administrator)

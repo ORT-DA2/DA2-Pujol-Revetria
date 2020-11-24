@@ -18,7 +18,7 @@ namespace BusinessLogic
         {
             if (this.administratorRepository.GetByEmail(administrator.Email) == null)
             {
-                var newAdmin = this.administratorRepository.Add(administrator);
+                var newAdmin = this.administratorRepository.AddAndSave(administrator);
                 return newAdmin;
             }
             throw new AlreadyExistsException("Administrator");

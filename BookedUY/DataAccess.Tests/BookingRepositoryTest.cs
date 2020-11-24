@@ -119,7 +119,7 @@ namespace DataAccess.Tests
             booking.HeadGuest = tourist;
             var repository = new BookingRepository(_context);
 
-            repository.Add(booking);
+            repository.AddAndSave(booking);
 
             Assert.AreEqual(_context.Find<Booking>(1), booking);
         }

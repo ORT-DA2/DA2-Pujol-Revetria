@@ -23,7 +23,7 @@ namespace DataAccess.Repositories
             return this.spots.Include(t => t.Region).Include(t => t.Categories);
         }
 
-        public TouristicSpot Add(TouristicSpot spot)
+        public TouristicSpot AddAndSave(TouristicSpot spot)
         {
             this.spots.Add(spot);
             this.bookUYContext.SaveChanges();

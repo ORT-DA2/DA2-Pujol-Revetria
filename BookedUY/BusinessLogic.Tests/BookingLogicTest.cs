@@ -63,7 +63,7 @@ namespace BusinessLogic.Tests
             };
             booking.BookingHistory.Add(bookingStage);
             var mockBooking = new Mock<IBookingRepository>(MockBehavior.Strict);
-            mockBooking.Setup(p => p.Add(It.IsAny<Booking>())).Returns(booking);
+            mockBooking.Setup(p => p.AddAndSave(It.IsAny<Booking>())).Returns(booking);
             var mockTourist = new Mock<ITouristRepository>(MockBehavior.Strict);
             mockTourist.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns(tourist);
             var mockAccommodation = new Mock<IAccommodationRepository>(MockBehavior.Strict);
@@ -100,7 +100,7 @@ namespace BusinessLogic.Tests
                 Name = "a"
             };
             var mockBooking = new Mock<IBookingRepository>(MockBehavior.Strict);
-            mockBooking.Setup(p => p.Add(It.IsAny<Booking>())).Returns(booking);
+            mockBooking.Setup(p => p.AddAndSave(It.IsAny<Booking>())).Returns(booking);
             var mockTourist = new Mock<ITouristRepository>(MockBehavior.Strict);
             mockTourist.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns(tourist);
             var mockAccommodation = new Mock<IAccommodationRepository>(MockBehavior.Strict);
@@ -132,7 +132,7 @@ namespace BusinessLogic.Tests
                 Name = "a"
             };
             var mockBooking = new Mock<IBookingRepository>(MockBehavior.Strict);
-            mockBooking.Setup(p => p.Add(It.IsAny<Booking>())).Returns(booking);
+            mockBooking.Setup(p => p.AddAndSave(It.IsAny<Booking>())).Returns(booking);
             var mockTourist = new Mock<ITouristRepository>(MockBehavior.Strict);
             mockTourist.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns(tourist);
             var mockAccommodation = new Mock<IAccommodationRepository>(MockBehavior.Strict);
@@ -170,7 +170,7 @@ namespace BusinessLogic.Tests
                 Name = "a"
             };
             var mockBooking = new Mock<IBookingRepository>(MockBehavior.Strict);
-            mockBooking.Setup(p => p.Add(It.IsAny<Booking>())).Returns(booking);
+            mockBooking.Setup(p => p.AddAndSave(It.IsAny<Booking>())).Returns(booking);
             var mockTourist = new Mock<ITouristRepository>(MockBehavior.Strict);
             mockTourist.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns(tourist);
             var mockAccommodation = new Mock<IAccommodationRepository>(MockBehavior.Strict);
@@ -208,7 +208,7 @@ namespace BusinessLogic.Tests
                 Name = "a"
             };
             var mockBooking = new Mock<IBookingRepository>(MockBehavior.Strict);
-            mockBooking.Setup(p => p.Add(It.IsAny<Booking>())).Returns(booking);
+            mockBooking.Setup(p => p.AddAndSave(It.IsAny<Booking>())).Returns(booking);
             var mockTourist = new Mock<ITouristRepository>(MockBehavior.Strict);
             mockTourist.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns(tourist);
             var mockAccommodation = new Mock<IAccommodationRepository>(MockBehavior.Strict);

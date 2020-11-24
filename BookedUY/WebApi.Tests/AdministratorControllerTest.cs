@@ -45,15 +45,15 @@ namespace WebApi.Tests
             {
                 admin
             };
-            //var mockAdministrator = new Mock<IAdministratorLogic>(MockBehavior.Strict);
-            //mockAdministrator.Setup(p => p.GetAll()).Returns(expected);
-            //var mockSession = new Mock<SessionLogic>(MockBehavior.Strict);
-            //var controller = new AdministratorController(mockAdministrator.Object, mockSession.Object);
+            var mockAdministrator = new Mock<IAdministratorLogic>(MockBehavior.Strict);
+            mockAdministrator.Setup(p => p.GetAll()).Returns(expected);
+            var mockSession = new Mock<SessionLogic>(MockBehavior.Strict, mockAdministrator.Object);
+            var controller = new AdministratorController(mockAdministrator.Object, mockSession.Object);
 
-            //var result = controller.Get() as OkObjectResult;
+            var result = controller.Get() as OkObjectResult;
 
-            //mockAdministrator.VerifyAll();
-            //Assert.AreEqual(200, result.StatusCode);
+            mockAdministrator.VerifyAll();
+            Assert.AreEqual(200, result.StatusCode);
         }
     }
 }

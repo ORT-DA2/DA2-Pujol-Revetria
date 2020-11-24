@@ -125,7 +125,7 @@ namespace DataAccess.Tests
             };
             var repository = new ReviewRepository(_context);
 
-            repository.Add(review);
+            repository.AddAndSave(review);
 
             Assert.AreEqual(_context.Find<Review>(1), review);
         }

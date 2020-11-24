@@ -7,7 +7,7 @@ namespace DataAccessInterface
     {
         IEnumerable<T> GetAll();
 
-        T Add(T obj);
+        T AddAndSave(T obj);
 
         T Delete(T obj);
 

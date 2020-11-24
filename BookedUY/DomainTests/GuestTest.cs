@@ -96,5 +96,29 @@ namespace DomainTests
 
             Assert.IsFalse(guest.Equals(test));
         }
+
+        [TestMethod]
+        public void TestGetAmount()
+        {
+            Guest guest = new Guest()
+            {
+                Amount = 1,
+                Multiplier = 1
+            };
+
+            Assert.AreEqual(1, guest.GetAmount());
+        }
+
+        [TestMethod]
+        public void TestGetAmount2()
+        {
+            Guest guest = new Guest()
+            {
+                Amount = 2,
+                Multiplier = 0.70
+            };
+
+            Assert.AreEqual(1.70, guest.GetAmount());
+        }
     }
 }
