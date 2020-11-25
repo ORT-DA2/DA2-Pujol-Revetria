@@ -22,7 +22,7 @@ namespace DataAccess.Repositories
             return this.bookingStages.Include(b => b.Administrator).Include(b => b.AsociatedBooking);
         }
 
-        public BookingStage Add(BookingStage bookingStage)
+        public BookingStage AddAndSave(BookingStage bookingStage)
         {
             this.bookingStages.Add(bookingStage);
             bookUYContext.SaveChanges();

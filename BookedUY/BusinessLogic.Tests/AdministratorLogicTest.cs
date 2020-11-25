@@ -20,7 +20,7 @@ namespace BusinessLogic.Tests
                 Password = "ab"
             };
             var mockAdministrator = new Mock<IAdministratorRepository>(MockBehavior.Strict);
-            mockAdministrator.Setup(p => p.Add(It.IsAny<Administrator>())).Returns(administrator);
+            mockAdministrator.Setup(p => p.AddAndSave(It.IsAny<Administrator>())).Returns(administrator);
             mockAdministrator.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns<Administrator>(null);
             var logic = new AdministratorLogic(mockAdministrator.Object);
 
@@ -41,7 +41,7 @@ namespace BusinessLogic.Tests
                 Password = "ab"
             };
             var mockAdministrator = new Mock<IAdministratorRepository>(MockBehavior.Strict);
-            mockAdministrator.Setup(p => p.Add(It.IsAny<Administrator>())).Returns(administrator);
+            mockAdministrator.Setup(p => p.AddAndSave(It.IsAny<Administrator>())).Returns(administrator);
             mockAdministrator.Setup(p => p.GetByEmail(It.IsAny<string>())).Returns(administrator);
             var logic = new AdministratorLogic(mockAdministrator.Object);
 
@@ -158,7 +158,7 @@ namespace BusinessLogic.Tests
                 Password = "ab"
             };
             var mockAdministrator = new Mock<IAdministratorRepository>(MockBehavior.Strict);
-            mockAdministrator.Setup(p => p.Add(It.IsAny<Administrator>())).Returns(administrator);
+            mockAdministrator.Setup(p => p.AddAndSave(It.IsAny<Administrator>())).Returns(administrator);
             mockAdministrator.Setup(p => p.GetById(It.IsAny<int>())).Returns<Administrator>(null);
             var logic = new AdministratorLogic(mockAdministrator.Object);
 

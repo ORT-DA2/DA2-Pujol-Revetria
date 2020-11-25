@@ -85,7 +85,7 @@ namespace DataAccess.Tests
             };
             var repository = new TouristicSpotRepository(_context);
 
-            repository.Add(spot);
+            repository.AddAndSave(spot);
 
             Assert.AreEqual(_context.Find<TouristicSpot>(1), spot);
         }

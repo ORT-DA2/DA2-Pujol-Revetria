@@ -50,7 +50,7 @@ namespace BusinessLogic
             {
                 throw new NotFoundException("Review Booking");
             }
-            return this.reviewRepository.Add(review);
+            return this.reviewRepository.AddAndSave(review);
         }
 
         public Accommodation AddAccommodation(Accommodation accommodation)
@@ -59,7 +59,7 @@ namespace BusinessLogic
             CheckAccommodationImages(accommodation);
             CheckAccommodationName(accommodation);
             CheckAccommodationId(accommodation);
-            var newAccom = this.accommodationRepository.Add(accommodation);
+            var newAccom = this.accommodationRepository.AddAndSave(accommodation);
             return newAccom;
         }
         private void CheckSpotId(Accommodation accommodation)

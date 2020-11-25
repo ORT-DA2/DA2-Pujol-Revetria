@@ -23,7 +23,7 @@ namespace DataAccess.Repositories
             return this.bookings.Include(b => b.Accommodation).Include(b => b.Guests).Include(b => b.HeadGuest);
         }
 
-        public Booking Add(Booking booking)
+        public Booking AddAndSave(Booking booking)
         {
             this.bookings.Add(booking);
             this.bookedUYContext.SaveChanges();

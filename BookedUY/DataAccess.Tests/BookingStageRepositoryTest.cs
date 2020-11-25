@@ -99,7 +99,7 @@ namespace DataAccess.Tests
             };
             var repository = new BookingStageRepository(_context);
 
-            repository.Add(bookingStage);
+            repository.AddAndSave(bookingStage);
 
             Assert.AreEqual(_context.Find<BookingStage>(3), bookingStage);
         }

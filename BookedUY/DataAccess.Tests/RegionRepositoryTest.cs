@@ -66,7 +66,7 @@ namespace DataAccess.Tests
             };
             var repository = new RegionRepository(_context);
 
-            repository.Add(region);
+            repository.AddAndSave(region);
 
             Assert.AreEqual(repository.GetById(region.Id), region);
         }

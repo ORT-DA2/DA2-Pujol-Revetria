@@ -91,7 +91,7 @@ namespace DataAccess.Tests
             };
             var repository = new AdministratorRepository(_context);
 
-            repository.Add(administrator);
+            repository.AddAndSave(administrator);
 
             Assert.AreEqual(_context.Find<Administrator>(1), administrator);
         }

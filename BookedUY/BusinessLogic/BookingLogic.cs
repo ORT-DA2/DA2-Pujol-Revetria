@@ -44,7 +44,7 @@ namespace BusinessLogic
                 Description = "Received"
             };
             booking.BookingHistory.Add(bookingStage);
-            var newBooking = this.bookingRepository.Add(booking);
+            var newBooking = this.bookingRepository.AddAndSave(booking);
             return newBooking;
         }
 
@@ -53,16 +53,7 @@ namespace BusinessLogic
             double total = 0;
             foreach (Guest guest in booking.Guests)
             {
-                if (guest.Multiplier == 0.70)
-                {
-                    int amount = guest.Amount;
-                    int aux = amount - (amount / 2);
-                    total += ((amount / 2) * guest.Multiplier) + aux;
-                }
-                else
-                {
-                    total += guest.Amount * guest.Multiplier;
-                }
+                total += guest.GetAmount();
             }
             return total;
         }

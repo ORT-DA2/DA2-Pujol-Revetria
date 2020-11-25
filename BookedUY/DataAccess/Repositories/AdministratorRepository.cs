@@ -29,7 +29,7 @@ namespace DataAccess.Repositories
             return administrator;
         }
 
-        public Administrator Add(Administrator obj)
+        public Administrator AddAndSave(Administrator obj)
         {
             this.administrators.Add(obj);
             bookedUYContext.SaveChanges();

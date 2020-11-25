@@ -129,7 +129,7 @@ namespace BusinessLogic
                     Name = parse.TouristicSpot.Name,
                     RegionId = parse.TouristicSpot.RegionId
                 };
-                touristicSpotRepository.Add(touristicSpot);
+                touristicSpotRepository.AddAndSave(touristicSpot);
                 touristicSpot = touristicSpotRepository.GetByName(parse.TouristicSpot.Name);
             }
 
@@ -142,7 +142,7 @@ namespace BusinessLogic
                     Image = accommodationImage.Image
                 });
             }
-            Accommodation accommodation = this.accommodationRepository.Add(new Accommodation()
+            Accommodation accommodation = this.accommodationRepository.AddAndSave(new Accommodation()
             {
                 Address = parse.Address,
                 ContactNumber = parse.ContactNumber,
