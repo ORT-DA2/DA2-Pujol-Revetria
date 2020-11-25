@@ -17,7 +17,7 @@ namespace DataAccess.Repositories
             this.categories = bookUYContext.Set<Category>();
         }
 
-        public Category Add(Category obj)
+        public Category AddAndSave(Category obj)
         {
             this.categories.Add(obj);
             bookUYContext.SaveChanges();

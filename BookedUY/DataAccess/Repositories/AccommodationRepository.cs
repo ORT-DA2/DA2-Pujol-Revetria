@@ -23,7 +23,7 @@ namespace DataAccess.Repositories
             return this.accommodations.Include(a => a.Spot).Include(a => a.Images);
         }
 
-        public Accommodation Add(Accommodation accommodation)
+        public Accommodation AddAndSave(Accommodation accommodation)
         {
             this.accommodations.Add(accommodation);
             bookedUYContext.SaveChanges();

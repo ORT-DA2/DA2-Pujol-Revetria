@@ -27,7 +27,7 @@ namespace BusinessLogic.Tests
                 Categories = categories
             };
             var mockTouristicSpot = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
-            mockTouristicSpot.Setup(p => p.Add(It.IsAny<TouristicSpot>())).Returns(touristicSpot);
+            mockTouristicSpot.Setup(p => p.AddAndSave(It.IsAny<TouristicSpot>())).Returns(touristicSpot);
             mockTouristicSpot.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
             var logic = new TouristicSpotLogic(mockTouristicSpot.Object);
 
@@ -56,7 +56,7 @@ namespace BusinessLogic.Tests
                 Categories = categories
             };
             var mockTouristicSpot = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
-            mockTouristicSpot.Setup(p => p.Add(It.IsAny<TouristicSpot>())).Returns(touristicSpot);
+            mockTouristicSpot.Setup(p => p.AddAndSave(It.IsAny<TouristicSpot>())).Returns(touristicSpot);
             mockTouristicSpot.Setup(p => p.GetByName(It.IsAny<string>())).Returns(touristicSpot);
             var logic = new TouristicSpotLogic(mockTouristicSpot.Object);
 
@@ -85,7 +85,7 @@ namespace BusinessLogic.Tests
                 Categories = categories
             };
             var mockTouristicSpot = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
-            mockTouristicSpot.Setup(p => p.Add(It.IsAny<TouristicSpot>())).Returns(touristicSpot);
+            mockTouristicSpot.Setup(p => p.AddAndSave(It.IsAny<TouristicSpot>())).Returns(touristicSpot);
             mockTouristicSpot.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
             var logic = new TouristicSpotLogic(mockTouristicSpot.Object);
 
@@ -111,7 +111,7 @@ namespace BusinessLogic.Tests
                 Categories = null
             };
             var mockTouristicSpot = new Mock<ITouristicSpotRepository>(MockBehavior.Strict);
-            mockTouristicSpot.Setup(p => p.Add(It.IsAny<TouristicSpot>())).Returns(touristicSpot);
+            mockTouristicSpot.Setup(p => p.AddAndSave(It.IsAny<TouristicSpot>())).Returns(touristicSpot);
             mockTouristicSpot.Setup(p => p.GetByName(It.IsAny<string>())).Returns<Accommodation>(null);
             var logic = new TouristicSpotLogic(mockTouristicSpot.Object);
 

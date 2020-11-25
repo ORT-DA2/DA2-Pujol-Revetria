@@ -24,7 +24,7 @@ namespace DataAccess.Repositories
             return this.reviews.Include(r=>r.Booking).Include(r=>r.Booking.HeadGuest);
         }
 
-        public Review Add(Review review)
+        public Review AddAndSave(Review review)
         {
             this.reviews.Add(review);
             this.bookedUYContext.SaveChanges();

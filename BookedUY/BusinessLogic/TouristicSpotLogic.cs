@@ -43,7 +43,7 @@ namespace BusinessLogic
             CheckRegion(spot.RegionId);
             CheckCategories(spot.Categories);
             CheckName(spot.Name);
-            return this.touristicSpotRepository.Add(spot);
+            return this.touristicSpotRepository.AddAndSave(spot);
         }
 
         public IEnumerable<TouristicSpot> GetSpotsByRegionAndCategory(List<int> category, int region)

@@ -10,6 +10,7 @@ using WebApi.Controllers;
 
 namespace WebApi.Tests
 {
+    [TestClass]
     public class CategoryControllerTest
     {
         [TestMethod]

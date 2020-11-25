@@ -73,7 +73,7 @@ namespace DataAccess.Tests
             };
             var repository = new TouristRepository(_context);
 
-            repository.Add(tourist);
+            repository.AddAndSave(tourist);
 
             Assert.AreEqual(_context.Find<Tourist>(3), tourist);
         }

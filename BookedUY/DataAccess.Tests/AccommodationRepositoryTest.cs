@@ -106,7 +106,7 @@ namespace DataAccess.Tests
             };
             var repository = new AccommodationRepository(_context);
 
-            repository.Add(accommodation);
+            repository.AddAndSave(accommodation);
 
             Assert.AreEqual(_context.Find<Accommodation>(3), accommodation);
         }

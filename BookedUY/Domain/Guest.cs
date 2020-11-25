@@ -53,5 +53,19 @@ namespace Domain
             hashCode = hashCode * -1521134295 + BookingId.GetHashCode();
             return hashCode;
         }
+
+        public double GetAmount()
+        {
+            if (Multiplier == 0.70)
+            {
+                int amount = Amount;
+                int aux = amount - (amount / 2);
+                return (double)((amount / 2) * Multiplier) + aux;
+            }
+            else
+            {
+                return (double)(Amount * Multiplier);
+            }
+        }
     }
 }
