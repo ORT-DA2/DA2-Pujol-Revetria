@@ -13,13 +13,15 @@
     <div *ngFor="let parameter of paramters">
       <div *ngIf="isString(parameter.type)"> {{parameter.name}}
         <input class="form-control" [name] = "parameter.name" ngModel type="text" required>
-        <span class="alert alert-danger" role="alert" *ngIf ="validateInput(parameter.name,importerForm)">Please enter a valid date</span>
+        <span class="alert alert-danger" role="alert" *ngIf ="validateInput(parameter.name,importerForm)">Please enter a valid {{parameter.name}}</span>
       </div>
       <div *ngIf="isNumber(parameter.type)"> {{parameter.name}}
         <input class="form-control" [name] = "parameter.name" ngModel type="text" required>
+        <span class="alert alert-danger" role="alert" *ngIf ="validateInput(parameter.name,importerForm)">Please enter a valid {{parameter.name}}</span>
       </div>
       <div *ngIf="isBoolean(parameter.type)"> {{parameter.name}}
         <input class="form-control" type="checkbox" [name] = "parameter.name" ngModel required>
+        <span class="alert alert-danger" role="alert" *ngIf ="validateInput(parameter.name,importerForm)">Please enter a valid {{parameter.name}}</span>
       </div>
     </div>
     <hr *ngIf="paramters.length>0">

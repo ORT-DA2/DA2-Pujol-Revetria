@@ -43,7 +43,11 @@ export class ImportAccommodationComponent implements OnInit {
   }
 
   validateInput(elemntName,form : NgForm){
-    return form.value[elemntName].valid&&form.value[elemntName].touched;
+    if(elemntName&&form.controls[elemntName]){
+      return !form.controls[elemntName].valid&&form.controls[elemntName].touched;
+    }else{
+      return false;
+    }
   }
 
   onSubmit(form : NgForm){
