@@ -11,7 +11,8 @@ using WebApi.Filters;
 namespace WebApi.Controllers
 {
     [Route("api/administrators")]
-    public class AdministratorController : BookedUYController
+    [ApiController]
+    public class AdministratorController : ControllerBase
     {
         private readonly IAdministratorLogic administratorLogic;
         private readonly ISessionLogic sessionLogic;

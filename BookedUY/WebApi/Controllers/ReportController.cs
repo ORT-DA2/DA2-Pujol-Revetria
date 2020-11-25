@@ -8,7 +8,8 @@ using WebApi.Filters;
 namespace WebApi.Controllers
 {
     [Route("api/reports")]
-    public class ReportController : BookedUYController
+    [ApiController]
+    public class ReportController : ControllerBase
     {
         private IBookingLogic bookingLogic;
         public ReportController(IBookingLogic bookingLogic)

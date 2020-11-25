@@ -6,7 +6,8 @@ using WebApi.DTOs;
 namespace WebApi.Controllers
 {
     [Route("api/regions")]
-    public class RegionController : BookedUYController
+    [ApiController]
+    public class RegionController : ControllerBase
     {
         private readonly IRegionLogic regionLogic;
 
