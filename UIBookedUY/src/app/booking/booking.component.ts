@@ -51,7 +51,7 @@ export class BookingComponent implements OnInit {
         },
         {
           Amount: form.value.infantAmount ? form.value.infantAmount : 0,
-          Multiplier:0.3,
+          Multiplier:0.25,
         }
       ],
     }

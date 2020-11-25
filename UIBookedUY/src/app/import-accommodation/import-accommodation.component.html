@@ -13,6 +13,7 @@
     <div *ngFor="let parameter of paramters">
       <div *ngIf="isString(parameter.type)"> {{parameter.name}}
         <input class="form-control" [name] = "parameter.name" ngModel type="text" required>
+        <span class="alert alert-danger" role="alert" *ngIf ="validateInput(parameter.name,importerForm)">Please enter a valid date</span>
       </div>
       <div *ngIf="isNumber(parameter.type)"> {{parameter.name}}
         <input class="form-control" [name] = "parameter.name" ngModel type="text" required>
@@ -24,6 +25,16 @@
     <hr *ngIf="paramters.length>0">
     <button class="btn btn-primary" type="submit" [disabled] = "!importerForm.valid" >Create Admin</button>
   </form>
+  <mat-card *ngIf="newAccommodation">
+    <div class="col-sm">
+      <mat-card-header><mat-card-title>{{newAccommodation.name}}</mat-card-title></mat-card-header>
+      <mat-card-content>
+        <p>{{newAccommodation.address}}</p>
+        <p>{{newAccommodation.contactNumber}}</p>
+        <p>{{newAccommodation.information}}</p>
+      </mat-card-content>
+    </div>
+    </mat-card>
   <div class="alert alert-danger" *ngIf="importError">
     <h1>An Error Ocurred</h1>
     <p>{{importError}}</p>

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { APIService } from '../api.service';
+import { Accommodation } from '../models/accommodation.model';
 import { ImporterSubmitted, ParameterOut } from '../models/impoertersubmitted.model';
 import { ImportParameter } from '../models/importparameters.model';
+import { TouristicSpot } from '../models/touristicSpot.model';
 
 @Component({
   selector: 'app-import-accommodation',
@@ -22,6 +24,8 @@ export class ImportAccommodationComponent implements OnInit {
 
   paramters : ImportParameter[] = [];
 
+  newAccommodation : Accommodation = null;
+
   ngOnInit(): void {
     this.getImportNames();
   }
@@ -36,6 +40,10 @@ export class ImportAccommodationComponent implements OnInit {
 
   isBoolean(variable){
     return variable === "boolean";
+  }
+
+  validateInput(elemntName,form : NgForm){
+    return form.value[elemntName].valid&&form.value[elemntName].touched;
   }
 
   onSubmit(form : NgForm){
@@ -70,9 +78,10 @@ export class ImportAccommodationComponent implements OnInit {
 
   postImporter(imp : ImporterSubmitted){
     this.api.postImporter(imp).subscribe(response=>{
-      this.responseCreation = response;
+      this.newAccommodation = response;
       this.importError = null;
     }, error=>{
+      this.newAccommodation=null;
       this.importError = error.error;
     });
   }

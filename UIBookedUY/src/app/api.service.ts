@@ -75,7 +75,7 @@ export class APIService {
       headers: new HttpHeaders({
         Authorization: this.auth.getToken()
       })}
-    return this.http.post(this.url + "importers",imp,httpOptions);
+    return this.http.post<Accommodation>(this.url + "importers",imp,httpOptions);
   }
 
   tryLogin(email, password){
