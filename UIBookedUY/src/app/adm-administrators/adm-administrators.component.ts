@@ -24,6 +24,10 @@ export class AdmAdministratorsComponent implements OnInit {
   deleteError = null;
   createError = null;
 
+  childDeleted(event){
+    let index =this.administrators.findIndex(admin=>admin.id==event);
+    this.administrators.splice(index,1);
+  }
 
 
   changeCreateError(){
@@ -44,7 +48,13 @@ export class AdmAdministratorsComponent implements OnInit {
       form.resetForm();
       this.createError = null;
     },error=>{
+      if(error.error.text == "Administrator Created Successfully"){
+        this.createError = null;
+        this.getAdmins();
+        form.resetForm();
+      }else{
       this.createError = error.error;
+      }
     })
   }
 

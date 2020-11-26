@@ -20,7 +20,7 @@
 <div class="container" *ngIf="!renderError">
   <mat-card *ngFor="let adminEl of administrators">
     <div class="row">
-      <app-admin-card [admin] = "adminEl"></app-admin-card>
+      <app-admin-card (deleteEvent)="childDeleted($event)" [admin] = "adminEl"></app-admin-card>
     </div>
   </mat-card>
 </div>

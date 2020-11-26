@@ -26,8 +26,15 @@ namespace DataAccess.Repositories
 
         public Review AddAndSave(Review review)
         {
-            this.reviews.Add(review);
-            this.bookedUYContext.SaveChanges();
+            try
+            {
+                this.reviews.Add(review);
+                this.bookedUYContext.SaveChanges();
+
+            }catch(DbUpdateException)
+            {
+                throw new AlreadyExistsException("Review");
+            }
             return review;
         }
 
