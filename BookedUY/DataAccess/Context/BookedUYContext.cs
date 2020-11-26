@@ -84,7 +84,7 @@ namespace DataAccess.Context
             modelBuilder.Entity<CategoryTouristicSpot>().HasOne<TouristicSpot>(ct => ct.TouristicSpot).WithMany(t => t.Categories).HasForeignKey(ct => ct.TouristicSpotId);
 
             modelBuilder.Entity<Review>().HasKey(r=>r.Id);
-            modelBuilder.Entity<Review>().HasAlternateKey(r => r.BookingId);
+            modelBuilder.Entity<Review>().Property(r => r.BookingId);
             modelBuilder.Entity<Review>().Property(r => r.Score);
             modelBuilder.Entity<Review>().Property(r => r.Comment);
             
