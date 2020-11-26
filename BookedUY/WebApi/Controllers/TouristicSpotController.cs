@@ -11,7 +11,8 @@ using WebApi.Filters;
 namespace WebApi.Controllers
 {
     [Route("api/touristicspots")]
-    public class TouristicSpotController : BookedUYController
+    [ApiController]
+    public class TouristicSpotController : ControllerBase
     {
         private readonly ITouristicSpotLogic touristicSpotLogic;
 

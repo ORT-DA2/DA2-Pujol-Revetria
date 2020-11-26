@@ -9,7 +9,8 @@ using WebApi.Filters;
 namespace WebApi.Controllers
 {
     [Route("api/accommodations")]
-    public class AccommodationController : BookedUYController
+    [ApiController]
+    public class AccommodationController : ControllerBase
     {
         private readonly IAccommodationLogic accommodationLogic;
 
