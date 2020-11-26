@@ -16,8 +16,7 @@ export class RegionComponent implements OnInit {
   "https://turismo.gub.uy/images/region-noreste-map.png"];
 
   constructor() { }
-  letters = '0123456789ABCDEF';
-  color = '#';
+
   ngOnInit(): void {
   }
 
@@ -32,18 +31,6 @@ export class RegionComponent implements OnInit {
   getImage(regionId) : string{
 
     return this.images[regionId-1];
-  }
-
-  getRandomColor(randomColor) {
-    this.color = '#'; // <-----------
-    for (var i = 0; i < 6; i++) {
-        this.color += this.letters[Math.floor(Math.random() * 16)];
-    }
-}
-  getColor(){
-     this.randomItem = this.colors[Math.floor(Math.random()*this.colors.length)];
-     console.log('s',this.randomItem);
-     return this.randomItem;
   }
 
 }
