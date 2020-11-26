@@ -20,6 +20,7 @@ import { ModalUnAuthorizedComponent } from './modal-unauthorized/modal-unauthori
 import { MatDialog } from '@angular/material/dialog';
 import { ImportParameter } from './models/importparameters.model';
 import { ImporterSubmitted } from './models/impoertersubmitted.model';
+import { environment } from 'src/environments/environment';
 
 class Token{
   token : string
@@ -33,7 +34,7 @@ export class APIService {
 
 
 
-  url = "https://localhost:5001/api/";
+  url = environment.apiUrl;
   constructor(private http : HttpClient, private auth : AuthService, public dialog: MatDialog) { }
 
   openDialog(errorMsg): void {
