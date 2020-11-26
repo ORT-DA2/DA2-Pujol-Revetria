@@ -1853,9 +1853,12 @@
       "BusinessLogic/1.0.0": {
         "dependencies": {
           "BusinessLogicInterface": "1.0.0",
+          "DataAccess": "1.0.0",
           "DataAccessInterface": "1.0.0",
+          "ImportInterface": "1.0.0",
           "SessionInterface": "1.0.0",
-          "System.IdentityModel.Tokens.Jwt": "6.7.1"
+          "System.IdentityModel.Tokens.Jwt": "6.7.1",
+          "WebApi.DTOs": "1.0.0"
         },
         "runtime": {
           "BusinessLogic.dll": {}
@@ -1866,7 +1869,9 @@
       },
       "BusinessLogicInterface/1.0.0": {
         "dependencies": {
-          "Domain": "1.0.0"
+          "Domain": "1.0.0",
+          "ImportInterface": "1.0.0",
+          "WebApi.DTOs": "1.0.0"
         },
         "runtime": {
           "BusinessLogicInterface.dll": {}
@@ -1927,6 +1932,14 @@
           "Factory.dll": {}
         }
       },
+      "ImportInterface/1.0.0": {
+        "runtime": {
+          "ImportInterface.dll": {}
+        },
+        "compile": {
+          "ImportInterface.dll": {}
+        }
+      },
       "SessionInterface/1.0.0": {
         "dependencies": {
           "Domain": "1.0.0"
@@ -1940,7 +1953,8 @@
       },
       "WebApi.DTOs/1.0.0": {
         "dependencies": {
-          "Domain": "1.0.0"
+          "Domain": "1.0.0",
+          "ImportInterface": "1.0.0"
         },
         "runtime": {
           "WebApi.DTOs.dll": {}
@@ -4554,6 +4568,11 @@
       "sha512": ""
     },
     "Factory/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ImportInterface/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
